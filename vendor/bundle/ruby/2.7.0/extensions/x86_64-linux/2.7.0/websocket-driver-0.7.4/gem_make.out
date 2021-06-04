@@ -1,0 +1,15 @@
+current directory: /home/norio/illustlife/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.4/ext/websocket-driver
+/home/norio/.rbenv/versions/2.7.2/bin/ruby -I /home/norio/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210604-3633-ycailr.rb extconf.rb
+creating Makefile
+
+current directory: /home/norio/illustlife/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.4/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /home/norio/illustlife/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.4/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /home/norio/illustlife/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.4/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20210604-3633-a8509m
