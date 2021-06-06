@@ -1,2 +1,4 @@
 <h1>イラストライフ</h1>
-<p>ログイン</p>
+
+<%= link_to "ログイン", new_user_session_path, method: "get" %>
+<%= link_to "ログアウト", destroy_user_session_path, method: "delete" %>
