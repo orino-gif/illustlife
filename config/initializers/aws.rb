@@ -1,5 +1,7 @@
-ActionMailer::Base.add_delivery_method :ses,
+ActionMailer::Base.add_delivery_method(
+  :ses,
   AWS::SES::Base,
-  access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-  secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-  server: 'email.ap-northeast-1.amazonaws.com'
+  access_key_id: Rails.application.credentials.dig(:aws, :access_key_id),
+  secret_access_key: Rails.application.credentials.dig(:aws, :secret_access_key),
+  server: 'email.us-east-1.amazonaws.com'
+)

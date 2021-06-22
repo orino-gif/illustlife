@@ -9,7 +9,7 @@ gem 'jquery-rails'
 gem 'devise-bootstrap-views'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
-gem 'aws-ses'
+#gem 'aws-ses'
 gem 'aws-sdk-rails'
 gem 'dotenv-rails'
 
