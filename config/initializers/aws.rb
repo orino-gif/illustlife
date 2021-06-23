@@ -1,6 +1,7 @@
-require 'aws-sdk-v1'
+creds = Aws::Credentials.new(Rails.application.credentials[:aws][:access_key_id], Rails.application.credentials[:aws][:secret_access_key])
 
-AWS.config({
-  :access_key_id => ENV["AWS_ACCESS_KEY_ID"],
-  :secret_access_key => ENV["AWS_SECRET_ACCESS_KEY"]
-})
+Aws::Rails.add_action_mailer_delivery_method(
+  :ses,
+  credentials: creds,
+  region: 'ap-us-east-1' #AWS SESで設定したregion 
+)

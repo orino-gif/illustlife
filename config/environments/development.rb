@@ -66,4 +66,5 @@ Rails.application.configure do
   
   #master.keyがない環境ではRails起動時にエラーになるように
   config.require_master_key = true
+  
 end
