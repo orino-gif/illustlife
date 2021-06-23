@@ -13,6 +13,9 @@ gem 'devise-i18n-views'
 gem 'aws-sdk-rails'
 gem 'dotenv-rails'
 
+# Use AWS SDK
+gem 'aws-sdk', '~>1'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6'
 # Use mysql as the database  for Active Record
