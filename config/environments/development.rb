@@ -67,4 +67,25 @@ Rails.application.configure do
   #master.keyがない環境ではRails起動時にエラーになるように
   config.require_master_key = true
   
+    #ホワイトリスト例外。0.0.0.0/0からのrender console要求を許可する。
+  config.web_console.whitelisted_ips = '0.0.0.0/0'
+  
+  config.action_mailer.raise_delivery_errors = true
+
+  # default url
+  config.action_mailer.default_url_options = {  host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+	config.action_mailer.smtp_settings = {
+	  port:                 587,
+	  address:              'mail.so-net.ne.jp',
+		domain:               'so-net.ne.jp',
+		user_name:            'xr274375@fc5.so-net.ne.jp',
+		# address:              'defomate.net',
+		# domain:               'defomate.net',
+		# user_name:            'operation@defomate.net',
+		password:             'orino1013',
+		authentication:       'login'
+		
+	 }
+
 end
