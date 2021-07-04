@@ -1,5 +1,7 @@
-<p>Welcome <%= @email %>!</p>
+<p>イラストライフ運営局</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>ようこそ <%= @email %>さん!</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>以下のリンク先からメール認証を完了できます。</p>
+
+<p><%= link_to 'メール認証先リンク', confirmation_url(@resource, confirmation_token: @token) %></p>

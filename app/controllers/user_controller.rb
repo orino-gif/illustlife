@@ -10,10 +10,12 @@ class UserController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      flash[:success] = '新しいユーザーを登録しました。'
       @url = request.url + "/" + @user.id.to_s
       NotificationMailer.user_create(@user, @url).deliver
       redirect_to(user_path(@user))
     else
+      flash.now[:danger] = 'ユーザーの登録に失敗しました。'
       render :new
     end
   end
