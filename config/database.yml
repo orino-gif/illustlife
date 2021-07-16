@@ -63,6 +63,7 @@ test:
 #
 production:
   <<: *default
-  database: illustlife_production
-  username: illustlife
-  password: <%= ENV['ILLUSTLIFE_DATABASE_PASSWORD'] %>
+  # database: illustlife_production
+  # username: illustlife
+  # password: <%= ENV['ILLUSTLIFE_DATABASE_PASSWORD'] %>
+  database: illustlifeDB
