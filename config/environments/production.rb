@@ -94,5 +94,13 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   
-  config.action_mailer.default_url_options = {  host: 'defomate.net', port: 3000 }
+  config.action_mailer.default_url_options = {  host: 'defomate.com', port: 80 }
+  
+  # config/environments/{staging,development}.rb
+  config.action_mailer.delivery_method = :ses
+  
+  config.active_storage.service = :local
+  
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = true
 end
