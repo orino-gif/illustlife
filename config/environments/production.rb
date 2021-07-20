@@ -91,10 +91,14 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  #master.keyがない環境ではRails起動時にエラーになるように
+  config.require_master_key = true
+  
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   
-  config.action_mailer.default_url_options = {  host: 'defomate.com', port: 80 }
+  # config.action_mailer.default_url_options = {  host: 'defomate.com', port: 80 }
+  config.action_mailer.default_url_options = {  host: 'defomate.com'}
   
   # config/environments/{staging,development}.rb
   config.action_mailer.delivery_method = :ses
@@ -103,4 +107,18 @@ Rails.application.configure do
   
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
+  
+  config.action_mailer.delivery_method = :smtp
+	config.action_mailer.smtp_settings = {
+	  port:                 587,
+	  address:              'mail.so-net.ne.jp',
+		domain:               'so-net.ne.jp',
+		user_name:            'xr274375@fc5.so-net.ne.jp',
+		# address:              'defomate.net',
+		# domain:               'defomate.net',
+		# user_name:            'operation@defomate.net',
+		password:             'orino1013',
+		authentication:       'login'
+		
+	 }
 end
