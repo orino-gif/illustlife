@@ -1,6 +1,7 @@
 class UserController < ApplicationController
   
   def index
+    
   end
 
   def new
@@ -22,7 +23,8 @@ class UserController < ApplicationController
   end
 
   def show
-    @user = User.find(current_user.id)
+     @user = User.find(current_user.id)
+    
   end
 
   def edit
@@ -41,4 +43,5 @@ class UserController < ApplicationController
       render :new
     end
   end
+  
 end

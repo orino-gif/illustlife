@@ -28,6 +28,8 @@
       <% if user_signed_in? %>
         <div class="right">
           <div class="h3">
+            
+            <%= link_to 'ユーザー情報',"/user/show/id" %>
             <%= link_to "ユーザー編集", edit_user_registration_path, method: "get" %>
             <%= link_to "ログアウト", destroy_user_session_path, method: "delete" %>
           </div>
