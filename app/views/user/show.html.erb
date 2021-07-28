@@ -1,6 +1,10 @@
-
+<% if @user.image.attached? %>
+  <%= image_tag @user.image %>
+<% end %>
 
 <h3>ニックネーム： <%=@user.nickname %></h3><br>
 
 <h3>Eメール： <%=@user.email %></h3><br>
+
+
 
