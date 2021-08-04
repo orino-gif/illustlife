@@ -28,6 +28,7 @@ default: &default
   password: Orino_1013
   socket: /var/lib/mysql/mysql.sock
   host: defomate-database.cczbbshsk7se.ap-northeast-1.rds.amazonaws.com
+  #host: default-s.cczbbshsk7se.ap-northeast-1.rds.amazonaws.com
 
 development:
   <<: *default

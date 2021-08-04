@@ -12,8 +12,6 @@ gem 'devise-i18n-views'
 #gem 'aws-ses'
 gem 'aws-sdk-rails'
 gem 'aws-sdk-s3', require: false
-# Use ActiveStorage variant
-gem 'mini_magick', '~> 4.8'
 gem 'dotenv-rails'
 
 # Use AWS SDK

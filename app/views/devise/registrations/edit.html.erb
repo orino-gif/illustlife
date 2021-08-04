@@ -6,15 +6,17 @@
   <div class="form-group">
     
     <% if @user.image.attached? %>
-      <%= image_tag @user.image %>
+      <%#= image_tag @user.image %>
+      <%= image_tag @user.image.variant(resize: '150x150').processed %>
     <% end %>
     <br>
     <%="アイコン変更"%>
     <%= f.file_field :image %>
   </div>
-  <div class="actions">
-      <%= f.submit "反映" %>
-  </div>
+  <!--<div class="actions">-->
+  <!--  <%#= f.submit "反映" %>-->
+  <!--</div>-->
+ 
 
   <br>
   <div class="form-group">

@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get 'user/show/:id', to: 'user#show', as: 'profile'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'home#index' 
+  resources :creators, only: [:new, :create, :index]
 end

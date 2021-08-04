@@ -1,0 +1,12 @@
+<!-- app/views/users/index.html.erb -->
+<h1>Users Index</h1>
+<%= link_to 'Add user', new_creator_path %>
+
+<ul>
+  <% @creators.each do |creator| %>
+    <li>
+      <p><%= creator.name %></p>
+      <%= image_tag creator.image %>
+    </li>
+  <% end %>
+</ul>

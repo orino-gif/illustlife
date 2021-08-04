@@ -1,0 +1,18 @@
+<!-- app/views/users/new.html.erb -->
+<h1>Add User</h1>
+
+<%= form_with model: @creators do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
