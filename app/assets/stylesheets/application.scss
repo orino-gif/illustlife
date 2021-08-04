@@ -15,4 +15,12 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ 
+ .icon {
+  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+  object-fit: cover; 
+  object-position: 40% 100%; 
+}
 
