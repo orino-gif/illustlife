@@ -1,7 +1,11 @@
 <% if @user.image.attached? %>
   <%#= image_tag @user.image %>
   <% require 'mini_magick'%>
-  <%= image_tag @user.image.variant(resize: '60x60').processed ,class: 'icon' %>
+  <%= image_tag @user.image.variant(resize: '140x140').processed ,class: 'icon' %>
+<% else %>
+  <div class="rounded-circle"">
+        <%= image_tag '/mobu.png',class: 'icon'%>
+  </div>
 <% end %>
 
 <h3>ニックネーム： <%=@user.nickname %></h3><br>

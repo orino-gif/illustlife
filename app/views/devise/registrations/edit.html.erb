@@ -7,15 +7,14 @@
     
     <% if @user.image.attached? %>
       <%#= image_tag @user.image %>
-      
       <%= image_tag @user.image.variant(resize: '150x150').processed ,class: 'icon' %>
      
       <!--<p>サイズ : <%#= @user.image.byte_size %>byte</p>-->
       <!--<p>ファイルタイプ :  <%#= @user.image.content_type %></p>-->
     <% else %>
-    <div class="rounded-circle"">
-      <%= image_tag '/mobu.png',class: 'icon'%>
-    </div>
+      <div class="rounded-circle"">
+        <%= image_tag '/mobu.png',class: 'icon'%>
+      </div>
       
     <% end %>
     <br>
