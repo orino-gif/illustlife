@@ -27,11 +27,14 @@ default: &default
   username: rio
   password: Orino_1013
   socket: /var/lib/mysql/mysql.sock
-  host: defomate-database.cczbbshsk7se.ap-northeast-1.rds.amazonaws.com
+  #host: defomate-database.cczbbshsk7se.ap-northeast-1.rds.amazonaws.com
   #host: default-s.cczbbshsk7se.ap-northeast-1.rds.amazonaws.com
+  
+  
 
 development:
   <<: *default
+  host: illustlife-database-test.cczbbshsk7se.ap-northeast-1.rds.amazonaws.com
   database: illustlifeDB
   
 
@@ -67,4 +70,5 @@ production:
   # database: illustlife_production
   # username: illustlife
   # password: <%= ENV['ILLUSTLIFE_DATABASE_PASSWORD'] %>
+  host: illustlife-database.cczbbshsk7se.ap-northeast-1.rds.amazonaws.com
   database: illustlifeDB
