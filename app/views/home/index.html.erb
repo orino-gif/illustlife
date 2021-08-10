@@ -1,6 +1,16 @@
 <h1>クリエイター紹介</h1><br>
+<ul class="users">
+  <h3>ディフォルメキャラ</h3><br>
+  <% @users.each do |user| %>
 
-<h3>ディフォルメキャラ</h3><br>
+      <%= user.nickname %>
+      <%= image_tag user.image %>
+    
+
+  <% end %>
+</ul>
+
+
 
 
 <h3>背景</h3><br>
