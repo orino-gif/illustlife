@@ -34,7 +34,7 @@ default: &default
 
 development:
   <<: *default
-  host: illustlife-database-test.cczbbshsk7se.ap-northeast-1.rds.amazonaws.com
+  host: illustlife-database.cczbbshsk7se.ap-northeast-1.rds.amazonaws.com
   database: illustlifeDB
   
 

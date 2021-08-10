@@ -1,14 +1,18 @@
 <h1>クリエイター紹介</h1><br>
-<ul class="users">
+
   <h3>ディフォルメキャラ</h3><br>
   <% @users.each do |user| %>
-
+    <div>
       <%= user.nickname %>
-      <%= image_tag user.image %>
-    
+      <% if user.image.attached? %>
+        <%= image_tag user.image.variant(resize: '140x140').processed ,class: 'icon'  %>
+      <% else %>
+        <%=image_tag '/mobu.png',class: 'icon' %>
+      <% end %>
+    </div>
 
   <% end %>
-</ul>
+
 
 
 
