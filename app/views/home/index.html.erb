@@ -6,9 +6,9 @@
     <% @users.each do |user| %>
       <div class="col-md-2">
         <% if user.image.attached? %>
-          <%= image_tag user.image.variant(resize: '140x140').processed ,class: 'icon' %><br>
+          <%=link_to image_tag(user.image.variant(resize: '140x140').processed ,class: 'icon'), "/home/show/#{user.id}" %><br>
         <% else %>
-          <%=image_tag '/mobu.png',class: 'icon'%><br>
+          <%=link_to image_tag('/mobu.png',class: 'icon'), "/home/show/#{user.id}" %><br>
         <% end %>
         <div class="text-sm-center"><%= user.nickname %></div>
       </div>

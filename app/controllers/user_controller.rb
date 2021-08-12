@@ -23,8 +23,11 @@ class UserController < ApplicationController
   end
 
   def show
+    if user_signed_in?
      @user = User.find(current_user.id)
-     
+    else
+      @user = User.find(50)
+    end
   end
 
   def edit

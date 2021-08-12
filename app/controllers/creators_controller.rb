@@ -16,6 +16,10 @@ class CreatorsController < ApplicationController
       render :new
     end
   end
+  
+  def show
+    @user = User.find(50)
+  end
 
   private
 
