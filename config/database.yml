@@ -45,7 +45,7 @@ development:
 test:
   <<: *default
   host: illustlife-test.cczbbshsk7se.ap-northeast-1.rds.amazonaws.com
-  database: illustlife_test
+  database: illustlifeDB
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
