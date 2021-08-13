@@ -3,14 +3,21 @@
   <h3>ディフォルメキャラ</h3><br>
   <div class="container-fluid">
     <div class="row">
-    <% @users.each do |user| %>
-      <div class="col-md-2">
-        <% if user.image.attached? %>
-          <%=link_to image_tag(user.image.variant(resize: '140x140').processed ,class: 'icon'), "/home/show/#{user.id}" %><br>
-        <% else %>
-          <%=link_to image_tag('/mobu.png',class: 'icon'), "/home/show/#{user.id}" %><br>
-        <% end %>
-        <div class="text-sm-center"><%= user.nickname %></div>
+    <% begin %>
+      <%# raise #意図的にエラーを発生%>
+      <% @users.each do |user| %>
+        <div class="col-md-2">
+          <% if user.image.attached? %>
+            <%=link_to image_tag(user.image.variant(resize: '140x140').processed ,class: 'icon'), "/home/show/#{user.id}" %><br>
+          <% else %>
+            <%=link_to image_tag('/mobu.png',class: 'icon'), "/home/show/#{user.id}" %><br>
+          <% end %>
+          <div class="text-sm-center"><%= user.nickname %></div>
+        </div>
+      <% end %>
+    <% rescue => e %>
+      <div class="row">
+        <%=p e%>
       </div>
     <% end %>
     </div>
@@ -27,3 +34,4 @@
 
 <%= link_to "クリエイター", new_creator_path, method: "get" %>
 <%= link_to "画像一覧", creators_path, method: "get" %>
+
