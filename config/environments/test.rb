@@ -103,9 +103,7 @@ Rails.application.configure do
   
   # config/environments/{staging,development}.rb
   config.action_mailer.delivery_method = :ses
-  
-  config.active_storage.service = :local
-  
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
   

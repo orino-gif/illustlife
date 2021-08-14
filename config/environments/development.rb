@@ -29,7 +29,7 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.action_mailer.default_url_options = { host: 'illustlife.com' }
+  config.action_mailer.default_url_options = { host: 'defomate.net', port: 3000 }
   #config.active_storage.service = :local
   config.active_storage.service = :amazon
   
@@ -73,8 +73,6 @@ Rails.application.configure do
   
   config.action_mailer.raise_delivery_errors = true
 
-  # default url
-  config.action_mailer.default_url_options = {  host: 'defomate.net', port: 3000 }
   config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = {
 	  port:                 587,
