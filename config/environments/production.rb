@@ -41,7 +41,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  # config.active_storage.service = :local
+  #config.active_storage.service = :local
   config.active_storage.service = :amazon
 
   # Mount Action Cable outside main process or domain
@@ -102,7 +102,7 @@ Rails.application.configure do
   #config.action_mailer.default_url_options = {  host: 'defomate.net', port:3000}
   
   # config/environments/{staging,development}.rb
-  #config.action_mailer.delivery_method = :ses
+  config.action_mailer.delivery_method = :ses
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
