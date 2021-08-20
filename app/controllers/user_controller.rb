@@ -5,11 +5,16 @@ class UserController < ApplicationController
   end
 
   def new
-    @user = User.new
+    # ストロングパラメータから精査されたデータだけをインスタンスに格納
+    @user = User.new(user_params)
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(
+      user_params,
+      content: params[:content],
+      user_id: user.id #ログインユーザーのidを取得して保存
+      )
 
     if @user.save
       flash[:success] = '新しいユーザーを登録しました。'
@@ -46,5 +51,9 @@ class UserController < ApplicationController
       render :new
     end
   end
-  
+  private
+
+  def user_params
+    params.require(:user).permit(:nickname, :email, :password, :password_confirmation)
+  end
 end
