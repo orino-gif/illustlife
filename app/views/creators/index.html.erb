@@ -7,11 +7,11 @@
     <li>
       <p><%= creator.name %></p>
       <% if creator.image1? %>
-        <%#= image_tag creator.image1.url %>
+        <%= image_tag creator.image1.url %>
       <% end %>
       
       <% if creator.image2? %>
-        <%#= image_tag creator.image2.url %>
+        <%= image_tag creator.image2.url %>
       <% end %>
     </li>
   <% end %>
