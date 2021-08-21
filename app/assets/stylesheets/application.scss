@@ -23,7 +23,16 @@
   object-fit: cover; 
   object-position: 40% 100%; 
 }
-
+ .header {
+   width: 100%;
+   height: 180px;
+  object-fit: cover; 
+  object-position: 40% 100%; 
+}
+ .upimage {
+   position: absolute;
+   top:250px;
+}
 .userList{
   text-decoration: none;
 }
