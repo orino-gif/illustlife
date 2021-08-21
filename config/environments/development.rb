@@ -8,7 +8,10 @@ Rails.application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
-
+  
+  #ログレベル logger.unknown '不明なエラー',logger.debug 'デバック
+  config.log_level = :debug 
+  
   # Show full error reports.
   config.consider_all_requests_local = true
 

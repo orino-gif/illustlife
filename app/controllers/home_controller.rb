@@ -9,5 +9,6 @@ class HomeController < ApplicationController
     # @user = User.find(params[:id])
     @user = User.find_by(id:params[:id])
     @creator = Creator.find_by(id:@user.id)
+    logger.debug{@creator.name}
   end
 end

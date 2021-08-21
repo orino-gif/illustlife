@@ -12,8 +12,7 @@ class UserController < ApplicationController
   def create
     @user = User.new(
       user_params,
-      content: params[:content],
-      user_id: user.id #ログインユーザーのidを取得して保存
+      user_id: @current_user.id
       )
 
     if @user.save
@@ -54,6 +53,6 @@ class UserController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:nickname, :email, :password, :password_confirmation)
+    params.require(:user).permit(:nickname, :email, :password, :password_confirmation,:user_id)
   end
 end
