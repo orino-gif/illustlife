@@ -5,7 +5,7 @@
   <%=image_tag('/nothing.png',class: 'header') %><br>
 <% end %>
 <% begin %>
-  <%= image_tag @user.image.variant(resize: '150x150').processed ,class: 'upimage' %>
+  <%= image_tag @user.image.variant(resize: '150x150').processed ,class: 'icon upimage' %>
 
 <% rescue => e %>
   <%=image_tag('/mobu.png',class: 'icon upimage' ) %>

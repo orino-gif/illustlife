@@ -15,16 +15,25 @@
       <div class="rounded-circle"">
         <%= image_tag '/mobu.png',class: 'icon'%>
       </div>
-      
     <% end %>
+    
     <br>
     <%="アイコン変更"%>
     <%= f.file_field :image %>
-  </div>
-  <!--<div class="actions">-->
-  <!--  <%#= f.submit "反映" %>-->
-  <!--</div>-->
  
+    <%= f.submit "反映" %>
+
+  
+  <br><br>
+  <%="ヘッダー変更"%>
+  <%= form_with(model: @creators, local: true) do |f| %>
+      <%= f.file_field(:image1) %>
+        <%= submit_tag("登録") %>
+
+  <% end %>
+ 
+  <br><br>
+  <%="ニックネーム変更"%><br>
 
   <br>
   <div class="form-group">
