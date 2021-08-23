@@ -1,8 +1,40 @@
-<%= link_to 'Index user', creators_path %>
+<!-- app/views/users/new.html.erb -->
+<h1>Add User</h1>
+
+<%= form_with model: @creators do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
 
 <div class="carrier_wave">
-  <%= form_with(model: @creators, local: true) do |f| %>
-    <%= f.file_field(:header) %>
-    <%= submit_tag("登録") %>
-  <% end %>
+  <main>
+    <h1>CarrierWave</h1>
+ 
+    <%= form_with(model: @creators, local: true) do |f| %>
+      <%= f.text_field(:name) %>
+      <%= f.file_field(:image1) %>
+      <%= f.file_field(:image2) %>
+      <%= submit_tag("登録") %>
+    <% end %>
+ 
+    <p><%= @creators.name %></p>
+    <% if @creators .image1? %>
+      <%= image_tag(@creators .image1.url) %>
+    <% end %>
+ 
+    <% if @creators .image2? %>
+      <%= image_tag(@creators .image2.url) %>
+    <% end %>
+  </main>
 </div>

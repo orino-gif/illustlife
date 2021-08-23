@@ -5,8 +5,13 @@
 <ul>
   <% @creators.each do |creator| %>
     <li>
-      <% if creator.header? %>
-        <%= image_tag creator.header.url %>
+      <p><%= creator.name %></p>
+      <% if creator.image1? %>
+        <%= image_tag creator.image1.url %>
+      <% end %>
+      
+      <% if creator.image2? %>
+        <%= image_tag creator.image2.url %>
       <% end %>
     </li>
   <% end %>

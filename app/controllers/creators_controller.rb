@@ -11,7 +11,7 @@ class CreatorsController < ApplicationController
     @creators = Creator.new(creators_params)
 
     if @creators.save
-      redirect_to root_url, notice: 'Add User'
+      #redirect_to root_url, notice: 'Add User'
     else
       render :new
     end
@@ -24,7 +24,8 @@ class CreatorsController < ApplicationController
   private
 
   def creators_params
-    params.require(:creator).permit(:header)
+    params.fetch(:creator, {}).permit(:name, :image)
+    params.require(:creator).permit(:name, :image, :image1, :image2)
   end   
     
     
