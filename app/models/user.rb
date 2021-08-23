@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
          
-         #dependent: :destroyを付与してuserレコードの削除に伴ってprofileが削除されるようにしました。
+         #dependent: :destroyを付与してuserレコードの削除に伴ってcreatorレコードが削除されるようにしました。
          has_one :creator, dependent: :destroy
  
 end
