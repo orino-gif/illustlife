@@ -18,7 +18,7 @@ class CreatorsController < ApplicationController
   end
   
   def show
-    @user = User.find(50)
+    @user = User.find(1)
   end
 
   private
