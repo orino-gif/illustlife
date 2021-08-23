@@ -34,9 +34,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_125704) do
   end
 
   create_table "creators", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.string "image1"
-    t.string "image2"
+    t.string "header"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
