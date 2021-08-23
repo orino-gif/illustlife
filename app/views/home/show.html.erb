@@ -1,18 +1,18 @@
 <h1>クリエイター情報</h1>
-<% if @creator.image1? %>
-  <%= image_tag creator.image1.url %>
+
+<% if @creator.header? %>
+  <%= image_tag creator.header.url %>
 <% else %>
-  <%=image_tag('/nothing.png',class: 'header') %><br>
+  <%=image_tag('/nothing.png',class: 'header') %>
 <% end %>
+<br>
+
 <% begin %>
   <%= image_tag @user.image.variant(resize: '150x150').processed ,class: 'icon upimage' %>
-
 <% rescue => e %>
   <%=image_tag('/mobu.png',class: 'icon upimage' ) %>
 <% end %>
 <br>
-
-
 
 <%="ニックネーム：#{@user.nickname}" %>
 

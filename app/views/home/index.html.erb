@@ -1,7 +1,9 @@
 <h1>クリエイター紹介</h1><br>
 
   <h3>ディフォルメキャラ(2～3頭身)</h3><br>
+  
   <div class="container-fluid">
+    
     <div class="row">
     <% begin %>
       <%# raise #意図的にエラーを発生%>
@@ -15,6 +17,7 @@
           <div class="text-sm-center"><%= user.nickname %></div>
         </div>
       <% end %>
+      
     <% rescue => e %>
       <div class="row">
         <%=p e%>
@@ -23,15 +26,15 @@
     </div>
   
   
-  <h3>背景</h3><br>
-  
-  <h3>前景(道具、衣装、エフェクト等)</h3><br>
-  
-  <h3>キャラバストアップ(4頭身以上)</h3><br>
-  
-  <h3>スライドショー</h3><br>
+    <h3>背景</h3><br>
+    
+    <h3>前景(道具、衣装、エフェクト等)</h3><br>
+    
+    <h3>キャラバストアップ(4頭身以上)</h3><br>
+    
+    <h3>スライドショー</h3><br>
 
-</div>
+  </div>
 
 
 <%= link_to "クリエイター", new_creator_path, method: "get" %>
