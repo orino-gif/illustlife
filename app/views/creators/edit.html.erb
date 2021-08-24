@@ -3,7 +3,7 @@
   <button type="button" class="btn btn-light"><%= link_to "Eメール,パスワード変更", edit_user_registration_path %></button><br><br>
   
   <%="ヘッダー変更"%>
-  <%= form_with(model: @creator, local: true) do |f| %>
+  <%= form_with(model: @creators, local: true) do |f| %>
     <%= f.file_field(:header) %>
     <%= submit_tag("登録") %><br>
   <% end %>

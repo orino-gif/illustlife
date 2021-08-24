@@ -22,14 +22,16 @@ class CreatorsController < ApplicationController
   end
   
   def edit
+    @creators = Creator.new
     @user = User.find(current_user.id)
-    @creator = Creator.find_by(user_id:3)
+    #@creator = Creator.find_by(user_id:@user.id)
+    @creator = Creator.find(8)
   end
   
   private
 
   def creators_params
     params.fetch(:creator, {}).permit(:name, :image)
-    params.require(:creator).permit(:name, :image, :image1, :image2)
+    params.require(:creator).permit(:image, :header)
   end   
 end
