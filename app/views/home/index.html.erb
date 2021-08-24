@@ -3,23 +3,26 @@
   <h3>ディフォルメキャラ(2～3頭身)</h3><br>
   <div class="container-fluid">
     <div class="row">
-    <% begin %>
-      <%# raise #意図的にエラーを発生%>
-      <% @users.each do |user| %>
-        <div class="col-md-2">
-          <% if user.image.attached? %>
-            <%=link_to image_tag(user.image.variant(resize: '140x140').processed ,class: 'icon'), "/home/show/#{user.id}" %><br>
-          <% else %>
-            <%=link_to image_tag('/mobu.png',class: 'icon'), "/home/show/#{user.id}" %><br>
-          <% end %>
-          <div class="text-sm-center"><%= user.nickname %></div>
+      <% begin %>
+        <%# raise #意図的にエラーを発生%>
+        <% @users.each do |user| %>
+          <div class="col-md-2">
+            <% if user.image.attached? %>
+              <%=link_to image_tag(user.image.variant(resize: '140x140').processed ,class: 'icon'), "/home/show/#{user.id}" %><br>
+            <% else %>
+              <%=link_to image_tag('/mobu.png',class: 'icon'), "/home/show/#{user.id}" %><br>
+            <% end %>
+            
+            <div class="text-sm-center">
+              <%= user.nickname %>
+            </div>
+          </div>
+        <% end %>
+      <% rescue => e %>
+        <div class="row">
+          <%=p e%>
         </div>
       <% end %>
-    <% rescue => e %>
-      <div class="row">
-        <%=p e%>
-      </div>
-    <% end %>
     </div>
   
   
