@@ -20,13 +20,16 @@ class CreatorsController < ApplicationController
   def show
     @user = User.find(1)
   end
-
+  
+  def edit
+    @user = User.find(current_user.id)
+    @creator = Creator.find_by(user_id:3)
+  end
+  
   private
 
   def creators_params
     params.fetch(:creator, {}).permit(:name, :image)
     params.require(:creator).permit(:name, :image, :image1, :image2)
   end   
-    
-    
 end
