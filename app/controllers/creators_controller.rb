@@ -10,7 +10,7 @@ class CreatorsController < ApplicationController
   def create
     @creators = Creator.new(creators_params)
 
-    if @creators.save
+    if @creators.save!
       #redirect_to root_url, notice: 'Add User'
     else
       render :new
@@ -25,13 +25,14 @@ class CreatorsController < ApplicationController
     @creators = Creator.new
     @user = User.find(current_user.id)
     #@creator = Creator.find_by(user_id:@user.id)
-    @creator = Creator.find(8)
+    @creator = Creator.find(9)
   end
   
   private
 
   def creators_params
-    params.fetch(:creator, {}).permit(:name, :image)
-    params.require(:creator).permit(:image, :header)
+    #params.fetch(:creator, {}).permit(:name, :image)
+    #params.require(:creator).permit(:image, :header)
+    params.require(:creator).permit(:header)
   end   
 end

@@ -4,7 +4,8 @@
   
   <%="ヘッダー変更"%>
   <%= form_with(model: @creators, local: true) do |f| %>
-    <%= f.file_field(:header) %>
+    <%#= f.file_field(:header) %>
+    <%= f.file_field :header %>
     <%= submit_tag("登録") %><br>
   <% end %>
   
