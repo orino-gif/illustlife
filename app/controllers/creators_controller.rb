@@ -25,7 +25,7 @@ class CreatorsController < ApplicationController
     #@creators = Creator.new
     @user = User.find(current_user.id)
     @creator = Creator.find_by(user_id:@user.id)
-    #@creator = Creator.find(9)
+    #@creator = Creator.find(12)
   end
   
   def update

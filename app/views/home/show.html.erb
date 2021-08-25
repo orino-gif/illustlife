@@ -1,6 +1,6 @@
 <h1>クリエイター情報</h1>
 <% if @creator.header? %>
-  <%= image_tag creator.header.url %>
+  <%= image_tag @creator.header.url %>
 <% else %>
   <%=image_tag('/nothing.png',class: 'header') %><br>
 <% end %>
