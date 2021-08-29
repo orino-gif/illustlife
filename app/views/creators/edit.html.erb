@@ -1,29 +1,37 @@
 <h1><%="ユーザー情報編集"%></h1><br><br>
-<div class="container-fluid">
-  <button type="button" class="btn btn-light"><%= link_to "Eメール,パスワード変更", edit_user_registration_path %></button><br><br>
+<div class="container">
   
-  <%="ヘッダー変更"%>
-  <%= form_with(model: @creator, local: true) do |f| %>
-    <%#= f.file_field(:header) %>
-    <%= f.file_field :header %>
-    <%= submit_tag("登録") %><br>
-  <% end %>
+  <div class="row">
+    <button type="button" class="btn btn-light"><%= link_to "Eメール,パスワード変更", edit_user_registration_path %></button>
+  </div>
+  <br><br>
   
-  <% if @creator.header? %>
-    <%= image_tag @creator.header.url  ,class: 'header' %>
-  <% end %>
-  
-  <table class="table">
-    <tr>
-      <tH><%="ニックネーム:"%><br></tH>
-      <tH><%=@user.nickname%><br></tH>
-    </tr>
+  <div class="row">
+    <%="ヘッダー変更:"%>
     
-    <tr>
-      <tH><%="ヘッダー:#{ @creator.user_id }"%><br></tH>
-      <tH><%="ヘッダー変更"%><br></tH>
-    </tr>
-  </table>
+    <% if @creator.header? %>
+      <%= image_tag @creator.header.url  ,class: 'header' %>
+    <% end %>
+    
+    <%= form_with(model: @creator, local: true) do |f| %>
+      <%= f.file_field :header %>
+      <%= submit_tag("登録") %>
+    <% end %>
+  </div>
+  
+  <div class="row">
+    <table class="table">
+      <tr>
+        <tH><%="ニックネーム:"%><br></tH>
+        <tH><%=@user.nickname%><br></tH>
+      </tr>
+      
+      <tr>
+        <tH><%="ヘッダー:#{ @creator.user_id }"%><br></tH>
+        <tH><%="ヘッダー変更"%><br></tH>
+      </tr>
+    </table>
+  </div>
     
 </div>
 
