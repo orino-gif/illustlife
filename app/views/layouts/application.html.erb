@@ -24,44 +24,46 @@
   </head>
   
   <body>
-    <div class="display-3">
-      <%= link_to "イラストライフ", home_index_path, method: "get" %>
-      <span style="font-size: 18px;">～好きな事だけで自由に生きる</span><br>
-      <span style="font-size: 24px;">1回6000円以下3日以内のインスタンスなイラスト依頼</span>
-    </div> 
-    
     <div class="container">
-      <% if user_signed_in? %>
-        <div class="right">
-          <!--<button type="button" class="btn btn-light"><%#= link_to "ユーザー情報","/user/show/id" %></button>-->
-          <button type="button" class="btn btn-light"><%= link_to "ユーザー情報","/home/show/#{@user.id}" %></button>
-          <!--<button type="button" class="btn btn-light"><%#= link_to "ユーザー編集", edit_user_registration_path, method: "get" %></button>-->
-          <button type="button" class="btn btn-light"><%= link_to "ユーザー編集", "/creators/#{@user.id}/edit" %></button>
-          <button type="button" class="btn btn-light"><%= link_to "ログアウト", destroy_user_session_path, method: "delete" %></button>
-        </div>
-      <% else %>
-        <div class="right">
-          <button type="button" class="btn btn-light"><%= link_to "新規登録", new_user_registration_path, method: "get" %></button>
-          <button type="button" class="btn btn-light"><%= link_to "ログイン\n", new_user_session_path, method: "get" %></button>
+      <div class="display-3">
+        <%= link_to "イラストライフ", home_index_path, method: "get" %>
+        <span style="font-size: 18px;">～好きな事だけで自由に生きる</span><br>
+        <span style="font-size: 24px;">1回6000円以下3日以内のインスタンスなイラスト依頼</span>
+      </div> 
+      
+      
+        <% if user_signed_in? %>
+          <div class="right">
+            <!--<button type="button" class="btn btn-light"><%#= link_to "ユーザー情報","/user/show/id" %></button>-->
+            <button type="button" class="btn btn-light"><%= link_to "ユーザー情報","/home/show/#{@user.id}" %></button>
+            <!--<button type="button" class="btn btn-light"><%#= link_to "ユーザー編集", edit_user_registration_path, method: "get" %></button>-->
+            <button type="button" class="btn btn-light"><%= link_to "ユーザー編集", "/creators/#{@user.id}/edit" %></button>
+            <button type="button" class="btn btn-light"><%= link_to "ログアウト", destroy_user_session_path, method: "delete" %></button>
+          </div>
+        <% else %>
+          <div class="right">
+            <button type="button" class="btn btn-light"><%= link_to "新規登録", new_user_registration_path, method: "get" %></button>
+            <button type="button" class="btn btn-light"><%= link_to "ログイン\n", new_user_session_path, method: "get" %></button>
+          </div>
+        <% end %>
+      
+    
+      <%# フラッシュ追加%>
+      <% if notice.present? %>
+        <div class="alert alert-dismissable alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <p><%= notice %></p>
         </div>
       <% end %>
-    </div>
-  
-    <%# フラッシュ追加%>
-    <% if notice.present? %>
-      <div class="alert alert-dismissable alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <p><%= notice %></p>
-      </div>
-    <% end %>
-  
-    <% if alert.present? %>
-      <div class="alert alert-dismissable alert-danger">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <p><%= alert %></p>
-      </div>
-    <% end %>
     
-    <%= yield %>
+      <% if alert.present? %>
+        <div class="alert alert-dismissable alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <p><%= alert %></p>
+        </div>
+      <% end %>
+      
+      <%= yield %>
+    </div>
   </body>
 </html>
