@@ -10,7 +10,7 @@
   <% end %>
   
   <% if @creator.header? %>
-    <%= image_tag @creator.header.url %>
+    <%= image_tag @creator.header.url  ,class: 'header' %>
   <% end %>
   
   <table class="table">

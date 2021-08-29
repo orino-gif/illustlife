@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_08_03_085238) do
   end
 
   create_table "creators", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "icon"
     t.string "header"
     t.bigint "user_id"
     t.datetime "created_at", null: false
