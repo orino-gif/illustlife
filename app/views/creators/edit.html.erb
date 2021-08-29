@@ -1,11 +1,7 @@
 <h1><%="ユーザー情報編集"%></h1><br><br>
 <div class="container">
-  
-  
-  
   <div class="row">
     <%="アイコン："%>
-    
       <%= form_with(model: @creator, local: true) do |f| %>
         <%= f.file_field :header %>
         <%= submit_tag("登録") %>
@@ -17,9 +13,6 @@
         <%=image_tag('/mobu.png',class: 'icon' ) %>
       <% end %>
     </div>
-    
-
-
   </div>
   
   <div class="row">
@@ -58,7 +51,6 @@
       </tr>
     </table>
   </div>
-    
 </div>
 
 
