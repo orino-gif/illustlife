@@ -1,40 +1,42 @@
 <h1><%="ユーザー情報編集"%></h1><br><br>
 <div class="container">
   <div class="row">
-    <%="アイコン："%>
+    <div class="col-2">
+      <%="アイコン："%>
+        <% if @creator.icon? %>
+          <%= image_tag @creator.icon.url  ,class: 'icon' %>
+        <% else %>
+          <%=image_tag('/mobu.png',class: 'icon' ) %>
+        <% end %>
+    </div>
+    <div class="col-10">
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :icon %>
+        <%= submit_tag("変更") %>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col">
+      <%="ヘッダー："%>
+      
+      <% if @creator.header? %>
+        <%= image_tag @creator.header.url  ,class: 'header' %>
+      <% else %>
+        <%=image_tag('/nothing.png',class: 'header') %>
+      <% end %>
+      
       <%= form_with(model: @creator, local: true) do |f| %>
         <%= f.file_field :header %>
         <%= submit_tag("登録") %>
       <% end %>
-    <div class="col-md-2">
-      <% if @creator.icon? %>
-        <%= image_tag @creator.header.url  ,class: 'icon' %>
-      <% else %>
-        <%=image_tag('/mobu.png',class: 'icon' ) %>
-      <% end %>
     </div>
   </div>
   
   <div class="row">
-    <%="ヘッダー："%>
-    
-    <% if @creator.header? %>
-      <%= image_tag @creator.header.url  ,class: 'header' %>
-    <% else %>
-      <%=image_tag('/nothing.png',class: 'header') %>
-    <% end %>
-    
-    <%= form_with(model: @creator, local: true) do |f| %>
-      <%= f.file_field :header %>
-      <%= submit_tag("登録") %>
-    <% end %>
-  </div>
-  
-  <div class="row">
-    <%="Eメール,パスワード："%>
-    <div class="col-md-2">
-      <button type="button"><%= link_to "変更", edit_user_registration_path %></button>
-    </div>
+    <div class="col"><%="Eメール,パスワード："%></div>
+    <div class="col"><button type="button"><%= link_to "変更", edit_user_registration_path %></button></div>
   </div>
   <br><br>
   
