@@ -19,6 +19,7 @@
  @import "bootstrap";
  
  .icon {
+  max-width: 100%;
   border-radius: 50%;
    width: 140px;
    height: 140px;
@@ -27,6 +28,7 @@
   border-style: solid;
   border-width: 5px;
   border-color: bule;
+  
 }
  .header {
   width: 100%;
