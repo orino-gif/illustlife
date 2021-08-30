@@ -1,12 +1,12 @@
-<h1><%="ユーザー情報編集"%></h1><br><br>
+<h1><%= "ユーザー情報編集" %></h1>
 <div class="container">
-  <div class="row">
+  <div class="row my-5">
     <div class="col-2">
-      <%="アイコン："%>
+      <%= "アイコン：" %>
         <% if @creator.icon? %>
           <%= image_tag @creator.icon.url  ,class: 'icon' %>
         <% else %>
-          <%=image_tag('/mobu.png',class: 'icon' ) %>
+          <%= image_tag('/mobu.png',class: 'icon' ) %>
         <% end %>
     </div>
     <div class="col-10">
@@ -17,10 +17,9 @@
     </div>
   </div>
   
-  <div class="row">
+  <div class="row my-5">
     <div class="col">
-      <%="ヘッダー："%>
-      
+      <%= "ヘッダー：" %>
       <% if @creator.header? %>
         <%= image_tag @creator.header.url  ,class: 'header' %>
       <% else %>
@@ -33,23 +32,17 @@
       <% end %>
     </div>
   </div>
-  
-  <div class="row">
-    <div class="col"><%="Eメール,パスワード："%></div>
-    <div class="col"><button type="button"><%= link_to "変更", edit_user_registration_path %></button></div>
-  </div>
-  <br><br>
-  
+
   <div class="row">
     <table class="table">
       <tr>
-        <tH><%="ニックネーム:"%><br></tH>
-        <tH><%=@user.nickname%><br></tH>
+        <td><%= "Eメール,パスワード：#{@user.email}" %></td>
+        <td><button type="button"><%= link_to "変更", edit_user_registration_path %></button></td>
       </tr>
       
       <tr>
-        <tH><%="ヘッダー:#{ @creator.user_id }"%><br></tH>
-        <tH><%="ヘッダー変更"%><br></tH>
+        <td><%= "ニックネーム:" %><br></td>
+        <td><%= @user.nickname %><br></td>
       </tr>
     </table>
   </div>
