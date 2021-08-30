@@ -8,20 +8,24 @@
     <% begin %>
       <%# raise #意図的にエラーを発生%>
       <% @creators.each do |creator| %>
-        <% if creator.icon? %>
-          <%= link_to image_tag(creator.icon.url  ,class: 'icon'),  "/home/show/#{creator.user_id}" %>
-        <% else %>
-          <%= link_to image_tag('/mobu.png',class: 'icon'), "/home/show/#{creator.user_id}" %>
-        <% end %>
-        <div class="text-sm-center">
-            <%= creator.user.nickname %>
+        <div class="col-2">
+          <% if creator.user.confirmed_at? %>
+            <% if creator.icon? %>
+              <%= link_to image_tag(creator.icon.url  ,class: 'icon center-block'),  "/home/show/#{creator.user_id}" %>
+            <% else %>
+              <%= link_to image_tag('/mobu.png',class: 'icon'), "/home/show/#{creator.user_id}" %>
+            <% end %>
+            <div class="text-center">
+              <span style="font-size: 18px;">
+                <%= creator.user.nickname %>
+              </span>
+            </div>
+          <% end %>
         </div>
       <% end %>
       
     <% rescue => e %>
-      <div class="row">
         <%=p e%>
-      </div>
     <% end %>
   </div>
 
