@@ -36,13 +36,13 @@
   <div class="row">
     <table class="table">
       <tr>
-        <td><%= "Eメール,パスワード：#{@user.email}" %></td>
+        <td><%= "Eメール, パスワード：#{@user.email}, xxxxxxxxxxx" %></td>
         <td><button type="button"><%= link_to "変更", edit_user_registration_path %></button></td>
       </tr>
       
       <tr>
-        <td><%= "ニックネーム:" %><br></td>
-        <td><%= @user.nickname %><br></td>
+        <td><%= "ニックネーム：" %></td>
+        <td><%= @user.nickname %></td>
       </tr>
     </table>
   </div>

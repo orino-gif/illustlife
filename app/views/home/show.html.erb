@@ -2,18 +2,20 @@
 <div class="container">
   <div class="row">
     <% begin %>
-      <%= image_tag @user.image.variant(resize: '150x150').processed ,class: 'icon upimage' %>
+      <%= image_tag @creator.icon.url  ,class: 'icon upimage' %>
     <% rescue => e %>
       <%=image_tag('/mobu.png',class: 'icon upimage') %>
-    <% end %><br>
+    <% end %>
     
     <% if @creator.header? %>
       <%= image_tag @creator.header.url ,class: 'header' %>
     <% else %>
       <%=image_tag('/nothing.png',class: 'header') %>
     <% end %>
-    <br><br>
-    
+  </div>  
+  
+  <div class="row my-5">  
     <%="ニックネーム：#{@user.nickname}" %>
   </div>
+  
 </div>

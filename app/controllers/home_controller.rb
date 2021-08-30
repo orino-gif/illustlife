@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
   def index
     @users = User.all
+    @creators = Creator.all
+    
   end
   
   def show

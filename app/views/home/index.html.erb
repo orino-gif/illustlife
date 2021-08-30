@@ -1,38 +1,38 @@
 <h1>クリエイター紹介</h1><br>
-
-  <h3>ディフォルメキャラ(2～3頭身)</h3><br>
-  <div class="container-fluid">
-    <div class="row">
-      <% begin %>
-        <%# raise #意図的にエラーを発生%>
-        <% @users.each do |user| %>
-          <div class="col-md-2">
-            <% if user.image.attached? %>
-              <%=link_to image_tag(user.image.variant(resize: '140x140').processed ,class: 'icon'), "/home/show/#{user.id}" %><br>
-            <% else %>
-              <%=link_to image_tag('/mobu.png',class: 'icon'), "/home/show/#{user.id}" %><br>
-            <% end %>
-            
-            <div class="text-sm-center">
-              <%= user.nickname %>
-            </div>
-          </div>
+<div class="container-fluid">
+  <div class="row">
+    <h3>ディフォルメキャラ(2～3頭身)</h3>
+  </div>
+  
+  <div class="row">
+    <% begin %>
+      <%# raise #意図的にエラーを発生%>
+      <% @creators.each do |creator| %>
+        <% if creator.icon? %>
+          <%= link_to image_tag(creator.icon.url  ,class: 'icon'),  "/home/show/#{creator.user_id}" %>
+        <% else %>
+          <%= link_to image_tag('/mobu.png',class: 'icon'), "/home/show/#{creator.user_id}" %>
         <% end %>
-      <% rescue => e %>
-        <div class="row">
-          <%=p e%>
+        <div class="text-sm-center">
+            <%= creator.user.nickname %>
         </div>
       <% end %>
-    </div>
-  
+      
+    <% rescue => e %>
+      <div class="row">
+        <%=p e%>
+      </div>
+    <% end %>
+  </div>
+
   <h3>背景</h3><br>
+  
   
   <h3>前景(道具、衣装、エフェクト等)</h3><br>
   
   <h3>キャラバストアップ(4頭身以上)</h3><br>
   
   <h3>スライドショー</h3><br>
-
 </div>
 
 <%= link_to "test1", new_creator_path, method: "get" %>
