@@ -40,8 +40,6 @@ class CreatorsController < ApplicationController
   private
 
   def creators_params
-    #params.fetch(:creator, {}).permit(:name, :image)
-    #params.require(:creator).permit(:image, :header)
     params.require(:creator).permit(:header,:update,:icon)
   end   
 end

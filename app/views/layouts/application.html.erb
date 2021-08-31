@@ -29,23 +29,19 @@
   <body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-1">
+        <div class="col-md-auto">
           <%= link_to image_tag('/symbol.png',class: 'favicon'),  home_index_path %>
         </div>
         <div class="col-md-auto">
           <span style="font-size: 30px;">イラストライフ</span><span style="font-size: 10px;">(テスト版)</span>
         </div>
       </div>
-      
-      <!--<div class="row">-->
-        <span style="font-size: 20px;">1回6000円以下3日以内のインスタンスなイラスト依頼</span>
-      <!--</div>-->
+
+      <span style="font-size: 20px;">1回6000円以下3日以内のインスタンスなイラスト依頼</span>
       
       <% if user_signed_in? %>
         <div class="right">
-          <!--<button type="button" class="btn btn-light"><%#= link_to "ユーザー情報","/user/show/id" %></button>-->
           <button type="button" class="btn btn-light"><%= link_to "ユーザー情報","/home/show/#{@user.id}" %></button>
-          <!--<button type="button" class="btn btn-light"><%#= link_to "ユーザー編集", edit_user_registration_path, method: "get" %></button>-->
           <button type="button" class="btn btn-light"><%= link_to "ユーザー編集", "/creators/#{@user.id}/edit" %></button>
           <button type="button" class="btn btn-light"><%= link_to "ログアウト", destroy_user_session_path, method: "delete" %></button>
         </div>

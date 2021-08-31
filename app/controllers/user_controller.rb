@@ -38,7 +38,6 @@ class UserController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-
       @user = current_user
       @url = request.url
       NotificationMailer.user_update(@user, @url).deliver
@@ -47,6 +46,7 @@ class UserController < ApplicationController
       render :new
     end
   end
+  
   private
 
   def user_params

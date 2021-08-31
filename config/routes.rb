@@ -4,5 +4,4 @@ Rails.application.routes.draw do
   resources :home, only: [:index]
   resources :creators, only: [:new, :create, :index, :show, :edit, :update]
   get 'home/show/:id', to: 'home#show', as: 'home'
-  
 end
