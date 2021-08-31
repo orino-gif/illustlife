@@ -24,13 +24,26 @@
   
   <body>
     <div class="container-fluid">
-      <div class="display-3">
-        <%= link_to "イラストライフ", home_index_path, method: "get" %>
-        
-        <span style="font-size: 18px;">～好きな事だけで自由に生きる</span>
-        <span style="font-size: 10px;">(テスト版)</span><br>
+      <div class="row">
+        <!--<div class="display-3">-->
+        <div class="col-3">
+          <%= image_tag('/symbol2.png',class: 'favicon') %>
+        </div>
+        <div class="col-3">
+          <span style="font-size: 40px;"><%= link_to "イラストライフ", home_index_path, method: "get" %></span>
+        </div>
+        <div class="col-1">
+          <span style="font-size: 10px;">(テスト版)</span><br>
+        </div>  
+        <div class="col-6">  
+          <span style="font-size: 18px;">～好きな事だけで自由に生きる</span>
+        </div>
+       
+        <!--</div> -->
+      </div>
+      <div class="row">
         <span style="font-size: 20px;">1回6000円以下3日以内のインスタンスなイラスト依頼</span>
-      </div> 
+      </div>
       
       <% if user_signed_in? %>
         <div class="right">
