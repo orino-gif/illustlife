@@ -7,6 +7,10 @@
     <!--integrity:html検証,crossorigin:ユーザー認証情報anonymous(不要)-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!--googleフォント設定-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500&family=Kosugi+Maru&family=Potta+One&family=Yomogi&display=swap" rel="stylesheet">
       
     <!--Railsの組み込み関数stylesheet_link_tag を使って、application.css.scssをすべてのファイルで読み込んでいる-->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -25,25 +29,17 @@
   <body>
     <div class="container-fluid">
       <div class="row">
-        <!--<div class="display-3">-->
-        <div class="col-3">
-          <%= image_tag('/symbol2.png',class: 'favicon') %>
+        <div class="col-md-1">
+          <%= link_to image_tag('/symbol.png',class: 'favicon'),  home_index_path %>
         </div>
-        <div class="col-3">
-          <span style="font-size: 40px;"><%= link_to "イラストライフ", home_index_path, method: "get" %></span>
+        <div class="col-md-auto">
+          <span style="font-size: 30px;">イラストライフ</span><span style="font-size: 10px;">(テスト版)</span>
         </div>
-        <div class="col-1">
-          <span style="font-size: 10px;">(テスト版)</span><br>
-        </div>  
-        <div class="col-6">  
-          <span style="font-size: 18px;">～好きな事だけで自由に生きる</span>
-        </div>
-       
-        <!--</div> -->
       </div>
-      <div class="row">
+      
+      <!--<div class="row">-->
         <span style="font-size: 20px;">1回6000円以下3日以内のインスタンスなイラスト依頼</span>
-      </div>
+      <!--</div>-->
       
       <% if user_signed_in? %>
         <div class="right">
