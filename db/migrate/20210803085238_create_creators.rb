@@ -5,7 +5,6 @@ class CreateCreators < ActiveRecord::Migration[5.2]
       t.string :icon
       t.string :header
       
-      
       t.timestamps
     end
     # 親テーブルに対象が存在しない場合、子テーブルへの保存ができないようにする。

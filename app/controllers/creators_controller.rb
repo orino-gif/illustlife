@@ -1,10 +1,8 @@
 class CreatorsController < ApplicationController
   def index
-    @creators = Creator.all
   end
 
   def new
-    @creators = Creator.new
   end
 
   def create
@@ -18,14 +16,13 @@ class CreatorsController < ApplicationController
   end
   
   def show
-    @user = User.find(1)
+    @user = User.find_by(id:params[:id])
+    @creator = Creator.find_by(user_id:@user.id)
   end
   
   def edit
-    #@creators = Creator.new
     @user = User.find(current_user.id)
     @creator = Creator.find_by(user_id:@user.id)
-    #@creator = Creator.find(12)
   end
   
   def update
@@ -40,6 +37,6 @@ class CreatorsController < ApplicationController
   private
 
   def creators_params
-    params.require(:creator).permit(:header,:update,:icon)
+    params.require(:creator).permit(:header,:icon,:update)
   end   
 end

@@ -11,9 +11,9 @@
         <div class="col-md-auto">
           <% if creator.user.confirmed_at? %>
             <% if creator.icon? %>
-              <%= link_to image_tag(creator.icon.url  ,class: 'icon center-block'),  "/home/show/#{creator.user_id}" %>
+              <%= link_to image_tag(creator.icon.url  ,class: 'icon center-block'),  "/creators/#{creator.user_id}" %>
             <% else %>
-              <%= link_to image_tag('/mobu.png',class: 'icon'), "/home/show/#{creator.user_id}" %>
+              <%= link_to image_tag('/mobu.png',class: 'icon'), "/creators/#{creator.user_id}" %>
             <% end %>
             <div class="text-center">
               <span style="font-size: 12px;">
@@ -37,7 +37,3 @@
   
   <h3>スライドショー</h3><br>
 </div>
-
-<%= link_to "test1", new_creator_path, method: "get" %>
-<%= link_to "test2", creators_path, method: "get" %>
-

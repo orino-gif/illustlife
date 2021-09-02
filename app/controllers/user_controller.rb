@@ -1,7 +1,6 @@
 class UserController < ApplicationController
   
   def index
-    
   end
 
   def new
@@ -50,6 +49,6 @@ class UserController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:nickname, :email, :password, :password_confirmation,:user_id)
+    params.require(:user).permit(:nickname, :email, :password, :password_confirmation)
   end
 end
