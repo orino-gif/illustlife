@@ -38,9 +38,12 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       @user = current_user
+      
+      #現在のURLを取得
       @url = request.url
+      
       NotificationMailer.user_update(@user, @url).deliver
-      redirect_to(user_path(@user))
+      redirect_to(creator_path(@user))
     else
       render :new
     end
@@ -49,6 +52,6 @@ class UserController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:nickname, :email, :password, :password_confirmation)
+    #params.require(:user).permit(:nickname)
   end
 end
