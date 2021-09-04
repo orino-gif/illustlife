@@ -1,15 +1,16 @@
 <h1><%= "ユーザー情報編集" %></h1>
 <div class="container">
   <div class="row my-5">
+    <%= "アイコン：" %>
     <div class="col-md-auto">
-      <%= "アイコン：" %>
+      
         <% if @creator.icon? %>
           <%= image_tag @creator.icon.url  ,class: 'icon' %>
         <% else %>
           <%= image_tag('/mobu.png',class: 'icon' ) %>
         <% end %>
     </div>
-    <div class="col-10">
+    <div class="col-auto">
       <%= form_with(model: @creator, local: true) do |f| %>
         <%= f.file_field :icon %>
         <%= submit_tag("変更") %>
@@ -18,8 +19,8 @@
   </div>
   
   <div class="row my-5">
+    <%= "ヘッダー：" %>
     <div class="col">
-      <%= "ヘッダー：" %>
       <% if @creator.header? %>
         <%= image_tag @creator.header.url  ,class: 'header' %>
       <% else %>
@@ -33,15 +34,39 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row my-5">
+    <%= "アカウント情報：" %>
     <table class="table">
       <tr><td><%= "Eメール：#{@user.email}" %></td></tr>
       <tr><td><%= " パスワード: xxxxxxxxxxx" %></td></tr>
       <tr><td><%= "ニックネーム：#{@user.nickname}" %></td></tr>
       <tr><td><%= "在籍 or 退会：在籍" %></td></tr>
-      <td><button type="button"><%= link_to "変更", edit_user_registration_path %></button></td>
+      <td><button type="button">
+        <%= link_to "変更", edit_user_registration_path %>
+      </button></td>
     </table>
   </div>
+  
+  <div class="row my-5">
+    <%= "リンク先：" %>
+    <table class="table">
+      <tr><td>
+        <%= form_tag(creator_path, method: :put) do %>
+          <%= "twitter：" %><%= text_field_tag :twitter_url, @creator.twitter_url,{size:"50"} %>
+          <%= submit_tag "変更" %>
+        <% end %>
+      </td></tr>
+      
+      <tr><td>
+        <%= form_tag(creator_path, method: :put) do %>
+          <%= "pixiv：" %><%= text_field_tag :pixiv_url, @creator.pixiv_url,{size:"50"} %>
+          <%= submit_tag "変更" %>
+        <% end %>
+      </td></tr>
+    </table>
+  </div>
+  
+  <div class="row my-5">
 </div>
 
 

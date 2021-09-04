@@ -4,6 +4,8 @@ class CreateCreators < ActiveRecord::Migration[5.2]
       t.column :user_id, 'INTEGER PRIMARY KEY NOT NULL'
       t.string :icon
       t.string :header
+      t.string :twitter_url
+      t.string :pixiv_url
       
       t.timestamps
     end
