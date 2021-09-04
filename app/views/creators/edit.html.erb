@@ -7,7 +7,7 @@
         <% if @creator.icon? %>
           <%= image_tag @creator.icon.url  ,class: 'icon' %>
         <% else %>
-          <%= image_tag('/mobu.png',class: 'icon' ) %>
+          <%= image_tag('/img/mobu.png',class: 'icon' ) %>
         <% end %>
     </div>
     <div class="col-auto">
@@ -24,7 +24,7 @@
       <% if @creator.header? %>
         <%= image_tag @creator.header.url  ,class: 'header' %>
       <% else %>
-        <%=image_tag('/nothing.png',class: 'header') %>
+        <%=image_tag('/img/nothing.png',class: 'header') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>

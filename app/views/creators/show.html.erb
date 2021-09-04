@@ -1,20 +1,33 @@
 <h1>ユーザー情報</h1>
 <div class="container">
   <div class="row">
-    <% begin %>
-      <%= image_tag @creator.icon.url  ,class: 'icon upimage' %>
-    <% rescue => e %>
-      <%=image_tag('/mobu.png',class: 'icon upimage') %>
-    <% end %>
-    
     <% if @creator.header? %>
       <%= image_tag @creator.header.url ,class: 'header' %>
     <% else %>
-      <%=image_tag('/nothing.png',class: 'header') %>
+      <%= image_tag('/img/nothing.png',class: 'header') %>
     <% end %>
-  </div>  
+  </div>
+  
+  <div class="row">
+    <div class="col-9">
+      <% begin %>
+        <%= image_tag @creator.icon.url  ,class: 'icon upicon' %>
+      <% rescue => e %>
+        <%= image_tag('/img/mobu.png',class: 'icon upicon') %>
+      <% end %>
+    </div>
+    
+    <div class="col-1">
+      <%= link_to image_tag('/img/twitter.png',class: 'symbol upsymbol'),@creator.twitter_url %>
+    </div>
+    
+    <div class="col-1">
+      <%= link_to image_tag('/img/pixiv.png',class: 'symbol upsymbol'), @creator.pixiv_url%>
+    </div>
+  </div>
   
   <div class="row my-5">  
-    <%="ニックネーム：#{@user.nickname}" %>
+    <%= "ニックネーム：#{@user.nickname}" %>
   </div>
+  
 </div>
