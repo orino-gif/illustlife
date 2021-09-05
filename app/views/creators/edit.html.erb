@@ -2,14 +2,15 @@
 <div class="container">
   <div class="row my-5">
     <%= "アイコン：" %>
+    
     <div class="col-md-auto">
-      
-        <% if @creator.icon? %>
-          <%= image_tag @creator.icon.url  ,class: 'icon' %>
-        <% else %>
-          <%= image_tag('/img/mobu.png',class: 'icon' ) %>
-        <% end %>
+      <% if @creator.icon? %>
+        <%= image_tag @creator.icon.url  ,class: 'icon' %>
+      <% else %>
+        <%= image_tag('/img/mobu.png',class: 'icon' ) %>
+      <% end %>
     </div>
+    
     <div class="col-auto">
       <%= form_with(model: @creator, local: true) do |f| %>
         <%= f.file_field :icon %>
@@ -20,6 +21,7 @@
   
   <div class="row my-5">
     <%= "ヘッダー：" %>
+    
     <div class="col">
       <% if @creator.header? %>
         <%= image_tag @creator.header.url  ,class: 'header' %>
@@ -51,15 +53,15 @@
     <%= "リンク先：" %>
     <table class="table">
       <tr><td>
-        <%= form_tag(creator_path, method: :put) do %>
-          <%= "twitter：" %><%= text_field_tag :twitter_url, @creator.twitter_url,{size:"50"} %>
+        <%= form_with(model: @creator, local: true) do |f| %>
+          <%= "twitter：" %><%= f.text_field :twitter ,{size:"70"} %>
           <%= submit_tag "変更" %>
         <% end %>
       </td></tr>
       
       <tr><td>
-        <%= form_tag(creator_path, method: :put) do %>
-          <%= "pixiv：" %><%= text_field_tag :pixiv_url, @creator.pixiv_url,{size:"50"} %>
+        <%= form_with(model: @creator, local: true) do |f| %>
+          <%= "twitter：" %><%= f.text_field :pixiv ,{size:"70"} %>
           <%= submit_tag "変更" %>
         <% end %>
       </td></tr>
@@ -67,6 +69,19 @@
   </div>
   
   <div class="row my-5">
+    <%= "デフォルメキャラ(2～3頭身)：" %>
+    
+    <div class="col">
+      <% if @creator.deforume1? %>
+        <%= image_tag @creator.deforume1.url  ,class: 'thumbnail' %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :header %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 

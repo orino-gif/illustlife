@@ -15,8 +15,26 @@ ActiveRecord::Schema.define(version: 2021_08_03_085238) do
   create_table "creators", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "icon"
     t.string "header"
-    t.string "twitter_url"
-    t.string "pixiv_url"
+    t.string "twitter"
+    t.string "pixiv"
+    t.string "deforume1"
+    t.string "deforume2"
+    t.string "deforume3"
+    t.string "background1"
+    t.string "background2"
+    t.string "background3"
+    t.string "foreground1"
+    t.string "foreground2"
+    t.string "foreground3"
+    t.string "bustup1"
+    t.string "bustup2"
+    t.string "bustup3"
+    t.string "rough1"
+    t.string "rough2"
+    t.string "rough3"
+    t.string "slide1"
+    t.string "slide2"
+    t.string "slide3"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
