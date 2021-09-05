@@ -61,16 +61,18 @@
       
       <tr><td>
         <%= form_with(model: @creator, local: true) do |f| %>
-          <%= "twitter：" %><%= f.text_field :pixiv ,{size:"70"} %>
+          <%= "pixiv：" %><%= f.text_field :pixiv ,{size:"70"} %>
           <%= submit_tag "変更" %>
         <% end %>
       </td></tr>
     </table>
   </div>
   
-  <div class="row my-5">
+  <div class="row">
     <%= "デフォルメキャラ(2～3頭身)：" %>
-    
+  </div>
+  
+  <div class="row my-5">
     <div class="col">
       <% if @creator.deforume1? %>
         <%= image_tag @creator.deforume1.url  ,class: 'thumbnail' %>
@@ -78,6 +80,28 @@
       
       <%= form_with(model: @creator, local: true) do |f| %>
         <%= f.file_field :deforume1 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+    
+    <div class="col">
+      <% if @creator.deforume2? %>
+        <%= image_tag @creator.deforume2.url  ,class: 'thumbnail' %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :deforume2 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+    
+    <div class="col">
+      <% if @creator.deforume3? %>
+        <%= image_tag @creator.deforume3.url  ,class: 'thumbnail' %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :deforume3 %>
         <%= submit_tag("登録") %>
       <% end %>
     </div>
