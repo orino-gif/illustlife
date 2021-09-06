@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_03_085238) do
+ActiveRecord::Schema.define(version: 2021_09_06_133845) do
 
   create_table "creators", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "icon"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2021_08_03_085238) do
     t.string "slide3"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "checkbox"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

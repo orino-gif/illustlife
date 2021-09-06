@@ -23,6 +23,7 @@ class CreatorsController < ApplicationController
   def edit
     @user = User.find(current_user.id)
     @creator = Creator.find_by(user_id:@user.id)
+    
   end
   
   def update
@@ -37,6 +38,6 @@ class CreatorsController < ApplicationController
   private
 
   def creators_params
-    params.require(:creator).permit(:header,:icon,:update,:twitter,:pixiv,:deforume1,:deforume2,:deforume3,:sample)
+    params.require(:creator).permit(:header,:icon,:update,:twitter,:pixiv,:deforume1,:deforume2,:deforume3,:sample,:checkbox)
   end   
 end

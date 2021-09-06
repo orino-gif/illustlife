@@ -52,6 +52,19 @@
   //object-fit: cover; 
   object-position: 40% 100%; 
 }
+label{
+ font-weight:normal;
+}
+.toggleButton{
+　　border:1px solid #000;
+　　padding:12px;
+　　text-align:center;
+　　width:50%;
+}
+.toggleContent{
+　　display:none;
+　　width:50%;
+}
 
 .cover {
  object-fit: cover; 

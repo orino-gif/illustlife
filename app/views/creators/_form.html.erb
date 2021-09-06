@@ -1,2 +1,6 @@
-<%= check_box_tag :sample %>
-<%= label_tag :sample, 'チェックボックス' %>
+<%= form_with(model: @creator, local: true) do |f| %>
+  <%= f.label :表示 %>
+  <%= f.check_box :checkbox, {checked: true}, id: :checkbox, :as => :boolean %>
+  <%= submit_tag("設定") %>
+<% end %>
+
