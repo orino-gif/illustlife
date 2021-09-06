@@ -77,7 +77,7 @@
       <% if @creator.deforume1? %>
         <%= image_tag @creator.deforume1.url, class: 'thumbnail' %>
       <% else %>
-        <%= image_tag('/img/noImage.png',class: 'thumbnail') %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>
@@ -88,7 +88,9 @@
     
     <div class="col">
       <% if @creator.deforume2? %>
-        <%= image_tag @creator.deforume2.url,class: 'thumbnail' %>
+        <%= image_tag @creator.deforume2.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>
@@ -99,7 +101,9 @@
     
     <div class="col">
       <% if @creator.deforume3? %>
-        <%= image_tag @creator.deforume3.url,class: 'thumbnail' %>
+        <%= image_tag @creator.deforume3.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>
@@ -107,7 +111,7 @@
         <%= submit_tag("登録") %>
       <% end %>
     </div>
-  </div>
+
 </div>
 
 
