@@ -6,6 +6,7 @@ class CreateCreators < ActiveRecord::Migration[5.2]
       t.string :header
       t.string :twitter
       t.string :pixiv
+      t.string :sample
       
       t.string :deforume1
       t.string :deforume2

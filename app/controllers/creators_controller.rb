@@ -37,6 +37,6 @@ class CreatorsController < ApplicationController
   private
 
   def creators_params
-    params.require(:creator).permit(:header,:icon,:update,:twitter,:pixiv,:deforume1,:deforume2,:deforume3)
+    params.require(:creator).permit(:header,:icon,:update,:twitter,:pixiv,:deforume1,:deforume2,:deforume3,:sample)
   end   
 end

@@ -70,6 +70,7 @@
   
   <div class="row">
     <%= "デフォルメキャラ(2～3頭身)：" %>
+    <%= render partial: "form", locals: { thing: @creator } %>
   </div>
   
   <div class="row my-5">
@@ -111,7 +112,6 @@
         <%= submit_tag("登録") %>
       <% end %>
     </div>
-
 </div>
 
 

@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2021_08_03_085238) do
     t.string "header"
     t.string "twitter"
     t.string "pixiv"
+    t.string "sample"
     t.string "deforume1"
     t.string "deforume2"
     t.string "deforume3"
