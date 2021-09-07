@@ -30,6 +30,7 @@ class CreatorsController < ApplicationController
     @creators = Creator.find(params[:id])
     if @creators.update(creators_params)
       redirect_to request.referer
+      #redirect_to creator_url
     else
       render :new
     end
