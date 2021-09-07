@@ -70,7 +70,11 @@
   
   <div class="row">
     <%= "デフォルメキャラ(2～3頭身)：" %>
-    <%= render partial: "form", locals: { thing: @creator } %>
+    <%= form_with(model: @creator, local: true) do |f| %>
+      <%= f.label :表示 %>
+      <%= f.check_box :checkbox, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= submit_tag("設定") %>
+    <% end %>
   </div>
   
   <div class="row my-5">

@@ -29,6 +29,7 @@
   <div class="row my-5">  
     <%= "ニックネーム：#{@user.nickname}" %>
   </div>
+  <% if @creator.checkbox == true then%>
   <div class="row">
     <%= "デフォルメキャラ(2～3頭身)：" %>
   </div>
@@ -58,3 +59,4 @@
       <% end %>
     </div>
   </div>
+  <% end %>
