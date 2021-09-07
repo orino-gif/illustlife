@@ -29,34 +29,195 @@
   <div class="row my-5">  
     <%= "ニックネーム：#{@user.nickname}" %>
   </div>
-  <% if @creator.checkbox == true then%>
-  <div class="row">
-    <%= "デフォルメキャラ(2～3頭身)：" %>
-  </div>
   
-  <div class="row my-5">
-    <div class="col">
-      <% if @creator.deforume1? %>
-        <%= image_tag @creator.deforume1.url, class: 'thumbnail' %>
-      <% else %>
-        <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
-      <% end %>
+  <% if @creator.deforume_display == true then %>
+    <div class="row">
+      <%= "デフォルメキャラ(2～3頭身)：" %>
     </div>
     
-    <div class="col">
-      <% if @creator.deforume2? %>
-        <%= image_tag @creator.deforume2.url, class: 'thumbnail' %>
-      <% else %>
-        <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
-      <% end %>
+    <div class="row my-5">
+      <div class="col">
+        <% if @creator.deforume1? %>
+          <%= image_tag @creator.deforume1.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+      
+      <div class="col">
+        <% if @creator.deforume2? %>
+          <%= image_tag @creator.deforume2.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+      
+      <div class="col">
+        <% if @creator.deforume3? %>
+          <%= image_tag @creator.deforume3.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  
+  <% if @creator.background_display == true then %>
+    <div class="row">
+      <%= "背景：" %>
     </div>
     
-    <div class="col">
-      <% if @creator.deforume3? %>
-        <%= image_tag @creator.deforume3.url, class: 'thumbnail' %>
-      <% else %>
-        <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
-      <% end %>
+    <div class="row my-5">
+      <div class="col">
+        <% if @creator.background1? %>
+          <%= image_tag @creator.background1.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+      
+      <div class="col">
+        <% if @creator.background2? %>
+          <%= image_tag @creator.background2.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+      
+      <div class="col">
+        <% if @creator.background3? %>
+          <%= image_tag @creator.background3.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
+  
+  <% if @creator.foreground_display == true then %>
+    <div class="row">
+      <%= "前景(道具、衣装、エフェクト等)：" %>
+    </div>
+    
+    <div class="row my-5">
+      <div class="col">
+        <% if @creator.foreground1? %>
+          <%= image_tag @creator.foreground1.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+      
+      <div class="col">
+        <% if @creator.foreground2? %>
+          <%= image_tag @creator.foreground2.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+      
+      <div class="col">
+        <% if @creator.foreground3? %>
+          <%= image_tag @creator.foreground3.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  
+  <% if @creator.bustup_display == true then %>
+    <div class="row">
+      <%= "バストアップ(4頭身以上)：" %>
+    </div>
+    
+    <div class="row my-5">
+      <div class="col">
+        <% if @creator.bustup1? %>
+          <%= image_tag @creator.bustup1.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+      
+      <div class="col">
+        <% if @creator.bustup2? %>
+          <%= image_tag @creator.bustup2.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+      
+      <div class="col">
+        <% if @creator.bustup3? %>
+          <%= image_tag @creator.bustup3.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  
+  <% if @creator.rough_display == true then %>
+    <div class="row">
+      <%= "ラフ・カラーラフ(4頭身以上)：" %>
+    </div>
+    
+    <div class="row my-5">
+      <div class="col">
+        <% if @creator.rough1? %>
+          <%= image_tag @creator.rough1.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+      
+      <div class="col">
+        <% if @creator.rough2? %>
+          <%= image_tag @creator.rough2.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+      
+      <div class="col">
+        <% if @creator.rough3? %>
+          <%= image_tag @creator.rough3.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  
+  <% if @creator.slide_display == true then %>
+    <div class="row">
+      <%= "スライドショー：" %>
+    </div>
+    
+    <div class="row my-5">
+      <div class="col">
+        <% if @creator.slide1? %>
+          <%= image_tag @creator.slide1.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+      
+      <div class="col">
+        <% if @creator.slide2? %>
+          <%= image_tag @creator.slide2.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+      
+      <div class="col">
+        <% if @creator.slide3? %>
+          <%= image_tag @creator.slide3.url, class: 'thumbnail' %>
+        <% else %>
+          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
+        <% end %>
+      </div>
+    </div>
   <% end %>

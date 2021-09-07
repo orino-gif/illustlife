@@ -72,7 +72,7 @@
     <%= "デフォルメキャラ(2～3頭身)：" %>
     <%= form_with(model: @creator, local: true) do |f| %>
       <%= f.label :表示 %>
-      <%= f.check_box :checkbox, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= f.check_box :deforume_display, {checked: true}, id: :checkbox, :as => :boolean %>
       <%= submit_tag("設定") %>
     <% end %>
   </div>
@@ -116,7 +116,257 @@
         <%= submit_tag("登録") %>
       <% end %>
     </div>
-</div>
+  </div>
+  
+  <div class="row">
+    <%= "背景：" %>
+    <%= form_with(model: @creator, local: true) do |f| %>
+      <%= f.label :表示 %>
+      <%= f.check_box :background_display, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= submit_tag("設定") %>
+    <% end %>
+  </div>
+  
+  <div class="row my-5">
+    <div class="col">
+      <% if @creator.background1? %>
+        <%= image_tag @creator.background1.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :background1 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+    
+    <div class="col">
+      <% if @creator.background2? %>
+        <%= image_tag @creator.background2.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :background2 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+    
+    <div class="col">
+      <% if @creator.background3? %>
+        <%= image_tag @creator.background3.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :background3 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <%= "前景(道具、衣装、エフェクト等)：" %>
+    <%= form_with(model: @creator, local: true) do |f| %>
+      <%= f.label :表示 %>
+      <%= f.check_box :foreground_display, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= submit_tag("設定") %>
+    <% end %>
+  </div>
+  
+  <div class="row my-5">
+    <div class="col">
+      <% if @creator.foreground1? %>
+        <%= image_tag @creator.foreground1.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :foreground1 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+    
+    <div class="col">
+      <% if @creator.foreground2? %>
+        <%= image_tag @creator.foreground2.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :foreground2 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+    
+    <div class="col">
+      <% if @creator.foreground3? %>
+        <%= image_tag @creator.foreground3.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :foreground3 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <%= "バストアップ(4頭身以上)：" %>
+    <%= form_with(model: @creator, local: true) do |f| %>
+      <%= f.label :表示 %>
+      <%= f.check_box :bustup_display, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= submit_tag("設定") %>
+    <% end %>
+  </div>
+  
+  <div class="row my-5">
+    <div class="col">
+      <% if @creator.bustup1? %>
+        <%= image_tag @creator.bustup1.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :bustup1 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+    
+    <div class="col">
+      <% if @creator.bustup2? %>
+        <%= image_tag @creator.bustup2.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :bustup2 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+    
+    <div class="col">
+      <% if @creator.bustup3? %>
+        <%= image_tag @creator.bustup3.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :bustup3 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <%= "ラフ・カラーラフ(4頭身以上)：" %>
+    <%= form_with(model: @creator, local: true) do |f| %>
+      <%= f.label :表示 %>
+      <%= f.check_box :rough_display, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= submit_tag("設定") %>
+    <% end %>
+  </div>
+  
+  <div class="row my-5">
+    <div class="col">
+      <% if @creator.rough1? %>
+        <%= image_tag @creator.rough1.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :rough1 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+    
+    <div class="col">
+      <% if @creator.rough2? %>
+        <%= image_tag @creator.rough2.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :rough2 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+    
+    <div class="col">
+      <% if @creator.rough3? %>
+        <%= image_tag @creator.rough3.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :rough3 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <%= "スライドショー：" %>
+    <%= form_with(model: @creator, local: true) do |f| %>
+      <%= f.label :表示 %>
+      <%= f.check_box :slide_display, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= submit_tag("設定") %>
+    <% end %>
+  </div>
+  
+  <div class="row my-5">
+    <div class="col">
+      <% if @creator.slide1? %>
+        <%= image_tag @creator.slide1.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :slide1 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+    
+    <div class="col">
+      <% if @creator.slide2? %>
+        <%= image_tag @creator.slide2.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :slide2 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+    
+    <div class="col">
+      <% if @creator.slide3? %>
+        <%= image_tag @creator.slide3.url, class: 'thumbnail' %>
+      <% else %>
+        <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
+      <% end %>
+      
+      <%= form_with(model: @creator, local: true) do |f| %>
+        <%= f.file_field :slide3 %>
+        <%= submit_tag("登録") %>
+      <% end %>
+    </div>
+  </div>
 
 
 

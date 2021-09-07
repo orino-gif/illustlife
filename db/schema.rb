@@ -38,7 +38,12 @@ ActiveRecord::Schema.define(version: 2021_09_06_133845) do
     t.string "slide3"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "checkbox"
+    t.boolean "deforume_display"
+    t.boolean "background_display"
+    t.boolean "foreground_display"
+    t.boolean "bustup_display"
+    t.boolean "rough_display"
+    t.boolean "slide_display"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
