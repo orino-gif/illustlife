@@ -72,7 +72,7 @@
     <%= "デフォルメキャラ(2～3頭身)：" %>
     <%= form_with(model: @creator, local: true) do |f| %>
       <%= f.label :表示 %>
-      <%= f.check_box :deforume_display, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= f.check_box :deforume_display, id: :checkbox, :as => :boolean %>
       <%= submit_tag("設定") %>
     <% end %>
   </div>
@@ -122,7 +122,7 @@
     <%= "背景：" %>
     <%= form_with(model: @creator, local: true) do |f| %>
       <%= f.label :表示 %>
-      <%= f.check_box :background_display, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= f.check_box :background_display, id: :checkbox, :as => :boolean %>
       <%= submit_tag("設定") %>
     <% end %>
   </div>
@@ -172,7 +172,7 @@
     <%= "前景(道具、衣装、エフェクト等)：" %>
     <%= form_with(model: @creator, local: true) do |f| %>
       <%= f.label :表示 %>
-      <%= f.check_box :foreground_display, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= f.check_box :foreground_display,id: :checkbox, :as => :boolean %>
       <%= submit_tag("設定") %>
     <% end %>
   </div>
@@ -222,7 +222,7 @@
     <%= "バストアップ(4頭身以上)：" %>
     <%= form_with(model: @creator, local: true) do |f| %>
       <%= f.label :表示 %>
-      <%= f.check_box :bustup_display, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= f.check_box :bustup_display, id: :checkbox, :as => :boolean %>
       <%= submit_tag("設定") %>
     <% end %>
   </div>
@@ -272,7 +272,7 @@
     <%= "ラフ・カラーラフ(4頭身以上)：" %>
     <%= form_with(model: @creator, local: true) do |f| %>
       <%= f.label :表示 %>
-      <%= f.check_box :rough_display, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= f.check_box :rough_display, id: :checkbox, :as => :boolean %>
       <%= submit_tag("設定") %>
     <% end %>
   </div>
@@ -322,7 +322,7 @@
     <%= "スライドショー：" %>
     <%= form_with(model: @creator, local: true) do |f| %>
       <%= f.label :表示 %>
-      <%= f.check_box :slide_display, {checked: true}, id: :checkbox, :as => :boolean %>
+      <%= f.check_box :slide_display, id: :checkbox, :as => :boolean %>
       <%= submit_tag("設定") %>
     <% end %>
   </div>
