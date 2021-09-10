@@ -42,11 +42,7 @@
     
     <div class="row my-5">
       <div class="col">
-        <% if @creator.deforume1? %>
-          <%= image_tag @creator.deforume1.url, class: 'thumbnail' %>
-        <% else %>
-          <%= image_tag '/img/noImage.png', class: 'thumbnail cover' %>
-        <% end %>
+        <%= display_image('deforume1') %>
       </div>
       
       <div class="col">
