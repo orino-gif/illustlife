@@ -1,0 +1,22 @@
+<h1>新規リクエスト</h1>
+
+<div class="container">
+  <div class="row">
+    <%= form_with(model: @request, local: true) do |f| %>
+      <div class="form-group">
+        <%= f.label :金額 %>
+        <%= f.text_field :request_money, autofocus: true, class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :"本文(700文字以内)" %>
+        <%= f.text_area :request_message, autofocus: true, class: 'form-control' %>
+      </div>
+    
+      <div>
+        <%= submit_tag("送信") %>
+      </div>
+    <% end %>
+    
+  </div>
+</div>

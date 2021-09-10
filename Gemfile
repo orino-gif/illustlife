@@ -17,6 +17,8 @@ gem 'dotenv-rails'
 gem 'carrierwave'
 gem "fog-aws"
 
+gem 'pry-rails'
+
 # Use AWS SDK
 gem 'aws-sdk', '~>1'
 

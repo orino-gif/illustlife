@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_07_060158) do
+ActiveRecord::Schema.define(version: 2021_09_08_155548) do
 
   create_table "creators", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "icon"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 2021_09_07_060158) do
     t.boolean "bustup_display", default: true
     t.boolean "rough_display", default: true
     t.boolean "slide_display", default: true
+  end
+
+  create_table "requests", primary_key: "request_id", id: :integer, default: 88363, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "request_money"
+    t.integer "send_id"
+    t.integer "receive_id"
+    t.string "status"
+    t.text "request_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
