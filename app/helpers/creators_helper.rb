@@ -6,9 +6,9 @@ module CreatorsHelper
   def display_image(creator)
 
    if creator.deforume1?
-        image_tag creator.deforume1.url, class: 'thumbnail' 
+      image_tag creator.deforume1.url, class: 'thumbnail' 
    else 
-        image_tag '/img/noImage.png', class: 'thumbnail cover' 
+      image_tag '/img/noImage.png', class: 'thumbnail cover' 
    end 
   end
 end
