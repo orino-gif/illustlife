@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2021_09_08_155548) do
     t.boolean "slide_display", default: true
   end
 
-  create_table "requests", primary_key: "request_id", id: :integer, default: 88363, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "request_money"
     t.integer "send_id"
     t.integer "receive_id"
