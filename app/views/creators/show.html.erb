@@ -1,5 +1,6 @@
 <h1>ユーザー情報</h1>
 <div class="container">
+  
   <div class="row">
     <% if @creator.header? %>
       <%= image_tag @creator.header.url ,class: 'header' %>
@@ -32,7 +33,7 @@
   </div>
   
   <div class="row my-5">  
-    <%= display_nickname(@user.nickname) %>
+    <%= display_nickname(@user.nickname) %><%#= render partial: 'shared/user_header' %>
   </div>
   
   <% if @creator.deforume_display == true then %>
