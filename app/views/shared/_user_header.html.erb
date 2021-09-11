@@ -1,6 +1,6 @@
 <div class="row">
   <% if @creator.header? %>
-    <%= image_tag @creator.header.url ,class: 'header' %>
+    <%= image_tag(@creator.header.url ,class: 'header') %>
   <% else %>
     <%= image_tag('/img/nothing.png',class: 'header') %>
   <% end %>
@@ -9,9 +9,9 @@
 <div class="row">
   <div class="col-2">
     <% begin %>
-      <%= image_tag @creator.icon.url  ,class: 'icon upicon' %>
+      <%= link_to image_tag(@creator.icon.url, class: 'icon upicon'), "/creators/#{@creator.user_id}" %>
     <% rescue => e %>
-      <%= image_tag('/img/mobu.png',class: 'icon upicon') %>
+      <%= link_to image_tag('/img/mobu.png', class: 'icon upicon'), "/creators/#{@creator.user_id}" %>
     <% end %>
   </div>
   
