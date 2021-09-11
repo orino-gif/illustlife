@@ -10,40 +10,21 @@
   </div>
   
   <div class="row">
-    <div class="col-2">
-      <% begin %>
-        <%= image_tag @creator.icon.url  ,class: 'icon upicon' %>
-      <% rescue => e %>
-        <%= image_tag('/img/mobu.png',class: 'icon upicon') %>
-      <% end %>
-    </div>
-    
-    <div class="col-7">
-      <%= link_to image_tag('/img/request.png',class: 'symbol upsymbol'), new_request_path %>
-    </div>
-    
-    
-    <div class="col-1">
-      <%= link_to image_tag('/img/twitter.png',class: 'symbol upsymbol') ,@creator.twitter %>
-    </div>
-    
-    <div class="col-1">
-      <%= link_to image_tag('/img/pixiv.png',class: 'symbol upsymbol'), @creator.pixiv %>
-    </div>
+    <%= render  'shared/user_header' %>
   </div>
   
   <div class="row my-5">  
-    <%= display_nickname(@user.nickname) %><%#= render partial: 'shared/user_header' %>
+    <%= display_nickname(@user.nickname) %>
   </div>
   
   <% if @creator.deforume_display == true then %>
     <div class="row">
-      <%= "デフォルメキャラ(2～3頭身)：" %>
+      <%= "デフォルメキャラ(2～4頭身)：" %>
     </div>
     
     <div class="row my-5">
       <div class="col">
-        <%= display_image('deforume1') %>
+        <%= display_image(@creator) %>
       </div>
       
       <div class="col">

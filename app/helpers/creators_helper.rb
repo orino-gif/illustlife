@@ -3,10 +3,10 @@ module CreatorsHelper
       "ニックネーム：#{name}"
   end
   
-  def display_image(image_name)
+  def display_image(creator)
 
-   if @creator.deforume1?
-        image_tag @creator.deforume1.url, class: 'thumbnail' 
+   if creator.deforume1?
+        image_tag creator.deforume1.url, class: 'thumbnail' 
    else 
         image_tag '/img/noImage.png', class: 'thumbnail cover' 
    end 
