@@ -2,7 +2,8 @@ class RequestsController < ApplicationController
   
   def new
     @request = Request.new
-    @creator = Creator.find_by(user_id:@user.id)
+    @user = User.find(7)
+    @creator = Creator.find(7)
   end
   
   def create

@@ -1,17 +1,6 @@
 <h1>ユーザー情報</h1>
 <div class="container">
-  
-  <div class="row">
-    <% if @creator.header? %>
-      <%= image_tag @creator.header.url ,class: 'header' %>
-    <% else %>
-      <%= image_tag('/img/nothing.png',class: 'header') %>
-    <% end %>
-  </div>
-  
-  <div class="row">
-    <%= render  'shared/user_header' %>
-  </div>
+  <%= render  'shared/user_header' %>
   
   <div class="row my-5">  
     <%= display_nickname(@user.nickname) %>

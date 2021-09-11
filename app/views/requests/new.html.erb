@@ -4,25 +4,13 @@
   <%= render 'shared/user_header' %>
 
   <div class="row my-5">
-    <div class="col-md-auto">
-      <%= form_with(model: @request, local: true) do |f| %>
-        <div class="form-group">
-          <%= f.label :金額 %>
-          <%= f.text_field :request_money, autofocus: true, class: 'form-control' %>
-        </div>
-        
-        <div class="form-group">
-          <%= f.label :"本文(700文字以内)" %>
-          <%= f.text_area :request_message, autofocus: true, class: 'form-control' %>
-        </div>
-      
-        <div>
-          <%= submit_tag("送信") %>
-        </div>
-      <% end %>
+    <div class="col-md-3">
+      <table class="table">
+      <tr><td><%= "ニックネーム：#{@user.nickname}" %></td></tr>
+    </table>
     </div>
     
-    <div class="col-md-auto border border-primary">
+    <div class="col-md-7 border border-primary">
       <%= form_with(model: @request, local: true) do |f| %>
         <div class="form-group">
           <%= f.label :金額 %>
