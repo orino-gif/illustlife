@@ -11,7 +11,7 @@
     </div>
     
     <div class="col-md-7 border border-primary">
-      <%= form_with(model: @request, local: true) do |f| %>
+      <%= form_with(model: @requests, local: true) do |f| %>
         <div class="form-group">
           <%= f.label :金額 %>
           <%= f.text_field :request_money, autofocus: true, class: 'form-control' %>
