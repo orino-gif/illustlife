@@ -6,9 +6,11 @@ class RequestsController < ApplicationController
   end
   
   def create
-    @creators = Request.new(requests_params)
-
-    if @creators.save!
+    @requests = Request.new(requests_params)
+    @creator = Creator.find(current_user.id)
+    if @requests.save!
+      @requests.send_id = @creator.user_id
+      @requests.save
       redirect_to root_url, notice: 'リクエストを送信しました。'
     else
       render :new

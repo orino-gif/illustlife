@@ -1,8 +1,8 @@
 <div class="row">
   <% if @creator.header? %>
-    <%= image_tag(@creator.header.url ,class: 'header') %>
+    <%= image_tag(@creator.header.url, class: 'header') %>
   <% else %>
-    <%= image_tag('/img/nothing.png',class: 'header') %>
+    <%= image_tag('/img/nothing.png', class: 'header') %>
   <% end %>
 </div>
 
@@ -16,14 +16,14 @@
   </div>
   
   <div class="col-7">
-    <%= link_to image_tag('/img/request.png',class: 'symbol upsymbol'), "/requests/new/#{@creator.user_id}" %>
+    <%= link_to image_tag('/img/request.png', class: 'symbol upsymbol'), "/requests/new/#{@creator.user_id}" %>
   </div>
   
   <div class="col-1">
-    <%= link_to image_tag('/img/twitter.png',class: 'symbol upsymbol') ,@creator.twitter %>
+    <%= link_to image_tag('/img/twitter.png', class: 'symbol upsymbol') ,@creator.twitter %>
   </div>
   
   <div class="col-1">
-    <%= link_to image_tag('/img/pixiv.png',class: 'symbol upsymbol'), @creator.pixiv %>
+    <%= link_to image_tag('/img/pixiv.png', class: 'symbol upsymbol'), @creator.pixiv %>
   </div>
 </div>
