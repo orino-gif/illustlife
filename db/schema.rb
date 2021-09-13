@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_08_155548) do
+ActiveRecord::Schema.define(version: 2021_09_12_232312) do
 
   create_table "creators", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "icon"
@@ -52,6 +52,12 @@ ActiveRecord::Schema.define(version: 2021_09_08_155548) do
     t.integer "receive_id"
     t.string "status"
     t.text "request_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "temporaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "temp_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
