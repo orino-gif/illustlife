@@ -1,2 +1,13 @@
 <h1>リクエスト状態</h1>
+<div class="container">
 
+  <table class="table">
+    <% if @requests.status? then %>
+      <tr><td><%= "リクエストID：#{@requests.id}" %></td></tr>
+      <tr><td><%= "状態：#{@requests.status}" %></td></tr>
+      <tr><td><%= "依頼者：#{@sender.nickname}" %></td></tr>
+      <tr><td><%= "承認者：#{@receiver.nickname}" %></td></tr>
+    <% end %>
+  </table>
+
+</div>
