@@ -13,4 +13,10 @@
       </table>
     <% end %>
   </div>
+  
+  <div class="row my-5">
+    <% if @requests.receive_id == current_user.id then %>
+      <button type="button" class="btn btn-light"><%= link_to "リクエスト承認","/requests/#{@user.id}" %></button>
+    <% end %>
+  </div>
 </div>
