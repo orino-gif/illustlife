@@ -25,11 +25,13 @@ class RequestsController < ApplicationController
   end
   
   def show
-    @requests = Request.find($requests_id)
-    @sender = User.find(@requests.send_id)
-    @receiver = User.find(@requests.receive_id)
-    
-    
+    begin
+      @requests = Request.find($requests_id)
+      @sender = User.find(@requests.send_id)
+      @receiver = User.find(@requests.receive_id)
+    rescue => e
+      p "showコントローラーエラー：#{e}"
+    end
   end
   
   def update

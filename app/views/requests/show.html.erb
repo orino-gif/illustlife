@@ -2,13 +2,13 @@
 <div class="container">
 
   <table class="table">
-    <% if @requests.status? then %>
+    <% if @sender != nil then %>
       <tr><td><%= "依頼者：#{@sender.nickname}" %></td></tr>
       <tr><td><%= "承認者：#{@receiver.nickname}" %></td></tr>
       <tr><td><%= "状態：#{@requests.status}" %></td></tr>
       <tr><td><%= "日付：#{@requests.created_at}" %></td></tr>
       <tr><td><%= "リクエストID：#{@requests.id}" %></td></tr>
-      <tr><td><%= "金額：#{@requests.money}" %></td></tr>
+      <tr><td><%= "金額：#{@requests.money}円" %></td></tr>
       <tr><td><%= "内容：#{@requests.message}" %></td></tr>
     <% end %>
   </table>
