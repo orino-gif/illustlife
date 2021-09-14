@@ -47,11 +47,11 @@ ActiveRecord::Schema.define(version: 2021_09_08_155548) do
   end
 
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "request_money"
+    t.integer "money"
     t.integer "send_id"
     t.integer "receive_id"
     t.string "status"
-    t.text "request_message"
+    t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
