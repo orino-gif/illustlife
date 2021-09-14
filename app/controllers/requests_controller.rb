@@ -16,7 +16,7 @@ class RequestsController < ApplicationController
     @requests.send_id=current_user.id.to_i
     @requests.status="START"
     if @requests.save!
-      redirect_to request_url(@requests), notice: 'リクエストを送信しました。'
+      redirect_to request_url(@requests.send_id), notice: 'リクエストを送信しました。'
       #redirect_to root_url, notice: 'リクエストを送信しました。'
     else
       render :new
