@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 2021_09_08_155548) do
   end
 
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "request_id"
     t.integer "request_money"
     t.integer "send_id"
     t.integer "receive_id"
