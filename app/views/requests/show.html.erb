@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row my-5">
     <% if @sender != nil then %>
-      <div class="bg-secondary text-white"><%="申請日時：#{@requests.created_at.strftime("%Y/%m/%d %H:%M:%S")}" %></div>
+      <%="申請日時：#{@requests.created_at.strftime("%Y/%m/%d %H:%M:%S")}" %>
       <table class="table">
         <tr><td><%= "依頼者：#{@sender.nickname}" %></td></tr>
         <tr><td><%= "承認者：#{@receiver.nickname}" %></td></tr>
@@ -13,5 +13,4 @@
       </table>
     <% end %>
   </div>
-
 </div>
