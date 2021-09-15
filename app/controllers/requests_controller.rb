@@ -35,6 +35,16 @@ class RequestsController < ApplicationController
     rescue => e
       p "showコントローラーエラー：#{e}"
     end
+    
+    if params[:status] != nil
+      @requests.status = params[:status]
+      @requests.save
+    elsif '納品完了' == params[:status]
+      @requests.status = params[:status]
+      @requests.save
+    end
+    
+    
   end
   
   def update
@@ -51,5 +61,7 @@ class RequestsController < ApplicationController
 
   def requests_params
     params.require(:request).permit(:money, :message)
-  end   
+  end
+  
+  
 end

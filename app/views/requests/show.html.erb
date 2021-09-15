@@ -15,8 +15,11 @@
   </div>
   
   <div class="row my-5">
-    <% if @requests.receive_id == current_user.id then %>
-      <button type="button" class="btn btn-light"><%= link_to "リクエスト承認","/requests/#{@user.id}" %></button>
+    <% if (@requests.receive_id == current_user.id) && (@requests.status == '承認待ち') then %>
+      <!--<button type="button" class="btn btn-light"><%#= link_to "リクエスト承認","/requests/#{@user.id}" %></button>-->
+      <%= button_to 'リクエスト承認', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '製作中'}} %>
+    <% elsif @requests.status == '製作中' %>
+      <%= button_to '納品完了', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '納品完了'}} %>
     <% end %>
   </div>
 </div>
