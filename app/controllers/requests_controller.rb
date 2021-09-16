@@ -39,16 +39,16 @@ class RequestsController < ApplicationController
       p "showコントローラーエラー：#{e}"
     end
     
-    if params[:status] != nil
+    if '拒否' == params[:status]
       @requests.status = params[:status]
       if @requests.save
-         UserMailer.request_email(@sender,@receiver,@requests).deliver_later
-        redirect_to request.referer, notice: 'クリエイターへリクエストのメールを送信しました。'
+        redirect_to request_url(@receiver), notice: '依頼者からのリクエストを拒否しました。'
       end
     elsif '製作中' == params[:status]
+      @requests.status = params[:status]
       if @requests.save
-         UserMailer.approval_email(@sender,@requests).deliver_later
-        redirect_to request.referer, notice: '依頼者へ承諾のメールを送信しました。'
+        UserMailer.consent_email(@sender, @receiver, @requests).deliver_later
+        redirect_to request_url(@receiver), notice: '依頼者へ承諾のメールを送信しました。'
       end
       
     elsif '納品完了' == params[:status]
@@ -58,8 +58,6 @@ class RequestsController < ApplicationController
         redirect_to request.referer, notice: '依頼者へ完了のメールを送信しました。'
       end
     end
-    
-    
   end
   
   def update
