@@ -15,13 +15,16 @@ class RequestsController < ApplicationController
     @requests.send_id=current_user.id.to_i
     @requests.status="承認待ち"
     
-    @user = User.find(@requests.receive_id)
+    
     
     if @requests.save!
+      @sender = User.find(@requests.send_id)
+      @receiver = User.find(@requests.receive_id)
+      
+      UserMailer.request_email(@sender,@receiver,@requests).deliver_later
+      redirect_to request_url(@sender), notice: 'クリエイターへリクエストのメールを送信しました。'
+      
       $requests_id = @requests.id
-      UserMailer.Approval_email(@user,@requests).deliver_later
-      redirect_to request_url(@requests.send_id), notice: 'リクエストを送信しました。'
-
     else
       render :new
     end
@@ -38,10 +41,22 @@ class RequestsController < ApplicationController
     
     if params[:status] != nil
       @requests.status = params[:status]
-      @requests.save
+      if @requests.save
+         UserMailer.request_email(@sender,@receiver,@requests).deliver_later
+        redirect_to request.referer, notice: 'クリエイターへリクエストのメールを送信しました。'
+      end
+    elsif '製作中' == params[:status]
+      if @requests.save
+         UserMailer.approval_email(@sender,@requests).deliver_later
+        redirect_to request.referer, notice: '依頼者へ承諾のメールを送信しました。'
+      end
+      
     elsif '納品完了' == params[:status]
       @requests.status = params[:status]
-      @requests.save
+      if @requests.save
+        UserMailer.deliver_email(@user,@requests).deliver_later
+        redirect_to request.referer, notice: '依頼者へ完了のメールを送信しました。'
+      end
     end
     
     
