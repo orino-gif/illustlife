@@ -8,6 +8,8 @@ class CreateRequests < ActiveRecord::Migration[5.2]
       t.integer :receive_id
       t.string :status
       t.text :message
+      
+      t.string :deliver_img
 
       t.timestamps
     end

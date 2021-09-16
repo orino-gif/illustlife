@@ -18,7 +18,20 @@
         <div class="col-md-auto"><%= button_to '拒否', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '拒否'}} %></div>
         
       <% elsif @requests.status == '製作中' %>
-        <%= button_to '納品完了', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '納品完了'}} %>
+        
+      <div class="col-md-auto">
+        <%= form_with(model: @requests, local: true) do |f| %>
+          <%= f.file_field :deliver_img %>
+          <%= submit_tag("登録") %>
+        <% end %>
+        
+        <% if @requests.deliver_img? %>
+          <%= image_tag @requests.deliver_img.url %>
+        <% end %>
+      </div>
+        
+        <div class="col-md-auto"><%= button_to '納品する', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '納品完了'}} %></div>
+        
       <% end %>
     <% end %>
   </div>

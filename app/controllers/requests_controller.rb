@@ -54,17 +54,16 @@ class RequestsController < ApplicationController
     elsif '納品完了' == params[:status]
       @requests.status = params[:status]
       if @requests.save
-        UserMailer.deliver_email(@user,@requests).deliver_later
-        redirect_to request.referer, notice: '依頼者へ完了のメールを送信しました。'
+        UserMailer.deliver_email(@sender, @receiver, @requests).deliver_later
+        redirect_to request_url(@receiver), notice: '依頼者への納品完了のメールを送信しました。'
       end
     end
   end
   
   def update
-    @requests = Request.find(@requests.id)
-    @creator = Creator.find(current_user.id)
+    @requests = Request.find($requests_id)
     if @requests.update(requests_params)
-      redirect_to root_url, notice: 'リクエストを送りました。'
+      redirect_to request_url(@requests), notice: 'ファイルをアップロードしました。'
     else
       render :new
     end
@@ -73,7 +72,7 @@ class RequestsController < ApplicationController
   private
 
   def requests_params
-    params.require(:request).permit(:money, :message)
+    params.require(:request).permit(:money, :message, :deliver_img)
   end
   
   

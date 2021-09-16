@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h3><%= @sender.nickname %>さんから<%= @receiver.nickname %>さんへのリクエストが承認されました。</h3>
+    <h3><%= @receiver.nickname %>さんから<%= @sender.nickname %>さんへの納品が完了しました。</h3>
     <p>リクエスト状況の詳細は、以下のリンク先に記載されています。</p>
     <p><%= link_to 'リクエスト状況確認先リンク', "http://defomate.net:3000/requests/#{@requests.send_id}" %></p>
 

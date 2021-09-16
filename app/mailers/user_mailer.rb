@@ -29,4 +29,14 @@ class UserMailer < ApplicationMailer
         subject: "[イラストライフ運営局]#{@sender.nickname}さんからのリクエストが承認されました"
       )
   end
+  
+  def deliver_email(sender,receiver,requests)
+    @sender = sender
+    @receiver = receiver
+    @requests = requests
+    mail(
+        to: @sender.email,
+        subject: "[イラストライフ運営局]#{@sender.nickname}さんへの納品が完了しました。"
+      )
+  end
 end

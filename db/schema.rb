@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2021_09_08_155548) do
     t.integer "receive_id"
     t.string "status"
     t.text "message"
+    t.string "deliver_img"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
