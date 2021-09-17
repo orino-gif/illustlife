@@ -2,18 +2,38 @@
 
 <div class="container">
   <%= render 'shared/user_header' %>
-
   <div class="row my-5">
+    <%= "ニックネーム：#{@user.nickname}" %>
+  </div>
+  <%= "リクエスト料金の目安" %>
+  <div class="row my-5">
+    
     <div class="col-md-3">
+      <%= "キャラクター" %>
       <table class="table">
-        <tr><td><%= "ニックネーム：#{@user.nickname}" %></td></tr>
+        <tr><td><%= "全身(4頭身以上)：非対応" %></td></tr>
+        <tr><td><%= "ディフォルメ(2～3頭身)：4000円" %></td></tr>
+        <tr><td><%= "バストアップ(4頭身以上)：3000円" %></td></tr>
+        <tr><td><%= "差分(+1枚)：500円" %></td></tr>
+      </table>
+      
+    <%= "背景" %>
+      <table class="table">
+        <tr><td><%= "全景：4000円" %></td></tr>
+        <tr><td><%= "差分(+1枚)：500円" %></td></tr>
+      </table>
+
+    
+    <%= "スライドショー" %>
+      <table class="table">
+        <tr><td><%= "1シーン：6000円" %></td></tr>
       </table>
     </div>
     
     <div class="col-md-7 border border-primary">
       <%= form_with(model: @requests, local: true) do |f| %>
         <div class="form-group">
-          <%= f.label :金額 %>
+          <%= f.label :"金額(6000円以下)" %>
           <%= f.text_field :money, autofocus: true, class: 'form-control' %>
         </div>
         <div class="form-group">
@@ -21,7 +41,23 @@
           <%= f.text_area :message, autofocus: true, class: 'form-control' %>
         </div>
         <div>
-          <%= submit_tag("送信") %>
+          <%= submit_tag("リクエスト送信") %>
+        </div><br>
+ 
+        <div>
+          <%= "注意事項" %>
+        </div>
+        <div>
+          <%= "以下の内容に同意される方のみリクエストを行ってください。" %>
+        </div>
+        <div>
+          <%= "・リテイク無し。" %>
+        </div>
+        <div>
+          <%= "・著作権譲渡は原則不可。別途ライセンス契約を交わした場合は、この限りではない。" %>
+        </div>
+        <div>
+          <%= "・納品物の品質はクリエイターが決定し、納品後に不服申し立てを行わない。" %>
         </div>
       <% end %>
     </div>
