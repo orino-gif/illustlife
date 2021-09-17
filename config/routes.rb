@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'credit/show'
   root to: 'home#index' 
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   resources :home, only: [:index]
