@@ -1,8 +1,5 @@
 module CreatorsHelper
-  def display_nickname(name)
-      "ニックネーム：#{name}"
-  end
-  
+
   def display_image(creator)
     if creator == @creator.deforume1 && @creator.deforume1?
       image_tag @creator.deforume1.url, class: 'thumbnail'

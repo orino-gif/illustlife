@@ -1,11 +1,7 @@
 <h1>ユーザー情報</h1>
 <div class="container">
   <%= render  'shared/user_header' %>
-  
-  <div class="row my-5">  
-    <%= display_nickname(@user.nickname) %>
-  </div>
-  
+
   <% if @creator.deforume_display == true then %>
     <div class="row">
       <%= "デフォルメキャラ(2～4頭身)：" %>
