@@ -11,15 +11,17 @@ class UserMailer < ApplicationMailer
       )
   end
   
-  # def request2_email(user,requests)
-  #   @user = user
-  #   @requests = requests
-  #   mail(
-  #       to: @user.email,
-  #       subject: "[イラストライフ運営局]#{@user.nickname}さんよりリクエストが承認されました"
-  #     )
-  # end
+  def refusal_email(sender,receiver,requests)
+    @sender = sender
+    @receiver = receiver
+    @requests = requests
+    mail(
+        to: @sender.email,
+        subject: "[イラストライフ運営局]#{@sender.nickname}さんからのリクエストが拒否されました"
+      )
+  end
   
+
   def consent_email(sender,receiver,requests)
     @sender = sender
     @receiver = receiver

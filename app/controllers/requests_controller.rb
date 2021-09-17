@@ -42,7 +42,8 @@ class RequestsController < ApplicationController
     if '拒否' == params[:status]
       @requests.status = params[:status]
       if @requests.save
-        redirect_to request_url(@receiver), notice: '依頼者からのリクエストを拒否しました。'
+        UserMailer.refusal_email(@sender, @receiver, @requests).deliver_later
+        redirect_to request_url(@receiver), notice: '依頼者からのリクエストを拒否するメールを送信しました。'
       end
     elsif '製作中' == params[:status]
       @requests.status = params[:status]
