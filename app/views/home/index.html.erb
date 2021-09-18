@@ -28,10 +28,93 @@
         <%= p e%>
     <% end %>
   </div>
-
-  <h3>背景</h3><br>
   
-  <h3>前景(道具、衣装、エフェクト等)</h3><br>
+  <div class="row">
+    <h3>背景</h3><br>
+  </div>
+  
+  <div class="row">
+    <% begin %>
+      <%# raise #意図的にエラーを発生%>
+      <% @creators.each do |creator| %>
+        <div class="col-md-auto">
+          <% if creator.user.confirmed_at? %>
+            <% if creator.icon? %>
+              <%= link_to image_tag(creator.icon.url  ,class: 'icon center-block'),  "/creators/#{creator.user_id}" %>
+            <% else %>
+              <%= link_to image_tag('/img/mobu.png',class: 'icon'), "/creators/#{creator.user_id}" %>
+            <% end %>
+            <div class="text-center">
+              <span style="font-size: 12px;">
+                <%= creator.user.nickname %>
+              </span>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      
+    <% rescue => e %>
+        <%= p e%>
+    <% end %>
+  </div>
+  
+  <div class="row">
+    <h3>前景(道具、衣装、エフェクト等)</h3><br>
+  </div>
+  
+  <div class="row">
+    <% begin %>
+      <%# raise #意図的にエラーを発生%>
+      <% @creators.each do |creator| %>
+        <div class="col-md-auto">
+          <% if creator.user.confirmed_at? %>
+            <% if creator.icon? %>
+              <%= link_to image_tag(creator.icon.url  ,class: 'icon center-block'),  "/creators/#{creator.user_id}" %>
+            <% else %>
+              <%= link_to image_tag('/img/mobu.png',class: 'icon'), "/creators/#{creator.user_id}" %>
+            <% end %>
+            <div class="text-center">
+              <span style="font-size: 12px;">
+                <%= creator.user.nickname %>
+              </span>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      
+    <% rescue => e %>
+        <%= p e%>
+    <% end %>
+  </div>
+  
+  <div class="row">
+    <h3>スライドショー</h3><br>
+  </div>
+  
+  <div class="row">
+    <% begin %>
+      <%# raise #意図的にエラーを発生%>
+      <% @creators.each do |creator| %>
+        <div class="col-md-auto">
+          <% if creator.user.confirmed_at? %>
+            <% if creator.icon? %>
+              <%= link_to image_tag(creator.icon.url  ,class: 'icon center-block'),  "/creators/#{creator.user_id}" %>
+            <% else %>
+              <%= link_to image_tag('/img/mobu.png',class: 'icon'), "/creators/#{creator.user_id}" %>
+            <% end %>
+            <div class="text-center">
+              <span style="font-size: 12px;">
+                <%= creator.user.nickname %>
+              </span>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      
+    <% rescue => e %>
+        <%= p e%>
+    <% end %>
+  </div>
 
-  <h3>スライドショー</h3><br>
+  
 </div>
