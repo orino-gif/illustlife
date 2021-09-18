@@ -13,6 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
     resource.build_creator
+    resource.build_credit
     resource.save
   end
 

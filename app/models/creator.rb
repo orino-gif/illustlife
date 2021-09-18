@@ -1,4 +1,6 @@
 class Creator < ApplicationRecord
+  belongs_to :user, optional: true #optional:trueは外部キーを許可する設定
+  
   mount_uploader :header, CreatorUploader
   mount_uploader :icon, CreatorUploader
   mount_uploader :deforume1, CreatorUploader
@@ -19,6 +21,6 @@ class Creator < ApplicationRecord
   mount_uploader :slide1, CreatorUploader
   mount_uploader :slide2, CreatorUploader
   mount_uploader :slide3, CreatorUploader
-  belongs_to :user, optional: true #optional:trueは外部キーを許可する設定
+  
 end
 

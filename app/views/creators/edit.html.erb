@@ -50,6 +50,14 @@
   </div>
   
   <div class="row my-5">
+    <%= "口座情報：" %>
+    <table class="table">
+      <tr><td><%= "銀行口座： xxxxxxxxxxx" %></td></tr>
+      <td><button type="button"><%= link_to "変更", credit_path %></button></td>
+    </table>
+  </div>
+  
+  <div class="row my-5">
     <%= "リンク先：" %>
     <table class="table">
       <tr><td>
@@ -69,7 +77,7 @@
   </div>
   
   <div class="row">
-    <%= "デフォルメキャラ(2～3頭身)：" %>
+    <%= "キャラクター：" %>
     <%= form_with(model: @creator, local: true) do |f| %>
       <%= f.label :表示 %>
       <%= f.check_box :deforume_display, id: :checkbox, :as => :boolean %>
