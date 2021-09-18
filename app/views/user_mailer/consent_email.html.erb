@@ -6,7 +6,7 @@
   <body>
     <h3><%= @sender.nickname %>さんから<%= @receiver.nickname %>さんへのリクエストが承認されました。</h3>
     <p>以下のリンク先より入力処理をお願い致します。</p>
-    <%= link_to 'イラストライフ運営局一時金預かり先', "http://defomate.net:3000/credit/show" %>
+    <%= link_to 'イラストライフ運営局一時金預かり先', "http://defomate.net:3000/credits/operation" %>
     
     <p>リクエスト状況の詳細は、以下のリンク先に記載されています。</p>
     <%= link_to 'リクエスト状況確認先リンク', "http://defomate.net:3000/requests/#{@requests.send_id}" %>

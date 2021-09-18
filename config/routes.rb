@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :requests, only: [:create, :show, :update]
   get '/requests/new/:id', to: 'requests#new', as: 'new_request'
   resources :credits, only: [:new, :create, :show, :update]
+  get '/credits/operation', to: 'credits#operation', as: 'operation'
 end

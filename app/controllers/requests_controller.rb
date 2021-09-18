@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:show]
   def new
     @requests = Request.new
     $receive_id=params[:id]
@@ -8,25 +8,27 @@ class RequestsController < ApplicationController
   end
   
   def create
-    @requests = Request.new(requests_params)
-    @creator = Creator.find(current_user.id)
-    
-    @requests.receive_id=$receive_id.to_i
-    @requests.send_id=current_user.id.to_i
-    @requests.status="承認待ち"
-    
-    
-    
-    if @requests.save!
-      @sender = User.find(@requests.send_id)
-      @receiver = User.find(@requests.receive_id)
+    if user_signed_in?
+      @requests = Request.new(requests_params)
+      @creator = Creator.find(current_user.id)
       
-      UserMailer.request_email(@sender,@receiver,@requests).deliver_later
-      redirect_to request_url(@sender), notice: 'クリエイターへリクエストのメールを送信しました。'
+      @requests.receive_id=$receive_id.to_i
+      @requests.send_id=current_user.id.to_i
+      @requests.status="承認待ち"
       
-      $requests_id = @requests.id
+      if @requests.save!
+        @sender = User.find(@requests.send_id)
+        @receiver = User.find(@requests.receive_id)
+        
+        UserMailer.request_email(@sender,@receiver,@requests).deliver_later
+        redirect_to request_url(@sender), notice: 'クリエイターへリクエストのメールを送信しました。'
+        
+        $requests_id = @requests.id
+      else
+        render :new
+      end
     else
-      render :new
+      redirect_to  '/users/sign_in', notice: 'ユーザー登録とログインが必要です。'
     end
   end
   

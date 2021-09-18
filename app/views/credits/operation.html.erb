@@ -1,7 +1,8 @@
-<h1>お振込み先情報</h1>
+<h1>お振込み先口座</h1>
 <div class="container">
 
   <div class="row my-5">
+    <%= イラストライフ運営局一時預かり金 %>
     <div class="col-md-4">
       <table border=1>
         <tr><td width="150">銀行名</td><td width="200"><%= @credits.bank %></td></tr>
@@ -11,17 +12,7 @@
         <tr><td>口座名義</td><td><%= @credits.account_holder %></td></tr>
       </table>
     </div>
-    
-    <div class="col-md-3">
-      <button type="button"><%= link_to "変更", new_credit_path %></button>
-    </div>
   </div>
 
   
 </div>
-
-      <!--<tr><td width="150">銀行名</td><td width="200">三菱東京UFJ銀行</td></tr>-->
-      <!--<tr><td>支店名</td><td>聖護院支店</td></tr>-->
-      <!--<tr><td>口座の種類</td><td>普通預金</td></tr>-->
-      <!--<tr><td>口座番号</td><td>4565837</td></tr>-->
-      <!--<tr><td>口座名義</td><td>林範夫</td></tr>-->
