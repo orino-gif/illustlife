@@ -1,4 +1,4 @@
-ENV['ACCESS_LABORATORY']
+<%= ENV['ACCESS_LABORATORY'] %>
 <h1><%= t('.resend_confirmation_instructions') %></h1>
 
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>

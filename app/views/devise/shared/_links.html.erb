@@ -1,4 +1,4 @@
-ENV['ACCESS_LABORATORY']
+<%= ENV['ACCESS_LABORATORY'] %>
 <div class="form-group">
   <%- if controller_name != 'sessions' %>
     <%= link_to t(".sign_in"), new_session_path(resource_name) %><br />

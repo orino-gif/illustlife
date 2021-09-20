@@ -1,4 +1,4 @@
-ENV['ACCESS_LABORATORY']
+<%= ENV['ACCESS_LABORATORY'] %>
 <div class="row">
   <% if @creator.header? %>
     <%= image_tag(@creator.header.url, class: 'header') %>
