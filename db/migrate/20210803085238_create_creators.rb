@@ -20,18 +20,6 @@ class CreateCreators < ActiveRecord::Migration[5.2]
       t.string :foreground2
       t.string :foreground3
       
-      t.string :bustup1
-      t.string :bustup2
-      t.string :bustup3
-      
-      t.string :rough1
-      t.string :rough2
-      t.string :rough3
-      
-      t.string :slide1
-      t.string :slide2
-      t.string :slide3
-      
       t.timestamps
     end
     # 親テーブルに対象が存在しない場合、子テーブルへの保存ができないようにする。

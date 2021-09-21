@@ -27,23 +27,11 @@ ActiveRecord::Schema.define(version: 2021_09_18_042615) do
     t.string "foreground1"
     t.string "foreground2"
     t.string "foreground3"
-    t.string "bustup1"
-    t.string "bustup2"
-    t.string "bustup3"
-    t.string "rough1"
-    t.string "rough2"
-    t.string "rough3"
-    t.string "slide1"
-    t.string "slide2"
-    t.string "slide3"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "deforume_display", default: true
     t.boolean "background_display", default: true
     t.boolean "foreground_display", default: true
-    t.boolean "bustup_display", default: true
-    t.boolean "rough_display", default: true
-    t.boolean "slide_display", default: true
   end
 
   create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
