@@ -6,19 +6,15 @@ class CreateCreators < ActiveRecord::Migration[5.2]
       t.string :header
       t.string :twitter
       t.string :pixiv
-      t.string :sample
-      
-      t.string :deforume1
-      t.string :deforume2
-      t.string :deforume3
-      
-      t.string :background1
-      t.string :background2
-      t.string :background3
-      
-      t.string :foreground1
-      t.string :foreground2
-      t.string :foreground3
+      t.string :fg1
+      t.string :fg2
+      t.string :fg3
+      t.string :bg1
+      t.string :bg2
+      t.string :bg3
+      t.string :cg1
+      t.string :cg2
+      t.string :cg3
       
       t.timestamps
     end

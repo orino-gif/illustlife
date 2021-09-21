@@ -3,14 +3,14 @@ class Creator < ApplicationRecord
   
   mount_uploader :header, CreatorUploader
   mount_uploader :icon, CreatorUploader
-  mount_uploader :deforume1, CreatorUploader
-  mount_uploader :deforume2, CreatorUploader
-  mount_uploader :deforume3, CreatorUploader
-  mount_uploader :background1, CreatorUploader
-  mount_uploader :background2, CreatorUploader
-  mount_uploader :background3, CreatorUploader
-  mount_uploader :foreground1, CreatorUploader
-  mount_uploader :foreground2, CreatorUploader
-  mount_uploader :foreground3, CreatorUploader
+  mount_uploader :fg1, CreatorUploader
+  mount_uploader :fg2, CreatorUploader
+  mount_uploader :fg3, CreatorUploader
+  mount_uploader :bg1, CreatorUploader
+  mount_uploader :bg2, CreatorUploader
+  mount_uploader :bg3, CreatorUploader
+  mount_uploader :cg1, CreatorUploader
+  mount_uploader :cg2, CreatorUploader
+  mount_uploader :cg3, CreatorUploader
 end
 

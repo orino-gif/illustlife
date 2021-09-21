@@ -88,40 +88,40 @@
   
   <div class="row my-5">
     <div class="col">
-      <% if @creator.deforume1? %>
-        <%= image_tag @creator.deforume1.url, class: 'thumbnail' %>
+      <% if @creator.fg1? %>
+        <%= image_tag @creator.fg1.url, class: 'thumbnail' %>
       <% else %>
         <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>
-        <%= f.file_field :deforume1 %>
+        <%= f.file_field :fg1 %>
         <%= submit_tag("登録") %>
       <% end %>
     </div>
     
     <div class="col">
-      <% if @creator.deforume2? %>
-        <%= image_tag @creator.deforume2.url, class: 'thumbnail' %>
+      <% if @creator.fg2? %>
+        <%= image_tag @creator.fg2.url, class: 'thumbnail' %>
       <% else %>
         <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>
-        <%= f.file_field :deforume2 %>
+        <%= f.file_field :fg2 %>
         <%= submit_tag("登録") %>
       <% end %>
     </div>
     
     <div class="col">
-      <% if @creator.deforume3? %>
-        <%= image_tag @creator.deforume3.url, class: 'thumbnail' %>
+      <% if @creator.fg3? %>
+        <%= image_tag @creator.fg3.url, class: 'thumbnail' %>
       <% else %>
         <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>
-        <%= f.file_field :deforume3 %>
+        <%= f.file_field :fg3 %>
         <%= submit_tag("登録") %>
       <% end %>
     </div>
@@ -131,47 +131,47 @@
     <%= "背景：" %>
     <%= form_with(model: @creator, local: true) do |f| %>
       <%= f.label :表示 %>
-      <%= f.check_box :background_display, id: :checkbox, :as => :boolean %>
+      <%= f.check_box :bg_display, id: :checkbox, :as => :boolean %>
       <%= submit_tag("設定") %>
     <% end %>
   </div>
   
   <div class="row my-5">
     <div class="col">
-      <% if @creator.background1? %>
-        <%= image_tag @creator.background1.url, class: 'thumbnail' %>
+      <% if @creator.bg1? %>
+        <%= image_tag @creator.bg1.url, class: 'thumbnail' %>
       <% else %>
         <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>
-        <%= f.file_field :background1 %>
+        <%= f.file_field :bg1 %>
         <%= submit_tag("登録") %>
       <% end %>
     </div>
     
     <div class="col">
-      <% if @creator.background2? %>
-        <%= image_tag @creator.background2.url, class: 'thumbnail' %>
+      <% if @creator.bg2? %>
+        <%= image_tag @creator.bg2.url, class: 'thumbnail' %>
       <% else %>
         <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>
-        <%= f.file_field :background2 %>
+        <%= f.file_field :bg2 %>
         <%= submit_tag("登録") %>
       <% end %>
     </div>
     
     <div class="col">
-      <% if @creator.background3? %>
-        <%= image_tag @creator.background3.url, class: 'thumbnail' %>
+      <% if @creator.bg3? %>
+        <%= image_tag @creator.bg3.url, class: 'thumbnail' %>
       <% else %>
         <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>
-        <%= f.file_field :background3 %>
+        <%= f.file_field :bg3 %>
         <%= submit_tag("登録") %>
       <% end %>
     </div>
@@ -181,47 +181,47 @@
     <%= "前景(道具、衣装、エフェクト等)：" %>
     <%= form_with(model: @creator, local: true) do |f| %>
       <%= f.label :表示 %>
-      <%= f.check_box :foreground_display,id: :checkbox, :as => :boolean %>
+      <%= f.check_box :cg_display,id: :checkbox, :as => :boolean %>
       <%= submit_tag("設定") %>
     <% end %>
   </div>
   
   <div class="row my-5">
     <div class="col">
-      <% if @creator.foreground1? %>
-        <%= image_tag @creator.foreground1.url, class: 'thumbnail' %>
+      <% if @creator.cg1? %>
+        <%= image_tag @creator.cg1.url, class: 'thumbnail' %>
       <% else %>
         <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>
-        <%= f.file_field :foreground1 %>
+        <%= f.file_field :cg1 %>
         <%= submit_tag("登録") %>
       <% end %>
     </div>
     
     <div class="col">
-      <% if @creator.foreground2? %>
-        <%= image_tag @creator.foreground2.url, class: 'thumbnail' %>
+      <% if @creator.cg2? %>
+        <%= image_tag @creator.cg2.url, class: 'thumbnail' %>
       <% else %>
         <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>
-        <%= f.file_field :foreground2 %>
+        <%= f.file_field :cg2 %>
         <%= submit_tag("登録") %>
       <% end %>
     </div>
     
     <div class="col">
-      <% if @creator.foreground3? %>
-        <%= image_tag @creator.foreground3.url, class: 'thumbnail' %>
+      <% if @creator.cg3? %>
+        <%= image_tag @creator.cg3.url, class: 'thumbnail' %>
       <% else %>
         <%= image_tag('/img/noImage.png',class: 'thumbnail cover') %>
       <% end %>
       
       <%= form_with(model: @creator, local: true) do |f| %>
-        <%= f.file_field :foreground3 %>
+        <%= f.file_field :cg3 %>
         <%= submit_tag("登録") %>
       <% end %>
     </div>

@@ -39,9 +39,7 @@ class CreatorsController < ApplicationController
   private
 
   def creators_params
-    params.require(:creator).permit(:header,:icon,:update,:twitter,:pixiv,:deforume1,:deforume2,:deforume3,:sample,
-    :deforume_display,:background_display,:foreground_display,:bustup_display,:rough_display,:slide_display,
-    :background1,:background2,:background3,:foreground1,:foreground2,:foreground3,:bustup1,:bustup2,:bustup3,
-    :rough1,:rough2,:rough3,:slide1,:slide2,:slide3)
+    params.require(:creator).permit(:header,:icon,:update,:twitter,:pixiv,:fg1,:fg2,:fg3,:fg_display,
+    :bg_display,:cg_display,:bg1,:bg2,:bg3,:cg1,:cg2,:cg3)
   end   
 end
