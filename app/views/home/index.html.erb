@@ -12,13 +12,8 @@
       
       <% @creators.each do |creator| %>
         <div class="col-md-auto">
-          <% if creator.user.confirmed_at? %>
-            <% if creator.icon? %>
-              <%= link_to image_tag(creator.icon.url  ,class: 'icon center-block'),  "/creators/#{creator.user_id}" %>
-            <% else %>
-              <% display_character() %>
-              <%#= link_to image_tag('/img/mobu.png',class: 'icon'), "/creators/#{creator.user_id}" %>
-            <% end %>
+          <% if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示 %>
+            <%= display_img(creator) %>
             <div class="text-center">
               <span style="font-size: 12px;">
                 <%= creator.user.nickname %>
@@ -39,15 +34,10 @@
   
   <div class="row">
     <% begin %>
-      <%# raise #意図的にエラーを発生%>
       <% @creators.each do |creator| %>
         <div class="col-md-auto">
           <% if creator.user.confirmed_at? %>
-            <% if creator.icon? %>
-              <%= link_to image_tag(creator.icon.url  ,class: 'icon center-block'),  "/creators/#{creator.user_id}" %>
-            <% else %>
-              <%= link_to image_tag('/img/mobu.png',class: 'icon'), "/creators/#{creator.user_id}" %>
-            <% end %>
+            <%= display_img(creator) %>
             <div class="text-center">
               <span style="font-size: 12px;">
                 <%= creator.user.nickname %>
@@ -68,15 +58,10 @@
   
   <div class="row">
     <% begin %>
-      <%# raise #意図的にエラーを発生%>
       <% @creators.each do |creator| %>
         <div class="col-md-auto">
           <% if creator.user.confirmed_at? %>
-            <% if creator.icon? %>
-              <%= link_to image_tag(creator.icon.url  ,class: 'icon center-block'),  "/creators/#{creator.user_id}" %>
-            <% else %>
-              <%= link_to image_tag('/img/mobu.png',class: 'icon'), "/creators/#{creator.user_id}" %>
-            <% end %>
+            <%= display_img(creator) %>
             <div class="text-center">
               <span style="font-size: 12px;">
                 <%= creator.user.nickname %>
