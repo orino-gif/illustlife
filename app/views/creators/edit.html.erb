@@ -77,10 +77,10 @@
   </div>
   
   <div class="row">
-    <%= "キャラクター：" %>
+    <%= "キャラクター、道具：" %>
     <%= form_with(model: @creator, local: true) do |f| %>
       <%= f.label :表示 %>
-      <%= f.check_box :deforume_display, id: :checkbox, :as => :boolean %>
+      <%= f.check_box :fg_display, id: :checkbox, :as => :boolean %>
       <%= submit_tag("設定") %>
     <% end %>
   </div>
@@ -177,7 +177,7 @@
   </div>
   
   <div class="row">
-    <%= "前景(道具、衣装、エフェクト等)：" %>
+    <%= "2.5D、3DCGモデリング(Live2D、Blender等)：" %>
     <%= form_with(model: @creator, local: true) do |f| %>
       <%= f.label :表示 %>
       <%= f.check_box :cg_display,id: :checkbox, :as => :boolean %>
