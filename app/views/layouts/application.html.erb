@@ -33,24 +33,37 @@
           <%= link_to image_tag('/img/symbol.png',class: 'favicon'),  home_index_path %>
         </div>
         <div class="col-md-auto">
-          <span style="font-size: 30px;">イラストライフ</span><span style="font-size: 10px;">(テスト版)</span>
-          <span style="font-size: 18px;">～1回8千円以下納品4日以内のインスタンスなイラスト&CG依頼</span><br>
+          <span style="font-size: 2.5em;">イラストライフ</span><span style="font-size: 0.1em;">(テスト版)</span>
+          
         </div>
       </div>
-
-      <% if user_signed_in? %>
-        <div class="right">
-          <button type="button" class="btn btn-light"><%= link_to "リクエスト状態","/requests/#{@user.id}" %></button>
-          <button type="button" class="btn btn-light"><%= link_to "ユーザー情報","/creators/#{@user.id}" %></button>
-          <button type="button" class="btn btn-light"><%= link_to "ユーザー編集", "/creators/#{@user.id}/edit" %></button>
-          <button type="button" class="btn btn-light"><%= link_to "ログアウト", destroy_user_session_path, method: "delete" %></button>
+      <div class="row">
+        <!-- 左寄せ -->
+        <div class="col-12 clearfix">
+          <div class="float-left test-box"><span style="font-size: 1.2em;">1回8千円以下納品4日以内のインスタンスなイラスト&CG依頼</span></div>
         </div>
-      <% else %>
-        <div class="right">
-          <button type="button" class="btn btn-light"><%= link_to "新規登録", new_user_registration_path, method: "get" %></button>
-          <button type="button" class="btn btn-light"><%= link_to "ログイン\n", new_user_session_path, method: "get" %></button>
+      </div>
+      
+      <div class="row">
+        <!-- 右寄せ -->
+        <div class="col-12 clearfix">
+          <div class="float-right test-box">
+            <% if user_signed_in? %>
+              <div class="right">
+                <button type="button" class="btn btn-light"><%= link_to "リクエスト状態","/requests/#{@user.id}" %></button>
+                <button type="button" class="btn btn-light"><%= link_to "ユーザー情報","/creators/#{@user.id}" %></button>
+                <button type="button" class="btn btn-light"><%= link_to "ユーザー編集", "/creators/#{@user.id}/edit" %></button>
+                <button type="button" class="btn btn-light"><%= link_to "ログアウト", destroy_user_session_path, method: "delete" %></button>
+              </div>
+            <% else %>
+              <div class="right">
+                <button type="button" class="btn btn-light"><%= link_to "新規登録", new_user_registration_path, method: "get" %></button>
+                <button type="button" class="btn btn-light"><%= link_to "ログイン\n", new_user_session_path, method: "get" %></button>
+              </div>
+            <% end %>
+          </div>
         </div>
-      <% end %>
+      </div>
 
       <%# フラッシュ追加%>
       <% if notice.present? %>
