@@ -34,13 +34,10 @@
         </div>
         <div class="col-md-auto">
           <span style="font-size: 30px;">イラストライフ</span><span style="font-size: 10px;">(テスト版)</span>
-          <span style="font-size: 18px;">～1回9千円納品4日以内のインスタンスな依頼</span><br>
+          <span style="font-size: 18px;">～1回8千円以下納品4日以内のインスタンスなイラスト&CG依頼</span><br>
         </div>
       </div>
 
-      
-      <span style="font-size: 14px;">個人製作向け。ゲーム、アニメーション、MV、漫画、Webサイト、SNS、YouTube、その他の素材に。</span>
-      
       <% if user_signed_in? %>
         <div class="right">
           <button type="button" class="btn btn-light"><%= link_to "リクエスト状態","/requests/#{@user.id}" %></button>

@@ -1,6 +1,6 @@
 module CreatorsHelper
 
-  def display_fg(creator)
+  def show_fg(creator)
     if creator == @creator.fg1 && @creator.fg1?
       image_tag @creator.fg1.url, class: 'thumbnail'
     elsif creator == @creator.fg2 && @creator.fg2?
@@ -12,7 +12,7 @@ module CreatorsHelper
     end
   end
   
-  def display_bg(creator)
+  def show_bg(creator)
     if creator == @creator.bg1 && @creator.bg1?
       image_tag @creator.bg1.url, class: 'thumbnail'
     elsif creator == @creator.bg2 && @creator.bg2?
@@ -24,7 +24,7 @@ module CreatorsHelper
     end
   end
   
-  def display_cg(creator)
+  def show_cg(creator)
     if creator == @creator.cg1 && @creator.cg1?
       image_tag @creator.cg1.url, class: 'thumbnail'
     elsif creator == @creator.cg2 && @creator.cg2?

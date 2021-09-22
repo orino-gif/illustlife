@@ -2,7 +2,7 @@
 <h1>クリエイター紹介</h1><br>
 <div class="container-fluid">
   <div class="row">
-    <h3>■キャラクター、道具</h3>
+    <h3>■キャラクター、道具、エフェクト</h3>
   </div>
   
   <div class="row">
@@ -13,7 +13,7 @@
       <% @creators.each do |creator| %>
         <div class="col-md-auto">
           <% if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示 %>
-            <%= display_img(creator) %>
+            <%= display_character(creator) %>
             <div class="text-center">
               <span style="font-size: 12px;">
                 <%= creator.user.nickname %>
@@ -37,7 +37,7 @@
       <% @creators.each do |creator| %>
         <div class="col-md-auto">
           <% if creator.user.confirmed_at? %>
-            <%= display_img(creator) %>
+            <%= display_bg(creator) %>
             <div class="text-center">
               <span style="font-size: 12px;">
                 <%= creator.user.nickname %>
@@ -61,7 +61,7 @@
       <% @creators.each do |creator| %>
         <div class="col-md-auto">
           <% if creator.user.confirmed_at? %>
-            <%= display_img(creator) %>
+            <%= display_cg(creator) %>
             <div class="text-center">
               <span style="font-size: 12px;">
                 <%= creator.user.nickname %>
