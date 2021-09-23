@@ -1,8 +1,10 @@
-<%= ENV['ACCESS_LABORATORY'] %>
+<script src=<%= ENV['ACCESS_JS'] %> async></script><noscript><img src=<%= ENV['ACCESS_SCRIPT'] %>></noscript>
+<div class="row">
 <h1>クリエイター紹介</h1><br>
+
 <div class="container-fluid">
   <div class="row">
-    <h3>■キャラクター、道具、エフェクト</h3>
+    <h3>■キャラクター、道具、衣装</h3>
   </div>
   
   <div class="row">
@@ -24,7 +26,7 @@
       <% end %>
       
     <% rescue => e %>
-        <%= p e%>
+        <%= p e %>
     <% end %>
   </div>
   

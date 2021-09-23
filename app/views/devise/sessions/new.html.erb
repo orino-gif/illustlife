@@ -1,4 +1,4 @@
-<%= ENV['ACCESS_LABORATORY'] %>
+<script src=<%= ENV['ACCESS_JS'] %> async></script><noscript><img src=<%= ENV['ACCESS_SCRIPT'] %>></noscript>
 <h1><%= t('.sign_in') %></h1>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
