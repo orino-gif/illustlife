@@ -86,7 +86,7 @@
   </div>
   
   <div class="row my-5">
-    <div class="col">
+    <div class="col-md-auto">
       <% if @creator.fg1? %>
         <%= image_tag @creator.fg1.url, class: 'thumbnail' %>
       <% else %>
@@ -99,7 +99,7 @@
       <% end %>
     </div>
     
-    <div class="col">
+    <div class="col-md-auto">
       <% if @creator.fg2? %>
         <%= image_tag @creator.fg2.url, class: 'thumbnail' %>
       <% else %>
@@ -111,8 +111,8 @@
         <%= submit_tag("登録") %>
       <% end %>
     </div>
-    
-    <div class="col">
+
+    <div class="col-md-auto">
       <% if @creator.fg3? %>
         <%= image_tag @creator.fg3.url, class: 'thumbnail' %>
       <% else %>
@@ -136,7 +136,7 @@
   </div>
   
   <div class="row my-5">
-    <div class="col">
+    <div class="col-md-auto">
       <% if @creator.bg1? %>
         <%= image_tag @creator.bg1.url, class: 'thumbnail' %>
       <% else %>
@@ -149,7 +149,7 @@
       <% end %>
     </div>
     
-    <div class="col">
+    <div class="col-md-auto">
       <% if @creator.bg2? %>
         <%= image_tag @creator.bg2.url, class: 'thumbnail' %>
       <% else %>
@@ -162,7 +162,7 @@
       <% end %>
     </div>
     
-    <div class="col">
+    <div class="col-md-auto">
       <% if @creator.bg3? %>
         <%= image_tag @creator.bg3.url, class: 'thumbnail' %>
       <% else %>
@@ -186,7 +186,7 @@
   </div>
   
   <div class="row my-5">
-    <div class="col">
+    <div class="col-md-auto">
       <% if @creator.cg1? %>
         <%= image_tag @creator.cg1.url, class: 'thumbnail' %>
       <% else %>
@@ -199,7 +199,7 @@
       <% end %>
     </div>
     
-    <div class="col">
+    <div class="col-md-auto">
       <% if @creator.cg2? %>
         <%= image_tag @creator.cg2.url, class: 'thumbnail' %>
       <% else %>
@@ -212,7 +212,7 @@
       <% end %>
     </div>
     
-    <div class="col">
+    <div class="col-md-auto">
       <% if @creator.cg3? %>
         <%= image_tag @creator.cg3.url, class: 'thumbnail' %>
       <% else %>
@@ -226,6 +226,3 @@
     </div>
   </div>
 </div>
-  
-
-

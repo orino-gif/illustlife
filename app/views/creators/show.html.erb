@@ -5,19 +5,19 @@
 
   <% if @creator.fg_display == true then %>
     <div class="row">
-      <%= "キャラクター、道具" %>
+      <%= "キャラクター、道具、エフェクト：" %>
     </div>
     
     <div class="row my-5">
-      <div class="col">
+      <div class="col-md-auto">
         <%= show_fg(@creator.fg1) %>
       </div>
       
-      <div class="col">
+      <div class="col-md-auto">
         <%= show_fg(@creator.fg2) %>
       </div>
       
-      <div class="col">
+      <div class="col-md-auto">
         <%= show_fg(@creator.fg3) %>
       </div>
     </div>
@@ -30,15 +30,15 @@
     </div>
     
     <div class="row my-5">
-      <div class="col">
+      <div class="col-md-auto">
         <%= show_bg(@creator.bg1) %>
       </div>
       
-      <div class="col">
+      <div class="col-md-auto">
         <%= show_bg(@creator.bg2) %>
       </div>
       
-      <div class="col">
+      <div class="col-md-auto">
         <%= show_bg(@creator.bg3) %>
       </div>
     </div>
@@ -50,15 +50,15 @@
     </div>
     
     <div class="row my-5">
-      <div class="col">
+      <div class="col-md-auto">
         <%= show_cg(@creator.cg1) %>
       </div>
       
-      <div class="col">
+      <div class="col-md-auto">
         <%= show_cg(@creator.cg2) %>
       </div>
       
-      <div class="col">
+      <div class="col-md-auto">
         <%= show_cg(@creator.cg3) %>
       </div>
     </div>
