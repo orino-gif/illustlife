@@ -1,7 +1,3 @@
-<% if Rails.env.production? %>
-  <script src="//accaii.com/orino/script.js" async></script><noscript><img src="//accaii.com/orino/script?guid=on"></noscript>
-<% end %>
-
 <p>Hello <%= @email %>!</p>
 
 <% if @resource.try(:unconfirmed_email?) %>
