@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<script src=<%= ENV['ACCESS_JS'] %> async></script><noscript><img src=<%= ENV['ACCESS_SCRIPT'] %>></noscript>
+<% if Rails.env.production? %>
+  <script src="//accaii.com/orino/script.js" async></script><noscript><img src="//accaii.com/orino/script?guid=on"></noscript>
+<% end %>
+
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />

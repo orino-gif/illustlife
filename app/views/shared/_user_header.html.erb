@@ -1,4 +1,7 @@
-<%= ENV['ACCESS_LABORATORY'] %>
+<% if Rails.env.production? %>
+  <script src="//accaii.com/orino/script.js" async></script><noscript><img src="//accaii.com/orino/script?guid=on"></noscript>
+<% end %>
+
 <div class="row">
   <% if @creator.header? %>
     <%= image_tag(@creator.header.url, class: 'header') %>
