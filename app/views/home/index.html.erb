@@ -1,10 +1,11 @@
 <% if Rails.env.production? %>
   <script src="//accaii.com/orino/script.js" async></script><noscript><img src="//accaii.com/orino/script?guid=on"></noscript>
 <% end %>
-
 <div class="row">
-<h1>クリエイター紹介</h1><br>
-
+  <div class="col-md-12 px-0">
+<h1>&nbsp;クリエイター紹介</h1>
+</div>
+</div>
 <div class="container-fluid">
   <div class="row">
     <h3>■キャラクター、道具、衣装</h3>
@@ -14,7 +15,6 @@
     
     <% begin %>
       <%# raise #意図的にエラーを発生%>
-      
       <% @creators.each do |creator| %>
         <div class="col-md-auto">
           <% if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示 %>
@@ -27,9 +27,8 @@
           <% end %>
         </div>
       <% end %>
-      
     <% rescue => e %>
-        <%= p e %>
+      <%= p e %>
     <% end %>
   </div>
   
@@ -51,7 +50,6 @@
           <% end %>
         </div>
       <% end %>
-      
     <% rescue => e %>
         <%= p e%>
     <% end %>
@@ -75,7 +73,6 @@
           <% end %>
         </div>
       <% end %>
-      
     <% rescue => e %>
         <%= p e%>
     <% end %>

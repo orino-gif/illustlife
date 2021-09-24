@@ -33,7 +33,6 @@
         </div>
         <div class="col-md-auto">
           <span style="font-size: 2.5em;">イラストライフ</span><span style="font-size: 0.1em;">(テスト版)</span>
-          
         </div>
       </div>
       <div class="row">
@@ -49,15 +48,27 @@
           <div class="float-right test-box">
             <% if user_signed_in? %>
               <div class="right">
-                <button type="button" class="btn btn-light"><%= link_to "リクエスト状態","/requests/#{@user.id}" %></button>
-                <button type="button" class="btn btn-light"><%= link_to "ユーザー情報","/creators/#{@user.id}" %></button>
-                <button type="button" class="btn btn-light"><%= link_to "ユーザー編集", "/creators/#{@user.id}/edit" %></button>
-                <button type="button" class="btn btn-light"><%= link_to "ログアウト", destroy_user_session_path, method: "delete" %></button>
+                <button type="button" class="btn btn-light">
+                  <%= link_to "リクエスト状態","/requests/#{@user.id}" %>
+                </button>
+                <button type="button" class="btn btn-light">
+                  <%= link_to "ユーザー情報","/creators/#{@user.id}" %>
+                </button>
+                <button type="button" class="btn btn-light">
+                  <%= link_to "ユーザー編集", "/creators/#{@user.id}/edit" %>
+                </button>
+                <button type="button" class="btn btn-light">
+                  <%= link_to "ログアウト", destroy_user_session_path, method: "delete" %>
+                </button>
               </div>
             <% else %>
               <div class="right">
-                <button type="button" class="btn btn-light"><%= link_to "新規登録", new_user_registration_path, method: "get" %></button>
-                <button type="button" class="btn btn-light"><%= link_to "ログイン\n", new_user_session_path, method: "get" %></button>
+                <button type="button" class="btn btn-light">
+                  <%= link_to "新規登録", new_user_registration_path, method: "get" %>
+                </button>
+                <button type="button" class="btn btn-light">
+                  <%= link_to "ログイン\n", new_user_session_path, method: "get" %>
+                </button>
               </div>
             <% end %>
           </div>
