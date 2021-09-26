@@ -26,10 +26,18 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control' %>
   </div>
+  
+  <div class="field text-left">
+    <%= f.check_box :accepted ,{},checked_value = "true",unchecked_value = "false" %>
+    <%= link_to '利用規約', explanations_show_path %>
+    <%= f.label '、及び、個人情報の取扱に同意する' %>
+  </div>
 
   <div class="form-group">
     <%= f.submit t('.sign_up'), class: 'btn btn-primary' %>
   </div>
+  
+  
 <% end %>
 
 <%= render 'devise/shared/links' %>

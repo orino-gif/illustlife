@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :credits, only: [:new, :create, :show, :update]
   get '/credits/operation', to: 'credits#operation', as: 'operation'
   get 'explanations/show'
+  get 'explanations/policy'
 end
