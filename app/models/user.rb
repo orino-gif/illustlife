@@ -6,4 +6,5 @@ class User < ApplicationRecord
   #dependent: :destroyを付与してuserレコードの削除に伴ってcreatorレコードを削除。
   has_one :creator , dependent: :destroy 
   has_one :credit , dependent: :destroy 
+  has_one  :card,  dependent: :destroy
 end

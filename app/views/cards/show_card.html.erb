@@ -1,0 +1,6 @@
+<h2>クレジットカード情報</h2>
+番号:**** **** **** <%= @default_card_information.last4 %><br>
+有効期限:年<%= @default_card_information.exp_year %><br>
+有効期限:月<%= @default_card_information.exp_month %><br><br>
+<%= link_to "カードを削除する",  card_path(Card.find_by(user_id: current_user.id)), method:"delete" %><br><br>
+<%= link_to "トップページに戻る", root_path %>

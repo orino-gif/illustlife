@@ -18,7 +18,7 @@ gem 'carrierwave'
 gem "fog-aws"
 
 gem 'pry-rails'
-
+gem 'payjp'
 # Use AWS SDK
 gem 'aws-sdk', '~>1'
 

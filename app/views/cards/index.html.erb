@@ -1,0 +1,12 @@
+<%= $date %>にデプロイが成功しました
+<% if user_signed_in? %>
+  <p>ようこそ<%= User.find(current_user.id).nickname %>さん</p>
+  <% if Card.find_by(user_id: current_user.id) == nil %>
+    <p><%= link_to "クレジットカードの登録", new_card_path %></p>
+  <% else %>
+    <p><%= link_to "クレジットカード情報の確認", show_card_cards_path %></p>
+  <% end %>
+  <p><%= link_to "ログアウト", destroy_user_session_path, method: "delete" %></p>
+<% else %>
+  <p><%= link_to "新規ユーザ登録", new_user_registration_path %></p>
+<% end %>

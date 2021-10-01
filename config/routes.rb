@@ -10,4 +10,9 @@ Rails.application.routes.draw do
   get '/credits/operation', to: 'credits#operation', as: 'operation'
   get 'explanations/show'
   get 'explanations/policy'
+  resources :cards,  only:   [:new, :create, :destroy] do
+    collection do
+      get "show_card"
+    end
+  end
 end
