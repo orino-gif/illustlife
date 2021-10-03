@@ -8,11 +8,7 @@ class CardsController < ApplicationController
   end
   
   def create
-    #Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
-    
-    
-    
-    Payjp.api_key = "sk_test_3807d7ff01e24b45310ebb5a"
+    Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
     token = Payjp::Token.create({
       card: {
         number:     params[:card][:number],
@@ -35,7 +31,7 @@ class CardsController < ApplicationController
     end
   end
   
- def show_card
+  def show_card
   card = Card.find_by(user_id: current_user.id)
     if card.blank?
       redirect_to :new
@@ -46,9 +42,9 @@ class CardsController < ApplicationController
     end
   end
   
-   def destroy
+  def destroy
     if Card.find_by(user_id: current_user.id).destroy
-      redirect_to root_path
+      redirect_to new_card_path
     else
       render :show_card
     end
