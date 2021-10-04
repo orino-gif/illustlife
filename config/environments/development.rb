@@ -3,8 +3,8 @@ Rails.application.configure do
 
   config.eager_load = false
   
-  #ログレベル logger.unknown '不明なエラー',logger.debug 'デバック
-  config.log_level = :error 
+  #ログレベル ( :debug | :info | :warn | :error | :fatal )
+  config.log_level = :fatal 
 
   config.consider_all_requests_local = true
 
