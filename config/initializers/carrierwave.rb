@@ -13,9 +13,13 @@ CarrierWave.configure do |config|
     region: 'ap-northeast-1', # リージョン
     path_style: true
   }
-  if Rails.env.production? # 本番環境の場合はバケットillustlife-storageへアップロード
+  if Rails.env.production? # 本番環境の場合は、アップロードとリンク先をバケットillustlife-storageに指定
     config.fog_directory  = 'illustlife-storage' # バケット名
-  else # 本番環境以外の場合はアプリケーション内にアップロード
+  elsif Rails.env.production?# テスト環境の場合はアップロードとリンク先を選択
+    config.fog_directory  = 'illustlife-storage-test' # バケット名
+    #config.fog_directory  = 'illustlife-storage' # バケット名
+    
+  else # それ以外の場合は、アップロードとリンク先をillustlife-storage-testに指定
     config.fog_directory  = 'illustlife-storage-test' # バケット名
   end
 end
