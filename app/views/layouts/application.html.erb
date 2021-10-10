@@ -80,6 +80,12 @@
   </header>
   
   <body>
+    <p>jQuery稼働テスト(未稼働)</p>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("p").text("jQuery稼働テスト(稼働中)");
+      });
+    </script>
     <%# if Rails.env.production? %>
       <script src="//accaii.com/orino/script.js" async></script><noscript><img src="//accaii.com/orino/script?guid=on"></noscript>
     <%# end %>
