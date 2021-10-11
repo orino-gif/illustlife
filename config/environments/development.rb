@@ -4,7 +4,7 @@ Rails.application.configure do
   config.eager_load = false
   
   #ログレベル ( :debug | :info | :warn | :error | :fatal )
-  config.log_level = :fatal 
+  config.log_level = :debug 
 
   config.consider_all_requests_local = true
 
