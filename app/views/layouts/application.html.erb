@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="row">
-        <!-- 左寄せ -->
+        <!-- 左寄せ --><!-- clearfixは、浮いた要素のバリア機能 -->
         <div class="col-12 clearfix">
           <div class="float-left test-box"><span style="font-size: 1.2em;">1回8千円以下納品4日以内のインスタンスなイラスト&CG依頼</span></div>
         </div>
@@ -106,19 +106,19 @@
   
   <footer class="footer">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-12 clearfix">
-          <%= link_to '利用規約', explanations_show_path %>
-          <%= link_to 'プライバシーポリシー', explanations_policy_path %>
-          <%= link_to '特定商取引法に基づく表記', explanations_transaction_law_path %>
-          
-        </div>
+      
+      <div class="row mx-5 my-3">
+        <div class="mx-3"><%= link_to '利用規約 ', explanations_show_path %></div>
+        <div class="mx-3"><%= link_to 'プライバシーポリシー ', explanations_policy_path %></div>
+        <div class="mx-3"><%= link_to '特定商取引法に基づく表記 ', explanations_transaction_law_path %></div>
       </div>
-      <div class="row">
+      <div class="row mx-5 my-2">
         <div class="col-12 clearfix">
-          <p>© イラストライフ株式会社</p>
+        <div class="float-right"><p>© 2021 イラストライフ株式会社</p></div>
         </div>
+        
       </div>
+      
     </div>
   </footer>
 </html>
