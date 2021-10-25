@@ -99,7 +99,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   
   config.action_mailer.default_url_options = {  :host => 'illustlife.com', :protocol => 'https' }
-  #config.action_mailer.default_url_options = {  host: 'defomate.net', port:3000}
+  #config.action_mailer.default_url_options = {  host: '160.16.136.195', port:3000}
   
   # config/environments/{staging,development}.rb
   config.action_mailer.delivery_method = :ses
@@ -113,9 +113,9 @@ Rails.application.configure do
 	  address:              'mail.so-net.ne.jp',
 		domain:               'so-net.ne.jp',
 		user_name:            'xr274375@fc5.so-net.ne.jp',
-		# address:              'defomate.net',
-		# domain:               'defomate.net',
-		# user_name:            'operation@defomate.net',
+		# address:              '160.16.136.195',
+		# domain:               '160.16.136.195',
+		# user_name:            'operation@160.16.136.195',
 		password:             'orino1013',
 		authentication:       'login'
 		

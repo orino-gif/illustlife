@@ -113,9 +113,9 @@ Rails.application.configure do
 	  address:              'mail.so-net.ne.jp',
 		domain:               'so-net.ne.jp',
 		user_name:            'xr274375@fc5.so-net.ne.jp',
-		# address:              'defomate.net',
-		# domain:               'defomate.net',
-		# user_name:            'operation@defomate.net',
+		# address:              '160.16.136.195',
+		# domain:               '160.16.136.195',
+		# user_name:            'operation@160.16.136.195',
 		password:             'orino1013',
 		authentication:       'login'
 		

@@ -21,7 +21,7 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  config.action_mailer.default_url_options = { host: 'defomate.net', port: 3000 }
+  config.action_mailer.default_url_options = { host: '160.16.136.195', port: 3000 }
 
   config.action_mailer.delivery_method = :ses
 
