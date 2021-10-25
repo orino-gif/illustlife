@@ -36,9 +36,9 @@ class CardsController < ApplicationController
     if card.blank?
       redirect_to :new
     else
-    Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
-    customer = Payjp::Customer.retrieve(card.customer_id)
-    @default_card_information = Payjp::Customer.retrieve(card.customer_id).cards.data[0]
+      Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
+      customer = Payjp::Customer.retrieve(card.customer_id)
+      @default_card_information = Payjp::Customer.retrieve(card.customer_id).cards.data[0]
     end
   end
   
