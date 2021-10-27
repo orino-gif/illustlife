@@ -30,7 +30,8 @@
   <div class="field text-left">
     <%= f.check_box :accepted ,{},checked_value = "true",unchecked_value = "false" %>
     <%= link_to '利用規約', explanations_show_path %>
-    <%= f.label '、及び、個人情報の取扱に同意する。又、事業主（個人事業主含む）でない事を認める。' %>
+    <%= f.label '、及び、' %><%= link_to 'プライバシーポリシー', explanations_policy_path %><%='に同意する。又、登録する利用者本人のみがIDとパスワードを利用し、' %></br>
+    <%="事業主（個人事業主含む）でない事を認める。" %>
   </div>
 
   <div class="form-group">
