@@ -6,38 +6,45 @@
 
 <div class="container">
   <div class="row my-5">
-    <% if @sender != nil then %>
-      <%="申請日時：#{@requests.created_at.strftime("%Y/%m/%d %H:%M:%S")}" %>
-      <table class="table">
-        <tr><td><%= "依頼者：#{@sender.nickname}" %></td></tr>
-        <tr><td><%= "承認者：#{@receiver.nickname}" %></td></tr>
-        <tr><td><%= "状態：#{@requests.status}" %></td></tr>
-        <tr><td><%= "リクエストID：#{@requests.id}" %></td></tr>
-        <tr><td><%= "金額：#{@requests.money}円" %></td></tr>
-        <tr><td><%= "内容：#{@requests.message}" %></td></tr>
-      </table>  
-      
-      <% if (@requests.receive_id == current_user.id) && (@requests.status == '承認待ち') && (@requests.status != '製作中') && (@requests.status != '拒否') then %>
-        <div class="col-md-auto"><%= "#{@sender.nickname}さんから#{@receiver.nickname}さんへのリクエストを承認しますか？" %></div>
-        <div class="col-md-auto"><%= button_to '承認', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '製作中'}} %></div>
-        <div class="col-md-auto"><%= button_to '拒否', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '拒否'}} %></div>
+    <div class="col-auto">
+      <% if @sender != nil then %>
         
-      <% elsif @requests.status == '製作中' %>
+        <%="■申請日時：#{@requests.created_at.strftime("%Y/%m/%d %H:%M:%S")}" %>
+        <table class="table">
+          <tr><td><%= "依頼者：#{@sender.nickname}" %></td></tr>
+          <tr><td><%= "承認者：#{@receiver.nickname}" %></td></tr>
+          <tr><td><%= "状態：#{@requests.status}" %></td></tr>
+          <tr><td><%= "リクエストID：#{@requests.id}" %></td></tr>
+          <tr><td><%= "金額：#{@requests.money}円" %></td></tr>
+          <tr><td><%= "リクエスト内容：#{@requests.message}" %></td></tr>
+        </table>  
         
-      <div class="col-md-auto">
-        <%= form_with(model: @requests, local: true) do |f| %>
-          <%= f.file_field :deliver_img %>
-          <%= submit_tag("登録") %>
+        <% if (@requests.receive_id == current_user.id) && (@requests.status == '承認待ち') && (@requests.status != '製作中') && (@requests.status != '拒否') then %>
+          <div class="col-md-auto"><%= "#{@sender.nickname}さんから#{@receiver.nickname}さんへのリクエストを承認しますか？" %></div>
+          <div class="col-md-auto"><%= button_to '承認', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '製作中'}} %></div>
+          <div class="col-md-auto"><%= button_to '拒否', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '拒否'}} %></div>
+          
+        <% elsif @requests.status == '製作中' %>
+          
+        <div class="col-md-auto">
+          <%= form_with(model: @requests, local: true) do |f| %>
+            <%= f.file_field :deliver_img %>
+            <%= submit_tag("登録") %>
+          <% end %>
+        </div>
+        <div class="col-md-auto">
+          <%= button_to '納品する', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '納品完了'}} %>
+        </div>
         <% end %>
-        
-        <% if @requests.deliver_img? %>
-          <%= image_tag @requests.deliver_img.url %>
-        <% end %>
-      </div>
-        
-        <div class="col-md-auto"><%= button_to '納品する', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '納品完了'}} %></div>
-        
       <% end %>
-    <% end %>
+    </div>
+    <div class="col-auto">
+      <% if @requests.deliver_img? %>
+        <%= image_tag @requests.deliver_img.url ,class: 'deliverables cover' %>
+      <% end %>
+    </div>
+    <div class="col-auto">
+      <%= button_to '通報', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '納品完了'}} %>
+    </div>
   </div>
 </div>
