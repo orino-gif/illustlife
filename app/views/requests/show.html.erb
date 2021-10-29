@@ -7,7 +7,7 @@
 <div class="container">
   <div class="row my-5">
     <div class="col-auto">
-      <% if @sender != nil then %>
+      <% if @sender != nil && @requests != nil then %>
         
         <%="■申請日時：#{@requests.created_at.strftime("%Y/%m/%d %H:%M:%S")}" %>
         <table class="table">
@@ -36,15 +36,20 @@
           <%= button_to '納品する', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '納品完了'}} %>
         </div>
         <% end %>
+        <div class="col-auto">
+          <% if @requests.deliver_img? %>
+            <%= image_tag @requests.deliver_img.url ,class: 'deliverables cover' %>
+          <% end %>
+        </div>
+      <% else %>
+        <%="@requests又は、@senderの値がありません" %>
       <% end %>
     </div>
+    
     <div class="col-auto">
-      <% if @requests.deliver_img? %>
-        <%= image_tag @requests.deliver_img.url ,class: 'deliverables cover' %>
-      <% end %>
-    </div>
-    <div class="col-auto">
-      <%= button_to '通報', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '納品完了'}} %>
+      <button type="button">
+        <%= link_to "通報", requests_path %>
+      </button>
     </div>
   </div>
 </div>

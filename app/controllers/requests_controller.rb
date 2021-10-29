@@ -38,7 +38,7 @@ class RequestsController < ApplicationController
       @sender = User.find(@requests.send_id)
       @receiver = User.find(@requests.receive_id)
     rescue => e
-      p "showコントローラーエラー：#{e}"
+      flash[:alert] = "エラー：#{e}"
     end
     
     if '拒否' == params[:status]
@@ -70,6 +70,10 @@ class RequestsController < ApplicationController
     else
       render :new
     end
+  end
+  
+  def report
+    render :new
   end
   
   private
