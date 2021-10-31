@@ -34,9 +34,13 @@ class RequestsController < ApplicationController
   
   def show
     begin
-      @requests = Request.find($requests_id)
-      @sender = User.find(@requests.send_id)
-      @receiver = User.find(@requests.receive_id)
+      #@request = Request.find($requests_id)
+      @requests = Request.where(receive_id:current_user.id).or(Request.where(send_id:current_user.id))
+      #@sender = User.where(Request.where(receive_id:current_user.id))
+      #@receiver = User.where(Request.where(receive_id:current_user.id))
+      
+      #@sender = User.find(@requests.send_id)
+      #@receiver = User.find(@requests.receive_id)
     rescue => e
       flash[:alert] = "エラー：#{e}"
     end
