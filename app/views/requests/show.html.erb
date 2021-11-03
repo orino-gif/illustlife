@@ -37,6 +37,7 @@
             <div class="col-md-auto">
               <%= form_with(model: request, local: true) do |f| %>
                 <%= f.file_field :deliver_img %>
+                <%= f.hidden_field :request_id, :value => request.id %>
                 <%= submit_tag("登録") %>
               <% end %>
             </div>

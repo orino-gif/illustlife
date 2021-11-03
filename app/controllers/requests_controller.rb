@@ -39,8 +39,9 @@ class RequestsController < ApplicationController
           @request = Request.find_by(receiver: @current_user.nickname)
         end
       end
+      
       p @request 
-
+      @aaa
       @requests = Request.where(receiver: @request.receiver).or(Request.where(sender: @request.sender))
       @sender = User.find_by(nickname: @request.sender)
       @receiver = User.find_by(nickname: @request.receiver)
@@ -74,7 +75,8 @@ class RequestsController < ApplicationController
   end
   
   def update
-    @requests = Request.find($requests_id)
+    @requests = Request.find(params[:request][:request_id])
+    p $request_id
     if @requests.update(requests_params)
       redirect_to request_url(@requests), notice: 'ファイルをアップロードしました。'
     else
