@@ -10,20 +10,16 @@ class RequestsController < ApplicationController
   def create
     if user_signed_in?
       @requests = Request.new(requests_params)
-      @creator = Creator.find(current_user.id)
-      
-      @requests.receive_id=$receive_id.to_i
-      @requests.send_id=current_user.id.to_i
+      #@creator = Creator.find(current_user.id)
+      @sender=User.find(current_user.id)
+      @receiver=User.find($receive_id.to_i)
+      @requests.sender=@sender.nickname
+      @requests.receiver=@receiver.nickname
       @requests.status="承認待ち"
       
       if @requests.save!
-        @sender = User.find(@requests.send_id)
-        @receiver = User.find(@requests.receive_id)
-        
         UserMailer.request_email(@sender,@receiver,@requests).deliver_later
         redirect_to request_url(@sender), notice: 'クリエイターへリクエストのメールを送信しました。'
-        
-        $requests_id = @requests.id
       else
         render :new
       end
@@ -34,35 +30,45 @@ class RequestsController < ApplicationController
   
   def show
     begin
-      #@request = Request.find($requests_id)
-      @requests = Request.where(receive_id:current_user.id).or(Request.where(send_id:current_user.id))
-      #@sender = User.where(Request.where(receive_id:current_user.id))
-      #@receiver = User.where(Request.where(receive_id:current_user.id))
-      
-      #@sender = User.find(@requests.send_id)
-      #@receiver = User.find(@requests.receive_id)
+      @current_user = User.find(current_user.id)
+      if params[:pressed] == 'ON'
+        @request = Request.find(params[:request_id])
+      else
+        @request = Request.find_by(sender: @current_user.nickname)
+        if @request == nil
+          @request = Request.find_by(receiver: @current_user.nickname)
+        end
+      end
+      p @request 
+
+      @requests = Request.where(receiver: @request.receiver).or(Request.where(sender: @request.sender))
+      @sender = User.find_by(nickname: @request.sender)
+      @receiver = User.find_by(nickname: @request.receiver)
     rescue => e
-      flash[:alert] = "エラー：#{e}"
+      p "エラー：#{e}"
     end
     
     if '拒否' == params[:status]
-      @requests.status = params[:status]
-      if @requests.save
-        UserMailer.refusal_email(@sender, @receiver, @requests).deliver_later
-        redirect_to request_url(@receiver), notice: '依頼者からのリクエストを拒否するメールを送信しました。'
+      @request.status = params[:status]
+      if @request.save
+        UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
+        redirect_to request_url(@request), notice: '依頼者からのリクエストを拒否するメールを送信しました。'
       end
     elsif '製作中' == params[:status]
-      @requests.status = params[:status]
-      if @requests.save
-        UserMailer.consent_email(@sender, @receiver, @requests).deliver_later
-        redirect_to request_url(@receiver), notice: '依頼者へ承諾のメールを送信しました。'
+      
+      p "リクエストステータス：#{@request.status}"
+      @request.status = params[:status]
+      if @request.save
+        # 承認者から依頼者へ承諾メールの送信
+        UserMailer.consent_email(@sender, @receiver, @request).deliver_later
+        redirect_to request_url(@user), notice: '依頼者へ承諾のメールを送信しました。'
       end
       
     elsif '納品完了' == params[:status]
-      @requests.status = params[:status]
-      if @requests.save
-        UserMailer.deliver_email(@sender, @receiver, @requests).deliver_later
-        redirect_to request_url(@receiver), notice: '依頼者への納品完了のメールを送信しました。'
+      @request.status = params[:status]
+      if @request.save
+        UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
+        redirect_to request_url(@request), notice: '依頼者への納品完了のメールを送信しました。'
       end
     end
   end

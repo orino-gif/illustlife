@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_27_133409) do
+ActiveRecord::Schema.define(version: 2021_10_26_224518) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2021_09_27_133409) do
 
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "money"
-    t.integer "send_id"
-    t.integer "receive_id"
+    t.string "sender"
+    t.string "receiver"
     t.string "status"
     t.text "message"
     t.string "deliver_img"
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 2021_09_27_133409) do
     t.datetime "updated_at", null: false
     t.string "nickname"
     t.boolean "accepted", default: false, null: false
+    t.string "uid"
+    t.string "provider"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

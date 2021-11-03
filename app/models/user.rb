@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_one :creator , dependent: :destroy 
   has_one :credit , dependent: :destroy 
   has_one  :card,  dependent: :destroy
-  has_many  :request,  dependent: :nullify
+  
 end
