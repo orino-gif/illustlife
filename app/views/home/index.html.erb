@@ -10,6 +10,22 @@
   </div>
   
   <div class="row">
+    
+    <% begin %>
+      <%# raise #意図的にエラーを発生%>
+      <% @requests.each do |request| %>
+        <div class="col-md-auto">
+          <% if request.deliver_img? && request.status=='納品完了' %>
+            <%= link_to image_tag(request.deliver_img.url ,class: 'bg center-block'), "/requests/#{request.id}" %>
+          <% end %>
+        </div>
+      <% end %>
+    <% rescue => e %>
+      <%= p e %>
+    <% end %>
+  </div>
+  
+  <div class="row">
     <h3>■キャラクター、道具、衣装</h3>
   </div>
   
