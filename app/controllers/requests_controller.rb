@@ -39,9 +39,7 @@ class RequestsController < ApplicationController
           @request = Request.find_by(receiver: @current_user.nickname)
         end
       end
-      
-      p @request 
-      @aaa
+
       @requests = Request.where(receiver: @request.receiver).or(Request.where(sender: @request.sender))
       @sender = User.find_by(nickname: @request.sender)
       @receiver = User.find_by(nickname: @request.receiver)
@@ -56,15 +54,12 @@ class RequestsController < ApplicationController
         redirect_to request_url(@request), notice: '依頼者からのリクエストを拒否するメールを送信しました。'
       end
     elsif '製作中' == params[:status]
-      
-      p "リクエストステータス：#{@request.status}"
       @request.status = params[:status]
       if @request.save
         # 承認者から依頼者へ承諾メールの送信
         UserMailer.consent_email(@sender, @receiver, @request).deliver_later
         redirect_to request_url(@user), notice: '依頼者へ承諾のメールを送信しました。'
       end
-      
     elsif '納品完了' == params[:status]
       @request.status = params[:status]
       if @request.save
@@ -76,16 +71,11 @@ class RequestsController < ApplicationController
   
   def update
     @requests = Request.find(params[:request][:request_id])
-    p $request_id
     if @requests.update(requests_params)
       redirect_to request_url(@requests), notice: 'ファイルをアップロードしました。'
     else
       render :new
     end
-  end
-  
-  def report
-    render :new
   end
   
   private
