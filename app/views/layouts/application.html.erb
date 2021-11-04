@@ -51,7 +51,7 @@
             <% if user_signed_in? %>
               <div class="right">
                 <button type="button" class="btn btn-light">
-                  <%= link_to "リクエスト状態","/requests/#{@user.id}" %>
+                  <%= link_to "リクエスト状態","/requests" %>
                 </button>
                 <button type="button" class="btn btn-light">
                   <%= link_to "ユーザー情報","/creators/#{@user.id}" %>

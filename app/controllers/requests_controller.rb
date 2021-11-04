@@ -1,8 +1,45 @@
 class RequestsController < ApplicationController
   before_action :authenticate_user!, only: [:show]
+  
+  def index
+    begin
+      @request = Request.find_by(sender: @current_user.nickname)
+      if @request == nil
+        @request = Request.find_by(receiver: @current_user.nickname)
+      end
+      
+      @current_user = User.find(current_user.id)
+      @requests = Request.where(receiver: @request.receiver).or(Request.where(sender: @request.sender))
+      @sender = User.find_by(nickname: @request.sender)
+      @receiver = User.find_by(nickname: @request.receiver)
+      
+      if params[:pressed] == 'ON'
+        @request = Request.find(params[:request_id])
+        @request.status = params[:status]
+        if @request.save
+          if '拒否' == params[:status]
+            UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
+            redirect_to requests_url, notice: '依頼者からのリクエストを拒否するメールを送信しました。'
+            
+          elsif '製作中' == params[:status]
+            UserMailer.consent_email(@sender, @receiver, @request).deliver_later
+            redirect_to requests_url, notice: '依頼者へ承諾のメールを送信しました。'
+            
+          elsif '納品完了' == params[:status]
+            UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
+            redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
+          end
+        end
+      end
+    
+    rescue => e
+      p "エラー：#{e}"
+    end
+  end
+  
   def new
     @requests = Request.new
-    $receive_id=params[:id]
+    $receive_id = params[:id]
     @user = User.find(params[:id])
     @creator = Creator.find(params[:id])
   end
@@ -10,12 +47,11 @@ class RequestsController < ApplicationController
   def create
     if user_signed_in?
       @requests = Request.new(requests_params)
-      #@creator = Creator.find(current_user.id)
-      @sender=User.find(current_user.id)
-      @receiver=User.find($receive_id.to_i)
-      @requests.sender=@sender.nickname
-      @requests.receiver=@receiver.nickname
-      @requests.status="承認待ち"
+      @sender = User.find(current_user.id)
+      @receiver = User.find($receive_id.to_i)
+      @requests.sender = @sender.nickname
+      @requests.receiver = @receiver.nickname
+      @requests.status = "承認待ち"
       
       if @requests.save!
         UserMailer.request_email(@sender,@receiver,@requests).deliver_later
@@ -29,50 +65,13 @@ class RequestsController < ApplicationController
   end
   
   def show
-    begin
-      @current_user = User.find(current_user.id)
-      if params[:pressed] == 'ON'
-        @request = Request.find(params[:request_id])
-      else
-        @request = Request.find_by(sender: @current_user.nickname)
-        if @request == nil
-          @request = Request.find_by(receiver: @current_user.nickname)
-        end
-      end
-
-      @requests = Request.where(receiver: @request.receiver).or(Request.where(sender: @request.sender))
-      @sender = User.find_by(nickname: @request.sender)
-      @receiver = User.find_by(nickname: @request.receiver)
-    rescue => e
-      p "エラー：#{e}"
-    end
-    
-    if '拒否' == params[:status]
-      @request.status = params[:status]
-      if @request.save
-        UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
-        redirect_to request_url(@request), notice: '依頼者からのリクエストを拒否するメールを送信しました。'
-      end
-    elsif '製作中' == params[:status]
-      @request.status = params[:status]
-      if @request.save
-        # 承認者から依頼者へ承諾メールの送信
-        UserMailer.consent_email(@sender, @receiver, @request).deliver_later
-        redirect_to request_url(@user), notice: '依頼者へ承諾のメールを送信しました。'
-      end
-    elsif '納品完了' == params[:status]
-      @request.status = params[:status]
-      if @request.save
-        UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
-        redirect_to request_url(@request), notice: '依頼者への納品完了のメールを送信しました。'
-      end
-    end
+    @request = Request.find(params[:id])
   end
   
   def update
     @requests = Request.find(params[:request][:request_id])
     if @requests.update(requests_params)
-      redirect_to request_url(@requests), notice: 'ファイルをアップロードしました。'
+      redirect_to requests_url, notice: 'ファイルをアップロードしました。'
     else
       render :new
     end
@@ -83,6 +82,5 @@ class RequestsController < ApplicationController
   def requests_params
     params.require(:request).permit(:money, :message, :deliver_img)
   end
-  
   
 end

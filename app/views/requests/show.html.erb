@@ -1,57 +1,9 @@
 <div class="row">
   <div class="col-md-12 px-0">
-    <h1>&nbsp;リクエスト状態</h1>
+    <h1>&nbsp;リクエスト</h1>
   </div>
 </div>
 
 <div class="container">
-  <% if @requests != nil then %>
-    <% @requests.reverse_each do |request| %>
-      <% if request != nil then %>
-        <div class="row my-5">
-          <div class="col-md-auto">
-            <%="■申請日時：#{request.created_at.strftime("%Y/%m/%d %H:%M:%S")}" %>
-            <table class="table">
-              <tr><td><%= "依頼者：#{request.sender}" %></td></tr>
-              <tr><td><%= "承認者：#{request.receiver}" %></td></tr>
-              <tr><td><%= "状態：#{request.status}" %></td></tr>
-              <tr><td><%= "リクエストID：#{request.id}" %></td></tr>
-              <tr><td><%= "金額：#{request.money}円" %></td></tr>
-              <tr><td><%= "リクエスト内容：#{request.message}" %></td></tr>
-              <tr><td>
-                <% if (request.receiver == @current_user.nickname) && (request.status == '承認待ち') then %>
-                  <%= "#{request.sender}さんから#{request.receiver}さんへのリクエストを承認しますか？" %>
-                  <%= button_to '承認', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '製作中', request_id: request.id, pressed: 'ON'}} %>
-                  <%= button_to '拒否', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '拒否', request_id: request.id, pressed: 'ON'}} %>
-                <% elsif request.status == '製作中' %>
-                  <%= form_with(model: request, local: true) do |f| %>
-                    <%= f.file_field :deliver_img %>
-                    <%= f.hidden_field :request_id, :value => request.id %>
-                    <%= submit_tag("登録") %>
-                  <% end %>
-                  <%= button_to '納品する', {controller: 'requests', action: 'show'}, {method: :get, params: {status: '納品完了', request_id: request.id, pressed: 'ON'}} %>
-                <% end %>
-              </td></tr>
-            </table>  
-          </div>
-          
-          <div class="col-md-auto">
-            <% if request.deliver_img? %>
-              <%= image_tag request.deliver_img.url ,class: 'deliverables cover' %>
-            <% end %>
-          </div>
-      
-          <div class="col-md-auto">
-            <% if request.status == '納品完了' %>
-            <button type="button">
-              <%= link_to "通報", requests_path %>
-            </button>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  <% else %>
-    <%="リクエストがまだ存在しません"%>
-  <% end %>
+  <%= render 'shared/request.html',requests: @request %>
 </div>

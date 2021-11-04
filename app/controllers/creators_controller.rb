@@ -1,15 +1,9 @@
 class CreatorsController < ApplicationController
-  def index
-  end
-
-  def new
-  end
-
   def create
     @creators = Creator.new(creators_params)
 
     if @creators.save!
-      #redirect_to root_url, notice: 'Add User'
+
     else
       render :new
     end

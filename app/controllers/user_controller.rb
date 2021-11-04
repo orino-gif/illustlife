@@ -1,7 +1,4 @@
 class UserController < ApplicationController
-  
-  def index
-  end
 
   def new
     # ストロングパラメータから精査されたデータだけをインスタンスに格納
@@ -25,8 +22,6 @@ class UserController < ApplicationController
   def show
     if user_signed_in?
      @user = User.find(current_user.id)
-    else
-      @user = User.find(50)
     end
   end
 
@@ -52,6 +47,5 @@ class UserController < ApplicationController
   private
 
   def user_params
-    #params.require(:user).permit(:nickname)
   end
 end
