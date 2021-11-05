@@ -55,7 +55,7 @@ class RequestsController < ApplicationController
       
       if @requests.save!
         UserMailer.request_email(@sender,@receiver,@requests).deliver_later
-        redirect_to request_url(@sender), notice: 'クリエイターへリクエストのメールを送信しました。'
+        redirect_to requests_url, notice: 'クリエイターへリクエストのメールを送信しました。'
       else
         render :new
       end
