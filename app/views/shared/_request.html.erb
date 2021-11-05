@@ -11,17 +11,19 @@
           <tr><td><%= "金額：#{@request.money}円" %></td></tr>
           <tr><td><%= "リクエスト内容：#{@request.message}" %></td></tr>
           <tr><td>
-            <% if (@request.receiver == @current_user.nickname) && (@request.status == '承認待ち') then %>
-              <%= "#{@request.sender}さんから#{@request.receiver}さんへのリクエストを承認しますか？" %>
-              <%= button_to '承認', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '製作中', request_id: @request.id, pressed: 'ON'}} %>
-              <%= button_to '拒否', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '拒否', request_id: @request.id, pressed: 'ON'}} %>
-            <% elsif @request.status == '製作中' %>
-              <%= form_with(model: @request, local: true) do |f| %>
-                <%= f.file_field :deliver_img %>
-                <%= f.hidden_field :request_id, :value => @request.id %>
-                <%= submit_tag("登録") %>
+            <% if @current_user != nil %>
+              <% if (@request.receiver == @current_user.nickname) && (@request.status == '承認待ち') then %>
+                <%= "#{@request.sender}さんから#{@request.receiver}さんへのリクエストを承認しますか？" %>
+                <%= button_to '承認', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '製作中', request_id: @request.id, pressed: 'ON'}} %>
+                <%= button_to '拒否', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '拒否', request_id: @request.id, pressed: 'ON'}} %>
+              <% elsif @request.status == '製作中' %>
+                <%= form_with(model: @request, local: true) do |f| %>
+                  <%= f.file_field :deliver_img %>
+                  <%= f.hidden_field :request_id, :value => @request.id %>
+                  <%= submit_tag("登録") %>
+                <% end %>
+                <%= button_to '納品する', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '納品完了', request_id: @request.id, pressed: 'ON'}} %>
               <% end %>
-              <%= button_to '納品する', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '納品完了', request_id: @request.id, pressed: 'ON'}} %>
             <% end %>
           </td></tr>
         </table>  

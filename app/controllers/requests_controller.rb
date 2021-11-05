@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-  before_action :authenticate_user!, only: [:show]
+  #before_action :authenticate_user!, only: [:index]
   
   def index
     begin
