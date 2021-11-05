@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-12 px-0">
+    <h1>&nbsp;ご意見・通報</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h3>内容:</h3>
+  </div>
+  
+  <div class="row">
+    <%= form_with(model: @explanations, local: true) do |f| %>
+      <%= f.text_area :letter_body, size: "80x20" %>
+      <%= submit_tag("送信") %>
+    <% end %>
+  </div>
+    
+</div>

@@ -35,7 +35,7 @@
   
       <div class="col-md-auto">
         <% if @request.status == '納品完了' %>
-          <button type="button"><%= link_to "通報", @requests_path %></button>
+          <button type="button"><%= link_to "通報", new_explanation_path %></button>
         <% end %>
       </div>
       

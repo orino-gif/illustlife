@@ -64,6 +64,10 @@ class RequestsController < ApplicationController
     end
   end
   
+  def report
+    
+  end
+  
   def show
     @request = Request.find(params[:id])
   end
