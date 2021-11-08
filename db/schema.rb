@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_05_011728) do
+ActiveRecord::Schema.define(version: 2021_11_08_085431) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -40,6 +40,9 @@ ActiveRecord::Schema.define(version: 2021_11_05_011728) do
     t.boolean "fg_display", default: true
     t.boolean "bg_display", default: true
     t.boolean "cg_display", default: true
+    t.float "average_delivery"
+    t.integer "number_deliveries"
+    t.integer "deadline_rate"
   end
 
   create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

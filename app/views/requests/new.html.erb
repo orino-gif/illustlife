@@ -35,7 +35,7 @@
     <div class="col-md-7 border border-primary">
       <%= form_with(model: @requests, local: true) do |f| %>
         <div class="form-group">
-          <%= f.label :"金額(8000円以下)" %>
+          <%= f.label :"金額" %>
           <%= f.text_field :money, autofocus: true, class: 'form-control' %>
         </div>
         <div class="form-group">

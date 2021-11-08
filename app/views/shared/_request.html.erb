@@ -1,4 +1,4 @@
-<% if @request != nil then %>
+<% if nil != @request then %>
     <div class="row my-5">
       
       <div class="col-md-auto">
@@ -11,18 +11,20 @@
           <tr><td><%= "金額：#{@request.money}円" %></td></tr>
           <tr><td><%= "リクエスト内容：#{@request.message}" %></td></tr>
           <tr><td>
-            <% if @current_user != nil %>
+            <% if nil != @current_user %>
               <% if (@request.receiver == @current_user.nickname) && (@request.status == '承認待ち') then %>
                 <%= "#{@request.sender}さんから#{@request.receiver}さんへのリクエストを承認しますか？" %>
-                <%= button_to '承認', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '製作中', request_id: @request.id, pressed: 'ON'}} %>
-                <%= button_to '拒否', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '拒否', request_id: @request.id, pressed: 'ON'}} %>
+                <%# 省略無しの場合 %>
+                <%#= button_to '承認', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '製作中', request_id: @request.id, pressed: 'ON'}} %>
+                <%= button_to '承認', {method: :get, params:{status: '製作中', request_id: @request.id, pressed: 'ON'}} %>
+                <%= button_to '拒否', {method: :get, params:{status: '拒否', request_id: @request.id, pressed: 'ON'}} %>
               <% elsif @request.status == '製作中' %>
                 <%= form_with(model: @request, local: true) do |f| %>
                   <%= f.file_field :deliver_img %>
                   <%= f.hidden_field :request_id, :value => @request.id %>
                   <%= submit_tag("登録") %>
                 <% end %>
-                <%= button_to '納品する', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '納品完了', request_id: @request.id, pressed: 'ON'}} %>
+                <%= button_to '納品する', {method: :get, params:{status: '納品完了', request_id: @request.id, pressed: 'ON'}} %>
               <% end %>
             <% end %>
           </td></tr>
@@ -36,8 +38,9 @@
       </div>
   
       <div class="col-md-auto">
-        <% if @request.status == '納品完了' %>
+        <% if '納品完了' == @request.status %>
           <button type="button"><%= link_to "通報", new_explanation_path %></button>
+          <%= button_to '取消', {method: :get, params:{status: '取消', request_id: @request.id, pressed: 'ON'}} %>
         <% end %>
       </div>
       

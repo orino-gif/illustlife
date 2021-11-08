@@ -29,6 +29,9 @@
 </div>
 
 <div class="row my-5">
-    <%= "ニックネーム：#{@user.nickname}、平均納品日数：2日、納品数：2点、締切厳守率：100%" %>
+    <%= "ニックネーム：#{@user.nickname}" %>
+    <% if nil != @creator.number_deliveries then %>
+    <%="、平均納品日数：#{@creator.Average_delivery}日、納品数：#{@creator.number_deliveries}点、締切厳守率：#{@creator.deadline_rate}%" %>
+    <% end %>
 </div>
 

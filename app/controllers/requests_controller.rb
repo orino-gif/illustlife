@@ -28,6 +28,10 @@ class RequestsController < ApplicationController
           elsif '納品完了' == params[:status]
             UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
             redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
+            
+          elsif '取消' == params[:status]
+            UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
+            redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
           end
         end
       end
@@ -63,11 +67,7 @@ class RequestsController < ApplicationController
       redirect_to  '/users/sign_in', notice: 'ユーザー登録とログインが必要です。'
     end
   end
-  
-  def report
-    
-  end
-  
+
   def show
     @request = Request.find(params[:id])
   end
