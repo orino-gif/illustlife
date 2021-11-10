@@ -3,17 +3,18 @@ class RequestsController < ApplicationController
   
   def index
     begin
+      #Requestテーブルからニックネームを元に
+      @current_user = User.find(current_user.id)
       @request = Request.find_by(sender: @current_user.nickname)
-      if @request == nil
+      if nil == @request
         @request = Request.find_by(receiver: @current_user.nickname)
       end
       
-      @current_user = User.find(current_user.id)
       @requests = Request.where(receiver: @request.receiver).or(Request.where(sender: @request.sender))
       @sender = User.find_by(nickname: @request.sender)
       @receiver = User.find_by(nickname: @request.receiver)
       
-      if params[:pressed] == 'ON'
+      if 'ON' == params[:pressed] 
         @request = Request.find(params[:request_id])
         @request.status = params[:status]
         if @request.save
@@ -29,9 +30,9 @@ class RequestsController < ApplicationController
             UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
             redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
             
-          elsif '取消' == params[:status]
-            UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
-            redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
+          elsif '手戻し' == params[:status]
+            UserMailer.rework_email(@sender, @receiver, @request).deliver_later
+            redirect_to requests_url, notice: '依頼者への手戻りのメールを送信しました。'
           end
         end
       end
