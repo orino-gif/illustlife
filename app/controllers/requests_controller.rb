@@ -4,7 +4,9 @@ class RequestsController < ApplicationController
   def index
     begin
       #Requestテーブルからニックネームを元に
-      @current_user = User.find(current_user.id)
+      if user_signed_in?
+        @current_user = User.find(current_user.id)
+      end
       @request = Request.find_by(sender: @current_user.nickname)
       if nil == @request
         @request = Request.find_by(receiver: @current_user.nickname)
@@ -70,6 +72,9 @@ class RequestsController < ApplicationController
   end
 
   def show
+    if user_signed_in?
+      @current_user = User.find(current_user.id)
+    end
     @request = Request.find(params[:id])
   end
   
