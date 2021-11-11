@@ -9,7 +9,7 @@
           <tr><td><%= "状態：#{@request.status}" %></td></tr>
           <tr><td><%= "リクエストID：#{@request.id}" %></td></tr>
           <tr><td><%= "金額：#{@request.money}円" %></td></tr>
-          <tr><td><%= "リクエスト内容：#{@request.message}" %></td></tr>
+          <tr><td style="word-wrap: break-word;min-width: 200px;max-width: 200px;"><%= "リクエスト内容：#{@request.message}" %></td></tr>
           <tr><td>
             <% if nil != @current_user %>
               <% if (@request.receiver == @current_user.nickname) && ('承認待ち' == @request.status) then %>
