@@ -42,7 +42,7 @@
             <% if Rails.env.development? %>
               <%= link_to '(テスト版)', tests_path %>
             <% else %>
-              '(テスト版)'
+              <%= "テスト版" %>
             <% end %>
           </span>
         </div>
