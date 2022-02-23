@@ -1,0 +1,35 @@
+.row
+  .col-md-12.px-0
+    %h1  ユーザー情報
+.container
+  = render  'shared/user_header'
+  - if @creator.fg_display == true then
+    .row
+      = "キャラクター、道具、エフェクト："
+    .row.my-5
+      .col-md-auto
+        = show_fg(@creator.fg1)
+      .col-md-auto
+        = show_fg(@creator.fg2)
+      .col-md-auto
+        = show_fg(@creator.fg3)
+  - if @creator.bg_display == true then
+    .row
+      = "背景："
+    .row.my-5
+      .col-md-auto
+        = show_bg(@creator.bg1)
+      .col-md-auto
+        = show_bg(@creator.bg2)
+      .col-md-auto
+        = show_bg(@creator.bg3)
+  - if @creator.cg_display == true then
+    .row
+      = "2.5/3Dモデリング、スライドショー(Live2D、blender等使用)："
+    .row.my-5
+      .col-md-auto
+        = show_cg(@creator.cg1)
+      .col-md-auto
+        = show_cg(@creator.cg2)
+      .col-md-auto
+        = show_cg(@creator.cg3)

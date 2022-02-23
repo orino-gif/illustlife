@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h3
+      = @receiver.nickname
+      さんから#{@sender.nickname}さんへの納品が完了しました。
+    %p リクエスト状況の詳細は、以下のリンク先に記載されています。
+    %p= link_to 'リクエスト状況確認先リンク', "http://160.16.136.195:3000/requests"
+    %p イラストライフ運営局より

@@ -1,0 +1,38 @@
+- if nil != @request then
+  .row.my-5
+    .col-md-auto
+      = "■申請日時：#{@request.created_at.strftime("%Y/%m/%d %H:%M:%S")}"
+      %table.table
+        %tr
+          %td= "依頼者：#{@request.sender}"
+        %tr
+          %td= "承認者：#{@request.receiver}"
+        %tr
+          %td= "状態：#{@request.status}"
+        %tr
+          %td= "リクエストID：#{@request.id}"
+        %tr
+          %td= "金額：#{@request.money}円"
+        %tr
+          %td{:style => "word-wrap: break-word;min-width: 200px;max-width: 200px;"}= "リクエスト内容：#{@request.message}"
+        %tr
+          %td
+            - if nil != @current_user
+              - if (@request.receiver == @current_user.nickname) && ('承認待ち' == @request.status) then
+                = "#{@request.sender}さんから#{@request.receiver}さんへのリクエストを承認しますか？"
+                = button_to '承認', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '製作中', request_id: @request.id, pressed: 'ON'}}
+                = button_to '拒否', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '拒否', request_id: @request.id, pressed: 'ON'}}
+              - elsif ('製作中' == @request.status) || ('手戻し' == @request.status)
+                = form_with(model: @request, local: true) do |f|
+                  = f.file_field :deliver_img
+                  = f.hidden_field :request_id, :value => @request.id
+                  = submit_tag("登録")
+                = button_to '納品する', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '納品完了', request_id: @request.id, pressed: 'ON'}}
+    .col-md-auto
+      - if @request.deliver_img?
+        = image_tag @request.deliver_img.url ,class: 'deliverables cover'
+    .col-md-auto
+      - if '納品完了' == @request.status
+        %button{:type => "button"}= link_to "通報", new_explanation_path
+        - if user_signed_in? && (@request.receiver == @current_user.nickname)
+          = button_to '手戻し', {controller: 'requests', action: 'index'}, {method: :get, params:{status: '手戻し', request_id: @request.id, pressed: 'ON'}}

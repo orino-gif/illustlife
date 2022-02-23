@@ -1,7 +1,0 @@
-<p>イラストライフ運営局</p>
-
-<p>ようこそ <%= @user.nickname %>さん!</p>
-
-<p>以下のリンク先からメール認証を完了できます。</p>
-
-<p><%= link_to 'メール認証先リンク', confirmation_url(@resource, confirmation_token: @token) %></p>

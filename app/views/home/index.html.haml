@@ -1,0 +1,50 @@
+.row
+  .col-md-12.px-0
+    %h1  クリエイター紹介
+.container-fluid
+  .row
+    %h3 ■新着リクエスト作品
+  .row
+    - if @requests != nil
+      - @requests.each do |request|
+        .col3
+          - if request.deliver_img? && request.status=='納品完了'
+            = link_to image_tag(request.deliver_img.url, class: 'new'), "/requests/#{request.id}"
+  .row
+    %h3 ■キャラクター、道具、衣装
+  .row
+    - begin
+      - @creators.each do |creator|
+        .col-md-auto
+          - if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示
+            = display_character(creator)
+            .text-center
+              %span{:style => "font-size: 12px;"}= creator.user.nickname
+    - rescue => e
+      = p e
+  .row
+    %h3 ■背景
+    %br/
+  .row
+    - begin
+      - @creators.each do |creator|
+        .col-md-auto
+          - if creator.user.confirmed_at?
+            = display_bg(creator)
+            .text-center
+              %span{:style => "font-size: 12px;"}= creator.user.nickname
+    - rescue => e
+      = p e
+  .row
+    %h3 ■2.5/3Dモデリング、スライドショー(Live2D、blender等使用)
+    %br/
+  .row
+    - begin
+      - @creators.each do |creator|
+        .col-md-auto
+          - if creator.user.confirmed_at?
+            = display_cg(creator)
+            .text-center
+              %span{:style => "font-size: 12px;"}= creator.user.nickname
+    - rescue => e
+      = p e

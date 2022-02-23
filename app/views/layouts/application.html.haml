@@ -1,0 +1,81 @@
+!!!
+%html{:lang => "ja"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "UTF-8", :content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title
+      = content_for?(:html_title) ? yield(:html_title) : ""
+      ｜ イラスト、3DCG、写真をリクエスト | イラストライフ株式会社
+    / integrity:html検証,crossorigin:ユーザー認証情報anonymous(不要)
+    %link{:crossorigin => "anonymous", :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", :integrity => "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk", :rel => "stylesheet"}/
+    %script{:src => "https://js.pay.jp/", :type => "text/javascript"}
+    / googleフォント設定
+    %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}/
+    %link{:crossorigin => "", :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+    %link{:href => "https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500&family=Kosugi+Maru&family=Potta+One&family=Yomogi&display=swap", :rel => "stylesheet"}/
+    / Railsの組み込み関数stylesheet_link_tag を使って、application.css.scssをすべてのファイルで読み込んでいる
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    / jQuery設定
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    / クロスサイトリクエストフォージェリー対策
+    = csrf_meta_tags
+    / コンテンツセキュリティポリシーの適用
+    = csp_meta_tag
+  %body
+    %header
+      .container-fluid
+        .row
+          .col-md-auto
+            = link_to image_tag('/img/symbol.png', class: 'favicon'), home_index_path
+          .col-md-auto
+            %span.x-large
+              %strong> イラスト
+              ライフ
+            %span.x-small
+              - if Rails.env.development?
+                = link_to '(テスト版)', tests_path
+              - else
+                = "テスト版"
+        .row
+          %span.large
+            %strong>  イラスト
+            、
+            %strong> 3DCG
+            、
+            %strong> 写真
+            を
+            %strong リクエスト
+        .row
+          .col.right
+            - if user_signed_in?
+              %button.btn.btn-light{:type => "button"}= link_to "リクエスト状態","/requests"
+              %button.btn.btn-light{:type => "button"}= link_to "ユーザー情報","/creators/#{@user.id}"
+              %button.btn.btn-light{:type => "button"}= link_to "ユーザー編集", "/creators/#{@user.id}/edit"
+              %button.btn.btn-light{:type => "button"}= link_to "ログアウト", destroy_user_session_path, method: "delete"
+            - else
+              %button.btn.btn-light{:type => "button"}= link_to "新規登録", new_user_registration_path, method: "get"
+              %button.btn.btn-light{:type => "button"}= link_to "ログイン\n", new_user_session_path, method: "get"
+    - if (Rails.env.production?) && (controller.controller_name != "cards") && (controller.controller_name != "registrations")
+      %script{:async => "", :src => "//accaii.com/orino/script.js"}
+      %noscript
+        %img{:src => "//accaii.com/orino/script?guid=on"}/
+    .container-fluid
+      - if notice.present?
+        .alert.alert-dismissable.alert-success
+          %button.close{"data-dismiss" => "alert", :type => "button"} ×
+          %p= notice
+      - if alert.present?
+        .alert.alert-dismissable.alert-danger
+          %button.close{"data-dismiss" => "alert", :type => "button"} ×
+          %p= alert
+      = yield
+    %footer.footer
+      .container-fluid
+        .row.mx-5.my-3
+          .mx-3= link_to '利用規約', explanations_terms_path
+          .mx-3= link_to 'プライバシーポリシー', explanations_policy_path
+          .mx-3= link_to '特定商取引法に基づく表記', explanations_transaction_law_path
+        .row.mx-5.my-2
+          .col-12.clearfix
+            .float-right
+              %p © 2021-2022 イラストライフ株式会社

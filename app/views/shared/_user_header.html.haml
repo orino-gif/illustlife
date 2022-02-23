@@ -1,0 +1,21 @@
+.row
+  - if @creator.header?
+    = image_tag(@creator.header.url, class: 'header')
+  - else
+    = image_tag('/img/nothing.png', class: 'header')
+.row
+  .col-2
+    - begin
+      = link_to image_tag(@creator.icon.url, class: 'icon upicon'), "/creators/#{@creator.user_id}"
+    - rescue => e
+      = link_to image_tag('/img/mobu.png', class: 'icon upicon'), "/creators/#{@creator.user_id}"
+  .col-7
+    = link_to image_tag('/img/request.png', class: 'symbol upsymbol'), "/requests/new/#{@creator.user_id}"
+  .col-1
+    = link_to image_tag('/img/twitter.png', class: 'symbol upsymbol') ,@creator.twitter
+  .col-1
+    = link_to image_tag('/img/pixiv.png', class: 'symbol upsymbol'), @creator.pixiv
+.row.my-5
+  = "ニックネーム：#{@user.nickname}"
+  - if nil != @creator.number_deliveries then
+    = "、平均納品日数：#{@creator.Average_delivery}日、納品数：#{@creator.number_deliveries}点、締切厳守率：#{@creator.deadline_rate}%"

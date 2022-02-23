@@ -1,0 +1,31 @@
+.row
+  .col-md-12.px-0
+    %h1  クレジットカード登録
+/ <div class="container">
+/ <haml_silent></haml_silent>
+/ <div class="field">有効期限:年<br><haml_silent></haml_silent></div>
+/ <div class="field">有効期限:月<br><haml_silent></haml_silent></div>
+/ <div class="field">クレジットカード番号<br><haml_silent></haml_silent></div>
+/ <div class="field">セキュリティコード<br><haml_silent></haml_silent></div>
+/ <div id="card_submit"><haml_silent></haml_silent></div>
+/ <haml_silent></haml_silent>
+/ </div>
+%script{:src => "https://js.pay.jp/", :type => "text/javascript"}
+%form
+  .form-group
+    %label{:for => "inputCardNumber"} カード番号
+    %input#card_number.form-control{:placeholder => "カード番号", :type => "text"}/
+  .form-group
+    %label{:for => "inputCVV"} CVV/セキュリティコード
+    %input#cvv.form-control{:placeholder => "CVV", :type => "text"}/
+  .form-group
+    %label{:for => "inputExp"} 有効期限
+    .row
+      .col-md-6
+        %input#exp_year.form-control{:placeholder => "年", :type => "text"}/
+      .col-md-6
+        %input#exp_month.form-control{:placeholder => "月", :type => "text"}/
+  %button#token トークン化
+/ 今回はHTML上に結果を表示します
+生成されたトークン：
+#card_token

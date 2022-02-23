@@ -1,0 +1,10 @@
+.row
+  .col-md-12.px-0
+    %h1  リクエスト一覧
+.container
+  - if @requests != nil then
+    - @requests.reverse_each do |request|
+      - @request = request
+      = render 'shared/request.html',requests: @request
+  - else
+    = "リクエストがまだ存在しません"

@@ -1,0 +1,23 @@
+.row
+  .col-md-12.px-0
+    %h1  お振込み先口座
+.container
+  .row.my-5
+    = イラストライフ運営局一時預かり金
+    .col-md-4
+      %table{:border => "1"}
+        %tr
+          %td{:width => "150"} 銀行名
+          %td{:width => "200"}= @credits.bank
+        %tr
+          %td 支店名
+          %td= @credits.branch_name
+        %tr
+          %td 口座の種類
+          %td= @credits.account_type
+        %tr
+          %td 口座番号
+          %td= @credits.account_number
+        %tr
+          %td 口座名義
+          %td= @credits.account_holder

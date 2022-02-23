@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h3
+      = @receiver.nickname
+      さんから、納品物に手戻しの処理が入りました。
+    %p 再納品が完了しましたら、再度ご連絡致します。
+    %p 詳細は以下のリンク先よりお願い致します。
+    %p= link_to '参照先リンク', "http://160.16.136.195:3000/requests"
+    %p イラストライフ運営局より

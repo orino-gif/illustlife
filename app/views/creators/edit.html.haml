@@ -1,0 +1,162 @@
+.row
+  .col-md-12.px-0
+    %h1  ユーザー情報編集
+.container
+  .row.my-5
+    / my-5:上下のマージンを5rem
+    = "アイコン："
+    .col-md-auto
+      - if @creator.icon?
+        = image_tag @creator.icon.url  ,class: 'icon'
+      - else
+        = image_tag('/img/mobu.png',class: 'icon' )
+    .col-auto
+      = form_with(model: @creator, local: true) do |f|
+        = f.file_field :icon
+        = submit_tag("変更")
+  .row.my-5
+    = "ヘッダー："
+    .col
+      - if @creator.header?
+        = image_tag @creator.header.url  ,class: 'header'
+      - else
+        = image_tag('/img/nothing.png',class: 'header')
+      = form_with(model: @creator, local: true) do |f|
+        = f.file_field :header
+        = submit_tag("登録")
+  .row.my-5
+    = "アカウント情報："
+    %table.table
+      %tr
+        %td= "Eメール：#{@user.email}"
+      %tr
+        %td= " パスワード: xxxxxxxxxxx"
+      %tr
+        %td= "ニックネーム：#{@user.nickname}"
+      %tr
+        %td= "在籍 or 退会：在籍"
+      %td
+        %button{:type => "button"}
+          = link_to "変更", edit_user_registration_path
+  .row.my-5
+    = "クレジット情報："
+    %table.table
+      %tr
+        %td= "クレジットカード： xxxxxxxxxxx"
+      %td
+        %button{:type => "button"}= link_to "登録", new_card_path
+  .row.my-5
+    = "口座情報："
+    %table.table
+      %tr
+        %td= "銀行口座： xxxxxxxxxxx"
+      %td
+        %button{:type => "button"}= link_to "登録", credit_path
+  .row.my-5
+    = "リンク先："
+    %table.table
+      %tr
+        %td
+          = form_with(model: @creator, local: true) do |f|
+            = "twitter："
+            = f.text_field :twitter ,{size:"70"}
+            = submit_tag "変更"
+      %tr
+        %td
+          = form_with(model: @creator, local: true) do |f|
+            = "pixiv："
+            = f.text_field :pixiv ,{size:"70"}
+            = submit_tag "変更"
+  .row
+    = "キャラクター、道具："
+    = form_with(model: @creator, local: true) do |f|
+      = f.label :表示
+      = f.check_box :fg_display, id: :checkbox, :as => :boolean
+      = submit_tag("設定")
+  .row.my-5
+    .col-md-auto
+      - if @creator.fg1?
+        = image_tag @creator.fg1.url, class: 'thumbnail'
+      - else
+        = image_tag('/img/noImage.png',class: 'thumbnail cover')
+      = form_with(model: @creator, local: true) do |f|
+        = f.file_field :fg1
+        = submit_tag("登録")
+    .col-md-auto
+      - if @creator.fg2?
+        = image_tag @creator.fg2.url, class: 'thumbnail'
+      - else
+        = image_tag('/img/noImage.png',class: 'thumbnail cover')
+      = form_with(model: @creator, local: true) do |f|
+        = f.file_field :fg2
+        = submit_tag("登録")
+    .col-md-auto
+      - if @creator.fg3?
+        = image_tag @creator.fg3.url, class: 'thumbnail'
+      - else
+        = image_tag('/img/noImage.png',class: 'thumbnail cover')
+      = form_with(model: @creator, local: true) do |f|
+        = f.file_field :fg3
+        = submit_tag("登録")
+  .row
+    = "背景："
+    = form_with(model: @creator, local: true) do |f|
+      = f.label :表示
+      = f.check_box :bg_display, id: :checkbox, :as => :boolean
+      = submit_tag("設定")
+  .row.my-5
+    .col-md-auto
+      - if @creator.bg1?
+        = image_tag @creator.bg1.url, class: 'thumbnail'
+      - else
+        = image_tag('/img/noImage.png',class: 'thumbnail cover')
+      = form_with(model: @creator, local: true) do |f|
+        = f.file_field :bg1
+        = submit_tag("登録")
+    .col-md-auto
+      - if @creator.bg2?
+        = image_tag @creator.bg2.url, class: 'thumbnail'
+      - else
+        = image_tag('/img/noImage.png',class: 'thumbnail cover')
+      = form_with(model: @creator, local: true) do |f|
+        = f.file_field :bg2
+        = submit_tag("登録")
+    .col-md-auto
+      - if @creator.bg3?
+        = image_tag @creator.bg3.url, class: 'thumbnail'
+      - else
+        = image_tag('/img/noImage.png',class: 'thumbnail cover')
+      = form_with(model: @creator, local: true) do |f|
+        = f.file_field :bg3
+        = submit_tag("登録")
+  .row
+    = "2.5/3Dモデリング、スライドショー(Live2D、blender等使用)："
+    = form_with(model: @creator, local: true) do |f|
+      = f.label :表示
+      = f.check_box :cg_display,id: :checkbox, :as => :boolean
+      = submit_tag("設定")
+  .row.my-5
+    .col-md-auto
+      - if @creator.cg1?
+        = image_tag @creator.cg1.url, class: 'thumbnail'
+      - else
+        = image_tag('/img/noImage.png',class: 'thumbnail cover')
+      = form_with(model: @creator, local: true) do |f|
+        = f.file_field :cg1
+        = submit_tag("登録")
+    .col-md-auto
+      - if @creator.cg2?
+        = image_tag @creator.cg2.url, class: 'thumbnail'
+      - else
+        = image_tag('/img/noImage.png',class: 'thumbnail cover')
+      = form_with(model: @creator, local: true) do |f|
+        = f.file_field :cg2
+        = submit_tag("登録")
+    .col-md-auto
+      - if @creator.cg3?
+        = image_tag @creator.cg3.url, class: 'thumbnail'
+      - else
+        = image_tag('/img/noImage.png',class: 'thumbnail cover')
+      = form_with(model: @creator, local: true) do |f|
+        = f.file_field :cg3
+        = submit_tag("登録")
