@@ -18,8 +18,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
  
-//ストロングタグの太字をを無効化
-strong, label{ font-weight: normal; }
+//ストロングとラベルタグの太字をを無効化
+strong, label { font-weight: normal; }
  
 //文字の大きさを定義
 .x-small { font-size: 0.5em; }

@@ -57,28 +57,16 @@
       
       <div class="row">
         <div class="col right">
-            <% if user_signed_in? %>
-                <button type="button" class="btn btn-light"><%= link_to "リクエスト状態","/requests" %></button>
-                <button type="button" class="btn btn-light">
-                  <%= link_to "ユーザー情報","/creators/#{@user.id}" %>
-                </button>
-                <button type="button" class="btn btn-light">
-                  <%= link_to "ユーザー編集", "/creators/#{@user.id}/edit" %>
-                </button>
-                <button type="button" class="btn btn-light">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: "delete" %>
-                </button>
-
-            <% else %>
-                <button type="button" class="btn btn-light">
-                  <%= link_to "新規登録", new_user_registration_path, method: "get" %>
-                </button>
-                <button type="button" class="btn btn-light">
-                  <%= link_to "ログイン\n", new_user_session_path, method: "get" %>
-                </button>
-
-            <% end %>
-          </div>
+          <% if user_signed_in? %>
+            <button type="button" class="btn btn-light"><%= link_to "リクエスト状態","/requests" %></button>
+            <button type="button" class="btn btn-light"><%= link_to "ユーザー情報","/creators/#{@user.id}" %></button>
+            <button type="button" class="btn btn-light"><%= link_to "ユーザー編集", "/creators/#{@user.id}/edit" %></button>
+            <button type="button" class="btn btn-light"><%= link_to "ログアウト", destroy_user_session_path, method: "delete" %></button>
+          <% else %>
+            <button type="button" class="btn btn-light"><%= link_to "新規登録", new_user_registration_path, method: "get" %></button>
+            <button type="button" class="btn btn-light"><%= link_to "ログイン\n", new_user_session_path, method: "get" %></button>
+          <% end %>
+        </div>
       </div>
       
     </div>
