@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1.0">
+    
+    <title><%= content_for?(:html_title) ? yield(:html_title) : "" %> ｜ イラスト、3DCG、写真をリクエスト | イラストライフ株式会社</title>
     
     <!--integrity:html検証,crossorigin:ユーザー認証情報anonymous(不要)-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -25,20 +27,20 @@
     
     <!--コンテンツセキュリティポリシーの適用-->
     <%= csp_meta_tag %>
-    
-    <title>イラストライフ</title>
-    
   </head>
   
   <header>
     <div class="container-fluid">
+      
       <div class="row">
+        
         <div class="col-md-auto">
-          <%= link_to image_tag('/img/symbol.png',class: 'favicon'),  home_index_path %>
+          <%= link_to image_tag('/img/symbol.png', class: 'favicon'), home_index_path %>
         </div>
+        
         <div class="col-md-auto">
-          <span style="font-size: 2.5em;">イラストライフ</span>
-          <span style="font-size: 0.1em;">
+          <span class="x-large"><strong>イラスト</strong>ライフ</span>
+          <span class="x-small">
             <% if Rails.env.development? %>
               <%= link_to '(テスト版)', tests_path %>
             <% else %>
@@ -46,23 +48,17 @@
             <% end %>
           </span>
         </div>
-      </div>
-      <div class="row">
-        <!-- 左寄せ --><!-- clearfixは、浮いた要素のバリア機能 -->
-        <div class="col-12 clearfix">
-          <div class="float-left test-box"><span style="font-size: 1.2em;">納品4日以内のインスタンスなイラスト&CGリクエスト</span></div>
-        </div>
+        
       </div>
       
       <div class="row">
-        <!-- 右寄せ -->
-        <div class="col-12 clearfix">
-          <div class="float-right test-box">
+        <span class="large"><strong>&emsp;イラスト</strong>、<strong>3DCG</strong>、<strong>写真</strong>を<strong>リクエスト</strong></span>
+      </div>
+      
+      <div class="row">
+        <div class="col right">
             <% if user_signed_in? %>
-              <div class="right">
-                <button type="button" class="btn btn-light">
-                  <%= link_to "リクエスト状態","/requests" %>
-                </button>
+                <button type="button" class="btn btn-light"><%= link_to "リクエスト状態","/requests" %></button>
                 <button type="button" class="btn btn-light">
                   <%= link_to "ユーザー情報","/creators/#{@user.id}" %>
                 </button>
@@ -72,20 +68,19 @@
                 <button type="button" class="btn btn-light">
                   <%= link_to "ログアウト", destroy_user_session_path, method: "delete" %>
                 </button>
-              </div>
+
             <% else %>
-              <div class="right">
                 <button type="button" class="btn btn-light">
                   <%= link_to "新規登録", new_user_registration_path, method: "get" %>
                 </button>
                 <button type="button" class="btn btn-light">
                   <%= link_to "ログイン\n", new_user_session_path, method: "get" %>
                 </button>
-              </div>
+
             <% end %>
           </div>
-        </div>
       </div>
+      
     </div>
   </header>
   
