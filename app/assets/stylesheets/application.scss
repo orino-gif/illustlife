@@ -17,22 +17,30 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+//見出しのデザイン
+h1{ background-color: whitesmoke; padding: 0.2em 0.8em;}
  
 //ストロングとラベルタグの太字をを無効化
 strong, label { font-weight: normal; }
+
+//aタグのディフォルト設定を変更：色変更、下線装飾無し(!importantで優先順位を上げる)
+a{ color: steelblue; text-decoration: none !important; }
  
 //文字の大きさを定義
 .x-small { font-size: 0.5em; }
 .small { font-size: 0.9em; }
-.large { font-size: 1.2em; }
+.large { font-size: 1.3em; }
 .x-large { font-size: 2.5em; }
+
+//文字列の位置を定義
+div.right { text-align: right; }
 
  .icon {
   max-width: 100%;
   border-radius: 50%;
   width: 150px;
   height: 150px;
-  //ボックスが画像で埋まるようにリサイズ
   object-fit: cover; 
   object-position: 50% 100%; 
   border-style: solid;

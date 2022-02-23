@@ -5,7 +5,7 @@
     %meta{:charset => "UTF-8", :content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title
       = content_for?(:html_title) ? yield(:html_title) : ""
-      ｜ イラスト、3DCG、写真をリクエスト | イラストライフ株式会社
+      ｜ イラスト、3Dモデリング、写真をリクエスト | イラストライフ株式会社
     / integrity:html検証,crossorigin:ユーザー認証情報anonymous(不要)
     %link{:crossorigin => "anonymous", :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", :integrity => "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk", :rel => "stylesheet"}/
     %script{:src => "https://js.pay.jp/", :type => "text/javascript"}
@@ -21,6 +21,7 @@
     = csrf_meta_tags
     / コンテンツセキュリティポリシーの適用
     = csp_meta_tag
+    
   %body
     %header
       .container-fluid
@@ -34,7 +35,7 @@
           %span.large
             %strong イラスト
             、
-            %strong 3DCG
+            %strong 3Dモデリング
             、
             %strong 写真
             を
@@ -53,22 +54,22 @@
       %script{:async => "", :src => "//accaii.com/orino/script.js"}
       %noscript
         %img{:src => "//accaii.com/orino/script?guid=on"}/
-    .container-fluid
-      - if notice.present?
-        .alert.alert-dismissable.alert-success
-          %button.close{"data-dismiss" => "alert", :type => "button"} ×
-          %p= notice
-      - if alert.present?
-        .alert.alert-dismissable.alert-danger
-          %button.close{"data-dismiss" => "alert", :type => "button"} ×
-          %p= alert
-      = yield
-    %footer.footer
+    - if notice.present?
+      .alert.alert-dismissable.alert-success
+        %button.close{"data-dismiss" => "alert", :type => "button"} ×
+        %p= notice
+    - if alert.present?
+      .alert.alert-dismissable.alert-danger
+        %button.close{"data-dismiss" => "alert", :type => "button"} ×
+        %p= alert
+    = yield
+    
+    %footer.footer.mt-5
       .container-fluid
-        .row.mx-5.my-3
+        .row.m-4
           .mx-3= link_to '利用規約', explanations_terms_path
           .mx-3= link_to 'プライバシーポリシー', explanations_policy_path
           .mx-3= link_to '特定商取引法に基づく表記', explanations_transaction_law_path
-        .row.mx-5.my-2
+        .row.m-3
           .col.right
             %p © 2021-2022 イラストライフ株式会社
