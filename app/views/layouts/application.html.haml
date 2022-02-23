@@ -29,32 +29,26 @@
             = link_to image_tag('/img/symbol.png', class: 'favicon'), home_index_path
           .col-md-auto
             %span.x-large
-              %strong> イラスト
-              ライフ
-            %span.x-small
-              - if Rails.env.development?
-                = link_to '(テスト版)', tests_path
-              - else
-                = "テスト版"
+              %strong イラストライフ
         .row
           %span.large
-            %strong>  イラスト
+            %strong イラスト
             、
-            %strong> 3DCG
+            %strong 3DCG
             、
-            %strong> 写真
+            %strong 写真
             を
             %strong リクエスト
         .row
           .col.right
             - if user_signed_in?
-              %button.btn.btn-light{:type => "button"}= link_to "リクエスト状態","/requests"
-              %button.btn.btn-light{:type => "button"}= link_to "ユーザー情報","/creators/#{@user.id}"
-              %button.btn.btn-light{:type => "button"}= link_to "ユーザー編集", "/creators/#{@user.id}/edit"
+              %button.btn.btn-light{:type => "button"}= link_to "リクエスト状態", requests_path
+              %button.btn.btn-light{:type => "button"}= link_to "ユーザー情報",creator_path(@user.id)
+              %button.btn.btn-light{:type => "button"}= link_to "ユーザー編集", edit_creator_path(@user.id)
               %button.btn.btn-light{:type => "button"}= link_to "ログアウト", destroy_user_session_path, method: "delete"
             - else
-              %button.btn.btn-light{:type => "button"}= link_to "新規登録", new_user_registration_path, method: "get"
-              %button.btn.btn-light{:type => "button"}= link_to "ログイン\n", new_user_session_path, method: "get"
+              %button.btn.btn-light{:type => "button"}= link_to "新規登録", new_user_registration_path
+              %button.btn.btn-light{:type => "button"}= link_to "ログイン\n", new_user_session_path
     - if (Rails.env.production?) && (controller.controller_name != "cards") && (controller.controller_name != "registrations")
       %script{:async => "", :src => "//accaii.com/orino/script.js"}
       %noscript
@@ -76,6 +70,5 @@
           .mx-3= link_to 'プライバシーポリシー', explanations_policy_path
           .mx-3= link_to '特定商取引法に基づく表記', explanations_transaction_law_path
         .row.mx-5.my-2
-          .col-12.clearfix
-            .float-right
-              %p © 2021-2022 イラストライフ株式会社
+          .col.right
+            %p © 2021-2022 イラストライフ株式会社
