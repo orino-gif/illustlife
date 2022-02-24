@@ -1,5 +1,4 @@
-class HomeController < ApplicationController
-  
+class HomesController < ApplicationController
   def index
     @creators = Creator.all
     @requests = Request.all

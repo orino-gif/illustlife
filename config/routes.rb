@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
-  root to: 'home#index' 
+
+  root to: 'homes#index' 
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   
   get '/requests/new/:id', to: 'requests#new'
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
   
   resources :credits, only: [:new, :create, :show, :update]
   resources :requests, only: [:create, :show, :update, :index]
-  resources :home, only: [:index]
+  resources :homes, only: [:index]
   resources :tests, only: [:index]
   resources :creators, only: [:create, :show, :edit, :update]
   resources :explanations, only: [:index, :new, :create, :show]

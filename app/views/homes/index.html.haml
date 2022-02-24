@@ -17,9 +17,9 @@
       - @creators.each do |creator|
         .col-md-auto
           - if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示
-            = display_character(creator)
+            = display_icon(creator)
             .text-center
               %span{:style => "font-size: 12px;"}= creator.user.nickname
     - rescue => e
       = p e
-  
+      

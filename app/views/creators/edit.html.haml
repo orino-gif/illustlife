@@ -5,10 +5,7 @@
   .row.my-5
     = 'アイコン：'
     .col-auto
-      - if @creator.icon?
-        = image_tag @creator.icon.url, class: 'icon'
-      - else
-        = image_tag('/img/mobu.png', class: 'icon' )
+      = display_icon(@creator)
     .col-auto
       = form_with(model: @creator, local: true) do |f|
         = f.file_field :icon
