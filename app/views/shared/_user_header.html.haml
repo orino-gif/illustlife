@@ -1,14 +1,8 @@
 .row
-  - if @creator.header?
-    = image_tag(@creator.header.url, class: 'header')
-  - else
-    = image_tag('/img/nothing.png', class: 'header')
+  = display_header(@creator)
 .row
   .col-2
-    - begin
-      = link_to image_tag(@creator.icon.url, class: 'icon upicon'), "/creators/#{@creator.user_id}"
-    - rescue => e
-      = link_to image_tag('/img/mobu.png', class: 'icon upicon'), "/creators/#{@creator.user_id}"
+    = display_icon(@creator, 'size-icon shape-round border-solid4 fit-cover color-steelblue')
   .col-7
     = link_to image_tag('/img/request.png', class: 'symbol upsymbol'), "/requests/new/#{@creator.user_id}"
   .col-1

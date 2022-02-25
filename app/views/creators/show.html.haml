@@ -1,6 +1,6 @@
-.row
-  .col-md-12.px-0
-    %h1  ユーザー情報
+- content_for(:html_title) { 'ユーザー情報' }
+%h1.color-whitesmoke ユーザー情報
+
 .container
   = render  'shared/user_header'
   - if @creator.fg_display == true then
@@ -13,6 +13,7 @@
         = show_fg(@creator.fg2)
       .col-md-auto
         = show_fg(@creator.fg3)
+        
   - if @creator.bg_display == true then
     .row
       = "背景："

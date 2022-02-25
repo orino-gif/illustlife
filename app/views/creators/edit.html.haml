@@ -1,11 +1,11 @@
 - content_for(:html_title) { 'ユーザー情報編集' }
-%h1 ユーザー情報編集
+%h1.color-whitesmoke ユーザー情報編集
 
 .container
   .row.my-5
     = 'アイコン：'
     .col-auto
-      = display_icon(@creator)
+      = display_icon(@creator, 'size-icon shape-round border-solid4 fit-cover color-steelblue')
     .col-auto
       = form_with(model: @creator, local: true) do |f|
         = f.file_field :icon
@@ -13,34 +13,31 @@
   .row.my-5
     = 'ヘッダー：'
     .col
-      - if @creator.header?
-        = image_tag @creator.header.url  ,class: 'header'
-      - else
-        = image_tag('/img/nothing.png',class: 'header')
+      = display_header(@creator)
       = form_with(model: @creator, local: true) do |f|
         = f.file_field :header
         = f.submit '登録'
   .row.my-5
-    = "アカウント情報："
+    = 'アカウント情報：'
     %table.table
       %tr
-        %td= "Eメール：#{@user.email}"
+        %td = "Eメール：#{@user.email}"
       %tr
-        %td= " パスワード: xxxxxxxxxxx"
+        %td = " パスワード: xxxxxxxxxxx"
       %tr
-        %td= "ニックネーム：#{@user.nickname}"
+        %td = "ニックネーム：#{@user.nickname}"
       %tr
-        %td= "在籍 or 退会：在籍"
+        %td = "在籍 or 退会：在籍"
       %td
         %button{:type => "button"}
           = link_to "変更", edit_user_registration_path
   .row.my-5
-    = "口座情報："
+    = '口座情報：'
     %table.table
       %tr
-        %td= "銀行口座： xxxxxxxxxxx"
+        %td = "銀行口座： xxxxxxxxxxx"
       %td
-        %button{:type => "button"}= link_to "登録", credit_path
+        %button{:type => "button"} = link_to "登録", credit_path
   .row.my-5
     = "リンク先："
     %table.table

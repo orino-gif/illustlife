@@ -1,5 +1,5 @@
 - content_for(:html_title) { 'クリエイター紹介' }
-%h1 クリエイター紹介
+%h1.color-whitesmoke クリエイター紹介
 
 .container
   .row
@@ -17,7 +17,7 @@
       - @creators.each do |creator|
         .col-md-auto
           - if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示
-            = display_icon(creator)
+            = display_icon(creator, 'size-icon shape-round border-solid4 fit-cover color-steelblue')
             .text-center
               %span{:style => "font-size: 12px;"}= creator.user.nickname
     - rescue => e

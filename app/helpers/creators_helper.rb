@@ -1,5 +1,12 @@
 module CreatorsHelper
-
+  def display_header(creator)
+    if creator.header?
+      image_tag creator.header.url, class: 'size-header fixed_aspect'
+    else
+      image_tag '/img/nothing.png', class: 'size-header fixed_aspect'
+    end
+  end
+  
   def show_fg(creator)
     if creator == @creator.fg1 && @creator.fg1?
       image_tag @creator.fg1.url, class: 'thumbnail'
