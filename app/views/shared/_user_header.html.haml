@@ -1,15 +1,16 @@
 .row
-  = display_header(@creator)
+  = display_header(@user.creator)
 .row
   .col-2
-    = display_icon(@creator, 'size-icon shape-round border-solid4 fit-cover color-steelblue')
+    = display_icon(@user.creator, 'size-large shape-round border-solid4 fit-cover color-steelblue position-top-100')
   .col-7
-    = link_to image_tag('/img/request.png', class: 'symbol upsymbol'), "/requests/new/#{@creator.user_id}"
+    - if "creators" == controller.controller_name && 'show' == controller.action_name
+      = link_to image_tag('/img/request.png', class: 'size-middle position-top-75'), "/requests/new/#{@user.creator.user_id}"
   .col-1
-    = link_to image_tag('/img/twitter.png', class: 'symbol upsymbol') ,@creator.twitter
+    = link_to image_tag('/img/twitter.png', class: 'size-small position-top-50') ,@user.creator.twitter
   .col-1
-    = link_to image_tag('/img/pixiv.png', class: 'symbol upsymbol'), @creator.pixiv
+    = link_to image_tag('/img/pixiv.png', class: 'size-small position-top-50'), @user.creator.pixiv
 .row.my-5
   = "ニックネーム：#{@user.nickname}"
-  - if nil != @creator.number_deliveries then
-    = "、平均納品日数：#{@creator.Average_delivery}日、納品数：#{@creator.number_deliveries}点、締切厳守率：#{@creator.deadline_rate}%"
+  - if nil != @user.creator.number_deliveries then
+    = "、平均納品日数：#{@user.creator.Average_delivery}日、納品数：#{@user.creator.number_deliveries}点、締切厳守率：#{@user.creator.deadline_rate}%"

@@ -3,54 +3,59 @@
 
 .container
   .row.my-5
-    = 'アイコン：'
     .col-auto
-      = display_icon(@creator, 'size-icon shape-round border-solid4 fit-cover color-steelblue')
-    .col-auto
-      = form_with(model: @creator, local: true) do |f|
+      = form_with(model: @user.creator, local: true) do |f|
+        = f.label :icon , 'アイコン：'
         = f.file_field :icon
-        = f.submit '変更'
+        = f.submit '登録'
+    .col-auto
+      = display_icon(@user.creator, 'size-large shape-round border-solid4 fit-cover color-steelblue')
+    
   .row.my-5
-    = 'ヘッダー：'
     .col
-      = display_header(@creator)
-      = form_with(model: @creator, local: true) do |f|
+      = form_with(model: @user.creator, local: true) do |f|
+        = f.label :header , 'ヘッダー：'
         = f.file_field :header
         = f.submit '登録'
+      = display_header(@user.creator)
   .row.my-5
-    = 'アカウント情報：'
-    %table.table
-      %tr
-        %td = "Eメール：#{@user.email}"
-      %tr
-        %td = " パスワード: xxxxxxxxxxx"
-      %tr
-        %td = "ニックネーム：#{@user.nickname}"
-      %tr
-        %td = "在籍 or 退会：在籍"
-      %td
-        %button{:type => "button"}
-          = link_to "変更", edit_user_registration_path
-  .row.my-5
-    = '口座情報：'
-    %table.table
-      %tr
-        %td = "銀行口座： xxxxxxxxxxx"
-      %td
-        %button{:type => "button"} = link_to "登録", credit_path
-  .row.my-5
-    = "リンク先："
-    %table.table
-      %tr
+    .col
+      = 'アカウント情報：'
+      %table.table
+        %tr
+          %td = "Eメール：#{@user.email}"
+        %tr
+          %td = " パスワード: xxxxxxxxxxx"
+        %tr
+          %td = "ニックネーム：#{@user.nickname}"
+        %tr
+          %td = "在籍 or 退会：在籍"
         %td
-          = form_with(model: @creator, local: true) do |f|
-            = "twitter："
-            = f.text_field :twitter ,{size:"70"}
-            = submit_tag "変更"
-      %tr
+          %button{:type => "button"}
+            = link_to "変更", edit_user_registration_path
+  .row.my-5
+    .col
+      = '口座情報：'
+      %table.table
+        %tr
+          %td = "銀行口座： xxxxxxxxxxx"
         %td
-          = form_with(model: @creator, local: true) do |f|
-            = "pixiv："
-            = f.text_field :pixiv ,{size:"70"}
-            = submit_tag "変更"
- 
+          %button{:type => "button"}
+            = link_to "登録", credit_path
+  .row.my-5
+    .col
+      = "リンク先："
+      %table.table
+        %tr
+          %td
+            = form_with(model: @user.creator, local: true) do |f|
+              = f.label :twitter , 'twitter:'
+              = f.text_field :twitter ,{size:"70"}
+              = f.submit '登録'
+        %tr
+          %td
+            = form_with(model: @user.creator, local: true) do |f|
+              = f.label :pixiv , 'pixiv:'
+              = f.text_field :pixiv ,{size:"70"}
+              = f.submit '登録'
+
