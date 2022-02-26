@@ -64,7 +64,12 @@
         %p= alert
     = yield
     
-    %footer.color-whitesmoke.mt-5
+    - if nil != @user && ENV['ADMINISTRATOR_MAIL'] == @user.email
+      - color='color-crimson'
+    - else
+      - color='color-whitesmoke'
+    
+    %footer{class:"#{color} mt-5"}
       .container-fluid
         .row.m-4
           .mx-3= link_to '利用規約', explanations_terms_path

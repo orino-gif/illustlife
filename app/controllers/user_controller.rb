@@ -1,5 +1,4 @@
 class UserController < ApplicationController
-
   def new
     # ストロングパラメータから精査されたデータだけをインスタンスに格納
     @user = User.new(user_params)

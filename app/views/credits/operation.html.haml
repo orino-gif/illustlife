@@ -1,23 +1,25 @@
-.row
-  .col-md-12.px-0
-    %h1  お振込み先口座
+%meta{:content => "noindex", :name => "robots"}/
+
+- content_for(:html_title) { '一時預かり先口座' }
+%h1.color-whitesmoke 一時預かり先口座
+
 .container
   .row.my-5
-    = イラストライフ運営局一時預かり金
+    ='振込み先口座'
     .col-md-4
       %table{:border => "1"}
         %tr
           %td{:width => "150"} 銀行名
-          %td{:width => "200"}= @credits.bank
+          %td{:width => "200"}= '三菱東京UFJ'
         %tr
           %td 支店名
-          %td= @credits.branch_name
+          %td= '聖護院支店'
         %tr
           %td 口座の種類
-          %td= @credits.account_type
+          %td= '普通'
         %tr
           %td 口座番号
-          %td= @credits.account_number
+          %td= '4565837'
         %tr
           %td 口座名義
-          %td= @credits.account_holder
+          %td= '林範夫'
