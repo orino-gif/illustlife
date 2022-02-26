@@ -6,15 +6,10 @@ class CreateCreators < ActiveRecord::Migration[5.2]
       t.string :header
       t.string :twitter
       t.string :pixiv
-      t.string :fg1
-      t.string :fg2
-      t.string :fg3
-      t.string :bg1
-      t.string :bg2
-      t.string :bg3
-      t.string :cg1
-      t.string :cg2
-      t.string :cg3
+      t.string :instagram
+      t.float :average_delivery
+      t.integer :number_deliveries
+      t.integer :deadline_rate
       
       t.timestamps
     end
