@@ -267,7 +267,7 @@ Devise.setup do |config|
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   if Rails.env.production?
-    config.sign_out_via = :get
+    config.sign_out_via = :delete
   else
     config.sign_out_via = :delete
   end
