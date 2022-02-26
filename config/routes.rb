@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   
   get '/requests/new/:id', to: 'requests#new'
-  get '/credits/operation', to: 'credits#operation', as: 'operation'
   get 'explanations/terms'
   get 'explanations/policy'
   get 'explanations/transaction_law'

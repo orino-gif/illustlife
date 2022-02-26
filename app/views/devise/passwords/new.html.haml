@@ -1,9 +1,14 @@
-%h1= t('.forgot_your_password')
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = bootstrap_devise_error_messages!
-  .form-group
-    = f.label :email
-    = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
-  .form-group
-    = f.submit t('.send_me_reset_password_instructions'), class: 'btn btn-primary'
-= render 'devise/shared/links'
+%meta{:content => "noindex", :name => "robots"}/
+
+- content_for(:html_title) { t('.forgot_your_password') }
+%h1.color-whitesmoke= t('.forgot_your_password')
+
+.container
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+    = bootstrap_devise_error_messages!
+    .form-group
+      = f.label :email
+      = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
+    .form-group
+      = f.submit t('.send_me_reset_password_instructions'), class: 'btn btn-primary'
+  = render 'devise/shared/links'
