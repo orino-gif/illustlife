@@ -27,7 +27,7 @@
       .container-fluid
         .row
           .col-md-auto
-            = link_to image_tag('/img/symbol.png', class: 'size-small'), homes_path
+            = link_to image_tag('/img/symbol.png', class: 'square-size-small'), homes_path
           .col-md-auto
             %span.font-Xlarge
               %strong イラストライフ
@@ -41,7 +41,7 @@
             を
             %strong リクエスト
         .row
-          .col.position-right
+          .col.text-right
             - if user_signed_in?
               %button.btn.btn-light{:type => "button"}= link_to "リクエスト状態", requests_path
               %button.btn.btn-light{:type => "button"}= link_to "ユーザー情報",creator_path(@user.id)
@@ -71,5 +71,5 @@
           .mx-3= link_to 'プライバシーポリシー', explanations_policy_path
           .mx-3= link_to '特定商取引法に基づく表記', explanations_transaction_law_path
         .row.m-3
-          .col.position-right
+          .col.text-right
             %p © 2021-2022 イラストライフ株式会社

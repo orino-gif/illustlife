@@ -12,8 +12,6 @@ class CreatorsController < ApplicationController
       @creators = Creator.find(params[:id])
       if @creators.update(creators_params)
         redirect_to request.referer, notice: '登録情報を更新しました。'
-      else
-        render :new
       end
     rescue => e
      p e
@@ -24,6 +22,6 @@ class CreatorsController < ApplicationController
   private
 
   def creators_params
-    params.require(:creator).permit(:header,:icon,:update,:twitter,:pixiv)
+    params.require(:creator).permit(:header, :icon, :twitter, :pixiv)
   end   
 end

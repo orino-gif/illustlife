@@ -4,10 +4,6 @@ class CreditsController < ApplicationController
     @credits = Credit.find(current_user.id)
   end
   
-  def create
-    render :new
-  end
-  
   def show
     @credits = Credit.find(current_user.id)
   end
@@ -15,7 +11,7 @@ class CreditsController < ApplicationController
   def update
     @credits = Credit.find(current_user.id)
     if @credits.update(credits_params)
-      redirect_to credit_url(@credits), notice: 'ファイルをアップロードしました。'
+      redirect_to credit_url(@credits), notice: '登録を変更しました。'
     else
       render :new
     end

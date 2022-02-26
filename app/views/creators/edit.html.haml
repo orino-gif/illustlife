@@ -9,7 +9,7 @@
         = f.file_field :icon
         = f.submit '登録'
     .col-auto
-      = display_icon(@user.creator, 'size-large shape-round border-solid4 fit-cover color-steelblue')
+      = display_icon(@user.creator, 'square-size-large shape-round border-solid4 fit-cover color-steelblue')
     
   .row.my-5
     .col
@@ -17,45 +17,45 @@
         = f.label :header , 'ヘッダー：'
         = f.file_field :header
         = f.submit '登録'
-      = display_header(@user.creator)
+      = display_header(@user.creator, 'Horizontal_rectangle-size-variable fit-cover')
   .row.my-5
     .col
       = 'アカウント情報：'
       %table.table
         %tr
-          %td = "Eメール：#{@user.email}"
+          %td="Eメール：#{@user.email}"
         %tr
-          %td = " パスワード: xxxxxxxxxxx"
+          %td='パスワード: xxxxxxxxxxx'
         %tr
-          %td = "ニックネーム：#{@user.nickname}"
+          %td="ニックネーム：#{@user.nickname}"
         %tr
-          %td = "在籍 or 退会：在籍"
+          %td='在籍 or 退会：在籍'
         %td
-          %button{:type => "button"}
-            = link_to "変更", edit_user_registration_path
+          %button{:type => 'buton'}
+            = link_to '変更', edit_user_registration_path
   .row.my-5
     .col
       = '口座情報：'
       %table.table
         %tr
-          %td = "銀行口座： xxxxxxxxxxx"
+          %td='銀行口座： xxxxxxxxxxx'
         %td
-          %button{:type => "button"}
-            = link_to "登録", credit_path
+          %button{:type => 'button'}
+            =link_to '登録', credit_path
   .row.my-5
     .col
-      = "リンク先："
+      = 'リンク先：'
       %table.table
         %tr
           %td
             = form_with(model: @user.creator, local: true) do |f|
               = f.label :twitter , 'twitter:'
-              = f.text_field :twitter ,{size:"70"}
+              = f.text_field :twitter ,{size:'70'}
               = f.submit '登録'
         %tr
           %td
             = form_with(model: @user.creator, local: true) do |f|
               = f.label :pixiv , 'pixiv:'
-              = f.text_field :pixiv ,{size:"70"}
+              = f.text_field :pixiv ,{size:'70'}
               = f.submit '登録'
 

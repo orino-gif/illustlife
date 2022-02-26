@@ -1,6 +1,8 @@
-.row
-  .col-md-12.px-0
-    %h1  お振込み先情報
+%meta{:content => "noindex", :name => "robots"}/
+
+- content_for(:html_title) { 'お振込み先情報' }
+%h1.color-whitesmoke お振込み先情報
+
 .container
   .row.my-5
     .col-md-4
@@ -21,4 +23,4 @@
           %td 口座名義
           %td= @credits.account_holder
     .col-md-3
-      %button{:type => "button"}= link_to "変更", new_credit_path
+      %button{:type => "button"}= link_to '登録', new_credit_path

@@ -5,21 +5,22 @@
   .row
     %h2 ■新着リクエスト作品
   .row
-    - if @requests != nil
+    - if nil != @requests
       - @requests.each do |request|
         .col3
           - if request.deliver_img? && request.status=='納品完了'
-            = link_to image_tag(request.deliver_img.url, class: 'new'), "/requests/#{request.id}"
+            = link_to image_tag(request.deliver_img.url, class: 'square-size-Xlarge fit-cover border-solid4'), "/requests/#{request.id}"
   .row
     %h2 ■クリエイター
   .row
     - begin
       - @creators.each do |creator|
-        .col-md-auto
+        .col-auto.text-center
           - if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示
-            = display_icon(creator, 'size-large shape-round border-solid4 fit-cover color-steelblue')
-            .text-center
-              %span{:style => "font-size: 12px;"}= creator.user.nickname
+            
+            = display_icon(creator, 'square-size-middle shape-round border-solid4 fit-cover color-steelblue')
+            .font-small
+              = creator.user.nickname
     - rescue => e
       = p e
       

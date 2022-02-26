@@ -39,66 +39,33 @@ strong, label { font-weight: normal; }
 .font-large { font-size: 1.3em; }
 .font-Xlarge { font-size: 2.5em; }
 
-//文字列やボタンの位置を右に配置
-.position-right { text-align: right; }
-
 //オブジェクトを上に配置
-.position-top-100 { position: absolute; top:-100px;}
-.position-top-75 { position: absolute; top:-75px;}
-.position-top-50 { position: absolute; top:-50px;}
+.position-top-long { position: absolute; top:-105px;}
+.position-top-middle { position: absolute; top:-75px;}
+.position-top-short { position: absolute; top:-37px;}
 
 //色設定
 .color-whitesmoke { background-color: whitesmoke; } 
 .color-steelblue { border-color: steelblue; } 
 
 //画像のサイズを決定
-.size-large { width: 130px; height: 130px; }
-.size-middle { width: 100px; height: 100px; }
-.size-small { width: 50px; height: 50px; }
+.square-size-Xlarge { width: 150px; height: 150px; }
+.square-size-large { width: 120px; height: 120px; }
+.square-size-middle { width: 90px; height: 90px; }
+.square-size-small { width: 50px; height: 50px; }
+.Horizontal_rectangle-size-variable { width: 100%; height: 180px; }
 
 .shape-round { border-radius: 50%; }
 
 .border-solid4 { border-style: solid; border-width: 4px; }
 
 //ヘッダーの表示方法を定義
-.size-header { width: 100%; height: 180px; }
+
 
  //アスペクト比を維持して表示
 .fit-cover { object-fit: cover; }
 
-
  
- .bg {
-  max-width: 100%;
-  width: 170px;
-  height: 150px;
-  object-fit: cover; 
-  object-position: 50% 100%; 
-  border-style: solid;
-  border-width: 5px;
-  border-color: bule;
-}
- .new {
-  max-width: 100%;
-  width: 200px;
-  height: 150px;
-  object-fit: cover; 
-  object-position: 50% 100%; 
-  border-style: solid;
-  border-width: 5px;
-  border-color: bule;
-}
- .cg {
-  max-width: 100%;
-  border-radius: 10px;
-  width: 170px;
-  height: 150px;
-  object-fit: cover; 
-  object-position: 50% 100%; 
-  border-style: solid;
-  border-width: 5px;
-  border-color: bule;
-}
 
  .thumbnail {
   width: 100%;

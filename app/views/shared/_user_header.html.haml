@@ -1,15 +1,15 @@
 .row
-  = display_header(@user.creator)
+  = display_header(@user.creator, 'Horizontal_rectangle-size-variable fit-cover')
 .row
   .col-2
-    = display_icon(@user.creator, 'size-large shape-round border-solid4 fit-cover color-steelblue position-top-100')
+    = display_icon(@user.creator, 'square-size-large shape-round border-solid4 fit-cover color-steelblue position-top-long')
   .col-7
     - if "creators" == controller.controller_name && 'show' == controller.action_name
-      = link_to image_tag('/img/request.png', class: 'size-middle position-top-75'), "/requests/new/#{@user.creator.user_id}"
+      = link_to image_tag('/img/request.png', class: 'square-size-middle position-top-middle'), "/requests/new/#{@user.creator.user_id}"
   .col-1
-    = link_to image_tag('/img/twitter.png', class: 'size-small position-top-50') ,@user.creator.twitter
+    = link_to image_tag('/img/twitter.png', class: 'square-size-small position-top-short') ,@user.creator.twitter
   .col-1
-    = link_to image_tag('/img/pixiv.png', class: 'size-small position-top-50'), @user.creator.pixiv
+    = link_to image_tag('/img/pixiv.png', class: 'square-size-small position-top-short'), @user.creator.pixiv
 .row.my-5
   = "ニックネーム：#{@user.nickname}"
   - if nil != @user.creator.number_deliveries then
