@@ -1,0 +1,7 @@
+- content_for(:html_title) { 'ご意見・通報一覧' }
+%h1.color-whitesmoke ご意見・通報一覧
+
+.container
+  .row
+    - @explanations.each do |explanation|
+      = explanation.letter_body

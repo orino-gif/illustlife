@@ -5,11 +5,11 @@
     = display_icon(@user.creator, 'square-size-large shape-round border-solid4 fit-cover color-steelblue position-top-long')
   .col-7
     - if "creators" == controller.controller_name && 'show' == controller.action_name
-      = link_to image_tag('/img/request.png', class: 'square-size-middle position-top-middle'), "/requests/new/#{@user.creator.user_id}"
+      = link_to image_tag('/img/request.png', class:'square-size-middle position-top-middle'), "/requests/new/#{@user.creator.user_id}"
   .col-1
-    = link_to image_tag('/img/twitter.png', class: 'square-size-small position-top-short') ,@user.creator.twitter
+    = link_to image_tag('/img/twitter.png', class:'square-size-small position-top-short'), user.creator.twitter
   .col-1
-    = link_to image_tag('/img/pixiv.png', class: 'square-size-small position-top-short'), @user.creator.pixiv
+    = link_to image_tag('/img/pixiv.png', class:'square-size-small position-top-short'), @user.creator.pixiv
 .row.my-5
   = "ニックネーム：#{@user.nickname}"
   - if nil != @user.creator.number_deliveries then
