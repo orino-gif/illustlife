@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   resources :homes, only: [:index]
   resources :tests, only: [:index]
   resources :creators, only: [:create, :show, :edit, :update]
-  resources :explanations, only: [:index, :new, :create, :show]
+  resources :explanations, only: [:index, :new, :create]
 end

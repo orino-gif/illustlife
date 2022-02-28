@@ -7,7 +7,7 @@
     - if "creators" == controller.controller_name && 'show' == controller.action_name
       = link_to image_tag('/img/request.png', class:'square-size-middle position-top-middle'), "/requests/new/#{@user.creator.user_id}"
   .col-1
-    = link_to image_tag('/img/twitter.png', class:'square-size-small position-top-short'), user.creator.twitter
+    = link_to image_tag('/img/twitter.png', class:'square-size-small position-top-short'), @user.creator.twitter
   .col-1
     = link_to image_tag('/img/pixiv.png', class:'square-size-small position-top-short'), @user.creator.pixiv
 .row.my-5
