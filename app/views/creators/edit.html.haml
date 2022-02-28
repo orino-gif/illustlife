@@ -11,7 +11,7 @@
         = f.file_field :icon
         = f.submit '登録'
     .col-auto
-      = display_icon(@user.creator, 'square-size-large shape-round border-solid4 fit-cover color-steelblue')
+      = display_icon(@user.creator, 'size-large-square shape-round border-solid4 fit-cover color-steelblue')
     
   .row.my-5
     .col
@@ -19,7 +19,7 @@
         = f.label :header , 'ヘッダー：'
         = f.file_field :header
         = f.submit '登録'
-      = display_header(@user.creator, 'Horizontal_rectangle-size-variable fit-cover')
+      = display_header(@user.creator, 'size-middle-Horizontal_variable_rectangle fit-cover')
   .row.my-5
     .col
       = 'アカウント情報：'

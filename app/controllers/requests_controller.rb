@@ -1,12 +1,9 @@
 class RequestsController < ApplicationController
-  #before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index]
   
   def index
     begin
-      #Requestテーブルからニックネームを元に
-      if user_signed_in?
-        @current_user = User.find(current_user.id)
-      end
+      @current_user = User.find(current_user.id)
       @request = Request.find_by(sender: @current_user.nickname)
       if nil == @request
         @request = Request.find_by(receiver: @current_user.nickname)
@@ -92,5 +89,4 @@ class RequestsController < ApplicationController
   def requests_params
     params.require(:request).permit(:money, :message, :deliver_img)
   end
-  
 end
