@@ -78,7 +78,7 @@ class RequestsController < ApplicationController
   def update
     @requests = Request.find(params[:request][:request_id])
     if @requests.update(requests_params)
-      redirect_to requests_url, notice: 'ファイルをアップロードしました。'
+      redirect_to requests_url, notice: '問題がなければ納品ボタンを押してください。'
     else
       render :new
     end
