@@ -10,9 +10,8 @@ class CreatorsController < ApplicationController
   def update
     begin
       @creators = Creator.find(params[:id])
-      if @creators.update(creators_params)
-        redirect_to request.referer, notice: '登録情報を更新しました。'
-      end
+      @creators.update(creators_params)
+      redirect_to request.referer, notice: '登録情報を更新しました。'
     rescue => e
      p e
      redirect_to request.referer, alert: 'ファイルを選択してください'
@@ -22,6 +21,6 @@ class CreatorsController < ApplicationController
   private
 
   def creators_params
-    params.require(:creator).permit(:header, :icon, :twitter, :pixiv)
+    params.require(:creator).permit(:header, :icon, :twitter, :pixiv, :instagram)
   end   
 end

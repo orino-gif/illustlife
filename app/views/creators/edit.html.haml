@@ -60,4 +60,10 @@
               = f.label :pixiv , 'pixiv:'
               = f.text_field :pixiv ,{size:'70'}
               = f.submit '登録'
+        %tr
+          %td
+            = form_with(model: @user.creator, local: true) do |f|
+              = f.label :instagram , 'instagram:'
+              = f.text_field :instagram ,{size:'70'}
+              = f.submit '登録'
 
