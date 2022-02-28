@@ -3,8 +3,12 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
+    To
+    =@receiver.nickname
+    さん
+    <br><br>
     = @sender.nickname
-    さんから、リクエストが送信されました。
-    %p リクエスト承認の可否決定を、以下のリンク先よりお願い致します。
-    %p= link_to '承認先リンク', "http://160.16.136.195:3000/requests"
-    %p イラストライフ運営局より
+    さんから、リクエストが送信されました。<br>
+    リクエスト承認の可否決定を以下のリンク先よりお願い致します。<br> 
+    = link_to '承認リンク先', ENV['HOME_ADDRESS'] + "/requests"
+    <br>

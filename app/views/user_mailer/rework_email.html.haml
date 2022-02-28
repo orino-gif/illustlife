@@ -3,9 +3,12 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
+    To
+    =@sender.nickname
+    さん
+    <br><br>
     = @receiver.nickname
-    さんから、納品物に手戻しの処理が入りました。
-    %p 再納品が完了しましたら、再度ご連絡致します。
-    %p 詳細は以下のリンク先よりお願い致します。
-    %p= link_to '参照先リンク', ENV['HOME_ADDRESS'] + "/requests"
-    %p イラストライフ運営局より
+    さんより納品物が戻されました。<br>
+    再納品されましたら、再度ご連絡致します。<br> 
+    = link_to '詳細リンク先', ENV['HOME_ADDRESS'] + "/requests"
+    <br>

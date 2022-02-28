@@ -2,9 +2,9 @@
   = display_header(@user.creator, 'size-middle-Horizontal_variable_rectangle fit-cover')
 .row
   .col-2
-    = display_icon(@user.creator, 'size-large-square shape-round border-solid4 fit-cover color-steelblue position-top-long')
+    = display_icon(@user.creator, 'size-large-square rounded-circle border-solid4 fit-cover color-steelblue position-top-long')
   .col-7
-    - if "creators" == controller.controller_name && 'show' == controller.action_name
+    - if 'creators' == controller.controller_name && 'show' == controller.action_name
       = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle'), "/requests/new/#{@user.creator.user_id}"
   .col-1
     = link_to image_tag('/img/twitter.png', class:'size-small-square position-top-short'), @user.creator.twitter

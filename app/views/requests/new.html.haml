@@ -1,51 +1,23 @@
-.row
-  .col-md-12.px-0
-    %h1  新規リクエスト
+- content_for(:html_title) { '新規リクエスト' }
+%h1.color-whitesmoke 新規リクエスト
+
 .container
   = render 'shared/user_header'
-  = "リクエスト料金の目安"
-  .row.my-3
-    .col-md-3
-      = "・キャラクター"
-      %table.table
-        %tr
-          %td= "全身(4頭身以上)：非対応"
-        %tr
-          %td= "ディフォルメ(2～3頭身)：4000円"
-        %tr
-          %td= "バストアップ(4頭身以上)：3000円"
-        %tr
-          %td= "差分(+1枚)：500円"
-      = "・背景"
-      %table.table
-        %tr
-          %td= "全景：4000円"
-        %tr
-          %td= "差分(+1枚)：500円"
-      = "・CG＆スライドショー"
-      %table.table
-        %tr
-          %td= "1モデリング：8000円"
-        %tr
-          %td= "1シーン：8000円"
-    .col-md-7.border.border-primary
+  .row.my-2
+    .col-md-8.border.border-secondary.position-center-content
       = form_with(model: @requests, local: true) do |f|
         .form-group
-          = f.label :"金額"
-          = f.text_field :money, autofocus: true, class: 'form-control'
+          = f.label :money, "金額(円)"
+          = f.text_field :money, class: 'form-control', value: '5000'
         .form-group
-          = f.label :"本文(400文字以内)"
-          = f.text_area :message, autofocus: true, class: 'form-control'
+          = f.label :message, "本文(1000文字以内)"
+          = f.text_area :message, autofocus: true, class: 'form-control', size: '10x6'
         %div
-          = submit_tag("リクエスト送信")
+          = f.submit 'リクエスト送信', :class=>"btn btn-light size-small-Horizontal_variable_rectangle font-large"
         %br/
         %div
-          = "注意事項"
-        %div
-          = "以下の内容に同意される方のみリクエストを行ってください。"
-        %div
-          = "・リテイク無し。"
-        %div
-          = "・著作権譲渡は原則不可。別途ライセンス契約を交わした場合は、この限りではない。"
-        %div
-          = "・納品物の品質はクリエイターが決定し、納品後に不服申し立てを行わない。"
+          \-注意事項-<br> &nbsp以下の内容に同意される方のみリクエストを行ってください。<br>
+          ・リテイク無し。<br>
+          ・著作権譲渡は原則不可(※ライセンス契約を交わした場合を除く)。<br>
+          ・納品物の品質はクリエイターが決定する。納品後に不服申し立てを行わない。<br>
+        %br

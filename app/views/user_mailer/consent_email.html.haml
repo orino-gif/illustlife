@@ -3,11 +3,12 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
-    %h3
-      = @sender.nickname
-      さんから#{@receiver.nickname}さんへのリクエストが承認されました。
-    %p 以下のリンク先より入力処理をお願い致します。
-    = link_to 'イラストライフ運営局一時金預かり先', "http://160.16.136.195:3000/credits/operation"
-    %p リクエスト状況の詳細は、以下のリンク先に記載されています。
-    = link_to 'リクエスト状況確認先リンク', "http://160.16.136.195:3000/requests"
-    %p イラストライフ運営局より
+    To
+    =@sender.nickname
+    さん
+    <br><br>
+    = @receiver.nickname
+    さんからのリクエストが承認されました<br>
+    作品納品時に再度ご連絡致します。<br>
+    = link_to '詳細リンク先', ENV['HOME_ADDRESS'] + "/requests"
+    <br>

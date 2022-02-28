@@ -1,6 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'xr274375@fc5.so-net.ne.jp'
-
+  
   def request_email(sender,receiver,requests)
     @sender = sender
     @receiver = receiver

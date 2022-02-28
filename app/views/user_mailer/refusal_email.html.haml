@@ -3,9 +3,12 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
-    %h3
-      = @sender.nickname
-      さんから#{@receiver.nickname}さんへのリクエストが拒否されました。
-    %p リクエスト状況の詳細は、以下のリンク先に記載されています。
-    %p= link_to 'リクエスト状況確認先リンク', "http://160.16.136.195:3000/requests"
-    %p イラストライフ運営局より
+    To
+    = @sender.nickname
+    さん
+    <br><br>
+    = @receiver.nickname
+    さんへのリクエストが拒否されました。<br>
+    価格や内容を変更する事で承認される事があります。<br>
+    = link_to '詳細リンク先', ENV['HOME_ADDRESS'] + "/requests"
+    <br>

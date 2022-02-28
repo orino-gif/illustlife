@@ -55,11 +55,11 @@ class RequestsController < ApplicationController
       @receiver = User.find($receive_id.to_i)
       @requests.sender = @sender.nickname
       @requests.receiver = @receiver.nickname
-      @requests.status = "承認待ち"
+      @requests.status = '承認待ち'
       
-      if @requests.save!
+      if @requests.save
         UserMailer.request_email(@sender,@receiver,@requests).deliver_later
-        redirect_to requests_url, notice: 'クリエイターへリクエストのメールを送信しました。'
+        redirect_to requests_url, notice: 'クリエイターへリクエストメールを送信しました。'
       else
         render :new
       end
