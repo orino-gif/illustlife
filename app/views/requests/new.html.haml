@@ -6,9 +6,9 @@
   .row.my-2
     .col-md-8.border.border-secondary.position-center-content
       = form_with(model: @requests, local: true) do |f|
-        .form-group
-          = f.label :money, '推奨金額(円)'
-          = f.text_field :money, class: 'form-control', value: @creator.recommended_amount
+        .form-group.mt-4
+          = f.label :money, '金額'
+          = f.text_field :money, class: 'form-control', value: @creator.recommended_amount.to_s + '円'
         .form-group
           = f.label :message, "本文(1000文字以内)"
           = f.text_area :message, autofocus: true, class:'form-control', size:'10x6'
@@ -18,6 +18,7 @@
         %div
           \-注意事項-<br> &nbsp以下の内容に同意される方のみリクエストを行ってください。<br>
           ・リテイク無し。<br>
-          ・著作権譲渡は原則不可(※ライセンス契約を交わした場合を除く)。<br>
           ・納品物の品質はクリエイターが決定する。納品後に不服申し立てを行わない。<br>
+          ・著作権譲渡は原則不可(※ライセンス契約を交わした場合を除く)。<br>
+          ・商用利用する場合は用途を明記する。<br>
         %br

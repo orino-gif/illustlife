@@ -48,7 +48,6 @@ strong, label { font-weight: normal; }
 .border_color-whitesmoke { background-color: whitesmoke; } 
 .border_color-crimson { background-color: crimson; } 
 .border_color-steelblue { border-color: steelblue; } 
-.border_color-white { border-color: white; } 
 .font_color-steelblue { color: steelblue; } 
 
 //画像のサイズを決定
@@ -68,3 +67,6 @@ strong, label { font-weight: normal; }
 
 //コンテンツを中央に寄せる
 .position-center-content{ width: 80%; margin: 0 auto; max-width: 600px; }
+
+//半透明
+.img_color-translucent{ opacity: 0.3; }

@@ -2,18 +2,18 @@
   = display_header(@user.creator, 'size-middle-Horizontal_variable_rectangle fit-cover')
 .row
   .col-2
-    = display_icon(@user.creator, 'size-large-square rounded-circle border-solid4 fit-cover border_color-white position-top-long')
+    = display_icon(@user.creator, 'size-large-square rounded-circle fit-cover position-top-long')
   .col-7
     - if ('creators' == controller.controller_name) && ('show' == controller.action_name) && (true == @user.creator.request_acceptance_permission)
       = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle'), "/requests/new/#{@user.creator.user_id}"
-    - else
+    - elsif ('creators' == controller.controller_name) && ('show' == controller.action_name) 
       = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
   .col-1
-    = link_to image_tag('/img/twitter.png', class:'size-small-square position-top-short'), @user.creator.twitter
+    = display_sns(@user.creator.twitter, '/img/twitter.png', 'size-small-square position-top-short')
   .col-1
-    = link_to image_tag('/img/pixiv.png', class:'size-small-square position-top-short'), @user.creator.pixiv
+    = display_sns(@user.creator.pixiv, '/img/pixiv.png', 'size-small-square position-top-short')
   .col-1
-    = link_to image_tag('/img/instagram.png', class:'size-small-square position-top-short'), @user.creator.instagram  
+    = display_sns(@user.creator.instagram, '/img/instagram.png', 'size-small-square position-top-short')
   
 .row.my-5
   = "ニックネーム：#{@user.nickname}"
