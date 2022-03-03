@@ -19,7 +19,7 @@
 @import "bootstrap";
 
 //見出しのデザイン
-h1 { padding: 0.2em 0.8em;}
+h1 { padding: 0.2em 0.8em; }
 
 //aタグのディフォルト設定を変更：色変更、下線装飾無し(!importantで優先順位を上げる)
 a { color: steelblue; text-decoration: none !important; }
@@ -40,14 +40,15 @@ strong, label { font-weight: normal; }
 .font-Xlarge { font-size: 2.5em; }
 
 //オブジェクトを上に配置
-.position-top-long { position: absolute; top:-105px;}
-.position-top-middle { position: absolute; top:-75px;}
-.position-top-short { position: absolute; top:-37px;}
+.position-top-long { position: absolute; top:-105px; }
+.position-top-middle { position: absolute; top:-75px; }
+.position-top-short { position: absolute; top:-37px; }
 
 //色設定
-.color-whitesmoke { background-color: whitesmoke; } 
-.color-crimson { background-color: crimson; } 
-.color-steelblue { border-color: steelblue; } 
+.border_color-whitesmoke { background-color: whitesmoke; } 
+.border_color-crimson { background-color: crimson; } 
+.border_color-steelblue { border-color: steelblue; } 
+.border_color-white { border-color: white; } 
 .font_color-steelblue { color: steelblue; } 
 
 //画像のサイズを決定

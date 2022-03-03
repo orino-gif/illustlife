@@ -18,9 +18,15 @@ ActiveRecord::Schema.define(version: 2021_11_05_011728) do
     t.string "twitter"
     t.string "pixiv"
     t.string "instagram"
-    t.float "average_delivery"
-    t.integer "number_deliveries"
-    t.integer "deadline_rate"
+    t.integer "recommended_amount", default: 3000, null: false
+    t.integer "working_days", default: 7, null: false
+    t.integer "number_of_works", default: 0, null: false
+    t.integer "number_of_request", default: 0, null: false
+    t.float "average_delivery_time", default: 0.0, null: false
+    t.float "deadline_strict_adherence_rate", default: 100.0, null: false
+    t.integer "creator_points", default: 0, null: false
+    t.integer "evaluation_points", default: 50, null: false
+    t.boolean "request_acceptance_permission", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

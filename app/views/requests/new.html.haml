@@ -1,5 +1,5 @@
 - content_for(:html_title) { '新規リクエスト' }
-%h1.color-whitesmoke 新規リクエスト
+%h1.border_color-whitesmoke 新規リクエスト
 
 .container
   = render 'shared/user_header'
@@ -7,13 +7,13 @@
     .col-md-8.border.border-secondary.position-center-content
       = form_with(model: @requests, local: true) do |f|
         .form-group
-          = f.label :money, "金額(円)"
-          = f.text_field :money, class: 'form-control', value: '5000'
+          = f.label :money, '推奨金額(円)'
+          = f.text_field :money, class: 'form-control', value: @creator.recommended_amount
         .form-group
           = f.label :message, "本文(1000文字以内)"
-          = f.text_area :message, autofocus: true, class: 'form-control', size: '10x6'
+          = f.text_area :message, autofocus: true, class:'form-control', size:'10x6'
         %div
-          = f.submit 'リクエスト送信', :class=>"btn btn-light size-small-Horizontal_variable_rectangle font-large"
+          = f.submit 'リクエスト送信', class:"btn btn-light size-small-Horizontal_variable_rectangle font-large"
         %br/
         %div
           \-注意事項-<br> &nbsp以下の内容に同意される方のみリクエストを行ってください。<br>

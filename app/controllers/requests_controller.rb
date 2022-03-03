@@ -44,7 +44,6 @@ class RequestsController < ApplicationController
   def new
     @requests = Request.new
     $receive_id = params[:id]
-    @user = User.find(params[:id])
     @creator = Creator.find(params[:id])
   end
   

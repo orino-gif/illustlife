@@ -21,6 +21,6 @@ class CreatorsController < ApplicationController
   private
 
   def creators_params
-    params.require(:creator).permit(:header, :icon, :twitter, :pixiv, :instagram)
+    params.require(:creator).permit(:header, :icon, :twitter, :pixiv, :instagram, :request_acceptance_permission)
   end   
 end

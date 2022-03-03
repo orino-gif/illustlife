@@ -7,9 +7,15 @@ class CreateCreators < ActiveRecord::Migration[5.2]
       t.string :twitter
       t.string :pixiv
       t.string :instagram
-      t.float :average_delivery
-      t.integer :number_deliveries
-      t.integer :deadline_rate
+      t.integer :recommended_amount, null:false, default:3000
+      t.integer :working_days, null:false, default:7
+      t.integer :number_of_works, null:false, default:0
+      t.integer :number_of_request, null:false, default:0
+      t.float :average_delivery_time, null:false, default:0
+      t.float :deadline_strict_adherence_rate, null:false, default:100
+      t.integer :creator_points, null:false, default:0
+      t.integer :evaluation_points, null:false, default:50
+      t.boolean :request_acceptance_permission, null:false, default:false
       
       t.timestamps
     end

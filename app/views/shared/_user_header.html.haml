@@ -2,10 +2,12 @@
   = display_header(@user.creator, 'size-middle-Horizontal_variable_rectangle fit-cover')
 .row
   .col-2
-    = display_icon(@user.creator, 'size-large-square rounded-circle border-solid4 fit-cover color-steelblue position-top-long')
+    = display_icon(@user.creator, 'size-large-square rounded-circle border-solid4 fit-cover border_color-white position-top-long')
   .col-7
-    - if 'creators' == controller.controller_name && 'show' == controller.action_name
+    - if ('creators' == controller.controller_name) && ('show' == controller.action_name) && (true == @user.creator.request_acceptance_permission)
       = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle'), "/requests/new/#{@user.creator.user_id}"
+    - else
+      = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
   .col-1
     = link_to image_tag('/img/twitter.png', class:'size-small-square position-top-short'), @user.creator.twitter
   .col-1
@@ -15,5 +17,8 @@
   
 .row.my-5
   = "ニックネーム：#{@user.nickname}"
-  - if nil != @user.creator.number_deliveries then
-    = "、平均納品日数：#{@user.creator.Average_delivery}日、納品数：#{@user.creator.number_deliveries}点、締切厳守率：#{@user.creator.deadline_rate}%"
+  %br
+    - if 0 != @user.creator.number_of_works then
+      = "納品数：#{@user.creator.number_of_works}点、作業予定日数：#{@user.creator.number_of_works}日、平均納品日数：#{}日、締切厳守率：#{@user.creator.deadline_strict_adherence_rate}%"
+    - else
+      = '納品作品なし'
