@@ -28,7 +28,7 @@
                 = button_to '納品', {controller:'requests', action:'index'}, {method: :get, params:{status:'納品完了', request_id:@request.id, pressed:'ON'}}
     .col-md-auto
       - if @request.deliver_img?
-        = image_tag @request.deliver_img.url ,class:'size-large-Horizontal_variable_rectangle fit-cover'
+        = link_to image_tag(@request.deliver_img.url, class:'size-large-Horizontal_variable_rectangle fit-cover'), @request.deliver_img.url 
     .col-md-auto
       - if '納品完了' == @request.status
         = button_to '通報', {controller:'explanations', action:'new'}, method: :get
