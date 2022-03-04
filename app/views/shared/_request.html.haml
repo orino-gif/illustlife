@@ -31,6 +31,8 @@
         = link_to image_tag(@request.deliver_img.url, class:'size-large-Horizontal_variable_rectangle fit-cover'), @request.deliver_img.url 
     .col-md-auto
       - if '納品完了' == @request.status
-        = button_to '通報', {controller:'explanations', action:'new'}, method: :get
+        %div
+          %button.btn.btn-light{:type => "button"}= link_to 'ダウンロード', download_request_path(@request)
+        // = button_to '通報', {controller:'explanations', action:'new'}, method: :get
         - if user_signed_in? && (@request.receiver == @login_user.nickname)
           = button_to '手戻し', {controller: 'requests', action: 'index'}, {method: :get, params:{status:'手戻し', request_id:@request.id, pressed:'ON'}}

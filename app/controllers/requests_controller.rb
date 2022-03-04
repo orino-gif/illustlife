@@ -3,10 +3,9 @@ class RequestsController < ApplicationController
   
   def index
     begin
-      @current_user = User.find(current_user.id)
-      @request = Request.find_by(sender: @current_user.nickname)
+      @request = Request.find_by(sender: @login_user.nickname)
       if nil == @request
-        @request = Request.find_by(receiver: @current_user.nickname)
+        @request = Request.find_by(receiver: @login_user.nickname)
       end
       
       @requests = Request.where(receiver: @request.receiver).or(Request.where(sender: @request.sender))
@@ -70,6 +69,13 @@ class RequestsController < ApplicationController
   def show
     @request = Request.find(params[:id])
   end
+  
+  def download
+    hoge = Request.find(1)
+    image = hoge.deliver_img # imageはFugaUploaderオブジェクト
+    send_data(image.read, filename: "download#{File.extname(image.path)}")
+  end
+
   
   def update
     @requests = Request.find(params[:request][:request_id])
