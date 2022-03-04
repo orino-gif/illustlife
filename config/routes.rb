@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   
   resources :credits, only: [:new, :create, :show, :update]
   resources :homes, only: [:index]
-  resources :tests, only: [:index]
   resources :creators, only: [:create, :show, :edit, :update]
   resources :requests, only: [:create, :show, :update, :index] do
     member  do
