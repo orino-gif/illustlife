@@ -63,8 +63,8 @@
         %button.close{"data-dismiss" => "alert", :type => "button"} ×
         %p= alert
     = yield
-    
-    - if nil != @user && ENV['ADMINISTRATOR_MAIL'] == @user.email
+
+    - if nil != @login_user && ENV['ADMINISTRATOR_MAIL'] == @login_user.email
       - color='border_color-crimson'
     - else
       - color='border_color-whitesmoke'
