@@ -45,7 +45,6 @@ class RequestsController < ApplicationController
     @requests = Request.new
     $receive_id = params[:id]
     @user = User.find(params[:id])
-    p params[:id]
   end
   
   def create
@@ -69,9 +68,6 @@ class RequestsController < ApplicationController
   end
 
   def show
-    if user_signed_in?
-      @current_user = User.find(current_user.id)
-    end
     @request = Request.find(params[:id])
   end
   

@@ -50,7 +50,7 @@ strong, label { font-weight: normal; }
 .border_color-steelblue { border-color: steelblue; } 
 .font_color-steelblue { color: steelblue; } 
 
-//画像のサイズを決定
+//画像や文字のサイズを決定
 .size-Xlarge-square { width: 150px; height: 150px; }
 .size-large-square { width: 120px; height: 120px; }
 .size-middle-square { width: 90px; height: 90px; }
@@ -70,3 +70,6 @@ strong, label { font-weight: normal; }
 
 //半透明
 .img_color-translucent{ opacity: 0.3; }
+
+//改行
+.string-indention{ word-wrap: break-word; max-width: 300px; }

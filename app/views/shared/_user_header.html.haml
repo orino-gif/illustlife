@@ -5,7 +5,7 @@
     = display_icon(@user.creator, 'size-large-square rounded-circle fit-cover position-top-long')
   .col-7
     - if ('creators' == controller.controller_name) && ('show' == controller.action_name) && (true == @user.creator.request_acceptance_permission)
-      = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle'), "/requests/new/#{@user.creator.user_id}"
+      = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle'), request_path(@user.creator.user_id)
     - elsif ('creators' == controller.controller_name) && ('show' == controller.action_name) 
       = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
   .col-1

@@ -44,8 +44,8 @@
           .col.text-right
             - if user_signed_in?
               %button.btn.btn-light{:type => "button"}= link_to "リクエスト状態", requests_path
-              %button.btn.btn-light{:type => "button"}= link_to "ユーザー情報",creator_path(@user.id)
-              %button.btn.btn-light{:type => "button"}= link_to "ユーザー編集", edit_creator_path(@user.id)
+              %button.btn.btn-light{:type => "button"}= link_to "ユーザー情報",creator_path(@login_user.id)
+              %button.btn.btn-light{:type => "button"}= link_to "ユーザー編集", edit_creator_path(@login_user.id)
               %button.btn.btn-light{:type => "button"}= link_to "ログアウト", destroy_user_session_path, method: "delete"
             - else
               %button.btn.btn-light{:type => "button"}= link_to "新規登録", new_user_registration_path
@@ -66,15 +66,16 @@
 
     - if nil != @login_user && ENV['ADMINISTRATOR_MAIL'] == @login_user.email
       - color='border_color-crimson'
+      ='管理者用のページ'
     - else
       - color='border_color-whitesmoke'
     
     %footer{class:"#{color} mt-5"}
       .container-fluid
         .row.m-4
-          .mx-3= link_to '利用規約', explanations_terms_path
-          .mx-3= link_to 'プライバシーポリシー', explanations_policy_path
-          .mx-3= link_to '特定商取引法に基づく表記', explanations_transaction_law_path
+          .mx-3= link_to '利用規約', terms_explanations_path
+          .mx-3= link_to 'プライバシーポリシー', policy_explanations_path
+          .mx-3= link_to '特定商取引法に基づく表記', transaction_law_explanations_path
         .row.m-3
           .col.text-right
             %p © 2021-2022 イラストライフ株式会社
