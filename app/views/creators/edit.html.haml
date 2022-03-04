@@ -6,15 +6,15 @@
 .container
   .row.my-5
     .col-auto
-      = form_with(model: @user.creator, local: true) do |f|
-        = f.label :icon , 'アイコン：'
+      = form_with(model: @user.creator, local:true) do |f|
+        = f.label :icon, 'アイコン：'
         = f.file_field :icon
         = f.submit '登録'
     .col-auto
       = display_icon(@user.creator, 'size-large-square rounded-circle border-solid4 fit-cover border_color-steelblue')
     
   .row.my-5
-    = form_with(model: @user.creator, local: true) do |f|
+    = form_with(model: @user.creator, local:true) do |f|
       = f.label :header , 'ヘッダー：'
       = f.file_field :header
       = f.submit '登録'
@@ -39,13 +39,13 @@
     %table.table
       %tr
         %td
-          = form_with(model: @user.creator, local: true) do |f|
+          = form_with(model: @user.creator, local:true) do |f|
             = f.label :recommended_amount, '金額(円):'
             = f.text_field :recommended_amount, {size:'40'}
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @user.creator, local: true) do |f|
+          = form_with(model: @user.creator, local:true) do |f|
             = f.label :request_acceptance_permission, 'リクエスト受付:'
             - if true != @user.creator.request_acceptance_permission
               = f.hidden_field :request_acceptance_permission, value:true
@@ -58,19 +58,19 @@
     %table.table
       %tr
         %td
-          = form_with(model: @user.creator, local: true) do |f|
+          = form_with(model: @user.creator, local:true) do |f|
             = f.label :twitter, 'twitter:'
             = f.text_field :twitter, {size:'70'}
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @user.creator, local: true) do |f|
+          = form_with(model: @user.creator, local:true) do |f|
             = f.label :pixiv, 'pixiv:'
             = f.text_field :pixiv, {size:'70'}
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @user.creator, local: true) do |f|
+          = form_with(model: @user.creator, local:true) do |f|
             = f.label :instagram, 'instagram:'
             = f.text_field :instagram, {size:'70'}
             = f.submit '登録'
