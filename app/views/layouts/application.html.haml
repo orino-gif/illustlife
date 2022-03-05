@@ -49,11 +49,11 @@
               %button.btn.btn-light{:type => "button"}= link_to 'ログアウト', destroy_user_session_path, method: "delete"
             - else
               %button.btn.btn-light{:type => "button"}= link_to '新規登録', new_user_registration_path
-              %button.btn.btn-light{:type => "button"}= link_to 'ログイン\n', new_user_session_path
-    - if (Rails.env.production?) && (controller.controller_name != "registrations")
-      %script{:async => "", :src => "//accaii.com/orino/script.js"}
+              %button.btn.btn-light{:type => "button"}= link_to 'ログイン', new_user_session_path
+    - if (Rails.env.production?) && (controller.controller_name != 'registrations')
+      %script{:async => "", :src => '//accaii.com/orino/script.js'}
       %noscript
-        %img{:src => "//accaii.com/orino/script?guid=on"}/
+        %img{:src => '//accaii.com/orino/script?guid=on'}/
     - if notice.present?
       .alert.alert-dismissable.alert-success
         %button.close{"data-dismiss" => "alert", :type => "button"} ×

@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     member  do
       get 'new', to: 'requests#new'
       get 'download'
-
     end
   end  
     

@@ -71,11 +71,10 @@ class RequestsController < ApplicationController
   end
   
   def download
-    hoge = Request.find(1)
+    hoge = Request.find(params[:id])
     image = hoge.deliver_img # imageはFugaUploaderオブジェクト
     send_data(image.read, filename: "download#{File.extname(image.path)}")
   end
-
   
   def update
     @requests = Request.find(params[:request][:request_id])
