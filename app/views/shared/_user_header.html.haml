@@ -1,11 +1,11 @@
 .row
   = display_header(@user.creator, 'size-middle-Horizontal_variable_rectangle fit-cover')
 .row
-  .col-2
-    = display_icon(@user.creator, 'size-large-square rounded-circle fit-cover position-top-long')
-  .col-7
+  .col-3
+    = display_icon(@user.creator, 'size-large-square rounded-circle fit-cover position-top-long size-lg')
+  .col-5
     - if ('creators' == controller.controller_name) && ('show' == controller.action_name) && (true == @user.creator.request_acceptance_permission)
-      = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle'), request_path(@user.creator.user_id)
+      = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle size-md'), request_path(@user.creator.user_id)
     - elsif ('creators' == controller.controller_name) && ('show' == controller.action_name) 
       = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
   .col-1

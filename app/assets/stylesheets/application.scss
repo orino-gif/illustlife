@@ -40,9 +40,9 @@ strong, label { font-weight: normal; }
 .font-Xlarge { font-size: 2.5em; }
 
 //オブジェクトを上に配置
-.position-top-long { position: absolute; top:-105px; }
-.position-top-middle { position: absolute; top:-75px; }
-.position-top-short { position: absolute; top:-37px; }
+.position-top-long { position: absolute; top:-100px; }
+.position-top-middle { position: absolute; top:-72px; }
+.position-top-short { position: absolute; top:-40px; }
 
 //色設定
 .border_color-whitesmoke { background-color: whitesmoke; } 
@@ -73,3 +73,12 @@ strong, label { font-weight: normal; }
 
 //改行
 .string-indention{ word-wrap: break-word; max-width: 300px; }
+
+@media screen and (max-width: 640px){
+.size-large-square { width: 100px; height: 100px; }
+.size-middle-square { width: 80px; height: 80px; }
+.size-small-square { width: 40px; height: 40px; }
+.position-top-long { position: absolute; top:-90px; }
+.position-top-middle { position: absolute; top:-70px; }
+.position-top-short { position: absolute; top:-30px; }
+}

@@ -26,20 +26,17 @@
     %header
       .container-fluid
         .row
-          .col-md-auto
+          .col-auto
             = link_to image_tag('/img/symbol.png', class: 'size-small-square'), homes_path
-          .col-md-auto
+          .col-m0-auto
             %span.font-Xlarge
               %strong イラストライフ
-        .row
-          %span.font-large
-            %strong イラスト
-            、
-            %strong 3Dモデリング
-            、
-            %strong 写真
-            を
-            %strong リクエスト
+          .col-sm.d-flex.align-items-center
+            %strong ～イラスト、3Dモデリング、写真をリクエスト～
+          .col.text-right
+            - if user_signed_in?
+              = @login_user.nickname + 'さん'
+              = display_icon(@login_user.creator, 'size-small-square rounded-circle fit-cover')
         .row
           .col.text-right
             - if user_signed_in?
@@ -64,7 +61,7 @@
         %p= alert
     = yield
 
-    - if nil != @login_user && ENV['ADMINISTRATOR_MAIL'] == @login_user.email
+    - if (nil != @login_user) && (ENV['ADMINISTRATOR_MAIL'] == @login_user.email)
       - color='border_color-crimson'
       ='管理者用のページ'
     - else

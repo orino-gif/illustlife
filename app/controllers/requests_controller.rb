@@ -9,8 +9,12 @@ class RequestsController < ApplicationController
       end
       
       @requests = Request.where(receiver: @request.receiver).or(Request.where(sender: @request.sender))
+      p 'テスト' + @requests
       @sender = User.find_by(nickname: @request.sender)
+      p 'テスト' + @sender.nickname
+      
       @receiver = User.find_by(nickname: @request.receiver)
+      p 'テスト' + @receiver.nickname
       
       if 'ON' == params[:pressed] 
         @request = Request.find(params[:request_id])

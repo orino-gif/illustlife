@@ -22,9 +22,9 @@
       = f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control'
     .field.text-left
       = f.check_box :accepted ,{},checked_value = "true",unchecked_value = "false"
-      = link_to '利用規約', explanations_terms_path
+      = link_to '利用規約', terms_explanations_path
       = f.label '、及び、'
-      = link_to 'プライバシーポリシー', explanations_policy_path
+      = link_to 'プライバシーポリシー', policy_explanations_path
       = 'に同意する。又、登録する利用者本人のみがIDとパスワードを利用し、'
       = "事業主（個人事業主含む）でない事を認める。"
     .form-group

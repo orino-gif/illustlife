@@ -41,7 +41,7 @@
         %td
           = form_with(model: @login_user.creator, local:true) do |f|
             = f.label :recommended_amount, '金額(円):'
-            = f.text_field :recommended_amount, {size:'40'}
+            = f.text_field :recommended_amount
             = f.submit '登録'
       %tr
         %td
@@ -60,19 +60,19 @@
         %td
           = form_with(model: @login_user.creator, local:true) do |f|
             = f.label :twitter, 'twitter:'
-            = f.text_field :twitter, {size:'70'}
+            = f.text_field :twitter
             = f.submit '登録'
       %tr
         %td
           = form_with(model: @login_user.creator, local:true) do |f|
             = f.label :pixiv, 'pixiv:'
-            = f.text_field :pixiv, {size:'70'}
+            = f.text_field :pixiv
             = f.submit '登録'
       %tr
         %td
           = form_with(model: @login_user.creator, local:true) do |f|
             = f.label :instagram, 'instagram:'
-            = f.text_field :instagram, {size:'70'}
+            = f.text_field :instagram
             = f.submit '登録'
   .row.my-5
     = '口座情報：'
