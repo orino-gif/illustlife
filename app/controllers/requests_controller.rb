@@ -2,46 +2,47 @@ class RequestsController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   
   def index
-    begin
-      @request = Request.find_by(sender: @login_user.nickname)
-      if nil == @request
-        @request = Request.find_by(receiver: @login_user.nickname)
-      end
-      
-      @requests = Request.where(receiver: @request.receiver).or(Request.where(sender: @request.sender))
-      p 'テスト' + @requests
-      @sender = User.find_by(nickname: @request.sender)
-      p 'テスト' + @sender.nickname
-      
-      @receiver = User.find_by(nickname: @request.receiver)
-      p 'テスト' + @receiver.nickname
-      
-      if 'ON' == params[:pressed] 
-        @request = Request.find(params[:request_id])
-        @request.status = params[:status]
-        if @request.save
-          if '拒否' == params[:status]
-            UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
-            redirect_to requests_url, notice: '依頼者からのリクエストを拒否するメールを送信しました。'
-            
-          elsif '製作中' == params[:status]
-            UserMailer.consent_email(@sender, @receiver, @request).deliver_later
-            redirect_to requests_url, notice: '依頼者へ承諾のメールを送信しました。'
-            
-          elsif '納品完了' == params[:status]
-            UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
-            redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
-            
-          elsif '手戻し' == params[:status]
-            UserMailer.rework_email(@sender, @receiver, @request).deliver_later
-            redirect_to requests_url, notice: '依頼者への手戻りのメールを送信しました。'
-          end
+
+    @request = Request.find_by(sender: @login_user.nickname)
+    p @request
+    if nil == @request
+      @request = Request.find_by(receiver: @login_user.nickname)
+    end
+    
+    @requests = Request.where(receiver: @login_user.nickname).or(Request.where(sender: @login_user.nickname))
+    p 'テスト0' + @login_user.nickname
+    p @requests
+    @sender = User.find_by(nickname: @request.sender)
+    p 'テスト2' + @request.sender
+    p 'テスト3' + @sender.nickname.to_s
+    
+    @receiver = User.find_by(nickname: @request.receiver)
+    p 'テスト4' + @request.receiver
+    p 'テスト5' + @receiver.nickname.to_s
+    
+    if 'ON' == params[:pressed] 
+      @request = Request.find(params[:request_id])
+      @request.status = params[:status]
+      if @request.save
+        if '拒否' == params[:status]
+          UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
+          redirect_to requests_url, notice: '依頼者からのリクエストを拒否するメールを送信しました。'
+          
+        elsif '製作中' == params[:status]
+          UserMailer.consent_email(@sender, @receiver, @request).deliver_later
+          redirect_to requests_url, notice: '依頼者へ承諾のメールを送信しました。'
+          
+        elsif '納品完了' == params[:status]
+          UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
+          redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
+          
+        elsif '手戻し' == params[:status]
+          UserMailer.rework_email(@sender, @receiver, @request).deliver_later
+          redirect_to requests_url, notice: '依頼者への手戻りのメールを送信しました。'
         end
       end
-    
-    rescue => e
-      p "エラー：#{e}"
     end
+
   end
   
   def new

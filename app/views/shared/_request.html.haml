@@ -1,8 +1,10 @@
 - if nil != @request
   .row.my-5
     .col-md-auto
-      = "■申請日時：#{@request.created_at.strftime("%Y/%m/%d %H:%M:%S")}"
+      = "■申請日時：#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
       %table.table
+        %tr
+          %td= "リクエストID：#{@request.id}"
         %tr
           %td= "依頼者：#{@request.sender}"
         %tr
