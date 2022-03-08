@@ -35,14 +35,14 @@
             %strong ～イラスト、3Dモデリング、写真をリクエスト～
           .col.text-right
             - if user_signed_in?
-              = @login_user.nickname + 'さん'
-              = display_icon(@login_user.creator, 'size-small-square rounded-circle fit-cover')
+              = current_user.nickname + 'さん'
+              = display_icon(current_user.creator, 'size-small-square rounded-circle fit-cover')
         .row
           .col.text-right
             - if user_signed_in?
               %button.btn.btn-light{:type => "button"}= link_to 'リクエスト状態', requests_path
-              %button.btn.btn-light{:type => "button"}= link_to 'ユーザー情報',creator_path(@login_user.id)
-              %button.btn.btn-light{:type => "button"}= link_to 'ユーザー編集', edit_creator_path(@login_user.id)
+              %button.btn.btn-light{:type => "button"}= link_to 'ユーザー情報',creator_path(current_user.id)
+              %button.btn.btn-light{:type => "button"}= link_to 'ユーザー編集', edit_creator_path(current_user.id)
               %button.btn.btn-light{:type => "button"}= link_to 'ログアウト', destroy_user_session_path, method: "delete"
             - else
               %button.btn.btn-light{:type => "button"}= link_to '新規登録', new_user_registration_path
@@ -61,7 +61,7 @@
         %p= alert
     = yield
 
-    - if (nil != @login_user) && (ENV['ADMINISTRATOR_MAIL'] == @login_user.email)
+    - if (nil != current_user) && (ENV['ADMINISTRATOR_MAIL'] == current_user.email)
       - color='border_color-crimson'
       ='管理者用のページ'
     - else

@@ -8,13 +8,17 @@
       = form_with(model: @requests, local: true) do |f|
         .form-group.mt-4
           = f.label :money, '金額'
-          = f.text_field :money, class: 'form-control', value: @user.creator.recommended_amount.to_s + '円'
+          = f.text_field :money, class:'form-control', value: @user.creator.recommended_amount.to_s + '円'
         .form-group
-          = f.label :message, "本文(1000文字以内)"
+          = f.label :message, '本文(1000文字以内)'
           = f.text_area :message, autofocus: true, class:'form-control', size:'10x6'
-        %div
-          = f.submit 'リクエスト送信', class:"btn btn-light size-small-Horizontal_variable_rectangle font-large"
+        .form-group
+          = f.label :file_format, 'ファイル形式:'
+          = f.select :file_format, ['png', 'fbx', 'jpeg', 'gif']
+        %br
+          = f.submit 'リクエスト送信', class:'btn btn-light size-small-Horizontal_variable_rectangle font-large'
         %br/
+        
         %div
           \-注意事項-<br> &nbsp以下の内容に同意される方のみリクエストを行ってください。<br>
           ・リテイク無し。<br>

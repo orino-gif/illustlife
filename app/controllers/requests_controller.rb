@@ -2,24 +2,15 @@ class RequestsController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   
   def index
-
-    @request = Request.find_by(sender: @login_user.nickname)
-    p @request
+    @request = Request.find_by(sender: current_user.nickname)
     if nil == @request
-      @request = Request.find_by(receiver: @login_user.nickname)
+      @request = Request.find_by(receiver: current_user.nickname)
     end
     
-    @requests = Request.where(receiver: @login_user.nickname).or(Request.where(sender: @login_user.nickname))
-    p 'テスト0' + @login_user.nickname
-    p @requests
+    @requests = Request.where(receiver: current_user.nickname).or(Request.where(sender: current_user.nickname))
     @sender = User.find_by(nickname: @request.sender)
-    p 'テスト2' + @request.sender
-    p 'テスト3' + @sender.nickname.to_s
-    
     @receiver = User.find_by(nickname: @request.receiver)
-    p 'テスト4' + @request.receiver
-    p 'テスト5' + @receiver.nickname.to_s
-    
+
     if 'ON' == params[:pressed] 
       @request = Request.find(params[:request_id])
       @request.status = params[:status]
@@ -42,20 +33,23 @@ class RequestsController < ApplicationController
         end
       end
     end
-
   end
   
   def new
     @requests = Request.new
     $receive_id = params[:id]
+    p $receive_id 
     @user = User.find(params[:id])
   end
   
   def create
-    if user_signed_in?
+    if (user_signed_in?) && ($receiver_id != current_user.id)
+      p $receiver_id.to_i
+      p 'test2' + current_user.id.to_s
       @requests = Request.new(requests_params)
-      @sender = User.find(current_user.id)
+      @sender = current_user
       @receiver = User.find($receive_id.to_i)
+      p @receiver_id.to_i
       @requests.sender = @sender.nickname
       @requests.receiver = @receiver.nickname
       @requests.status = '承認待ち'
@@ -66,6 +60,8 @@ class RequestsController < ApplicationController
       else
         render :new
       end
+    elsif $receiver_id == current_user.id
+      redirect_to  request.referer, notice: 'ご自身へのリクエストはできません。'
     else
       redirect_to  '/users/sign_in', notice: 'ユーザー登録とログインが必要です。'
     end
@@ -93,6 +89,6 @@ class RequestsController < ApplicationController
   private
 
   def requests_params
-    params.require(:request).permit(:money, :message, :deliver_img)
+    params.require(:request).permit(:money, :message, :deliver_img, :file_format)
   end
 end

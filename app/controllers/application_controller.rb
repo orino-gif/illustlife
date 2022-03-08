@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :layouts_value
   
   def layouts_value
-    @login_user=current_user
+    #@login_user=current_user
   end
   
   protected
