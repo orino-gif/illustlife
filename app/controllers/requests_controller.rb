@@ -8,34 +8,36 @@ class RequestsController < ApplicationController
     end
     
     @requests = Request.where(receiver: current_user.nickname).or(Request.where(sender: current_user.nickname))
-    @sender = User.find_by(nickname: @request.sender)
-    @receiver = User.find_by(nickname: @request.receiver)
-
-    if 'ON' == params[:pressed] 
-      @request = Request.find(params[:request_id])
-      @request.status = params[:status]
-      if @request.save
-        if '拒否' == params[:status]
-          UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
-          @receiver.creator.number_of_rejection = @receiver.creator.number_of_rejection + 1
-          redirect_to requests_url, notice: '依頼者からのリクエストを拒否するメールを送信しました。'
-          
-        elsif '製作中' == params[:status]
-          UserMailer.consent_email(@sender, @receiver, @request).deliver_later
-          @receiver.creator.number_of_rejection = @receiver.creator.number_of_rejection + 1
-          redirect_to requests_url, notice: '依頼者へ承諾のメールを送信しました。'
-          
-        elsif '納品完了' == params[:status]
-          @receiver.creator.number_of_works = @receiver.creator.number_of_works + 1
-          UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
-          redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
-          
-        elsif '手戻し' == params[:status]
-          @receiver.creator.number_of_works = @receiver.creator.number_of_works - 1
-          UserMailer.rework_email(@sender, @receiver, @request).deliver_later
-          redirect_to requests_url, notice: '依頼者への手戻りのメールを送信しました。'
+    if (nil != @request) && (nil != @requests)
+      @sender = User.find_by(nickname: @request.sender)
+      @receiver = User.find_by(nickname: @request.receiver)
+  
+      if 'ON' == params[:pressed] 
+        @request = Request.find(params[:request_id])
+        @request.status = params[:status]
+        if @request.save
+          if '拒否' == params[:status]
+            UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
+            @receiver.creator.number_of_rejection = @receiver.creator.number_of_rejection + 1
+            redirect_to requests_url, notice: '依頼者からのリクエストを拒否するメールを送信しました。'
+            
+          elsif '製作中' == params[:status]
+            UserMailer.consent_email(@sender, @receiver, @request).deliver_later
+            @receiver.creator.number_of_rejection = @receiver.creator.number_of_rejection + 1
+            redirect_to requests_url, notice: '依頼者へ承諾のメールを送信しました。'
+            
+          elsif '納品完了' == params[:status]
+            @receiver.creator.number_of_works = @receiver.creator.number_of_works + 1
+            UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
+            redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
+            
+          elsif '手戻し' == params[:status]
+            @receiver.creator.number_of_works = @receiver.creator.number_of_works - 1
+            UserMailer.rework_email(@sender, @receiver, @request).deliver_later
+            redirect_to requests_url, notice: '依頼者への手戻りのメールを送信しました。'
+          end
+          @receiver.creator.save
         end
-        @receiver.creator.save
       end
     end
   end
