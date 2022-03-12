@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2021_11_05_011728) do
     t.integer "working_days", default: 7, null: false
     t.integer "number_of_works", default: 0, null: false
     t.integer "number_of_request", default: 0, null: false
+    t.integer "number_of_rejection", default: 0, null: false
+    t.integer "number_of_approval", default: 0, null: false
     t.float "average_delivery_time", default: 0.0, null: false
     t.float "deadline_strict_adherence_rate", default: 100.0, null: false
     t.integer "creator_points", default: 0, null: false

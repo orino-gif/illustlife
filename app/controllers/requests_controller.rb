@@ -17,20 +17,25 @@ class RequestsController < ApplicationController
       if @request.save
         if '拒否' == params[:status]
           UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
+          @receiver.creator.number_of_rejection = @receiver.creator.number_of_rejection + 1
           redirect_to requests_url, notice: '依頼者からのリクエストを拒否するメールを送信しました。'
           
         elsif '製作中' == params[:status]
           UserMailer.consent_email(@sender, @receiver, @request).deliver_later
+          @receiver.creator.number_of_rejection = @receiver.creator.number_of_rejection + 1
           redirect_to requests_url, notice: '依頼者へ承諾のメールを送信しました。'
           
         elsif '納品完了' == params[:status]
+          @receiver.creator.number_of_works = @receiver.creator.number_of_works + 1
           UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
           redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
           
         elsif '手戻し' == params[:status]
+          @receiver.creator.number_of_works = @receiver.creator.number_of_works - 1
           UserMailer.rework_email(@sender, @receiver, @request).deliver_later
           redirect_to requests_url, notice: '依頼者への手戻りのメールを送信しました。'
         end
+        @receiver.creator.save
       end
     end
   end
@@ -44,17 +49,16 @@ class RequestsController < ApplicationController
   
   def create
     if (user_signed_in?) && ($receiver_id != current_user.id)
-      p $receiver_id.to_i
-      p 'test2' + current_user.id.to_s
       @requests = Request.new(requests_params)
       @sender = current_user
       @receiver = User.find($receive_id.to_i)
-      p @receiver_id.to_i
       @requests.sender = @sender.nickname
       @requests.receiver = @receiver.nickname
       @requests.status = '承認待ち'
       
       if @requests.save
+        current_user.creator.number_of_request = current_user.creator.number_of_request + 1
+        current_user.creator.save
         UserMailer.request_email(@sender,@receiver,@requests).deliver_later
         redirect_to requests_url, notice: 'クリエイターへリクエストメールを送信しました。'
       else
@@ -84,11 +88,16 @@ class RequestsController < ApplicationController
     else
       render :new
     end
+    
   end
   
   private
 
   def requests_params
     params.require(:request).permit(:money, :message, :deliver_img, :file_format)
+  end
+  
+  def creator_params
+    params.require(:creator).permit(:number_of_request)
   end
 end

@@ -16,6 +16,8 @@
         %tr
           %td.string-indention= "リクエスト内容：#{@request.message}"
         %tr
+          %td.string-indention= "ファイル形式：#{@request.file_format}"
+        %tr
           %td.string-indention
             - if nil != current_user
               - if (@request.receiver == current_user.nickname) && ('承認待ち' == @request.status)
