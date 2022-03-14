@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :creators, only: [:create, :show, :edit, :update]
   resources :requests, only: [:index,:create, :show, :update] do
     member  do
-      # get 'new', to: 'requests#new'
+      get 'new', to: 'requests#new'
       get 'download'
     end
   end  
