@@ -8,7 +8,6 @@ class RequestsController < ApplicationController
     end
     
     @requests = Request.where(receiver: current_user.nickname).or(Request.where(sender: current_user.nickname))
-    if (nil != @request) && (nil != @requests)
       @sender = User.find_by(nickname: @request.sender)
       @receiver = User.find_by(nickname: @request.receiver)
   
@@ -39,7 +38,6 @@ class RequestsController < ApplicationController
           @receiver.creator.save
         end
       end
-    end
   end
   
   def new
@@ -86,7 +84,7 @@ class RequestsController < ApplicationController
   def update
     @requests = Request.find(params[:request][:request_id])
     if @requests.update(requests_params)
-      redirect_to requests_url, notice: '問題がなければ納品ボタンを押してください。'
+      redirect_to requests_path(@requests, anchor: 'content')
     else
       render :new
     end

@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   resources :credits, only: [:new, :create, :show, :update]
   resources :homes, only: [:index]
   resources :creators, only: [:create, :show, :edit, :update]
-  resources :requests, only: [:create, :show, :update, :index] do
+  resources :requests, only: [:index,:create, :show, :update] do
     member  do
-      get 'new', to: 'requests#new'
+      # get 'new', to: 'requests#new'
       get 'download'
     end
   end  

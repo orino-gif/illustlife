@@ -20,11 +20,12 @@
         %tr
           %td.string-indention
             - if nil != current_user
+              #content
               - if (@request.receiver == current_user.nickname) && ('承認待ち' == @request.status)
                 = "#{@request.sender}さんから#{@request.receiver}さんへのリクエストを承認しますか？"
                 = button_to '承認', {controller:'requests', action:'index'}, {method: :get, params:{status:'製作中', request_id:@request.id, pressed:'ON'}}
                 = button_to '拒否', {controller:'requests', action:'index'}, {method: :get, params:{status:'拒否', request_id:@request.id, pressed:'ON'}}
-              - elsif ('製作中' == @request.status) || ('手戻し' == @request.status)
+              - elsif (@request.receiver == current_user.nickname) && ('製作中' == @request.status || '手戻し' == @request.status)
                 = form_with(model: @request, local: true) do |f|
                   = f.file_field :deliver_img
                   = f.hidden_field :request_id, :value => @request.id

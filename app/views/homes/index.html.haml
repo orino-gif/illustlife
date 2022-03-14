@@ -21,6 +21,6 @@
             .font-small
               = creator.user.nickname
     - rescue => e
-      - if nil != creator.user && ENV['ADMINISTRATOR_MAIL'] == creator.user.email
+      - if (nil != creator.user) && (ENV['ADMINISTRATOR_MAIL'] == creator.user.email)
         = p e
       
