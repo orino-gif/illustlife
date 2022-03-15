@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   root to: 'homes#index' 
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   
+
+  get 'requests/:id/new', to: 'requests#new'
   resources :credits, only: [:new, :create, :show, :update]
   resources :homes, only: [:index]
   resources :creators, only: [:create, :show, :edit, :update]
-  resources :requests, only: [:index,:create, :show, :update] do
+  resources :requests, only: [:index, :create, :show, :update] do
     member  do
-      get 'new', to: 'requests#new'
       get 'download'
     end
   end  
