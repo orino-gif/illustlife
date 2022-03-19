@@ -4,8 +4,10 @@
   .col-3
     = display_icon(@user.creator, 'size-large-square rounded-circle fit-cover position-top-long size-lg')
   .col-5
-    - if ('creators' == controller.controller_name) && ('show' == controller.action_name) && (true == @user.creator.request_acceptance_permission)
+    - if ('creators' == controller.controller_name) && ('show' == controller.action_name) && (true == @user.creator.request_acceptance_permission) && @user.creator.user_id != current_user.id
       = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle size-md'), "/requests/#{@user.creator.user_id}/new"
+    - elsif @user.creator.user_id == current_user.id
+      = image_tag '/img/request.png', class:'size-middle-square position-top-middle size-md'
     - elsif ('creators' == controller.controller_name) && ('show' == controller.action_name) 
       = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
   .col-1

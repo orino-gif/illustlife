@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2021_11_05_011728) do
     t.boolean "accepted", default: false, null: false
     t.string "nickname"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["nickname"], name: "index_users_on_nickname", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
