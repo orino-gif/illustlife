@@ -1,26 +1,27 @@
 .row
-  = display_header(@user.creator, 'size-middle-Horizontal_variable_rectangle fit-cover')
+  = display_header(@authorizer.creator, 'size-middle-Horizontal_variable_rectangle fit-cover')
 .row
   .col-3
-    = display_icon(@user.creator, 'size-large-square rounded-circle fit-cover position-top-long size-lg')
+    = display_icon(@authorizer.creator, 'size-large-square rounded-circle fit-cover position-top-long size-lg')
   .col-5
-    - if ('creators' == controller.controller_name) && ('show' == controller.action_name) && (true == @user.creator.request_acceptance_permission) && @user.creator.user_id != current_user.id
-      = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle size-md'), "/requests/#{@user.creator.user_id}/new"
-    - elsif @user.creator.user_id == current_user.id
-      = image_tag '/img/request.png', class:'size-middle-square position-top-middle size-md'
-    - elsif ('creators' == controller.controller_name) && ('show' == controller.action_name) 
+    - if (('new' == controller.action_name) || ('show' == controller.action_name)) && (true == @authorizer.creator.request_acceptance_permission)
+      - if (user_signed_in?) && (@authorizer.id == current_user.id)
+        = image_tag '/img/request.png', class:'size-middle-square position-top-middle size-md'
+      - else
+        = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle size-md'), "/requests/#{@authorizer.creator.user_id}/new"
+    - else
       = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
   .col-1
-    = display_sns(@user.creator.twitter, '/img/twitter.png', 'size-small-square position-top-short')
+    = display_sns(@authorizer.creator.twitter, '/img/twitter.png', 'size-small-square position-top-short')
   .col-1
-    = display_sns(@user.creator.pixiv, '/img/pixiv.png', 'size-small-square position-top-short')
+    = display_sns(@authorizer.creator.pixiv, '/img/pixiv.png', 'size-small-square position-top-short')
   .col-1
-    = display_sns(@user.creator.instagram, '/img/instagram.png', 'size-small-square position-top-short')
+    = display_sns(@authorizer.creator.instagram, '/img/instagram.png', 'size-small-square position-top-short')
   
 .row.my-5
-  = "ニックネーム：#{@user.nickname}"
+  = "ニックネーム：#{@authorizer.nickname}"
   %br
-    - if 0 != @user.creator.number_of_works then
-      = "納品数：#{@user.creator.number_of_works}点、作業予定日数：#{@user.creator.number_of_works}日、平均納品日数：#{}日、締切厳守率：#{@user.creator.deadline_strict_adherence_rate}%"
+    - if 0 != @authorizer.creator.number_of_works then
+      = "納品数：#{@authorizer.creator.number_of_works}点、作業予定日数：#{@authorizer.creator.number_of_works}日、平均納品日数：#{}日、締切厳守率：#{@authorizer.creator.deadline_strict_adherence_rate}%"
     - else
       = '納品作品なし'

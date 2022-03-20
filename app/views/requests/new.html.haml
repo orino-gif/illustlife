@@ -8,7 +8,7 @@
       = form_with(model: @requests, local: true) do |f|
         .form-group.mt-4
           = f.label :money, '金額'
-          = f.text_field :money, class:'form-control', value: @user.creator.recommended_amount.to_s + '円'
+          = f.text_field :money, class:'form-control', value: @authorizer.creator.recommended_amount.to_s + '円'
         .form-group
           = f.label :message, '本文(1000文字以内)'
           = f.text_area :message, autofocus: true, class:'form-control', size:'10x6'
