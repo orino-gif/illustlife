@@ -85,7 +85,7 @@ class RequestsController < ApplicationController
     if @requests.update(requests_params)
       redirect_to requests_path(@requests, anchor: 'content')
     else
-      render :new
+      redirect_to request.referer, alert: 'ファイル形式かサイズが許容範囲外です'
     end
     
   end
