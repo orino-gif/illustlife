@@ -44,7 +44,6 @@ class RequestsController < ApplicationController
   
   def new
     @request = Request.new
-    $receive_id = params[:id]
     @authorizer = User.find(params[:id])
   end
   
@@ -52,7 +51,7 @@ class RequestsController < ApplicationController
     if user_signed_in?
       @request = Request.new(requests_params)
       @sender = current_user
-      @receiver = User.find($receive_id.to_i)
+      @receiver = User.find(params[:authorizer_id])
       @request.sender = @sender.nickname
       @request.receiver = @receiver.nickname
       @request.status = '承認待ち'

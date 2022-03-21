@@ -14,12 +14,11 @@
           = f.text_area :message, autofocus: true, class:'form-control', size:'10x6'
         .form-group
           = f.label :file_format, 'ファイル形式:'
-          = f.select :file_format, ['png', 'jpg', 'jpeg', 'gif', 'psd', 'fbx']
-        
+          = f.select :file_format, ['png', 'jpg', 'jpeg', 'gif']
         %br
           = f.submit 'リクエスト送信', class:'btn btn-light size-small-Horizontal_variable_rectangle font-large'
         %br/
-        
+        = hidden_field_tag :authorizer_id, params[:id]
       %div
         \-注意事項-<br> &nbsp以下の内容に同意される方のみリクエストを行ってください。<br>
         ・リテイク無し。<br>
