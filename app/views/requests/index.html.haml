@@ -5,6 +5,7 @@
   - if @requests != nil then
     - @requests.reverse_each do |request|
       - @request = request
+      #page1
       = render 'shared/request.html', requests:@request
   - else
     = 'リクエストがまだ存在しません'

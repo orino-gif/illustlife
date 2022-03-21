@@ -5,7 +5,7 @@
   = render 'shared/user_header'
   .row.my-2
     .col-md-8.border.border-secondary.position-center-content
-      = form_with(model: @requests, local: true) do |f|
+      = form_with(model: @request, local: true) do |f|
         .form-group.mt-4
           = f.label :money, '金額'
           = f.text_field :money, class:'form-control', value: @authorizer.creator.recommended_amount.to_s + '円'
@@ -14,7 +14,7 @@
           = f.text_area :message, autofocus: true, class:'form-control', size:'10x6'
         .form-group
           = f.label :file_format, 'ファイル形式:'
-          = f.select :file_format, ['png', 'fbx', 'jpg', 'jpeg', 'gif', 'psd']
+          = f.select :file_format, ['png', 'jpg', 'jpeg', 'gif', 'psd', 'fbx']
         
         %br
           = f.submit 'リクエスト送信', class:'btn btn-light size-small-Horizontal_variable_rectangle font-large'

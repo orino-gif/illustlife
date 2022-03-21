@@ -22,7 +22,6 @@
         %tr
           %td.string-indention
             - if nil != current_user
-              #content
               - if (@request.receiver == current_user.nickname) && ('承認待ち' == @request.status)
                 = "#{@request.sender}さんから#{@request.receiver}さんへのリクエストを承認しますか？"
                 = button_to '承認', {controller:'requests', action:'index'}, {method: :get, params:{status:'製作中', request_id:@request.id, pressed:'ON'}}

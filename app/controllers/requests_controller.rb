@@ -43,30 +43,30 @@ class RequestsController < ApplicationController
   end
   
   def new
-    @requests = Request.new
+    @request = Request.new
     $receive_id = params[:id]
     @authorizer = User.find(params[:id])
   end
   
   def create
     if user_signed_in?
-      @requests = Request.new(requests_params)
+      @request = Request.new(requests_params)
       @sender = current_user
       @receiver = User.find($receive_id.to_i)
-      @requests.sender = @sender.nickname
-      @requests.receiver = @receiver.nickname
-      @requests.status = '承認待ち'
+      @request.sender = @sender.nickname
+      @request.receiver = @receiver.nickname
+      @request.status = '承認待ち'
       
-      if @requests.save
+      if @request.save
         current_user.creator.number_of_request += 1
         current_user.creator.save
-        UserMailer.request_email(@sender, @receiver, @requests).deliver_later
+        UserMailer.request_email(@sender, @receiver, @request).deliver_later
         redirect_to requests_url, notice: 'クリエイターへリクエストメールを送信しました。'
       else
-        render :new
+        redirect_to request.referer, alert: '文字(1000文字以下)が許容範囲外です'
       end
     else
-      redirect_to  '/users/sign_in', notice: 'ユーザー登録とログインが必要です。'
+      redirect_to  '/users/sign_in', alert: 'ユーザー登録とログインが必要です。'
     end
   end
 
@@ -83,11 +83,10 @@ class RequestsController < ApplicationController
   def update
     @requests = Request.find(params[:request][:request_id])
     if @requests.update(requests_params)
-      redirect_to requests_path(@requests, anchor: 'content')
+      redirect_to requests_path(@requests, anchor: 'page1')
     else
-      redirect_to request.referer, alert: 'ファイル形式かサイズが許容範囲外です'
+      redirect_to request.referer, alert: 'ファイル形式かサイズ(2GB以下)が許容範囲外です'
     end
-    
   end
   
   private
