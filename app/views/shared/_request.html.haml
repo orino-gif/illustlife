@@ -2,13 +2,15 @@
   .row.my-5
     .col-md-auto
       = "■申請日時：#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
+      - sender = User.find_by(nickname: @request.sender)
+      - receiver = User.find_by(nickname: @request.receiver)
       %table.table
         %tr
           %td= "リクエストID：#{@request.id}"
         %tr
-          %td= link_to "依頼者：#{@request.sender}", creator_path(User.find_by(nickname: @request.sender).id)
+          %td= display_icon(sender.creator, 'size-small-square rounded-circle fit-cover') + "依頼者：" + @request.sender
         %tr
-          %td= link_to "承認者：#{@request.receiver}", creator_path(User.find_by(nickname: @request.receiver).id)
+          %td= display_icon(receiver.creator, 'size-small-square rounded-circle fit-cover') + "承認者：" + @request.receiver
         %tr
           %td= "状態：#{@request.status}"
         %tr
