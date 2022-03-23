@@ -7,8 +7,8 @@
   .row
     - if nil != @requests
       - @requests.reverse_each do |request|
-        .col4.ml-1
-          - if request.deliver_img? && request.status== '納品完了'
+        .col3.mx-1
+          - if (request.deliver_img?) && (request.status == '納品完了')
             = link_to image_tag(request.deliver_img.url, class: 'size-Xlarge-square fit-cover border-solid4'), request_path(request.id)
   .row
     %h2 ■クリエイター
