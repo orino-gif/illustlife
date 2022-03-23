@@ -2,20 +2,14 @@ class RequestsController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   
   def index
-    @request = Request.find_by(sender: current_user.nickname)
-    if @request.nil?
-      @request = Request.find_by(receiver: current_user.nickname)
-    end
-
     @requests = Request.where(receiver: current_user.nickname).or(Request.where(sender: current_user.nickname))
-    if not @requests.empty?
+    
+    if 'ON' == params[:pressed]
+      @request = Request.find(params[:request_id])
       @sender = User.find_by(nickname: @request.sender)
       @receiver = User.find_by(nickname: @request.receiver)
-    end
-
-    if 'ON' == params[:pressed] 
-      @request = Request.find(params[:request_id])
       @request.status = params[:status]
+      
       if @request.save
         if '拒否' == params[:status]
           @receiver.creator.number_of_rejection += 1
@@ -65,7 +59,7 @@ class RequestsController < ApplicationController
         redirect_to request.referer, alert: '文字(1000文字以下)が許容範囲外です'
       end
     else
-      redirect_to  '/users/sign_in', alert: 'ユーザー登録とログインが必要です。'
+      redirect_to '/users/sign_in', alert: 'ユーザー登録とログインが必要です。'
     end
   end
 
@@ -91,7 +85,7 @@ class RequestsController < ApplicationController
   private
 
   def requests_params
-    params.require(:request).permit(:money, :message, :deliver_img, :file_format)
+    params.require(:request).permit(:money, :message, :deliver_img, :file_format, :psd_img)
   end
   
   def creator_params

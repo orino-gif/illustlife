@@ -5,7 +5,7 @@
     %meta{:charset => "UTF-8", :content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title
       = content_for?(:html_title) ? yield(:html_title) : ""
-      ｜ イラスト、3Dモデリング、写真をリクエスト | イラストライフ株式会社
+      ｜ イラストや写真をリクエスト | イラストライフ株式会社
     / integrity:html検証,crossorigin:ユーザー認証情報anonymous(不要)
     %link{:crossorigin => "anonymous", :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", :integrity => "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk", :rel => "stylesheet"}/
     %script{:src => "https://js.pay.jp/", :type => "text/javascript"}
@@ -41,8 +41,6 @@
           .col.text-right
             - if user_signed_in?
               %button.btn.btn-light= link_to 'リクエスト状態', requests_path
-              - if controller.action_name != 'show'
-                %button.btn.btn-light= link_to 'ユーザー情報', creator_path(current_user.id)
               - if (ENV['ADMINISTRATOR_MAIL'] == current_user.email) && (controller.controller_name == "creators") && (controller.action_name == 'show')
                 %button.btn.btn-light= link_to 'アカウント編集', edit_creator_path(params[:id])
               - else

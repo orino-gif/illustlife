@@ -1,6 +1,6 @@
 class CreatorUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
+   include CarrierWave::RMagick
    include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
@@ -40,7 +40,7 @@ class CreatorUploader < CarrierWave::Uploader::Base
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w(png jpg jpeg gif fbx psd)
+    %w(png jpg jpeg gif psd)
   end
 
   # Override the filename of the uploaded files:
