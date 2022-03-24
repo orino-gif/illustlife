@@ -8,9 +8,9 @@
         %tr
           %td= "リクエストID：#{@request.id}"
         %tr
-          %td= display_icon(sender.creator, 'size-small-square rounded-circle fit-cover') + "依頼者：" + @request.sender
+          %td= display_icon(sender.creator, 'size-small-square rounded-circle fit-cover') + '依頼者：' + @request.sender
         %tr
-          %td= display_icon(receiver.creator, 'size-small-square rounded-circle fit-cover') + "承認者：" + @request.receiver
+          %td= display_icon(receiver.creator, 'size-small-square rounded-circle fit-cover') + '承認者：' + @request.receiver
         %tr
           %td= "状態：#{@request.status}"
         %tr
