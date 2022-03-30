@@ -8,7 +8,7 @@ class CreateCreators < ActiveRecord::Migration[5.2]
       t.string :pixiv
       t.string :instagram
       t.integer :recommended_amount, null:false, default:3000
-      t.integer :working_days, null:false, default:7
+      t.integer :working_days, null:false, default:14
       t.integer :number_of_works, null:false, default:0
       t.integer :number_of_request, null:false, default:0
       t.integer :number_of_rejection, null:false, default:0

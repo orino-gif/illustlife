@@ -15,23 +15,23 @@ class RequestsController < ApplicationController
           @receiver.creator.number_of_rejection += 1
           UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
           redirect_to requests_url, notice: '依頼者からのリクエストを拒否しました。'
-          
         elsif '製作中' == params[:status]
+          @request.approval_date = Date.today 
           @receiver.creator.number_of_approval += 1
           UserMailer.consent_email(@sender, @receiver, @request).deliver_later
           redirect_to requests_url, notice: '依頼者へ承諾のメールを送信しました。'
-          
         elsif '納品完了' == params[:status]
+          @request.delivery_date = Date.today 
           @receiver.creator.number_of_works += 1
           UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
           redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
-          
         elsif '手戻し' == params[:status]
           @receiver.creator.number_of_works -= 1
           UserMailer.rework_email(@sender, @receiver, @request).deliver_later
           redirect_to requests_url, notice: '依頼者への手戻りのメールを送信しました。'
         end
         @receiver.creator.save
+        @request.save
       end
     end
   end
@@ -85,7 +85,7 @@ class RequestsController < ApplicationController
   private
 
   def requests_params
-    params.require(:request).permit(:money, :message, :deliver_img, :file_format, :psd_img)
+    params.require(:request).permit(:money, :message, :deliver_img, :file_format, :psd_img, :approval_date, :delivery_date)
   end
   
   def creator_params

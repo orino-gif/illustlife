@@ -45,4 +45,4 @@
         - if @request.sender == current_user.nickname
           %button.btn.btn-light= link_to 'ダウンロード', download_request_path(@request)
         - elsif @request.receiver == current_user.nickname
-          = button_to '手戻し', {controller: 'requests', action: 'index'}, {method: :get, params:{status:'手戻し', request_id:@request.id, pressed:'ON'}}
+          = button_to '手戻し', {controller:'requests', action:'index'}, {method: :get, params:{status:'手戻し', request_id:@request.id, pressed:'ON'}}

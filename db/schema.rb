@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_11_05_011728) do
     t.string "pixiv"
     t.string "instagram"
     t.integer "recommended_amount", default: 3000, null: false
-    t.integer "working_days", default: 7, null: false
+    t.integer "working_days", default: 14, null: false
     t.integer "number_of_works", default: 0, null: false
     t.integer "number_of_request", default: 0, null: false
     t.integer "number_of_rejection", default: 0, null: false
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 2021_11_05_011728) do
     t.text "message"
     t.string "file_format"
     t.string "deliver_img"
+    t.date "approval_date"
+    t.date "delivery_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

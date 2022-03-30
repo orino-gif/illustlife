@@ -22,7 +22,7 @@
             = display_icon(creator, 'size-middle-square rounded-circle border-solid4 fit-cover border_color-steelblue')
             .font-small
             = creator.user.nickname
-        - break if (i == 20)
+        - break if i == 20
     - rescue => e
       = p e
       
