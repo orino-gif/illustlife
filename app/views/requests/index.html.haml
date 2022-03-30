@@ -11,8 +11,8 @@
       - @request = request
       #page1
       = render 'shared/request.html'
-      
-    - current_user.creator.average_delivery_time = sum / i
-    - current_user.creator.save
+    - if 0 != i
+      - current_user.creator.average_delivery_time = sum / i
+      - current_user.creator.save
   - else
     = 'リクエストがまだ存在しません'
