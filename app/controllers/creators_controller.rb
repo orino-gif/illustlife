@@ -1,6 +1,7 @@
 class CreatorsController < ApplicationController
   def show
     @authorizer = User.find_by(id:params[:id])
+    @requests = Request.where(receiver: current_user.nickname, status:'納品完了')
   end
   
   def edit
