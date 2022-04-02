@@ -15,6 +15,7 @@ class CreateCreators < ActiveRecord::Migration[5.2]
       t.integer :number_of_approval, null:false, default:0
       t.float :average_delivery_time, null:false, default:0
       t.float :deadline_strict_adherence_rate, null:false, default:100
+      t.float :reply_rate, null:false, default:100
       t.integer :creator_points, null:false, default:0
       t.integer :evaluation_points, null:false, default:50
       t.boolean :request_acceptance_permission, null:false, default:false

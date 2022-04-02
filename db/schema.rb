@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2021_11_05_011728) do
     t.integer "number_of_approval", default: 0, null: false
     t.float "average_delivery_time", default: 0.0, null: false
     t.float "deadline_strict_adherence_rate", default: 100.0, null: false
+    t.float "reply_rate", default: 100.0, null: false
     t.integer "creator_points", default: 0, null: false
     t.integer "evaluation_points", default: 50, null: false
     t.boolean "request_acceptance_permission", default: false, null: false
