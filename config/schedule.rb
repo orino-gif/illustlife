@@ -22,10 +22,10 @@
 set :output, 'log/crontab.log'
 set :environment, :development
 
-# every 1.day, at: '11:48 am' do
-#   runner 'lib/script/hoge.rb'
-# end
-
-every 1.minute do
+every 1.day, at: '02:00 am' do
   runner 'lib/script/expired_notice.rb'
 end
+
+# every 1.minute do
+#   runner 'lib/script/expired_notice.rb'
+# end
