@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_05_011728) do
+ActiveRecord::Schema.define(version: 2022_04_04_052707) do
 
   create_table "creators", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "icon"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 2021_11_05_011728) do
     t.datetime "updated_at", null: false
     t.boolean "accepted", default: false, null: false
     t.string "nickname"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["nickname"], name: "index_users_on_nickname", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
