@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'devise-bootstrap-views'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'omniauth'
 gem 'omniauth-twitter'
 gem "omniauth-rails_csrf_protection"
 
