@@ -1,32 +1,23 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable,:omniauthable, omniauth_providers: %i[twitter]
+         :recoverable, :rememberable, :validatable, :confirmable,:omniauthable, omniauth_providers: [:twitter]
          
-         
+  # Twitter認証ログイン用
+  # ユーザーの情報があれば探し、無ければ作成する       
   # omniauthのコールバック時に呼ばれるメソッド
-  def self.find_for_oauth(auth)
-    user = User.where(uid: auth.uid, provider: auth.provider).first
-
-    unless user
-      user = User.create(
-        uid:      auth.uid,
-        provider: auth.provider,
-        email:    User.dummy_email(auth),
-        password: Devise.friendly_token[0, 20],
-        image: auth.info.image,
-        name: auth.info.name,
-        nickname: auth.info.nickname,
-        location: auth.info.location
-      )
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.id = 3
+      user.created_at=DateTime.now
+      user.updated_at=DateTime.now
+      user.accepted=true
+      user.nickname='bbb'
+      user.confirmed_at=DateTime.now
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20] # ランダムなパスワードを作成
     end
-
-    user
-  end
-
-  private
-
-  def self.dummy_email(auth)
-    "#{auth.uid}-#{auth.provider}@example.com"
   end
   
   validates :accepted, presence: {message: ':利用規約にチェックを入力してください'}
