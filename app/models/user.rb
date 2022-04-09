@@ -5,18 +5,19 @@ class User < ApplicationRecord
   # Twitter認証ログイン用
   # ユーザーの情報があれば探し、無ければ作成する       
   # omniauthのコールバック時に呼ばれるメソッド
-  def self.from_omniauth(auth)
+  def self.from_omniauth(auth, new_record)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.id = 3
-      user.created_at=DateTime.now
-      user.updated_at=DateTime.now
-      user.accepted=true
-      user.nickname='bbb'
-      user.confirmed_at=DateTime.now
+      user.id = auth.id
+      user.created_at = DateTime.now
+      user.updated_at = DateTime.now
+      user.accepted = true
+      user.nickname = auth.info.nickname
+      user.confirmed_at = DateTime.now
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20] # ランダムなパスワードを作成
+      new_record[0] = true
     end
   end
   

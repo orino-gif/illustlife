@@ -31,11 +31,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   # common callback method
   def callback_for(provider)
-    @user = User.from_omniauth(request.env["omniauth.auth"])
+    new_record = [false]
+    @user = User.from_omniauth(request.env["omniauth.auth"],new_record)
     p @user
-    resource.build_creator
-    resource.build_credit
-    resource.save
+    p new_record[0]
+    if new_record[0] == true
+      resource.build_creator
+      resource.build_credit
+      resource.save
+    end
     
     if @user.persisted?
       sign_in_and_redirect @user, event: :authentication #this will throw if @user is not activated
