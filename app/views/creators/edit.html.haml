@@ -75,6 +75,9 @@
             = f.text_field :instagram
             = f.submit '登録'
   .row.my-5
+    = 'クレジットカード登録：'
+    = link_to '登録', new_card_path
+  .row.my-5
     = '口座情報：'
     %table.table
       %tr
