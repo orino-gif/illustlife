@@ -14,6 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     resource.build_creator
     resource.build_credit
+    # resource.build_card
     resource.save
   end
 

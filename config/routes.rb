@@ -12,7 +12,13 @@ Rails.application.routes.draw do
       get 'download'
     end
   end  
-    
+  resources :cards, only: [:new, :show,] do
+    collection do
+      post 'show', to: 'cards#show'
+      post 'pay', to: 'cards#pay'
+      post 'delete', to: 'cards#delete'
+    end
+  end
    resources :explanations, only: [:index, :new, :create] do
     collection  do
       get 'terms'

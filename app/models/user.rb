@@ -26,5 +26,6 @@ class User < ApplicationRecord
          
   #dependent: :destroyは、userレコードの削除に伴って生成したレコードを削除するコード。
   has_one :creator , dependent: :destroy 
-  has_one :credit , dependent: :destroy 
+  has_one :credit , dependent: :destroy
+  # has_one :card, dependent: :destroy
 end
