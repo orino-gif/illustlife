@@ -1,4 +1,5 @@
-$(function () {
+$(window).bind("load", function(){ 
+// $(function () {
   //URLにcardsが含まれている際に発火します。
   if (document.URL.match(/cards/)){
 
