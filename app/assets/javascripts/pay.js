@@ -1,10 +1,9 @@
-$(window).bind("load", function(){ 
-// $(function () {
+$(function () {
   //URLにcardsが含まれている際に発火します。
   if (document.URL.match(/cards/)){
 
     //公開鍵を記述
-    var payjp = Payjp(ENV["PAYJP_PRIVATE_KEY"]);
+    var payjp = Payjp('pk_test_5a019ae5ebe946ea0d6e2c95');
     //Elements インスタンスを生成します。
     var elements = payjp.elements();
     var numberElement = elements.create('cardNumber');

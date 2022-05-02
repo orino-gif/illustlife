@@ -4,7 +4,8 @@ class CardsController < ApplicationController
 
   def new
     card = Card.where(user_id: current_user.id)
-    redirect_to action: "show" if card.exists?
+    p card
+    # redirect_to action: "show" if card.exists?
   end
 
   def pay#payjpとCardのデータベース作成
@@ -52,7 +53,6 @@ class CardsController < ApplicationController
       redirect_to action: "new" 
     else
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      p Payjp.api_key
       customer = Payjp::Customer.retrieve(card.customer_id)
       p card.card_id
       @default_card_information = customer.cards.retrieve(card.card_id)
