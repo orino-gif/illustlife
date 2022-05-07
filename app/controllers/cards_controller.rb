@@ -26,9 +26,9 @@ class CardsController < ApplicationController
         card_id: customer.default_card  # .default_cardを使うことで、customer定義時に紐付けされたカード情報を引っ張ってくる ここがnullなら上のcustomerのcard: params['payjp_token']が読み込めていないことが多い
       )
       if @card.save
-        redirect_to action: "show"
+        redirect_to action: "show", notice: "クレジットカードが登録されました"
       else
-        redirect_to action: "pay"
+        redirect_to action: "pay", notice: "クレジットカードの登録に失敗しました"
       end
     end
   end

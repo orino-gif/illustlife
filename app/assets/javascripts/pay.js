@@ -3,7 +3,7 @@ $(function () {
   if (document.URL.match(/cards/)){
 
     //公開鍵を記述
-    var payjp = Payjp('pk_test_5a019ae5ebe946ea0d6e2c95');
+    var payjp = Payjp('pk_live_860cbe2d5bbdb3165c595a32');
     //Elements インスタンスを生成します。
     var elements = payjp.elements();
     var numberElement = elements.create('cardNumber');
@@ -20,8 +20,9 @@ $(function () {
       payjp.createToken(numberElement).then(function (response) {
 
         if (response.error) {  //  通信に失敗したとき
+          console.log('WWW')
           alert(response.error.message)
-          regist_card.prop('disabled', false)
+          // regist_card.prop('disabled', false)
         } else {
           $("#card_token").append(
             `<input type="hidden" name="payjp_token" value=${response.id}>
