@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'products/index'
+  post 'products/pay'
   root to: 'homes#index' 
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks'}
   
@@ -12,10 +14,11 @@ Rails.application.routes.draw do
       get 'download'
     end
   end  
-  resources :cards, only: [:new, :show,] do
+  resources :cards, only: [:new, :create, :show,] do
     collection do
       post 'show', to: 'cards#show'
       post 'pay', to: 'cards#pay'
+      post 'pay_item', to: 'cards#pay_item'
       post 'delete', to: 'cards#delete'
     end
   end

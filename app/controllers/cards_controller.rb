@@ -7,7 +7,7 @@ class CardsController < ApplicationController
     p 'bbb'
     redirect_to action: "show" if card.exists?
   end
-
+  
   def pay#payjpとCardのデータベース作成
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     if params['payjp_token'].blank?
@@ -32,6 +32,8 @@ class CardsController < ApplicationController
       end
     end
   end
+  
+  
   
   def show #Cardのデータpayjpに送り情報を取り出します
     card = Card.find_by(user_id: current_user.id)
