@@ -39,7 +39,6 @@ class CardsController < ApplicationController
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
     :amount => params[:amount],
-    #:card => params['payjp-token'],
     :customer => @card.customer_id,
     :currency => 'jpy'
   )
