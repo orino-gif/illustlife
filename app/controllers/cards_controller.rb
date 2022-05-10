@@ -1,7 +1,9 @@
 class CardsController < ApplicationController
   
   require 'payjp' #これでpajpのメソッドが使用できます
-
+  
+  before_action :card_present, only:[:pay_charge]
+  
   def new
     card = Card.where(user_id: current_user.id)
     p 'bbb'
@@ -33,7 +35,15 @@ class CardsController < ApplicationController
     end
   end
   
-  
+  def pay_charge
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+    :amount => params[:amount],
+    #:card => params['payjp-token'],
+    :customer => @card.customer_id,
+    :currency => 'jpy'
+  )
+  end
   
   def show #Cardのデータpayjpに送り情報を取り出します
     card = Card.find_by(user_id: current_user.id)
@@ -62,5 +72,11 @@ class CardsController < ApplicationController
       card.delete
     end
     redirect_to action: "new"
+  end
+  
+  private
+  
+  def card_present
+    @card = Card.where(user_id: current_user.id).first if Card.where(user_id: current_user.id).present?
   end
 end

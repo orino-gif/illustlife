@@ -14,15 +14,16 @@ Rails.application.routes.draw do
       get 'download'
     end
   end  
-  resources :cards, only: [:new, :create, :show,] do
+  resources :cards, only: [:index, :new, :create, :show, :pay_charge] do
     collection do
+      get 'index', to: 'cards#index'
+      post 'pay_charge', to: 'cards#pay_charge'
       post 'show', to: 'cards#show'
       post 'pay', to: 'cards#pay'
-      post 'pay_item', to: 'cards#pay_item'
       post 'delete', to: 'cards#delete'
     end
   end
-   resources :explanations, only: [:index, :new, :create] do
+  resources :explanations, only: [:index, :new, :create] do
     collection  do
       get 'terms'
       get 'policy'
