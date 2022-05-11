@@ -2,7 +2,7 @@ class RequestsController < ApplicationController
   require 'payjp' #これでpajpのメソッドが使用できます
   
   before_action :authenticate_user!, only: [:index]
-  before_action :card_present
+  before_action :card_present, only: [:index]
   
   def index
     @request = Request.find_by(sender: current_user.nickname)
