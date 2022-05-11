@@ -1,5 +1,8 @@
 class RequestsController < ApplicationController
+  require 'payjp' #これでpajpのメソッドが使用できます
+  
   before_action :authenticate_user!, only: [:index]
+  before_action :card_present
   
   def index
     @request = Request.find_by(sender: current_user.nickname)
@@ -31,6 +34,13 @@ class RequestsController < ApplicationController
           @receiver.creator.number_of_works += 1
           UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
           redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
+          
+          Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+          Payjp::Charge.create(
+          :amount => params[:amount],
+          :customer => @card.customer_id,
+          :currency => 'jpy'
+          )
           
         elsif '手戻し' == params[:status]
           @receiver.creator.number_of_works -= 1
@@ -96,5 +106,9 @@ class RequestsController < ApplicationController
   
   def creator_params
     params.require(:creator).permit(:number_of_request)
+  end
+
+  def card_present
+    @card = Card.where(user_id: current_user.id).first if Card.where(user_id: current_user.id).present?
   end
 end
