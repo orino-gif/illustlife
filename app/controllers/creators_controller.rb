@@ -5,6 +5,7 @@ class CreatorsController < ApplicationController
   
   def edit
     @authorizer = User.find_by(id:params[:id])
+    @card = Card.find_by(user_id:params[:id])
   end
   
   def update
