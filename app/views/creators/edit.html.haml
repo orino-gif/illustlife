@@ -84,7 +84,7 @@
           %td='登録カードなし'
       %td
         %button{:type => 'button'}
-          = link_to '登録', new_card_path
+          = link_to '登録', new_card_path, data: {"turbolinks" => false}
   .row.my-5
     = '口座情報：'
     %table.table
