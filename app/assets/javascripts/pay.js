@@ -20,7 +20,7 @@ $(function () {
       payjp.createToken(numberElement).then(function (response) {
 
         if (response.error) {  //  通信に失敗したとき
-          console.log('WWW')
+          console.log('通信に失敗しました。')
           alert(response.error.message)
           // regist_card.prop('disabled', false)
         } else {

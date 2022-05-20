@@ -1,5 +1,5 @@
 - content_for(:html_title) { 'リクエスト一覧' }
-%h1.border_color-whitesmoke リクエスト一覧
+%h1.border_color-whitesmoke='リクエスト一覧'
 - sum = 1
 - i = @requests.where(status:'納品完了', receiver:current_user.nickname).count
 
