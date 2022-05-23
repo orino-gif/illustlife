@@ -1,13 +1,11 @@
 - content_for(:html_title) { 'クレジットカード登録' }
 %h1.border_color-whitesmoke='カード登録'
 
-.container
-  .row
-    .form-group
-      %p#number-form.payjs-outer
-      %p#expiry-form.payjs-outer
-      %p#cvc-form.payjs-outer
-    .form-group
-      = form_with url: pay_cards_path, method: :post,id: "card_form" do |f|
-        #card_token
-        = f.submit "登録する", class:"btn", id: "info_submit"
+.form-group
+  %p#number-form.payjs-outer
+  %p#expiry-form.payjs-outer
+  %p#cvc-form.payjs-outer
+.form-group
+  = form_with url: pay_cards_path, method: :post,id: "card_form" do |f|
+    #card_token
+    = f.submit "登録する", class:"btn", id: "info_submit"
