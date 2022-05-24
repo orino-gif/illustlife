@@ -47,12 +47,15 @@
         %td
           = form_with(model: @authorizer.creator, local:true) do |f|
             = f.label :request_acceptance_permission, 'リクエスト受付:'
-            - if true != @authorizer.creator.request_acceptance_permission
-              = f.hidden_field :request_acceptance_permission, value:true
-              = f.submit '開始'
+            -if (nil != @credit) && (nil != @credit.bank) && (nil != @credit.branch_name) && (nil != @credit.account_type) && (nil != @credit.account_number) && (nil != @credit.account_holder)
+              - if true != @authorizer.creator.request_acceptance_permission
+                = f.hidden_field :request_acceptance_permission, value:true
+                = f.submit '開始'
+              - else
+                = f.hidden_field :request_acceptance_permission, value:false
+                = f.submit '停止'
             - else
-              = f.hidden_field :request_acceptance_permission, value:false
-              = f.submit '停止'
+              = '報酬支払い先の口座登録が事前に必要です'
   .row.my-5
     = 'リンク先：'
     %table.table
@@ -89,7 +92,10 @@
     = '口座情報：'
     %table.table
       %tr
-        %td='銀行口座： xxxxxxxxxxx'
+        -if (nil != @credit) && (nil != @credit.bank)
+          %td='銀行口座： xxxxxxxxxxx'
+        -else
+          %td='登録口座なし'
       %td
         %button{:type => 'button'}
           =link_to '登録', credit_path

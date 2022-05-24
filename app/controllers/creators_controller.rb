@@ -6,6 +6,7 @@ class CreatorsController < ApplicationController
   def edit
     @authorizer = User.find_by(id:params[:id])
     @card = Card.find_by(user_id:params[:id])
+    @credit = Credit.find_by(user_id:params[:id])
   end
   
   def update
@@ -14,8 +15,8 @@ class CreatorsController < ApplicationController
       @creators.update(creators_params)
       redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
     rescue => e
-     p e
-     redirect_to request.referer, alert: 'ファイルを選択してください'
+      p e
+      redirect_to request.referer, alert: 'ファイルを選択してください'
     end
   end
   
