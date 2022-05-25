@@ -55,7 +55,9 @@
                 = f.hidden_field :request_acceptance_permission, value:false
                 = f.submit '停止'
             - else
-              = '報酬支払い先の口座登録が事前に必要です'
+              %button{:disabled => "disabled", :type => "submit"}='開始'
+              = '※報酬受取先の口座登録が事前に必要です'
+              
   .row.my-5
     = 'リンク先：'
     %table.table
