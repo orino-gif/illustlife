@@ -32,6 +32,7 @@ class RequestsController < ApplicationController
           
         elsif '納品完了' == params[:status]
           @receiver.creator.number_of_works += 1
+          @card = Card.find_by(user_id: current_user.id)
           UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
           redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
           
@@ -65,12 +66,15 @@ class RequestsController < ApplicationController
       @request.sender = @sender.nickname
       @request.receiver = @receiver.nickname
       @request.status = '承認待ち'
+      @card = Card.find_by(user_id: current_user.id)
       
-      if @request.save
+      if (nil != @card) && (@request.save)
         current_user.creator.number_of_request += 1
         current_user.creator.save
         UserMailer.request_email(@sender, @receiver, @request).deliver_later
         redirect_to requests_url, notice: 'クリエイターへリクエストメールを送信しました。'
+      elsif nil == @card
+        redirect_to request.referer, alert: '事前にクレジットカードの登録が必要です'
       else
         redirect_to request.referer, alert: '文字(1000文字以下)が許容範囲外です'
       end
