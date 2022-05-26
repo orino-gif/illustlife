@@ -38,9 +38,9 @@ class RequestsController < ApplicationController
           
           Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
           Payjp::Charge.create(
-          :amount => params[:amount],
-          :customer => @card.customer_id,
-          :currency => 'jpy'
+            :amount => params[:amount],
+            :customer => @card.customer_id,
+            :currency => 'jpy'
           )
           
         elsif '手戻し' == params[:status]
