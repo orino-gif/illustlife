@@ -48,7 +48,7 @@
         %td
           = form_with(model: @authorizer.creator, local:true) do |f|
             = f.label :request_acceptance_permission, 'リクエスト受付:'
-            -if ((nil != @credit) && (nil != @credit.bank) && (nil != @credit.branch_name) && (nil != @credit.account_type) && (nil != @credit.account_number) && (nil != @credit.account_holder) || ('development' == ENV['RAILS_ENV']) || ('test' == ENV['RAILS_ENV']))
+            -if ((nil != @credit) && (nil != @credit.bank) && (nil != @credit.branch_name) && (nil != @credit.account_type) && (nil != @credit.account_number) && (nil != @credit.account_holder) || ('development' == ENV['RAILS_ENV']))
               - if true != @authorizer.creator.request_acceptance_permission
                 = f.hidden_field :request_acceptance_permission, value:true
                 = f.submit '開始'
