@@ -66,9 +66,12 @@ class RequestsController < ApplicationController
       @request.sender = @sender.nickname
       @request.receiver = @receiver.nickname
       @request.status = '承認待ち'
+      @request.sender_icon_url = @sender.creator.icon
+      p 'aaa' + @sender.creator.icon.to_s
+      @request.receiver_icon_url = @receiver.creator.icon
       @card = Card.find_by(user_id: current_user.id)
       
-      if (nil != @card) && (@request.save)
+      if ((nil != @card) || ('development' == ENV['RAILS_ENV'])) && (@request.save)
         current_user.creator.number_of_request += 1
         current_user.creator.save
         UserMailer.request_email(@sender, @receiver, @request).deliver_later
@@ -105,7 +108,7 @@ class RequestsController < ApplicationController
   private
 
   def requests_params
-    params.require(:request).permit(:money, :message, :deliver_img, :file_format)
+    params.require(:request).permit(:money, :message, :deliver_img, :file_format, :sender_icon_url, :receiver_icon_url)
   end
   
   def creator_params
