@@ -11,11 +11,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
-    resource.build_creator
-    resource.build_credit
-    # resource.build_card
-    resource.save
+    begin
+      super
+      resource.build_creator
+      resource.build_credit
+      # resource.build_card
+      resource.save
+    rescue => e
+      p e
+      e.to_s.include?("Duplicate")
+      redirect_to request.referer, alert: '既に登録されているメールアドレスです'
+    end
   end
 
   # GET /resource/edit
@@ -32,6 +38,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def destroy
   #   super
   # end
+  
+  def destroy
+    resource.soft_destroy # <- 論理削除を実行
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    set_flash_message :notice, :destroyed
+    yield resource if block_given?
+    respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

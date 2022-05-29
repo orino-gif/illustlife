@@ -6,6 +6,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
+      
+      # kakurenbo-puti
+      t.datetime :soft_destroyed_at
 
       ## Recoverable
       t.string   :reset_password_token
@@ -36,7 +39,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.timestamps null: false
     end
 
-    add_index :users, :email,                unique: true
+    # add_index :users, :email,                unique: true
+    # 代わりに、soft_destoryed_atがNULLであることを条件にした部分indexを追加する
+    add_index :users, :email, unique: true, where: '(soft_destroyed_at IS NULL)'
+    add_index :users, :soft_destroyed_at
+    
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
