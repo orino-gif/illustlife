@@ -19,7 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.save
     rescue => e
       p e
-      e.to_s.include?("Duplicate")
+      e.to_s.include?('Duplicate')
       redirect_to request.referer, alert: '既に登録されているメールアドレスです'
     end
   end

@@ -11,6 +11,7 @@ class RequestsController < ApplicationController
     end
 
     @requests = Request.where(receiver: current_user.nickname).or(Request.where(sender: current_user.nickname))
+    p @requests 
     if not @requests.empty?
       @sender = User.find_by(nickname: @request.sender)
       @receiver = User.find_by(nickname: @request.receiver)
@@ -22,6 +23,7 @@ class RequestsController < ApplicationController
       if @request.save
         if '拒否' == params[:status]
           @receiver.creator.number_of_rejection += 1
+          
           UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
           redirect_to requests_url, notice: '依頼者からのリクエストを拒否しました。'
           
@@ -36,12 +38,14 @@ class RequestsController < ApplicationController
           UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
           redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
           
-          Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-          Payjp::Charge.create(
-            :amount => params[:amount],
-            :customer => @card.customer_id,
-            :currency => 'jpy'
-          )
+          if nil != @card 
+            Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+            Payjp::Charge.create(
+              :amount => params[:amount],
+              :customer => @card.customer_id,
+              :currency => 'jpy'
+            )
+          end
           
         elsif '手戻し' == params[:status]
           @receiver.creator.number_of_works -= 1
