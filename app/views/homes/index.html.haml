@@ -17,12 +17,12 @@
   .row
     - begin
       // 1から20番までのユーザーを表示
-      - @users.each.with_index(1) do |user,index| 
+      - @creators.each.with_index(1) do |creator,index| 
         .col-auto.text-center
-          - if user.confirmed_at? #ユーザー認証済みの場合画像を表示
-            = display_icon(user.creator, 'size-middle-square rounded-circle border-solid4 fit-cover border_color-steelblue')
+          - if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示
+            = display_icon(creator, 'size-middle-square rounded-circle border-solid4 fit-cover border_color-steelblue')
             .font-small
-            = user.nickname
+            = creator.user.nickname
         - break if index == 20
     - rescue => e
       = p e

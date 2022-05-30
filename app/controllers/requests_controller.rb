@@ -39,7 +39,7 @@ class RequestsController < ApplicationController
           redirect_to requests_url, notice: '依頼者への納品完了のメールを送信しました。'
           
           if nil != @card 
-            Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+            Payjp.api_key = ENV['PAYJP_SECRET_KEY']
             Payjp::Charge.create(
               :amount => params[:amount],
               :customer => @card.customer_id,
