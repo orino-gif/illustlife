@@ -71,8 +71,9 @@ class RequestsController < ApplicationController
       @request.receiver = @receiver.nickname
       @request.status = '承認待ち'
       @request.sender_icon_url = @sender.creator.icon
-      p 'aaa' + @sender.creator.icon.to_s
+      p 'aaa' + @request.sender_icon_url.to_s if 'development' == ENV['RAILS_ENV']
       @request.receiver_icon_url = @receiver.creator.icon
+      p 'bbb' + @request.receiver_icon_url.to_s if 'development' == ENV['RAILS_ENV']
       @card = Card.find_by(user_id: current_user.id)
       
       if ((nil != @card) || ('development' == ENV['RAILS_ENV'])) && (@request.save)

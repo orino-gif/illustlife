@@ -8,9 +8,21 @@
         %tr
           %td= "リクエストID：#{@request.id}"
         %tr
-          %td= display_icon(sender.creator, 'size-small-square rounded-circle fit-cover') + '依頼者：' + @request.sender
+          - if nil != sender
+            %td= display_icon(sender.creator, 'size-small-square rounded-circle fit-cover') + '依頼者：' + @request.sender
+          - else
+            - if @request.sender_icon_url.empty?
+              %td=image_tag('/img/mobu.png', class: 'size-small-square rounded-circle fit-cover') + '依頼者：' + @request.sender
+            - else
+              %td=image_tag(@request.sender_icon_url, class: 'size-small-square rounded-circle fit-cover') + '依頼者：' + @request.sender
         %tr
-          %td= display_icon(receiver.creator, 'size-small-square rounded-circle fit-cover') + '承認者：' + @request.receiver
+          - if nil != receiver
+            %td= display_icon(receiver.creator, 'size-small-square rounded-circle fit-cover') + '承認者：' + @request.receiver
+          - else
+            - if @request.receiver_icon_url.empty?
+              %td=image_tag('/img/mobu.png', class: 'size-small-square rounded-circle fit-cover') + '承認者：' + @request.receiver
+            - else
+              %td=image_tag(@request.receiver_icon_url, class: 'size-small-square rounded-circle fit-cover') + '承認者：' + @request.receiver
         %tr
           %td= "状態：#{@request.status}"
         %tr
