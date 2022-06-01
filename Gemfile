@@ -12,6 +12,7 @@ gem 'devise-i18n-views'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem "omniauth-rails_csrf_protection"
+gem 'gon'
 
 gem 'haml-rails'
 gem 'erb2haml'

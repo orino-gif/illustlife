@@ -1,9 +1,12 @@
 $(function () {
   //URLにcardsが含まれている際に発火します。
   if (document.URL.match(/cards/)){
-
+    
+    const PUBLICKEY = gon.public_key;// 環境変数
+    console.log(PUBLICKEY)
+    
     //公開鍵を記述
-    var payjp = Payjp('pk_test_5a019ae5ebe946ea0d6e2c95');
+    var payjp = Payjp(PUBLICKEY);
     //Elements インスタンスを生成します。
     var elements = payjp.elements();
     var numberElement = elements.create('cardNumber');

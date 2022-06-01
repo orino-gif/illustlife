@@ -13,6 +13,8 @@
     %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}/
     %link{:crossorigin => "", :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
     %link{:href => "https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500&family=Kosugi+Maru&family=Potta+One&family=Yomogi&display=swap", :rel => "stylesheet"}/
+    
+    = include_gon
     / Railsの組み込み関数stylesheet_link_tag を使って、application.css.scssをすべてのファイルで読み込んでいる
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     / jQuery設定
@@ -21,6 +23,7 @@
     = csrf_meta_tags
     / コンテンツセキュリティポリシーの適用
     = csp_meta_tag
+    
     
   %body
     %header
