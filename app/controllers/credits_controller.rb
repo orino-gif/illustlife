@@ -1,15 +1,15 @@
 class CreditsController < ApplicationController
   before_action :authenticate_user!
   def new
-    @credits = Credit.find(current_user.id)
+    @credits = Credit.find(params[:id])
   end
   
   def show
-    @credits = Credit.find(current_user.id)
+    @credits = Credit.find(params[:id])
   end
   
   def update
-    @credits = Credit.find(current_user.id)
+    @credits = Credit.find(params[:id])
     if @credits.update(credits_params)
       redirect_to credit_url(@credits), notice: '登録を変更しました。'
     else
