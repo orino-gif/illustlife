@@ -91,8 +91,6 @@ ActiveRecord::Schema.define(version: 2022_05_28_003045) do
     t.string "uid"
     t.index ["email", "soft_destroyed_at"], name: "index_users_on_email_and_soft_destroyed_at", unique: true
     t.index ["nickname"], name: "index_users_on_nickname", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["soft_destroyed_at"], name: "index_users_on_soft_destroyed_at"
   end
 
 end
