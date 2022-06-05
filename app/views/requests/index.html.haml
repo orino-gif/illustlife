@@ -4,7 +4,7 @@
 // - i = @requests.where(status:'納品完了', receiver:current_user.nickname).count
 
 .container
-  - if nil != @requests then
+  - if not @requests.empty? then
     - @requests.reverse_each do |request|
       // - if (nil != request.delivery_date) && (nil != request.delivery_date)
       //   - sum = sum + (request.delivery_date - request.approval_date).to_i
