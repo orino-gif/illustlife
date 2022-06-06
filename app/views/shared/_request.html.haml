@@ -5,8 +5,9 @@
       - sender = User.find_by(nickname: @request.sender)
       - receiver = User.find_by(nickname: @request.receiver)
       %table.table
-        %tr
-          %td= "リクエストID：#{@request.id}"
+        - if 'development' == ENV['RAILS_ENV']
+          %tr
+            %td= "リクエストID：#{@request.id}" 
         %tr
           - if nil != sender
             %td= display_icon(sender.creator, 'size-small-square rounded-circle fit-cover') + '依頼者：' + @request.sender
