@@ -23,12 +23,14 @@ class RequestsController < ApplicationController
         
       elsif '製作中断' == params[:status]
         @receiver.creator.number_of_approval -= 1
+        @receiver.creator.evaluation_points -= 10
         UserMailer.suspension_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者へ中断のメールを送信しました。'
         
       elsif '納品完了' == params[:status]
-        @receiver.creator.number_of_works += 1
         @card = Card.find_by(user_id: @sender.id)
+        @receiver.creator.number_of_works += 1
+        @receiver.creator.evaluation_points += 3
         UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者への納品完了のメールを送信しました。'
         

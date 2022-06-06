@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
     @receiver = receiver
     @request = requests
     mail(
-        to: @receiver.email,
+        to: "#{@receiver.email},#{ENV['ADMINISTRATOR_MAIL']}",
         subject: "[イラストライフ運営局]#{@sender.nickname}さんからリクエストが送信されました。"
       )
   end
@@ -15,7 +15,7 @@ class UserMailer < ApplicationMailer
     @receiver = receiver
     @request = requests
     mail(
-        to: @sender.email,
+        to: "#{@sender.email},#{ENV['ADMINISTRATOR_MAIL']}",
         subject: "[イラストライフ運営局]#{@sender.nickname}さんからのリクエストが拒否されました"
       )
   end
@@ -25,7 +25,7 @@ class UserMailer < ApplicationMailer
     @receiver = receiver
     @request = requests
     mail(
-        to: @sender.email,
+        to: "#{@sender.email},#{ENV['ADMINISTRATOR_MAIL']}",
         subject: "[イラストライフ運営局]#{@sender.nickname}さんからのリクエストが承認されました"
       )
   end
@@ -35,7 +35,7 @@ class UserMailer < ApplicationMailer
     @receiver = receiver
     @request = requests
     mail(
-        to: @sender.email,
+        to: "#{@sender.email},#{ENV['ADMINISTRATOR_MAIL']}",
         subject: "[イラストライフ運営局]#{@sender.nickname}さんの作業が中断されました"
       )
   end
@@ -45,7 +45,7 @@ class UserMailer < ApplicationMailer
     @receiver = receiver
     @request = requests
     mail(
-        to: @sender.email,
+        to: "#{@sender.email},#{ENV['ADMINISTRATOR_MAIL']}",
         subject: "[イラストライフ運営局]#{@sender.nickname}さんへの納品が完了しました。"
       )
   end
@@ -55,7 +55,7 @@ class UserMailer < ApplicationMailer
     @receiver = receiver
     @request = requests
     mail(
-        to: @sender.email,
+        to: "#{@sender.email},#{ENV['ADMINISTRATOR_MAIL']}",
         subject: "[イラストライフ運営局]#{@sender.nickname}さんへの納品の手戻りがありました。"
       )
   end
