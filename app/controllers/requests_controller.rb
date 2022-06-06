@@ -61,26 +61,25 @@ class RequestsController < ApplicationController
   
   def create
     if user_signed_in?
-      @request = Request.new(requests_params)
       @sender = current_user
       @receiver = User.find(params[:authorizer_id])
+      @card = Card.find_by(user_id: current_user.id)
+      
+      @request = Request.new(requests_params)
       @request.sender = @sender.nickname
       @request.receiver = @receiver.nickname
       @request.status = '承認待ち'
       @request.sender_icon_url = @sender.creator.icon
-      p 'aaa' + @request.sender_icon_url.to_s if 'development' == ENV['RAILS_ENV']
       @request.receiver_icon_url = @receiver.creator.icon
-      p 'bbb' + @request.receiver_icon_url.to_s if 'development' == ENV['RAILS_ENV']
-      @card = Card.find_by(user_id: current_user.id)
       
       if ((nil != @card) || ('development' == ENV['RAILS_ENV'])) && (@request.save)
         current_user.creator.number_of_request += 1
         current_user.creator.save
         UserMailer.request_email(@sender, @receiver, @request).deliver_later
         redirect_to requests_url, notice: 'クリエイターへリクエストメールを送信しました。'
-      elsif nil == @card
+      elsif @card.nil?
         redirect_to request.referer, alert: '事前にクレジットカードの登録が必要です'
-      else
+      elsif false == @request.save
         redirect_to request.referer, alert: '文字(1000文字以下)が許容範囲外です'
       end
     else
