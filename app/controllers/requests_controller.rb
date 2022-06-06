@@ -8,45 +8,47 @@ class RequestsController < ApplicationController
     @requests = Request.where(receiver: current_user.nickname).or(Request.where(sender: current_user.nickname))
     
     if not params[:request_id].nil?
-      
-
       @request = Request.find(params[:request_id])
       @sender = User.find_by(nickname: Request.find(params[:request_id]).sender)
       @receiver = User.find_by(nickname: Request.find(params[:request_id]).receiver)
-      @request.status = params[:status]
-      if @request.save
-        if '拒否' == params[:status]
-          @receiver.creator.number_of_rejection += 1
-          UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
-          redirect_to request.referer, notice: '依頼者からのリクエストを拒否しました。'
-          
-        elsif '製作中' == params[:status]
-          @receiver.creator.number_of_approval += 1
-          UserMailer.consent_email(@sender, @receiver, @request).deliver_later
-          redirect_to request.referer, notice: '依頼者へ承諾のメールを送信しました。'
-          
-        elsif '納品完了' == params[:status]
-          @receiver.creator.number_of_works += 1
-          @card = Card.find_by(user_id: @sender.id)
-          UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
-          redirect_to request.referer, notice: '依頼者への納品完了のメールを送信しました。'
-          
-          if nil != @card 
-            Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-            Payjp::Charge.create(
-              :amount => params[:amount],
-              :customer => @card.customer_id,
-              :currency => 'jpy'
-            )
-          end
-          
-        elsif '手戻し' == params[:status]
-          @receiver.creator.number_of_works -= 1
-          UserMailer.rework_email(@sender, @receiver, @request).deliver_later
-          redirect_to request.referer, notice: '依頼者への手戻りのメールを送信しました。'
+
+      if '拒否' == params[:status]
+        UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
+        redirect_to request.referer, notice: '依頼者からのリクエストを拒否しました。'
+        
+      elsif '製作中' == params[:status]
+        @receiver.creator.number_of_approval += 1
+        UserMailer.consent_email(@sender, @receiver, @request).deliver_later
+        redirect_to request.referer, notice: '依頼者へ承諾のメールを送信しました。'
+        
+      elsif '製作中断' == params[:status]
+        @receiver.creator.number_of_approval -= 1
+        UserMailer.suspension_email(@sender, @receiver, @request).deliver_later
+        redirect_to request.referer, notice: '依頼者へ中断のメールを送信しました。'
+        
+      elsif '納品完了' == params[:status]
+        @receiver.creator.number_of_works += 1
+        @card = Card.find_by(user_id: @sender.id)
+        UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
+        redirect_to request.referer, notice: '依頼者への納品完了のメールを送信しました。'
+        
+        if nil != @card 
+          Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+          Payjp::Charge.create(
+            :amount => params[:amount],
+            :customer => @card.customer_id,
+            :currency => 'jpy'
+          )
         end
-        @receiver.creator.save
+        
+      elsif '手戻し' == params[:status]
+        @receiver.creator.number_of_works -= 1
+        UserMailer.rework_email(@sender, @receiver, @request).deliver_later
+        redirect_to request.referer, notice: '依頼者への手戻りのメールを送信しました。'
       end
+      @request.status = params[:status]
+      @request.save
+      @receiver.creator.save
     end
   end
   

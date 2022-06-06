@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    To
+    =@sender.nickname
+    さん
+    <br><br>
+    = @receiver.nickname
+    さんより作業が中断されました。<br>
+    料金は返金されます。<br>
+    大変申し訳ありませんが、宜しくお願い致します。<br> 
+    = link_to '詳細リンク先', ENV['HOME_ADDRESS'] + "/requests"
+    <br>
