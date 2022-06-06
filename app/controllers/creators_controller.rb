@@ -1,6 +1,8 @@
 class CreatorsController < ApplicationController
   before_action :set_authorizer, only: [:show, :edit]
+  
   def show
+    @requests = Request.where(receiver: current_user.nickname, status: '納品完了')
   end
   
   def edit
