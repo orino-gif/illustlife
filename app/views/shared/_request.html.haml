@@ -9,7 +9,7 @@
           %tr
             %td= "リクエストID：#{@request.id}" 
         %tr
-          - if nil != sender
+          - if not sender.nil?
             %td= display_icon(sender.creator, 'size-small-square rounded-circle fit-cover') + '依頼者：' + @request.sender
           - else
             - if @request.sender_icon_url.empty?
@@ -17,7 +17,7 @@
             - else
               %td=image_tag(@request.sender_icon_url, class: 'size-small-square rounded-circle fit-cover') + '依頼者：' + @request.sender
         %tr
-          - if nil != receiver
+          - if not receiver.nil?
             %td= display_icon(receiver.creator, 'size-small-square rounded-circle fit-cover') + '承認者：' + @request.receiver
           - else
             - if @request.receiver_icon_url.empty?
@@ -34,7 +34,7 @@
           %td.string-indention= "ファイル形式：#{@request.file_format}"
         %tr
           %td.string-indention
-            - if nil != current_user
+            - if not current_user.nil?
               - if (@request.receiver == current_user.nickname) && ('承認待ち' == @request.status)
                 = "#{@request.sender}さんから#{@request.receiver}さんへのリクエストを承認しますか？"
                 = button_to '承認', {controller:'requests', action:'index'}, {method: :get, params:{status:'製作中', request_id:@request.id}}

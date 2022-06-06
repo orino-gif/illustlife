@@ -1,12 +1,8 @@
 class RequestsController < ApplicationController
   require 'payjp' #これでpajpのメソッドが使用できます
   
-  before_action :authenticate_user!, only: [:index]
-  before_action :card_present, only: [:index]
-  
   def index
     @requests = Request.where(receiver: current_user.nickname).or(Request.where(sender: current_user.nickname))
-    
     if not params[:request_id].nil?
       @request = Request.find(params[:request_id])
       @sender = User.find_by(nickname: Request.find(params[:request_id]).sender)
@@ -34,13 +30,9 @@ class RequestsController < ApplicationController
         UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者への納品完了のメールを送信しました。'
         
-        if nil != @card 
+        if not @card.nil?
           Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-          Payjp::Charge.create(
-            :amount => params[:amount],
-            :customer => @card.customer_id,
-            :currency => 'jpy'
-          )
+          Payjp::Charge.create(:amount => params[:amount], :customer => @card.customer_id, :currency => 'jpy')
         end
         
       elsif '手戻し' == params[:status]
@@ -102,7 +94,7 @@ class RequestsController < ApplicationController
     if @requests.update(requests_params)
       redirect_to requests_path(@requests, anchor: 'page1')
     else
-      redirect_to request.referer, alert: 'ファイル形式かサイズ(2GB以下)が許容範囲外です'
+      redirect_to request.referer, alert: 'ファイル形式かサイズ(2GB以下)が非対応です'
     end
   end
   
@@ -114,9 +106,5 @@ class RequestsController < ApplicationController
   
   def creator_params
     params.require(:creator).permit(:number_of_request)
-  end
-
-  def card_present
-    @card = Card.where(user_id: current_user.id).first if Card.where(user_id: current_user.id).present?
   end
 end

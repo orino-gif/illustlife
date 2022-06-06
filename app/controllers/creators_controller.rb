@@ -1,10 +1,9 @@
 class CreatorsController < ApplicationController
+  before_action :set_authorizer, only: [:show, :edit]
   def show
-    @authorizer = User.find_by(id:params[:id])
   end
   
   def edit
-    @authorizer = User.find_by(id:params[:id])
     @card = Card.find_by(user_id:params[:id])
     @credit = Credit.find_by(user_id:params[:id])
   end
@@ -24,5 +23,9 @@ class CreatorsController < ApplicationController
 
   def creators_params
     params.require(:creator).permit(:header, :icon, :twitter, :pixiv, :instagram, :request_acceptance_permission, :recommended_amount)
-  end   
+  end
+  
+  def set_authorizer
+    @authorizer = User.find_by(id:params[:id])
+  end
 end

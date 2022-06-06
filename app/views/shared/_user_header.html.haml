@@ -20,10 +20,10 @@
   
 .row.my-5
   = "ニックネーム：#{@authorizer.nickname}"
-  %br
-    - if 0 != @authorizer.creator.number_of_works
-      = "納品数：#{@authorizer.creator.number_of_works}点、作業予定日数：#{@authorizer.creator.working_days}日、"
-      = "平均納品日数：#{@authorizer.creator.average_delivery_time}日、締切厳守率：#{@authorizer.creator.deadline_strict_adherence_rate}%、"
-      = "返信率:#{@authorizer.creator.reply_rate}%"
-    - else
-      = '納品作品なし'
+  = "、作業予定日数：#{@authorizer.creator.working_days}日"
+  - if 0 != @authorizer.creator.number_of_works
+    = "、納品数：#{@authorizer.creator.number_of_works}点、"
+    = "平均納品日数：#{@authorizer.creator.average_delivery_time}日、締切厳守率：#{@authorizer.creator.deadline_strict_adherence_rate}%、"
+    = "返信率:#{@authorizer.creator.reply_rate}%"
+  - else
+    = '、納品作品なし'
