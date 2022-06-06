@@ -16,7 +16,6 @@
     %h2 ■クリエイター
   .row
     - begin
-      // 1から20番までのユーザーを表示
       - @creators.each.with_index(1) do |creator,index| 
         .col-auto.text-center
           - if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示
