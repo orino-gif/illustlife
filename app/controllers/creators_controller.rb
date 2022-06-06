@@ -1,8 +1,9 @@
 class CreatorsController < ApplicationController
   before_action :set_authorizer, only: [:show, :edit]
+  before_action :set_creator, only: [:show, :update]
   
   def show
-    @requests = Request.where(receiver: current_user.nickname, status: '納品完了')
+    @requests = Request.where(receiver: @creator.user.nickname, status: '納品完了')
   end
   
   def edit
@@ -12,8 +13,7 @@ class CreatorsController < ApplicationController
   
   def update
     begin
-      @creators = Creator.find(params[:id])
-      @creators.update(creators_params)
+      @creator.update(creators_params)
       redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
     rescue => e
       p e
@@ -29,5 +29,9 @@ class CreatorsController < ApplicationController
   
   def set_authorizer
     @authorizer = User.find_by(id:params[:id])
+  end
+  
+  def set_creator
+    @creator = Creator.find(params[:id])
   end
 end
