@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks'}
 
   get 'requests/:id/new', to: 'requests#new'
-  resources :credits, only: [:new, :create, :show, :update]
+  get 'credits/:id/new', to: 'credits#new'
+  resources :credits, only: [:create, :show, :update]
   resources :homes, only: [:index]
   resources :creators, only: [:create, :show, :edit, :update]
   resources :requests, only: [:index, :create, :show, :update] do
