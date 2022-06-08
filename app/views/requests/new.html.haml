@@ -8,7 +8,7 @@
       = form_with(model: @request, local: true) do |f|
         .form-group.mt-4
           = f.label :money, '推奨金額(円)'
-          = f.text_field :money, class:'form-control input-textbox_large font-large', value: @authorizer.creator.recommended_amount.to_s
+          = f.text_field :money, class:'form-control Horizontal_rectangle font-large', value: @authorizer.creator.recommended_amount.to_s
           = f.label :money, '入力可能範囲:￥' + @authorizer.creator.minimum_amount.to_s(:delimited) + '～￥99,999', class:'font-Xsmall'
         
         .form-group.mt-4
