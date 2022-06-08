@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_28_003045) do
+ActiveRecord::Schema.define(version: 2022_06_08_184609) do
 
   create_table "cards", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2022_05_28_003045) do
     t.boolean "request_acceptance_permission", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "minimum_amount", default: 1000
   end
 
   create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
