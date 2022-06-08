@@ -41,8 +41,10 @@
       %tr
         %td
           = form_with(model: @authorizer.creator, local:true) do |f|
-            = f.label :recommended_amount, '金額(円):'
+            = f.label :recommended_amount, '推奨金額(円):'
             = f.text_field :recommended_amount
+            = f.label :minimum_amount, '最低金額(円):'
+            = f.text_field :minimum_amount
             = f.submit '登録'
       %tr
         %td
