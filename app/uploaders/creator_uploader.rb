@@ -40,7 +40,7 @@ class CreatorUploader < CarrierWave::Uploader::Base
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w(png jpg jpeg gif psd)
+    %w(png jpg jpeg gif)
   end
 
   # Override the filename of the uploaded files:
