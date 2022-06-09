@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_08_184609) do
+ActiveRecord::Schema.define(version: 2022_06_09_191227) do
 
   create_table "cards", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -71,6 +71,9 @@ ActiveRecord::Schema.define(version: 2022_06_08_184609) do
     t.datetime "updated_at", null: false
     t.text "sender_icon_url"
     t.text "receiver_icon_url"
+    t.boolean "is_nsfw", default: false
+    t.boolean "is_anonymous", default: false
+    t.boolean "is_autographed", default: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

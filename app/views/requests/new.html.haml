@@ -9,7 +9,7 @@
         .form-group.mt-4
           = f.label :money, '推奨金額(円)'
           = f.text_field :money, class:'form-control Horizontal_rectangle font-large', value: @authorizer.creator.recommended_amount.to_s
-          = f.label :money, '入力可能範囲:￥' + @authorizer.creator.minimum_amount.to_s(:delimited) + '～￥99,999', class:'font-Xsmall'
+          = f.label :money, '入力可能範囲:￥' + @authorizer.creator.minimum_amount.to_s(:delimited) + '～￥100,000', class:'font-Xsmall'
         
         .form-group.mt-4
           = f.label :message, '本文(1000文字以内)'
@@ -17,6 +17,16 @@
         .form-group
           = f.label :file_format, 'ファイル形式:'
           = f.select :file_format, ['png', 'jpg', 'jpeg', 'gif']
+        .form-group
+          = f.check_box :is_nsfw ,{},checked_value = "true",unchecked_value = "false"
+          = f.label :is_nsfw, 'NSFW'
+          %br
+          = f.check_box :is_anonymous ,{},checked_value = "true",unchecked_value = "false"  
+          = f.label :is_anonymous, '匿名希望'
+          %br
+          = f.check_box :is_autographed ,{},checked_value = "true",unchecked_value = "false"  
+          = f.label :is_autographed, '宛名入りサイン'
+          
         %br
           = f.submit 'リクエスト送信', class:'btn btn-light size-small-Horizontal_variable_rectangle font-large'
         %br/
@@ -25,6 +35,8 @@
         \-注意事項-<br> &nbsp以下の内容に同意される方のみリクエストを行ってください。<br>
         ・リテイク無し。<br>
         ・納品物の品質はクリエイターが決定する。納品後に不服申し立てを行わない。<br>
-        ・著作権譲渡は原則不可(※ライセンス契約を交わした場合を除く)。<br>
+        ・著作権はクリエーターに帰属する。(※ライセンス契約を交わした場合を除く)。<br>
+        ・未成年者は性的な表現が含まれるリクエストを行わない。<br>
         ・商用利用する場合は用途を明記する。<br>
+        
       %br
