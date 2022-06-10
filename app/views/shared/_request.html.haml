@@ -31,7 +31,10 @@
         %tr
           %td.string_indention= "リクエスト内容：#{@request.message}"
         %tr
-          %td.string_indention= "ファイル形式：#{@request.file_format},　NSFW:#{@request.is_nsfw},　匿名:#{@request.is_anonymous},　宛名サイン:#{@request.is_autographed}"
+          - true == @request.is_nsfw ? nsfw='希望する':nsfw='希望しない'
+          - true == @request.is_anonymous ? anonymous='希望する':anonymous='希望しない'
+          - true == @request.is_autographed ? autographed='希望する':autographed='希望しない'
+          %td.string_indention= "ファイル形式：#{@request.file_format},　NSFW:#{nsfw},　匿名:#{anonymous},　宛名サイン:#{autographed}"
         %tr
           
         %tr
