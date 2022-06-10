@@ -29,11 +29,13 @@
         %tr
           %td= "金額：#{@request.money}円"
         %tr
-          %td.string-indention= "リクエスト内容：#{@request.message}"
+          %td.string_indention= "リクエスト内容：#{@request.message}"
         %tr
-          %td.string-indention= "ファイル形式：#{@request.file_format}"
+          %td.string_indention= "ファイル形式：#{@request.file_format},　NSFW:#{@request.is_nsfw},　匿名:#{@request.is_anonymous},　宛名サイン:#{@request.is_autographed}"
         %tr
-          %td.string-indention
+          
+        %tr
+          %td.string_indention
             - if not current_user.nil?
               - if (@request.receiver == current_user.nickname) && ('承認待ち' == @request.status)
                 = "#{@request.sender}さんから#{@request.receiver}さんへのリクエストを承認しますか？"

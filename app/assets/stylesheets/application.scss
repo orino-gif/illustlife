@@ -71,8 +71,8 @@ strong, label { font-weight: normal; }
 //半透明
 .img_color-translucent{ opacity: 0.3; }
 
-//改行
-.string-indention{ word-wrap: break-word; max-width: 300px; }
+//文字がコンテンツからあふれた場合に改行
+.string_indention{ word-wrap: break-word; max-width: 350px; }
 
 @media screen and (max-width: 640px){
   .size-large-square { width: 100px; height: 100px; }

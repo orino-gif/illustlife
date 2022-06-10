@@ -19,14 +19,13 @@
           = f.select :file_format, ['png', 'jpg', 'jpeg', 'gif']
         .form-group
           = f.check_box :is_nsfw ,{},checked_value = "true",unchecked_value = "false"
-          = f.label :is_nsfw, 'NSFW'
+          = f.label :is_nsfw, 'NSFW '
           %br
           = f.check_box :is_anonymous ,{},checked_value = "true",unchecked_value = "false"  
-          = f.label :is_anonymous, '匿名希望'
+          = f.label :is_anonymous, '匿名希望 '
           %br
           = f.check_box :is_autographed ,{},checked_value = "true",unchecked_value = "false"  
-          = f.label :is_autographed, '宛名入りサイン'
-          
+          = f.label :is_autographed, '宛名入りサイン '
         %br
           = f.submit 'リクエスト送信', class:'btn btn-light size-small-Horizontal_variable_rectangle font-large'
         %br/
