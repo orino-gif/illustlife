@@ -14,6 +14,7 @@ class RequestsController < ApplicationController
         
       elsif '製作中' == params[:status]
         @receiver.creator.number_of_approval += 1
+        @request.approval_day = Time.now
         UserMailer.consent_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者へ承諾のメールを送信しました。'
         
@@ -27,6 +28,8 @@ class RequestsController < ApplicationController
         @card = Card.find_by(user_id: @sender.id)
         @receiver.creator.number_of_works += 1
         @receiver.creator.evaluation_points += 3
+        p Time.now - @request.approval_day
+        @request.delivery_time = 1 + ((Time.now - @request.approval_day).to_i/60/60)
         UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者への納品完了のメールを送信しました。'
         

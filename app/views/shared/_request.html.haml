@@ -38,6 +38,9 @@
         %tr
           
         %tr
+          - if not @request.delivery_time.nil?
+            %td.string_indention= "納品日数：#{@request.delivery_time}日"
+        %tr
           %td.string_indention
             - if not current_user.nil?
               - if (@request.receiver == current_user.nickname) && ('承認待ち' == @request.status)
@@ -51,6 +54,8 @@
                   = f.submit '登録'
                 = button_to '納品', {controller:'requests', action:'index'}, {method: :get, params:{status:'納品完了', request_id:@request.id, amount:@request.money}}
                 = button_to '製作中断', {controller:'requests', action:'index'}, {method: :get, params:{status:'製作中断', request_id:@request.id}}
+        
+
     .col-md-auto
       - if @request.deliver_img?
         - if @request.deliver_img.to_s.include?('.psd')
