@@ -1,14 +1,15 @@
 class RequestsController < ApplicationController
   require 'payjp' #これでpajpのメソッドが使用できます
-  
+
   def index
     @requests = Request.where(receiver: current_user.nickname).or(Request.where(sender: current_user.nickname))
     if not params[:request_id].nil?
       @request = Request.find(params[:request_id])
+      @deadline = @request.created_at + 60*60*24*14
       @sender = User.find_by(nickname: Request.find(params[:request_id]).sender)
       @receiver = User.find_by(nickname: Request.find(params[:request_id]).receiver)
 
-      if '拒否' == params[:status]
+      if '拒否' == params[:status] || (@request.created_at + 60*60*24*14) < Time.now
         UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者からのリクエストを拒否しました。'
         
@@ -19,6 +20,7 @@ class RequestsController < ApplicationController
         redirect_to request.referer, notice: '依頼者へ承諾のメールを送信しました。'
         
       elsif '製作中断' == params[:status]
+        @request.is_in_time_for_the_deadline = false
         @receiver.creator.number_of_approval -= 1
         @receiver.creator.evaluation_points -= 10
         UserMailer.suspension_email(@sender, @receiver, @request).deliver_later
@@ -26,6 +28,7 @@ class RequestsController < ApplicationController
         
       elsif '納品完了' == params[:status]
         @card = Card.find_by(user_id: @sender.id)
+        @request.is_in_time_for_the_deadline = true
         @receiver.creator.number_of_works += 1
         @receiver.creator.evaluation_points += 3
         p @requests.all.sum(:delivery_time)

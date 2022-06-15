@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2022_06_14_133645) do
     t.boolean "is_autographed", default: false
     t.datetime "approval_day"
     t.integer "delivery_time"
+    t.boolean "is_in_time_for_the_deadline"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
