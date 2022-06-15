@@ -28,8 +28,10 @@ class RequestsController < ApplicationController
         @card = Card.find_by(user_id: @sender.id)
         @receiver.creator.number_of_works += 1
         @receiver.creator.evaluation_points += 3
+        p @requests.all.sum(:delivery_time)
         p Time.now - @request.approval_day
-        @request.delivery_time = 1 + ((Time.now - @request.approval_day).to_i/60/60)
+        @request.delivery_time =+ 1
+        @receiver.creator.average_delivery_time = 1 + (@requests.all.sum(:delivery_time) / @receiver.creator.number_of_works)
         UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者への納品完了のメールを送信しました。'
         
