@@ -6,6 +6,12 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
+      t.boolean :accepted, null: false, default: false
+      t.string :nickname, null: false, default: ""
+      
+      ## ツイッター連携に必要
+      t.string :provider, null: false, default: ""
+      t.string :uid, null: false, default: ""
       
       # kakurenbo-puti
       t.datetime :soft_destroyed_at
@@ -35,17 +41,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-
       t.timestamps null: false
     end
 
-    # add_index :users, :email,                unique: true
-    # 代わりに、soft_destoryed_atがNULLであることを条件にした部分indexを追加する
-    add_index :users, :email, unique: true, where: '(soft_destroyed_at IS NULL)'
-    add_index :users, :soft_destroyed_at
-    
-    add_index :users, :reset_password_token, unique: true
-    # add_index :users, :confirmation_token,   unique: true
-    # add_index :users, :unlock_token,         unique: true
+    add_index :users, [:email, :nickname], unique: true
+    add_index :users, [:provider, :uid]
   end
 end

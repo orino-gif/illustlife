@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_14_133645) do
+ActiveRecord::Schema.define(version: 2022_04_26_104512) do
 
   create_table "cards", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -27,7 +27,10 @@ ActiveRecord::Schema.define(version: 2022_06_14_133645) do
     t.string "twitter"
     t.string "pixiv"
     t.string "instagram"
+    t.string "youtube"
+    t.string "link"
     t.integer "recommended_amount", default: 3000
+    t.integer "minimum_amount", default: 1000
     t.integer "working_days", default: 14
     t.integer "number_of_request", default: 0
     t.integer "number_of_approval", default: 0
@@ -35,12 +38,11 @@ ActiveRecord::Schema.define(version: 2022_06_14_133645) do
     t.float "average_delivery_time", default: 0.0
     t.float "deadline_strict_adherence_rate", default: 100.0
     t.float "reply_rate", default: 100.0
+    t.boolean "request_acceptance_permission", default: false
     t.integer "creator_points", default: 0
     t.integer "evaluation_points", default: 50
-    t.boolean "request_acceptance_permission", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "minimum_amount", default: 1000
   end
 
   create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -53,12 +55,6 @@ ActiveRecord::Schema.define(version: 2022_06_14_133645) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "explanations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.text "letter_body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "money"
     t.string "sender"
@@ -66,22 +62,26 @@ ActiveRecord::Schema.define(version: 2022_06_14_133645) do
     t.string "status"
     t.text "message"
     t.string "file_format"
-    t.string "deliver_img"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.text "sender_icon_url"
     t.text "receiver_icon_url"
     t.boolean "is_nsfw", default: false
     t.boolean "is_anonymous", default: false
     t.boolean "is_autographed", default: false
     t.datetime "approval_day"
-    t.integer "delivery_time"
-    t.boolean "is_in_time_for_the_deadline"
+    t.integer "delivery_time", default: 0
+    t.integer "is_in_time_for_the_deadline", default: 0
+    t.string "deliver_img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.boolean "accepted", default: false, null: false
+    t.string "nickname", default: "", null: false
+    t.string "provider", default: "", null: false
+    t.string "uid", default: "", null: false
     t.datetime "soft_destroyed_at"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -92,12 +92,8 @@ ActiveRecord::Schema.define(version: 2022_06_14_133645) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "accepted", default: false, null: false
-    t.string "nickname"
-    t.string "provider"
-    t.string "uid"
-    t.index ["email", "soft_destroyed_at"], name: "index_users_on_email_and_soft_destroyed_at", unique: true
-    t.index ["nickname"], name: "index_users_on_nickname", unique: true
+    t.index ["email", "nickname"], name: "index_users_on_email_and_nickname", unique: true
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid"
   end
 
 end

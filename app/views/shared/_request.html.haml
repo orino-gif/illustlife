@@ -37,7 +37,7 @@
           %td.string_indention= "ファイル形式：#{@request.file_format},　NSFW:#{nsfw},　匿名:#{anonymous},　宛名入りサイン:#{autographed}"
         %tr
           - deadline = @request.created_at + (receiver.creator.working_days * 60 * 60 * 24)
-          %td.string_indention= "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M:%S')}"
+          %td.string_indention= "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
         %tr
           - if not @request.delivery_time.nil?
             %td.string_indention= "納品日数：#{@request.delivery_time}日"

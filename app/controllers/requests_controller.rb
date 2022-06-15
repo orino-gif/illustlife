@@ -5,7 +5,6 @@ class RequestsController < ApplicationController
     @requests = Request.where(receiver: current_user.nickname).or(Request.where(sender: current_user.nickname))
     if not params[:request_id].nil?
       @request = Request.find(params[:request_id])
-      @deadline = @request.created_at + 60*60*24*14
       @sender = User.find_by(nickname: Request.find(params[:request_id]).sender)
       @receiver = User.find_by(nickname: Request.find(params[:request_id]).receiver)
 
@@ -48,6 +47,10 @@ class RequestsController < ApplicationController
         UserMailer.rework_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者への手戻りのメールを送信しました。'
       end
+      
+      p @requests.all.sum(:is_in_time_for_the_deadline)
+      
+      @receiver.creator.deadline_strict_adherence_rate = 100-(@requests.all.sum(:is_in_time_for_the_deadline) / @receiver.creator.number_of_approval)
       @request.status = params[:status]
       @request.save
       @receiver.creator.save
