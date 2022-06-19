@@ -61,7 +61,7 @@ class RequestsController < ApplicationController
     @request = Request.new
     @authorizer = User.find(params[:id])
   end
-  
+
   def create
     if user_signed_in?
       @sender = current_user

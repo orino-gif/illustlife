@@ -1,3 +1,4 @@
-example_id                      | status | run_time        |
-------------------------------- | ------ | --------------- |
-./spec/models/test_spec.rb[1:1] | failed | 0.10911 seconds |
+example_id                        | status | run_time        |
+--------------------------------- | ------ | --------------- |
+./spec/models/test_spec.rb[1:1]   | passed | 0.01146 seconds |
+./spec/models/test_spec.rb[2:1:1] | passed | 0.15777 seconds |
