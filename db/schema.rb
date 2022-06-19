@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_17_214055) do
+ActiveRecord::Schema.define(version: 2022_04_26_104512) do
 
   create_table "cards", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -71,13 +71,6 @@ ActiveRecord::Schema.define(version: 2022_06_17_214055) do
     t.integer "delivery_time", default: 0
     t.integer "is_in_time_for_the_deadline", default: 0
     t.string "deliver_img"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "tests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
