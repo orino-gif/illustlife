@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_26_104512) do
+ActiveRecord::Schema.define(version: 2022_06_19_215822) do
 
   create_table "cards", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -92,8 +92,7 @@ ActiveRecord::Schema.define(version: 2022_04_26_104512) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email", "nickname"], name: "index_users_on_email_and_nickname", unique: true
-    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid"
+    t.datetime "deleted_at"
   end
 
 end
