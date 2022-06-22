@@ -59,4 +59,11 @@ class UserMailer < ApplicationMailer
         subject: "[イラストライフ運営局]#{@sender.nickname}さんへの納品の手戻りがありました。"
       )
   end
+  
+  def info
+    mail(
+        to: "#{ENV['ADMINISTRATOR_MAIL']}",
+        subject: "[イラストライフ運営局]解除されました。"
+      )
+  end
 end

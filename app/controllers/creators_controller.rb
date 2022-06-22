@@ -9,11 +9,15 @@ class CreatorsController < ApplicationController
   def edit
     @card = Card.find_by(user_id:params[:id])
     @credit = Credit.find_by(user_id:params[:id])
+    p params[:aa]
   end
   
   def update
     begin
       @creator.update(creators_params)
+      if @creator.request_acceptance_permission
+        UserMailer.info.deliver_later
+      end
       redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
     rescue => e
       p e
