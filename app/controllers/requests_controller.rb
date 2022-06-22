@@ -2,11 +2,11 @@ class RequestsController < ApplicationController
   require 'payjp' #これでpajpのメソッドが使用できます
 
   def index
-    @requests = Request.where(receiver: current_user.nickname).or(Request.where(sender: current_user.nickname))
+    @requests = Request.where(receiver_id: current_user.id).or(Request.where(sender: current_user.id))
     if not params[:request_id].nil?
       @request = Request.find(params[:request_id])
-      @sender = User.find_by(nickname: Request.find(params[:request_id]).sender)
-      @receiver = User.find_by(nickname: Request.find(params[:request_id]).receiver)
+      @sender = User.find(nickname: Request.find(params[:request_id]).sender_id)
+      @receiver = User.find(nickname: Request.find(params[:request_id]).receiver_id)
 
       if '拒否' == params[:status] || (@request.created_at + 60*60*24*14) < Time.now
         UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
@@ -69,8 +69,8 @@ class RequestsController < ApplicationController
       @card = Card.find_by(user_id: current_user.id)
       
       @request = Request.new(requests_params)
-      @request.sender = @sender.nickname
-      @request.receiver = @receiver.nickname
+      @request.sender = @sender.id
+      @request.receiver = @receiver.id
       @request.status = '承認待ち'
       @request.sender_icon_url = @sender.creator.icon
       @request.receiver_icon_url = @receiver.creator.icon

@@ -17,7 +17,7 @@
   .row
     - begin
       - @creators.each.with_index(1) do |creator,index| 
-        // - user.user.restore ユーザーアカウントを復旧
+        // - user.restore ユーザーアカウントを復旧
         .col-auto.text-center
           - if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示
             - if not creator.user.soft_destroyed?

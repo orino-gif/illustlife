@@ -44,7 +44,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.timestamps null: false
     end
 
-    # add_index :users, :email, unique: true, where: (soft_destroyed_at IS NULL)
-    # add_index :users, [:provider, :uid, :soft_destroyed_at]
+    add_index :users, :nickname
+    add_index :users, [:email, :provider, :uid, :soft_destroyed_at]
   end
 end

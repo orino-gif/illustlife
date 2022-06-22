@@ -2,8 +2,8 @@
   .row.my-5
     .col-md-auto
       = "■申請日時：#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
-      - sender = User.find_by(nickname: @request.sender)
-      - receiver = User.find_by(nickname: @request.receiver)
+      - sender = User.find_(id: @request.sender_id)
+      - receiver = User.find(id: @request.receiver_id)
       %table.table
         - if 'development' == ENV['RAILS_ENV']
           %tr

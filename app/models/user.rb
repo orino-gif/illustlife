@@ -24,8 +24,7 @@ class User < ApplicationRecord
   end
   
   validates :accepted, presence: {message: ':利用規約にチェックを入力してください'}
-  validates :nickname, uniqueness: {message: ':重複したニックネームです'}
-  
+
   # 論理削除に対応するため、validationをカスタマイズする
   validates :email, presence: true, length: { maximum: 255 }
   validates_uniqueness_of :email, scope: :soft_destroyed_at

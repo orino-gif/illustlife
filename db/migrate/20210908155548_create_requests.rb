@@ -2,8 +2,8 @@ class CreateRequests < ActiveRecord::Migration[5.2]
   def change
     create_table :requests do |t|
       t.integer :money
-      t.string :sender
-      t.string :receiver
+      t.integer :sender_id
+      t.integer :receiver_id
       t.string :status
       t.text :message
       t.string :file_format

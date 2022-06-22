@@ -1,18 +1,10 @@
 - content_for(:html_title) { 'リクエスト一覧' }
 %h1.border_color-whitesmoke='リクエスト一覧'
-// - sum = 1
-// - i = @requests.where(status:'納品完了', receiver:current_user.nickname).count
 
 .container
   - if not @requests.empty? then
     - @requests.reverse_each do |request|
-      // - if (nil != request.delivery_date) && (nil != request.delivery_date)
-      //   - sum = sum + (request.delivery_date - request.approval_date).to_i
       - @request = request
-      // #page1
       = render 'shared/request.html'
-    // - if 0 != i
-    //   - current_user.creator.average_delivery_time = sum / i
-    //   - current_user.creator.save
   - else
     = 'リクエストがまだ存在しません'

@@ -3,7 +3,7 @@ class CreatorsController < ApplicationController
   before_action :set_creator, only: [:show, :update]
   
   def show
-    @requests = Request.where(receiver: @creator.user.nickname, status: '納品完了')
+    @requests = Request.where(receiver_id: @creator.user.id, status: '納品完了')
   end
   
   def edit
