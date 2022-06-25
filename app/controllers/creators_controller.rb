@@ -9,7 +9,6 @@ class CreatorsController < ApplicationController
   def edit
     @card = Card.find_by(user_id:params[:id])
     @credit = Credit.find_by(user_id:params[:id])
-    p params[:aa]
   end
   
   def update

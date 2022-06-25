@@ -2,7 +2,7 @@ class RequestsController < ApplicationController
   require 'payjp' #これでpajpのメソッドが使用できます
 
   def index
-    @requests = Request.where(receiver_id: current_user.id).or(Request.where(sender: current_user.id))
+    @requests = Request.where(receiver_id: current_user.id).or(Request.where(sender_id: current_user.id))
     if not params[:request_id].nil?
       @request = Request.find(params[:request_id])
       @sender = User.find(nickname: Request.find(params[:request_id]).sender_id)
