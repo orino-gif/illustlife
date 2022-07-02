@@ -84,25 +84,3 @@ strong, label { font-weight: normal; }
   .position-top-middle { position: absolute; top:-70px; }
   .position-top-short { position: absolute; top:-30px; }
 }
-
-.box{
-  position: relative;
-}
-.center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.shadow{
-    padding: 10px;
-    color: #FFF;
-    font-weight: bold;
-    font-size: 1em;
-    text-shadow:
-           1px 1px 0px #000, -1px -1px 0px #000,
-          -1px 1px 0px #000,  1px -1px 0px #000,
-           1px 0px 0px #000, -1px  0px 0px #000,
-           0px 1px 0px #000,  0px -1px 0px #000;
-    margin: 0;
-}
