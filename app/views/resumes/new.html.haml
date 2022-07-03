@@ -1,0 +1,7 @@
+- content_for(:html_title) { '再開通知' }
+%h1.border_color-whitesmoke 再開通知
+
+.container
+  = form_with(model: @resume, local: true) do |f|
+    = f.hidden_field :resume_user, :value => params[:id]
+    = f.submit '再開時に通知メールを送る', class:'btn btn-light size-small-Horizontal_variable_rectangle font-large'

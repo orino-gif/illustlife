@@ -10,12 +10,9 @@
       - else
         = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle size-md'), "/requests/#{@authorizer.creator.user_id}/new"
     - else
-      .box
-        = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
-        // %p.center.shadow 再開を通知
-  
+      = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
   .col-3
-    %button.btn.btn-light.font-small.position-top-shortX.position-left= link_to '再開を通知', new_user_registration_path    
+    %button.btn.btn-light.font-small.position-top-shortX.position-left= link_to '再開を通知', "/resumes/#{@authorizer.creator.user_id}/new"
   .col-1
     = display_sns(@authorizer.creator.twitter, '/img/twitter.png', 'size-small-square position-top-short')
   .col-1

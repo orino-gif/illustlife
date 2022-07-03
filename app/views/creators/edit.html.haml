@@ -103,4 +103,16 @@
       %td
         %button{:type => 'button'}
           =link_to '登録', credit_path
+          
+  .row.my-5
+    = '再開通知リスト：'
+    %table.table
+      %tr
+        -if (nil != @credit) && (nil != @credit.bank)
+          %td='銀行口座： xxxxxxxxxxx'
+        -else
+          %td='登録口座なし'
+      %td
+        %button{:type => 'button'}
+          =link_to '登録', edit_creator_path
 
