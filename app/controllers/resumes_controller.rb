@@ -5,6 +5,7 @@ class ResumesController < ApplicationController
   
   def new
     @resume = Resume.new
+    @creator = Creator.find(params[:id])
   end
   
   def create
