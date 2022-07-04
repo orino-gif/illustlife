@@ -1,4 +1,5 @@
 class ResumesController < ApplicationController
+  before_action :authenticate_user!, except: [:create]
   def index
   end
   
