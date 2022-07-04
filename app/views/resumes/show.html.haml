@@ -1,0 +1,13 @@
+- content_for(:html_title) { '再開通知リスト' }
+%h1.border_color-whitesmoke 再開通知リスト
+
+.container
+  .row.my-5
+    %table.table
+    - @resumes.each do |resume|
+      %tr
+        %td=User.find(resume.notification_user).nickname
+        
+      %tr
+        %td="削除"
+        %br

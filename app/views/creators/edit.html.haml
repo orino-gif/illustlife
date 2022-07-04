@@ -108,11 +108,7 @@
     = '再開通知リスト：'
     %table.table
       %tr
-        -if (nil != @credit) && (nil != @credit.bank)
-          %td='銀行口座： xxxxxxxxxxx'
-        -else
-          %td='登録口座なし'
       %td
         %button{:type => 'button'}
-          =link_to '登録', edit_creator_path
+          =link_to 'リスト表示', resume_path
 

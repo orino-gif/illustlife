@@ -17,6 +17,10 @@ class ResumesController < ApplicationController
     end
   end
   
+  def show
+    @resumes = Resume.where(resume_user:current_user.id)
+  end
+  
   private
   
   def resume_params
