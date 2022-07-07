@@ -11,7 +11,7 @@
         = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle size-md'), "/requests/#{@authorizer.creator.user_id}/new"
     - else
       = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
-      - if not (@authorizer.id == current_user.id)
+      - if user_signed_in? && (@authorizer.id != current_user.id)
         %button.btn.btn-light.font-Xsmall.position-top-shortX.position-left= link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new"
   .col-3
     
