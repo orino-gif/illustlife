@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'requests/:id/new', to: 'requests#new'
   get 'credits/:id/new', to: 'credits#new'
   get 'resumes/:id/new', to: 'resumes#new'
-  resources :resumes, only: [:index, :create, :show]
+  resources :resumes, only: [:index, :create, :show, :destroy]
   resources :credits, only: [:create, :show, :update]
   resources :homes, only: [:index]
   resources :creators, only: [:create, :show, :edit, :update]

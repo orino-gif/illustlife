@@ -8,6 +8,6 @@
       .col
         =User.find(resume.notification_user).nickname
       .col
-        =button_to '削除', {controller:'requests', action:'index'}, {method: :delete}
+        =button_to '削除', {controller:'resumes', action:'show'}, {method: :get, params: {record_delete:resume.id}}
       .col
         %br

@@ -19,8 +19,11 @@ class ResumesController < ApplicationController
   
   def show
     @resumes = Resume.where(resume_user:current_user.id)
+    if not params[:record_delete].nil?
+      Resume.find(params[:record_delete]).delete
+    end
   end
-  
+
   private
   
   def resume_params
