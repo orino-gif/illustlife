@@ -3,11 +3,11 @@
 
 .container
   
-  - @resumes.each do |resume|
+  - @notification_users.each do |notification_user|
     .row.my-5
       .col
-        =User.find(resume.notification_user).nickname
+        =User.find(notification_user.resume_user).nickname
       .col
-        =button_to '削除', {controller:'resumes', action:'show'}, {method: :get, params: {record_delete:resume.id}}
+        =button_to '削除', {controller:'resumes', action:'show'}, {method: :get, params: {record_delete:notification_user.id}}
       .col
         %br
