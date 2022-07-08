@@ -11,7 +11,10 @@
         = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle size-md'), "/requests/#{@authorizer.creator.user_id}/new"
     - else
       = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
-      - if user_signed_in? && (@authorizer.id != current_user.id)
+      - if user_signed_in? && (@authorizer.id != current_user.id) && (@notification_users.find_by(resume_user: params[:id]).nil?)
+        - @notification_users.each do |notification_user|
+          = User.find(notification_user.resume_user).nickname
+        
         %button.btn.btn-light.font-Xsmall.position-top-shortX.position-left= link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new"
   .col-3
     
