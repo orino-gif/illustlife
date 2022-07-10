@@ -61,6 +61,19 @@
               %button{:disabled => "disabled", :type => "submit"}='開始'
               = '※報酬受取先の口座登録が事前に必要です'
   .row.my-5
+    = 'NSFW：'
+    %table.table
+      %tr
+        %td
+          = form_with(model: @authorizer.creator, local:true) do |f|
+            = f.label :nsfw, '表示と受付:'
+            - if not @authorizer.creator.nsfw
+              = f.hidden_field :nsfw, value:true
+              = f.submit '不可'
+            - else
+              = f.hidden_field :nsfw, value:false
+              = f.submit '可'
+  .row.my-5
     = 'リンク先：'
     %table.table
       %tr
