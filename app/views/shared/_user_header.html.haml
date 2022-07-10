@@ -14,7 +14,7 @@
       - if user_signed_in? && (@authorizer.id != current_user.id) && (@notification_users.find_by(resume_user: params[:id]).nil?)
         .col-1
           %button.btn.btn-light.font-Xsmall.position-top-shortX.position-left= link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new"
-  .col-2.font-Xsmall.d-flex.align-items-center
+  .col-1.font-Xsmall.d-flex.align-items-center.text
     ='NSFW可'
     
   .col-1
