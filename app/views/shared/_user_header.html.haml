@@ -3,7 +3,7 @@
 .row
   .col-3
     = display_icon(@authorizer.creator, 'size-large-square rounded-circle fit-cover position-top-long size-lg')
-  .col-1
+  .col-2
     - if (('new' == controller.action_name) || ('show' == controller.action_name)) && (true == @authorizer.creator.request_acceptance_permission)
       - if (user_signed_in?) && (@authorizer.id == current_user.id)
         = image_tag '/img/request.png', class:'size-middle-square position-top-middle size-md'
@@ -12,8 +12,10 @@
     - else
       = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
       - if user_signed_in? && (@authorizer.id != current_user.id) && (@notification_users.find_by(resume_user: params[:id]).nil?)
-        %button.btn.btn-light.font-Xsmall.position-top-shortX.position-left= link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new"
-  .col-3
+        .col-1
+          %button.btn.btn-light.font-Xsmall.position-top-shortX.position-left= link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new"
+  .col-2.font-Xsmall.d-flex.align-items-center
+    ='NSFW可'
     
   .col-1
     = display_sns(@authorizer.creator.twitter, '/img/twitter.png', 'size-small-square position-top-short')

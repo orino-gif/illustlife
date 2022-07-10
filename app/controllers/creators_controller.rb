@@ -4,7 +4,9 @@ class CreatorsController < ApplicationController
   
   def show
     @requests = Request.where(receiver_id: @creator.user.id, status: '納品完了')
-    @notification_users = Resume.where(notification_user:current_user.id)
+    if user_signed_in?
+      @notification_users = Resume.where(notification_user:current_user.id)
+    end
   end
   
   def edit
