@@ -1,9 +1,9 @@
 .row
   = display_header(@authorizer.creator, 'size-middle-Horizontal_variable_rectangle fit-cover')
 .row
-  .col-3
-    = display_icon(@authorizer.creator, 'size-large-square rounded-circle fit-cover position-top-long size-lg')
   .col-2
+    = display_icon(@authorizer.creator, 'size-large-square rounded-circle fit-cover position-top-long size-lg')
+  .col
     - if (('new' == controller.action_name) || ('show' == controller.action_name)) && (true == @authorizer.creator.request_acceptance_permission)
       - if (user_signed_in?) && (@authorizer.id == current_user.id)
         = image_tag '/img/request.png', class:'size-middle-square position-top-middle size-md'
@@ -12,23 +12,26 @@
     - else
       = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
       - if user_signed_in? && (@authorizer.id != current_user.id) && (@notification_users.find_by(resume_user: params[:id]).nil?)
-        .col-1
-          %button.btn.btn-light.font-Xsmall.position-top-shortX.position-left= link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new"
-  .col-1.font-Xsmall.d-flex.align-items-center.text
-    ='NSFW可'
-    
-  .col-1
+        .col
+          %button.btn.btn-light.position-top-shortX.position-left.font-Xsmall= link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new"
+  .col
     = display_sns(@authorizer.creator.twitter, '/img/twitter.png', 'size-small-square position-top-short')
-  .col-1
-    = display_sns(@authorizer.creator.pixiv, '/img/pixiv.png', 'size-small-square position-top-short')
-  .col-1
-    = display_sns(@authorizer.creator.instagram, '/img/instagram.png', 'size-small-square position-top-short')
-.row.my-5
-  = "ニックネーム：#{@authorizer.nickname}"
-  = "、作業予定日数：#{@authorizer.creator.working_days}日"
-  - if 0 != @authorizer.creator.number_of_works
-    = "、納品数：#{@authorizer.creator.number_of_works}点、"
-    = "平均納品日数：#{@authorizer.creator.average_delivery_time}日、締切厳守率：#{@authorizer.creator.deadline_strict_adherence_rate}%、"
-    = "返信率:#{@authorizer.creator.reply_rate}%"
-  - else
-    = '、納品作品なし'
+  // .col-1
+  //   = display_sns(@authorizer.creator.pixiv, '/img/pixiv.png', 'size-small-square position-top-short')
+  // .col-1
+  //   = display_sns(@authorizer.creator.instagram, '/img/instagram.png', 'size-small-square position-top-short')
+.container
+  .row.my-5
+    = "ニックネーム：#{@authorizer.nickname}"
+    = "、作業予定日数：#{@authorizer.creator.working_days}日"
+    ='、NSFW不可'
+    - if 0 != @authorizer.creator.number_of_works
+      = "、納品数：#{@authorizer.creator.number_of_works}点、"
+      = "平均納品日数：#{@authorizer.creator.average_delivery_time}日、締切厳守率：#{@authorizer.creator.deadline_strict_adherence_rate}%、"
+      = "返信率:#{@authorizer.creator.reply_rate}%"
+    - else
+      %br
+      %br
+        = '納品作品なし'
+  
+  
