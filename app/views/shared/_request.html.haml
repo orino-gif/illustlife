@@ -39,7 +39,7 @@
           - deadline = @request.created_at + (receiver.creator.working_days * 60 * 60 * 24)
           %td.string_indention= "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
         %tr
-          - if not @request.delivery_time.nil?
+          - if 0 < @request.delivery_time
             %td.string_indention= "納品日数：#{@request.delivery_time}日"
         %tr
           %td.string_indention
