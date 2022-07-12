@@ -1,19 +1,8 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *app/assets/stylesheets以下の全ての階層のスタイルシートを読込。
- *
+ *app/assets/stylesheets以下の全ての階層のスタイルシートを読込。*
  *= require_self
  */
+ 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -34,16 +23,6 @@ strong, label { font-weight: normal; }
 .background_color-crimson { background-color: crimson; } 
 .border_color-steelblue { border-color: steelblue; } 
 
-//画像や文字のサイズを決定
-
-.size-large-square { width: 120px; height: 120px; }
-.size-middle-square { width: 90px; height: 90px; }
-.size-small-square { width: 50px; height: 50px; }
-.size-small-Horizontal_variable_rectangle { width: 100%; height: 50px; }
-.size-middle-Horizontal_variable_rectangle { width: 100%; height: 180px; }
-.size-large-Horizontal_variable_rectangle { width: 100%; height: 300px; }
-.Horizontal_rectangle { width: 150px; height: 50px; }
-
 //ボーダーのデザインを定義
 .border-solid4 { border-style: solid; border-width: 4px; }
 
@@ -51,7 +30,7 @@ strong, label { font-weight: normal; }
 .fit-cover { object-fit: cover; }
 
 //コンテンツを中央に寄せる
-.position-center-content{ width: 80%; margin: 0 auto; max-width: 600px; }
+.position-center{ width: 80%; margin: 0 auto; max-width: 600px; }
 
 //半透明
 .img_color-translucent{ opacity: 0.3; }
@@ -59,15 +38,16 @@ strong, label { font-weight: normal; }
 //文字がコンテンツからあふれた場合に改行
 .string_indention{ word-wrap: break-word; max-width: 320px; }
 
+//画像や文字のサイズを決定
+.size-small-Horizontal_variable_rectangle { width: 100%; height: 50px; }
+.size-middle-Horizontal_variable_rectangle { width: 100%; height: 180px; }
+.size-large-Horizontal_variable_rectangle { width: 100%; height: 300px; }
+.Horizontal_rectangle { width: 150px; height: 50px; }
 
-//関数 引数のディフォルト値はExtra large//
+//関数 引数のデフォルト値はExtra large//
   //見出しのデザインを設定する関数 
-  @mixin size_font( $Xlarge: 2.8em, $large: 1.5em, $medium: 1.1em, $small: 1.2em, $Xsmall: 0.8em ) {
-    .font-Xlarge { font-size: $Xlarge; }
-    .font-large { font-size: $large; }
+  @mixin size_padding( $Xlarge: 2.8em, $large: 1.5em, $medium: 1.1em, $small: 1.2em, $Xsmall: 0.6em ) {
     .font-medium { font-size: $medium; }
-    .font-small { font-size: $small; }
-    .font-Xsmall { font-size: $Xsmall; }
   }
   //文字の大きさを設定する関数 
   @mixin size_font( $Xlarge: 2.8em, $large: 1.5em, $medium: 1.1em, $small: 1.2em, $Xsmall: 0.8em ) {
@@ -107,7 +87,7 @@ strong, label { font-weight: normal; }
   //Large
   @media screen and (max-width: 1199px){
     h1 { font-size: 2.4em; padding: 0.2em 0.8em; }
-    @include size_font(0.7em, 1em, 1.1em, 1.4em, 2.7em);
+    @include size_font(2.7em, 1.4em, 1.1em, 1em, 0.7em);
     @include size_img(150px, 110px, 90px, 50px);
     @include position_move(-100px, -72px, -40px, -15px, 100px);
   }
@@ -115,7 +95,7 @@ strong, label { font-weight: normal; }
   //Medium
   @media screen and (max-width: 991px){
     h1 { font-size: 2.3em; padding: 0.2em 0.8em; }
-    @include size_font(0.6em, 0.9em, 1.0em, 1.3em, 2.5em);
+    @include size_font(2.5em, 1.3em, 1.0em, 0.9em, 0.6em);
     @include size_img(150px, 100px, 80px, 40px);
     @include position_move(-100px, -72px, -40px, -15px, 90px);
   }
@@ -123,7 +103,7 @@ strong, label { font-weight: normal; }
   //Small
   @media screen and (max-width: 767px){
     h1 { font-size: 2.2em; padding: 0.2em 0.8em; }
-    @include size_font(0.5em, 0.8em, 0.9em, 1.2em, 2.4em);
+    @include size_font(2.4em, 1.2em, 0.9em, 0.8em, 0.5em);
     @include size_img(150px, 100px, 70px, 40px);
     @include position_move(-100px, -62px, -40px, -15px, 90px);
   }
@@ -131,7 +111,7 @@ strong, label { font-weight: normal; }
   //Extra small
   @media screen and (max-width: 575px){
     h1 { font-size: 2.1em; padding: 0.2em 0.8em; }
-    @include size_font(0.4em, 0.7em, 0.8em, 1.1em, 1.8em);
+    @include size_font(1.8em, 1.1em, 0.8em, 0.7em, 0.4em);
     @include size_img(150px, 80px, 60px, 40px);
     @include position_move(-60px, -60px, -40px, -15px, 90px);
   }
