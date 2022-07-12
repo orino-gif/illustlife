@@ -61,18 +61,22 @@ strong, label { font-weight: normal; }
 //文字がコンテンツからあふれた場合に改行
 .string_indention{ word-wrap: break-word; max-width: 320px; }
 
+//文字の大きさを設定する関数 ディフォルトはExtra large
+@mixin size_font($Xsmall: 0.8em, $small: 1.2em, $medium: 1.1em, $large: 1.5em, $Xlarge: 2.8em) {
+  .font-Xsmall { font-size: $Xsmall; }
+  .font-small { font-size: $small; }
+  .font-medium { font-size: $medium; }
+  .font-large { font-size: $large; }
+  .font-Xlarge { font-size: $Xlarge; }
+}
+
 //Extra large
 @media screen and (min-width: 1200px){
   //見出しのデザイン
   h1 { font-size: 2.5em; padding: 0.2em 0.8em; }
   
-  //文字の大きさを定義
-  .font-Xsmall { font-size: 0.8em; }
-  .font-small { font-size: 1.2em; }
-  .font-medium { font-size: 1.1em; }
-  .font-large { font-size: 1.5em; }
-  .font-Xlarge { font-size: 2.8em; }
-  
+  @include size_font();
+
   //オブジェクトを上に配置
   .position-top_large { position: absolute; top: -100px; }
   .position-top_medium { position: absolute; top: -72px; }
@@ -92,13 +96,9 @@ strong, label { font-weight: normal; }
   //見出しのデザイン
   h1 { font-size: 2.4em; padding: 0.2em 0.8em; }
   
-  //文字の大きさを定義
-  .font-Xsmall { font-size: 0.7em; }
-  .font-small { font-size: 1em; }
-  .font-medium { font-size: 1.1em; }
-  .font-large { font-size: 1.4em; }
-  .font-Xlarge { font-size: 2.7em; }
-  
+  //文字の大きさを設定する関数
+  @include size_font(0.7em, 1em, 1.1em, 1.4em, 2.7em);
+
   //オブジェクトを上に配置
   .position-top_large { position: absolute; top:-100px; }
   .position-top_medium { position: absolute; top:-72px; }
@@ -118,13 +118,9 @@ strong, label { font-weight: normal; }
   //見出しのデザイン
   h1 { font-size: 2.3em; padding: 0.2em 0.8em; }
   
-  //文字の大きさを定義
-  .font-Xsmall { font-size: 0.6em; }
-  .font-small { font-size: 0.9em; }
-  .font-medium { font-size: 1.0em; }
-  .font-large { font-size: 1.3em; }
-  .font-Xlarge { font-size: 2.5em; }
-  
+  //文字の大きさを設定する関数
+  @include size_font(0.6em, 0.9em, 1.0em, 1.3em, 2.5em);
+
   //オブジェクトを上に配置
   .position-top_large { position: absolute; top: -100px; }
   .position-top_medium { position: absolute; top: -72px; }
@@ -143,13 +139,9 @@ strong, label { font-weight: normal; }
   //見出しのデザイン
   h1 { font-size: 2.2em; padding: 0.2em 0.8em; }
   
-  //文字の大きさを定義
-  .font-Xsmall { font-size: 0.6em; }
-  .font-small { font-size: 0.9em; }
-  .font-medium { font-size: 1.0em; }
-  .font-large { font-size: 1.3em; }
-  .font-Xlarge { font-size: 2.5em; }
-  
+  //文字の大きさを設定する関数
+  @include size_font(0.5em, 0.8em, 0.9em, 1.2em, 2.4em);
+
   //オブジェクトを上に配置
   .position-top_large { position: absolute; top: -100px; }
   .position-top_medium { position: absolute; top: -62px; }
@@ -168,13 +160,9 @@ strong, label { font-weight: normal; }
   //見出しのデザイン
   h1 { font-size: 2.1em; padding: 0.2em 0.8em; }
   
-  //文字の大きさを定義
-  .font-Xsmall { font-size: 0.5em; }
-  .font-small { font-size: 0.7em; }
-  .font-medium { font-size: 0.8em; }
-  .font-large { font-size: 1em; }
-  .font-Xlarge { font-size: 1.8em; }
-  
+  //文字の大きさを設定する関数
+  @include size_font(0.4em, 0.7em, 0.8em, 1.1em, 1.8em);
+
   //オブジェクトを上に配置
   .position-top_large { position: absolute; top:-60px; }
   .position-top_medium { position: absolute; top:-60px; }
