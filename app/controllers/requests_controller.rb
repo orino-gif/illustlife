@@ -5,8 +5,8 @@ class RequestsController < ApplicationController
     @requests = Request.where(receiver_id: current_user.id).or(Request.where(sender_id: current_user.id))
     if not params[:request_id].nil?
       @request = Request.find(params[:request_id])
-      @sender = User.find(nickname: Request.find(params[:request_id]).sender_id)
-      @receiver = User.find(nickname: Request.find(params[:request_id]).receiver_id)
+      @sender = User.find(Request.find(params[:request_id]).sender_id)
+      @receiver = User.find(Request.find(params[:request_id]).receiver_id)
 
       if '拒否' == params[:status] || (@request.created_at + 60*60*24*14) < Time.now
         UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
