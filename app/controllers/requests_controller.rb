@@ -69,8 +69,8 @@ class RequestsController < ApplicationController
       @card = Card.find_by(user_id: current_user.id)
       
       @request = Request.new(requests_params)
-      @request.sender = @sender.id
-      @request.receiver = @receiver.id
+      @request.sender_id = @sender.id
+      @request.receiver_id = @receiver.id
       @request.status = '承認待ち'
       @request.sender_icon_url = @sender.creator.icon
       @request.receiver_icon_url = @receiver.creator.icon

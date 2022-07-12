@@ -2,28 +2,28 @@
   .row.my-5
     .col-md-auto
       = "■申請日時：#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
-      - sender = User.find_(id: @request.sender_id)
-      - receiver = User.find(id: @request.receiver_id)
+      - sender = User.find(@request.sender_id)
+      - receiver = User.find(@request.receiver_id)
       %table.table
         - if 'development' == ENV['RAILS_ENV']
           %tr
             %td= "リクエストID：#{@request.id}" 
         %tr
           - if not sender.nil?
-            %td= display_icon(sender.creator, 'size-small-square rounded-circle fit-cover') + '依頼者：' + @request.sender
+            %td= display_icon(sender.creator, 'size-small-square rounded-circle fit-cover') + '依頼者：' + sender.nickname
           - else
             - if @request.sender_icon_url.empty?
-              %td=image_tag('/img/mobu.png', class: 'size-small-square rounded-circle fit-cover') + '依頼者：' + @request.sender
+              %td=image_tag('/img/mobu.png', class: 'size-small-square rounded-circle fit-cover') + '依頼者：' + sender.nickname
             - else
-              %td=image_tag(@request.sender_icon_url, class: 'size-small-square rounded-circle fit-cover') + '依頼者：' + @request.sender
+              %td=image_tag(@request.sender_icon_url, class: 'size-small-square rounded-circle fit-cover') + '依頼者：' + sender.nickname
         %tr
           - if not receiver.nil?
-            %td= display_icon(receiver.creator, 'size-small-square rounded-circle fit-cover') + '承認者：' + @request.receiver
+            %td= display_icon(receiver.creator, 'size-small-square rounded-circle fit-cover') + '承認者：' + receiver.nickname
           - else
             - if @request.receiver_icon_url.empty?
-              %td=image_tag('/img/mobu.png', class: 'size-small-square rounded-circle fit-cover') + '承認者：' + @request.receiver
+              %td=image_tag('/img/mobu.png', class: 'size-small-square rounded-circle fit-cover') + '承認者：' + receiver.nickname
             - else
-              %td=image_tag(@request.receiver_icon_url, class: 'size-small-square rounded-circle fit-cover') + '承認者：' + @request.receiver
+              %td=image_tag(@request.receiver_icon_url, class: 'size-small-square rounded-circle fit-cover') + '承認者：' + receiver.nickname
         %tr
           %td= "状態：#{@request.status}"
         %tr
@@ -44,11 +44,11 @@
         %tr
           %td.string_indention
             - if not current_user.nil?
-              - if (@request.receiver == current_user.nickname) && ('承認待ち' == @request.status)
+              - if (receiver.nickname == current_user.nickname) && ('承認待ち' == @request.status)
                 = "#{@request.sender}さんから#{@request.receiver}さんへのリクエストを承認しますか？"
                 = button_to '承認', {controller:'requests', action:'index'}, {method: :get, params:{status:'製作中', request_id:@request.id}}
                 = button_to '拒否', {controller:'requests', action:'index'}, {method: :get, params:{status:'拒否', request_id:@request.id}}
-              - elsif (@request.receiver == current_user.nickname) && ('製作中' == @request.status || '手戻し' == @request.status)
+              - elsif (receiver.nickname == current_user.nickname) && ('製作中' == @request.status || '手戻し' == @request.status)
                 = form_with(model: @request, local: true) do |f|
                   = f.file_field :deliver_img
                   = f.hidden_field :request_id, :value => @request.id
