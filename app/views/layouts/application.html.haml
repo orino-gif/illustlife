@@ -43,16 +43,16 @@
         .row
           .col.text-right
             - if user_signed_in?
-              %button.btn.btn-light= link_to 'リクエスト状態', requests_path
+              %button.btn.btn-light.font-medium= link_to 'リクエスト状態', requests_path
               - if (ENV['ADMINISTRATOR_MAIL'] == current_user.email) && (controller.controller_name == "creators") && (controller.action_name == 'show')
                 %button.btn.btn-light= link_to 'アカウント編集', edit_creator_path(params[:id])
               - else
                 - if controller.action_name == 'show'
-                  %button.btn.btn-light= link_to 'ユーザー編集', edit_creator_path(current_user.id)
-              %button.btn.btn-light= link_to 'ログアウト', destroy_user_session_path, method: "delete"
+                  %button.btn.btn-light.font-medium= link_to 'ユーザー編集', edit_creator_path(current_user.id)
+              %button.btn.btn-light.font-medium= link_to 'ログアウト', destroy_user_session_path, method: "delete"
             - else
-              %button.btn.btn-light= link_to '新規登録', new_user_registration_path
-              %button.btn.btn-light= link_to 'ログイン', new_user_session_path
+              %button.btn.btn-light.font-medium= link_to '新規登録', new_user_registration_path
+              %button.btn.btn-light.font-medium= link_to 'ログイン', new_user_session_path
     - if (Rails.env.production?) && (controller.controller_name != 'registrations')
       %script{:async => "", :src => '//accaii.com/orino/script.js'}
       %noscript
@@ -68,17 +68,17 @@
     = yield
 
     - if (nil != current_user) && (ENV['ADMINISTRATOR_MAIL'] == current_user.email)
-      - color='border_color-crimson'
+      - color='background_color-crimson'
       ='管理者用のページ'
     - else
-      - color='border_color-whitesmoke'
+      - color='background_color-whitesmoke'
     
     %footer{class:"#{color} mt-5"}
       .container
-        .row.m-4
+        .row.m-4.font-small
           .mx-3= link_to '利用規約', terms_explanations_path
           .mx-3= link_to 'プライバシーポリシー', policy_explanations_path
           .mx-3= link_to '特定商取引法に基づく表記', transaction_law_explanations_path
         .row.m-3
-          .col.text-right
+          .col.font-small.text-right
             %p © 2021-2022 イラストライフ株式会社

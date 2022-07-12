@@ -17,8 +17,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-//見出しのデザイン
-h1 { padding: 0.2em 0.8em; }
+
 
 //aタグのディフォルト設定を変更：色変更、下線装飾無し(!importantで優先順位を上げる)
 a { color: steelblue; text-decoration: none !important; }
@@ -32,18 +31,13 @@ footer { width: 100%; height: 100px; }
 //ストロングとラベルタグの太字を無効化
 strong, label { font-weight: normal; }
 
-
-
-
-
 //色設定
-.border_color-whitesmoke { background-color: whitesmoke; } 
-.border_color-crimson { background-color: crimson; } 
+.background_color-whitesmoke { background-color: whitesmoke; } 
+.background_color-crimson { background-color: crimson; } 
 .border_color-steelblue { border-color: steelblue; } 
-.font_color-steelblue { color: steelblue; } 
 
 //画像や文字のサイズを決定
-.size-Xlarge-square { width: 150px; height: 150px; }
+
 .size-large-square { width: 120px; height: 120px; }
 .size-middle-square { width: 90px; height: 90px; }
 .size-small-square { width: 50px; height: 50px; }
@@ -69,117 +63,130 @@ strong, label { font-weight: normal; }
 
 //Extra large
 @media screen and (min-width: 1200px){
+  //見出しのデザイン
+  h1 { font-size: 2.5em; padding: 0.2em 0.8em; }
+  
   //文字の大きさを定義
   .font-Xsmall { font-size: 0.8em; }
-  .font-small { font-size: 1.1em; }
+  .font-small { font-size: 1.2em; }
+  .font-medium { font-size: 1.1em; }
   .font-large { font-size: 1.5em; }
   .font-Xlarge { font-size: 2.8em; }
   
   //オブジェクトを上に配置
-  .position-top-long { position: absolute; top:-100px; }
-  .position-top-middle { position: absolute; top:-72px; }
-  .position-top-short { position: absolute; top:-40px; }
-  .position-top-shortX { position: absolute; top:-15px; }
-  .position-left { position: absolute; left:90px; }
+  .position-top_large { position: absolute; top: -100px; }
+  .position-top_medium { position: absolute; top: -72px; }
+  .position-top-short { position: absolute; top: -40px; }
+  .position-top-shortX { position: absolute; top: -15px; }
+  .position-left { position: absolute; left: 120px; }
   
+  //図のサイズ
+  .size-square_Xlarge { width: 150px; height: 150px; }
   .size-large-square { width: 120px; height: 120px; }
   .size-middle-square { width: 100px; height: 100px; }
   .size-small-square { width: 60px; height: 60px; }
-  .position-top-long { position: absolute; top:-90px; }
-  .position-top-middle { position: absolute; top:-70px; }
-  .position-top-short { position: absolute; top:-30px; }
 }
 
 //Large
 @media screen and (max-width: 1199px){
+  //見出しのデザイン
+  h1 { font-size: 2.4em; padding: 0.2em 0.8em; }
+  
   //文字の大きさを定義
   .font-Xsmall { font-size: 0.7em; }
   .font-small { font-size: 1em; }
+  .font-medium { font-size: 1.1em; }
   .font-large { font-size: 1.4em; }
   .font-Xlarge { font-size: 2.7em; }
   
   //オブジェクトを上に配置
-  .position-top-long { position: absolute; top:-100px; }
-  .position-top-middle { position: absolute; top:-72px; }
+  .position-top_large { position: absolute; top:-100px; }
+  .position-top_medium { position: absolute; top:-72px; }
   .position-top-short { position: absolute; top:-40px; }
   .position-top-shortX { position: absolute; top:-15px; }
-  .position-left { position: absolute; left:90px; }
+  .position-left { position: absolute; left:100px; }
   
+  .size-square_Xlarge { width: 150px; height: 150px; }
   .size-large-square { width: 110px; height: 110px; }
   .size-middle-square { width: 90px; height: 90px; }
   .size-small-square { width: 50px; height: 50px; }
-  .position-top-long { position: absolute; top:-90px; }
-  .position-top-middle { position: absolute; top:-70px; }
-  .position-top-short { position: absolute; top:-30px; }
 }
 
 
-//Midium
+//Medium
 @media screen and (max-width: 991px){
+  //見出しのデザイン
+  h1 { font-size: 2.3em; padding: 0.2em 0.8em; }
+  
   //文字の大きさを定義
   .font-Xsmall { font-size: 0.6em; }
   .font-small { font-size: 0.9em; }
+  .font-medium { font-size: 1.0em; }
   .font-large { font-size: 1.3em; }
   .font-Xlarge { font-size: 2.5em; }
   
   //オブジェクトを上に配置
-  .position-top-long { position: absolute; top:-100px; }
-  .position-top-middle { position: absolute; top:-72px; }
-  .position-top-short { position: absolute; top:-40px; }
-  .position-top-shortX { position: absolute; top:-15px; }
-  .position-left { position: absolute; left:90px; }
+  .position-top_large { position: absolute; top: -100px; }
+  .position-top_medium { position: absolute; top: -72px; }
+  .position-top-short { position: absolute; top: -40px; }
+  .position-top-shortX { position: absolute; top: -15px; }
+  .position-left { position: absolute; left: 90px; }
   
+  .size-square_Xlarge { width: 150px; height: 150px; }
   .size-large-square { width: 100px; height: 100px; }
   .size-middle-square { width: 80px; height: 80px; }
   .size-small-square { width: 40px; height: 40px; }
-  .position-top-long { position: absolute; top:-90px; }
-  .position-top-middle { position: absolute; top:-70px; }
-  .position-top-short { position: absolute; top:-30px; }
 }
 
 //Small
 @media screen and (max-width: 767px){
+  //見出しのデザイン
+  h1 { font-size: 2.2em; padding: 0.2em 0.8em; }
+  
   //文字の大きさを定義
   .font-Xsmall { font-size: 0.6em; }
   .font-small { font-size: 0.9em; }
+  .font-medium { font-size: 1.0em; }
   .font-large { font-size: 1.3em; }
   .font-Xlarge { font-size: 2.5em; }
   
   //オブジェクトを上に配置
-  .position-top-long { position: absolute; top:-100px; }
-  .position-top-middle { position: absolute; top:-72px; }
-  .position-top-short { position: absolute; top:-40px; }
-  .position-top-shortX { position: absolute; top:-15px; }
-  .position-left { position: absolute; left:90px; }
+  .position-top_large { position: absolute; top: -100px; }
+  .position-top_medium { position: absolute; top: -62px; }
+  .position-top-short { position: absolute; top: -40px; }
+  .position-top-shortX { position: absolute; top: -15px; }
+  .position-left { position: absolute; left: 100px; }
   
+  .size-square_Xlarge { width: 150px; height: 150px; }
   .size-large-square { width: 100px; height: 100px; }
-  .size-middle-square { width: 80px; height: 80px; }
-  .size-small-square { width: 40px; height: 40px; }
-  .position-top-long { position: absolute; top:-90px; }
-  .position-top-middle { position: absolute; top:-70px; }
-  .position-top-short { position: absolute; top:-30px; }
+  .size-middle-square { width: 70px; height: 70px; }
+  .size-small-square { width: 45px; height: 45px; }
 }
 
 //Extra small
 @media screen and (max-width: 575px){
+  //見出しのデザイン
+  h1 { font-size: 2.1em; padding: 0.2em 0.8em; }
+  
   //文字の大きさを定義
   .font-Xsmall { font-size: 0.5em; }
   .font-small { font-size: 0.7em; }
-  .font-large { font-size: 1.1em; }
-  .font-Xlarge { font-size: 2.0em; }
+  .font-medium { font-size: 0.8em; }
+  .font-large { font-size: 1em; }
+  .font-Xlarge { font-size: 1.8em; }
   
   //オブジェクトを上に配置
-  .position-top-long { position: absolute; top:-100px; }
-  .position-top-middle { position: absolute; top:-72px; }
+  .position-top_large { position: absolute; top:-60px; }
+  .position-top_medium { position: absolute; top:-60px; }
   .position-top-short { position: absolute; top:-40px; }
   .position-top-shortX { position: absolute; top:-15px; }
   .position-left { position: absolute; left:90px; }
   
+  .size-square_Xlarge { width: 150px; height: 150px; }
   .size-large-square { width: 80px; height: 80px; }
   .size-middle-square { width: 60px; height: 60px; }
-  .size-small-square { width: 30px; height: 30px; }
-  .position-top-long { position: absolute; top:-60px; }
-  .position-top-middle { position: absolute; top:-50px; }
-  .position-top-short { position: absolute; top:-20px; }
+  .size-small-square { width: 40px; height: 40px; }
 }
+.button-text
+{ background-color:#EEEEEE; padding:3px; }
 

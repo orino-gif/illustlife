@@ -2,18 +2,18 @@
   = display_header(@authorizer.creator, 'size-middle-Horizontal_variable_rectangle fit-cover')
 .row
   .col-2
-    = display_icon(@authorizer.creator, 'size-large-square rounded-circle fit-cover position-top-long size-lg')
+    = display_icon(@authorizer.creator, 'size-large-square rounded-circle fit-cover position-top_large')
   .col
     - if (('new' == controller.action_name) || ('show' == controller.action_name)) && (true == @authorizer.creator.request_acceptance_permission)
       - if (user_signed_in?) && (@authorizer.id == current_user.id)
-        = image_tag '/img/request.png', class:'size-middle-square position-top-middle size-md'
+        = image_tag '/img/request.png', class:'size-middle-square position-top_medium'
       - else
-        = link_to image_tag('/img/request.png', class:'size-middle-square position-top-middle size-md'), "/requests/#{@authorizer.creator.user_id}/new"
+        = link_to image_tag('/img/request.png', class:'size-middle-square position-top_medium'), "/requests/#{@authorizer.creator.user_id}/new"
     - else
-      = image_tag '/img/request_stop.png', class:'size-middle-square position-top-middle'
+      = image_tag '/img/request_stop.png', class:'size-middle-square position-top_medium'
       - if user_signed_in? && (@authorizer.id != current_user.id) && (@notification_users.find_by(resume_user: params[:id]).nil?)
-        .col
-          %button.btn.btn-light.position-top-shortX.position-left.font-Xsmall= link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new"
+        .position-top-shortX.position-left.font-Xsmall
+          = link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new", class:'button-text'
   .col
     = display_sns(@authorizer.creator.twitter, '/img/twitter.png', 'size-small-square position-top-short')
   // .col-1

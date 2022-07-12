@@ -1,7 +1,7 @@
 %meta{:content => "noindex", :name => "robots"}/
 
 - content_for(:html_title) { 'ユーザー情報' }
-%h1.border_color-whitesmoke ユーザー情報
+%h1.background_color-whitesmoke ユーザー情報
 
 .container
   = render 'shared/user_header'
@@ -9,4 +9,4 @@
     - if not @requests.nil?
       - @requests.reverse_each do |request|
         .col3.m-2
-          = link_to image_tag(request.deliver_img.url, class: 'size-Xlarge-square fit-cover border-solid4'), request_path(request.id)
+          = link_to image_tag(request.deliver_img.url, class: 'size-square_Xlarge fit-cover border-solid4'), request_path(request.id)

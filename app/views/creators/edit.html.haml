@@ -1,7 +1,7 @@
 %meta{:content => "noindex", :name => "robots"}/
 
 - content_for(:html_title) { 'ユーザー情報編集' }
-%h1.border_color-whitesmoke ユーザー情報編集
+%h1.background_color-whitesmoke ユーザー情報編集
 
 .container
   .row.my-5
@@ -11,7 +11,7 @@
         = f.file_field :icon
         = f.submit '登録'
     .col-auto
-      = display_icon(@authorizer.creator, 'size-large-square rounded-circle border-solid4 fit-cover border_color-steelblue')
+      = display_icon(@authorizer.creator, 'size-large-square fit-cover rounded-circle border-solid4 border_color-steelblue')
     
   .row.my-5
     = form_with(model: @authorizer.creator, local:true) do |f|
