@@ -1,7 +1,7 @@
 %meta{:content => "noindex", :name => "robots"}/
 
 - content_for(:html_title) { t('.change_your_password') }
-%h1.background_color-whitesmoke= t('.change_your_password')
+%h1.font-Xlarge.background_color-whitesmoke= t('.change_your_password')
 
 .container
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|

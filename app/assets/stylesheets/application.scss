@@ -7,6 +7,8 @@
 @import "bootstrap";
 
 //全体の設定
+  //見出しのデザイン
+  h1 {padding: 0.2em 0.8em; }
   //色変更、下線装飾無し(!importantで優先順位を上げる)
   a { color: steelblue; text-decoration: none !important; }
   // body全体のフォント指定
@@ -34,10 +36,12 @@
   .size-middle-Horizontal_variable_rectangle { width: 100%; height: 180px; }
   .size-large-Horizontal_variable_rectangle { width: 100%; height: 300px; }
   .Horizontal_rectangle { width: 150px; height: 50px; }
+  //ボタンのデザイン
+  .button-text{ background-color: whitesmoke; padding: 3px; }
 
 //関数 引数のデフォルト値はExtra large//
   //文字の大きさを設定する関数 
-  @mixin size_font( $Xlarge: 2.8em, $large: 1.5em, $medium: 1.1em, $small: 1.2em, $Xsmall: 0.8em ) {
+  @mixin size_font( $Xlarge, $large, $medium, $small, $Xsmall ) {
     .font-Xlarge { font-size: $Xlarge; }
     .font-large { font-size: $large; }
     .font-medium { font-size: $medium; }
@@ -46,7 +50,7 @@
   }
   
   //図のサイズを設定する関数
-  @mixin size_img($square_Xlarge: 150px, $square_large: 120px, $square_medium: 100px, $square_small: 60px) {
+  @mixin size_img($square_Xlarge, $square_large, $square_medium, $square_small) {
     .size-square_Xlarge { width: $square_Xlarge; height: $square_Xlarge; }
     .size-large-square { width: $square_large; height: $square_large; }
     .size-middle-square { width: $square_medium; height: $square_medium; }
@@ -54,7 +58,7 @@
   }
   
   //配置の長さを設定する関数
-  @mixin position_move($top_large: -100px, $top_medium: -72px, $top_short: -40px, $top_shortX: -15px, $left_medium: 120px) {
+  @mixin position_move($top_large, $top_medium, $top_short, $top_shortX, $left_medium) {
     .position-top_large { position: absolute; top: $top_large; }
     .position-top_medium { position: absolute; top: $top_medium; }
     .position-top-short { position: absolute; top: $top_short }
@@ -65,43 +69,31 @@
 //メディアクエリ　bootstrapのブレークポイント値に合わせる//
   //Extra large
   @media screen and (min-width: 1200px){
-    h1 { font-size: 2.5em; padding: 0.2em 0.8em; }
-    @include size_font();
-    @include size_img();
-    @include position_move();
+    @include size_font(2.8em, 1.5em, 1.1em, 1.2em, 0.8em);
+    @include size_img(150px, 120px, 100px, 60px);
+    @include position_move(-100px, -72px, -40px, -15px, 120px);
   }
-  
   //Large
   @media screen and (max-width: 1199px){
-    h1 { font-size: 2.4em; padding: 0.2em 0.8em; }
     @include size_font(2.7em, 1.4em, 1.1em, 1em, 0.7em);
     @include size_img(150px, 110px, 90px, 50px);
     @include position_move(-100px, -72px, -40px, -15px, 100px);
   }
-  
   //Medium
   @media screen and (max-width: 991px){
-    h1 { font-size: 2.3em; padding: 0.2em 0.8em; }
     @include size_font(2.5em, 1.3em, 1.0em, 0.9em, 0.6em);
     @include size_img(150px, 100px, 80px, 40px);
     @include position_move(-100px, -72px, -40px, -15px, 90px);
   }
-  
   //Small
   @media screen and (max-width: 767px){
-    h1 { font-size: 2.2em; padding: 0.2em 0.8em; }
     @include size_font(2.4em, 1.2em, 0.9em, 0.8em, 0.5em);
     @include size_img(150px, 100px, 70px, 40px);
     @include position_move(-100px, -62px, -40px, -15px, 90px);
   }
-  
   //Extra small
   @media screen and (max-width: 575px){
-    h1 { font-size: 2.1em; padding: 0.2em 0.8em; }
     @include size_font(1.8em, 1.1em, 0.8em, 0.7em, 0.4em);
     @include size_img(150px, 80px, 60px, 40px);
     @include position_move(-60px, -60px, -40px, -15px, 90px);
   }
-.button-text
-{ background-color:#EEEEEE; padding:3px; }
-
