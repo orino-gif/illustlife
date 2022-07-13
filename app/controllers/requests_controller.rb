@@ -49,8 +49,11 @@ class RequestsController < ApplicationController
       end
       
       p @requests.all.sum(:is_in_time_for_the_deadline)
+      p @receiver.creator.number_of_approval
       
-      @receiver.creator.deadline_strict_adherence_rate = 100-(@requests.all.sum(:is_in_time_for_the_deadline) / @receiver.creator.number_of_approval)
+      if 0 != @receiver.creator.number_of_approval
+        @receiver.creator.deadline_strict_adherence_rate = 100-(@requests.all.sum(:is_in_time_for_the_deadline) / @receiver.creator.number_of_approval)
+      end
       @request.status = params[:status]
       @request.save
       @receiver.creator.save

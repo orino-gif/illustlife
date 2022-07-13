@@ -65,7 +65,7 @@
           = link_to image_tag(@request.deliver_img.url, class:'size-large-Horizontal_variable_rectangle fit-cover'), @request.deliver_img.url
     .col-md-auto
       - if ('納品完了' == @request.status) && (user_signed_in?)
-        - if @request.sender == current_user.nickname
+        - if sender.nickname == current_user.nickname
           %button.btn.btn-light= link_to 'ダウンロード', download_request_path(@request)
-        - elsif @request.receiver == current_user.nickname
+        - elsif receiver.nickname == current_user.nickname
           = button_to '手戻し', {controller:'requests', action:'index'}, {method: :get, params:{status:'手戻し', request_id:@request.id}}
