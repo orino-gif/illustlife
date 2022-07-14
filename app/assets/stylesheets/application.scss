@@ -71,29 +71,29 @@
 //メディアクエリ　bootstrapのブレークポイント値に合わせる//
   //Extra large
   @media screen and (min-width: 1200px){
-    @include size_font(2.8em, 1.5em, 1.1em, 0.9em, 0.8em);
+    @include size_font(2.5em, 1.5em, 1.1em, 0.9em, 0.8em);
     @include size_square(150px, 120px, 100px, 60px);
     @include size_rectangle(300px, 180px, 110px, 50px);
     @include position_move(-100px, -78px, -48px, -13px, 120px);
   }
   //Large
   @media screen and (max-width: 1199px){
-    @include size_font(2.7em, 1.4em, 1.1em, 0.8em, 0.7em);
+    @include size_font(2.4em, 1.4em, 1.1em, 0.8em, 0.7em);
     @include size_square(150px, 110px, 90px, 50px);
     @include size_rectangle(300px, 170px, 105px, 50px);
     @include position_move(-95px, -72px, -38px, -12px, 100px);
   }
   //Medium
   @media screen and (max-width: 991px){
-    @include size_font(2.5em, 1.3em, 1.0em, 0.7em, 0.6em);
-    @include size_square(150px, 100px, 90px, 40px);
+    @include size_font(2.3em, 1.3em, 1.0em, 0.7em, 0.6em);
+    @include size_square(150px, 100px, 90px, 50px);
     @include size_rectangle(300px, 160px, 100px, 50px);
     @include position_move(-90px, -72px, -33px, -11px, 100px);
   }
   //Small
   @media screen and (max-width: 767px){
-    @include size_font(2.4em, 1.2em, 0.9em, 0.6em, 0.5em);
-    @include size_square(150px, 90px, 80px, 40px);
+    @include size_font(2.2em, 1.2em, 0.9em, 0.6em, 0.5em);
+    @include size_square(150px, 90px, 80px, 45px);
     @include size_rectangle(300px, 150px, 98px, 50px);
     @include position_move(-85px, -62px, -33px, -10px, 100px);
   }

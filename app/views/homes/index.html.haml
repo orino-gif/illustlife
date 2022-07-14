@@ -3,7 +3,7 @@
 
 .container
   .row
-    %h2 ■新着作品
+    %h2.font-Xlarge ■新着作品
   .row
     - if not @requests.nil?
       - @requests.reverse_each.with_index(1) do |request,index|
@@ -13,7 +13,7 @@
             - index -= 1
         - break if index == 20
   .row
-    %h2 ■クリエイター
+    %h2.font-Xlarge ■クリエイター
   .row
     - begin
       - @creators.each.with_index(1) do |creator,index| 
