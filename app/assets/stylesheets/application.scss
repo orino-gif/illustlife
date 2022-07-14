@@ -47,10 +47,10 @@
   }
   //正方形の図のサイズを設定する関数
   @mixin size_square($Xlarge, $large, $medium, $small) {
-    .size-square_Xlarge { width: $Xlarge; height: $Xlarge; }
-    .size-large-square { width: $large; height: $large; }
-    .size-middle-square { width: $medium; height: $medium; }
-    .size-small-square { width: $small; height: $small; }
+    .size_Xlarge-square { width: $Xlarge; height: $Xlarge; }
+    .size_large-square { width: $large; height: $large; }
+    .size_medium-square { width: $medium; height: $medium; }
+    .size_small-square { width: $small; height: $small; }
   }
   //長方形の図のサイズを設定する関数
   @mixin size_rectangle($large, $medium, $small) {
@@ -59,11 +59,11 @@
     .size_small-rectangle { width: 100%; height: $small; }
   }
   //配置の長さを設定する関数
-  @mixin position_move($top_large, $top_medium, $top_short, $top_shortX, $left_medium) {
-    .position-top_large { position: absolute; top: $top_large; }
-    .position-top_medium { position: absolute; top: $top_medium; }
-    .position-top-short { position: absolute; top: $top_short }
-    .position-top-shortX { position: absolute; top: $top_shortX; }
+  @mixin position_move($top_large, $top_medium, $top_short, $top_Xshort, $left_medium) {
+    .position_large-top { position: absolute; top: $top_large; }
+    .position_medium-top { position: absolute; top: $top_medium; }
+    .position_short-top { position: absolute; top: $top_short; }
+    .position_Xshort-top { position: absolute; top: $top_Xshort; }
     .position-left { position: absolute; left: $left_medium; }
   }
 
@@ -73,33 +73,33 @@
     @include size_font(2.8em, 1.5em, 1.1em, 0.9em, 0.8em);
     @include size_square(150px, 120px, 100px, 60px);
     @include size_rectangle(300px, 180px, 50px);
-    @include position_move(-100px, -72px, -40px, -15px, 120px);
+    @include position_move(-100px, -78px, -48px, -13px, 120px);
   }
   //Large
   @media screen and (max-width: 1199px){
     @include size_font(2.7em, 1.4em, 1.1em, 0.8em, 0.7em);
     @include size_square(150px, 110px, 90px, 50px);
     @include size_rectangle(300px, 170px, 50px);
-    @include position_move(-100px, -72px, -40px, -15px, 100px);
+    @include position_move(-95px, -72px, -38px, -12px, 100px);
   }
   //Medium
   @media screen and (max-width: 991px){
     @include size_font(2.5em, 1.3em, 1.0em, 0.7em, 0.6em);
     @include size_square(150px, 100px, 80px, 40px);
     @include size_rectangle(300px, 160px, 50px);
-    @include position_move(-100px, -72px, -40px, -15px, 90px);
+    @include position_move(-90px, -72px, -33px, -11px, 90px);
   }
   //Small
   @media screen and (max-width: 767px){
     @include size_font(2.4em, 1.2em, 0.9em, 0.6em, 0.5em);
-    @include size_square(150px, 100px, 70px, 40px);
+    @include size_square(150px, 90px, 70px, 40px);
     @include size_rectangle(300px, 150px, 50px);
-    @include position_move(-100px, -62px, -40px, -15px, 90px);
+    @include position_move(-85px, -62px, -33px, -10px, 80px);
   }
   //Extra small
   @media screen and (max-width: 575px){
     @include size_font(1.8em, 1.1em, 0.8em, 0.5em, 0.4em);
     @include size_square(150px, 80px, 60px, 40px);
     @include size_rectangle(300px, 140px, 50px);
-    @include position_move(-60px, -60px, -40px, -15px, 90px);
+    @include position_move(-70px, -50px, -30px, -9px, 75px);
   }

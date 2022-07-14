@@ -2,24 +2,25 @@
   = display_header(@authorizer.creator, 'size_medium-rectangle fit-cover')
 .row
   .col-2
-    = display_icon(@authorizer.creator, 'size-large-square rounded-circle fit-cover position-top_large')
-  .col
+    = display_icon(@authorizer.creator, 'size_large-square rounded-circle fit-cover position_large-top')
+  .col-4
     - if (('new' == controller.action_name) || ('show' == controller.action_name)) && (true == @authorizer.creator.request_acceptance_permission)
       - if (user_signed_in?) && (@authorizer.id == current_user.id)
-        = image_tag '/img/request.png', class:'size-middle-square position-top_medium'
+        = image_tag '/img/request.png', class:'size_medium-square position_medium-top'
       - else
-        = link_to image_tag('/img/request.png', class:'size-middle-square position-top_medium'), "/requests/#{@authorizer.creator.user_id}/new"
+        = link_to image_tag('/img/request.png', class:'size_medium-square position_medium-top'), "/requests/#{@authorizer.creator.user_id}/new"
     - else
-      = image_tag '/img/request_stop.png', class:'size-middle-square position-top_medium'
+      = image_tag '/img/request_stop.png', class:'size_medium-square position_medium-top'
       - if user_signed_in? && (@authorizer.id != current_user.id) && (@notification_users.find_by(resume_user: params[:id]).nil?)
-        .position-top-shortX.position-left.font-Xsmall
+        .font-Xsmall.position_Xshort-top.position-left
           = link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new", class:'button-text'
-  .col
-    = display_sns(@authorizer.creator.twitter, '/img/twitter.png', 'size-small-square position-top-short')
+        
+  .col-1
+    = display_sns(@authorizer.creator.twitter, '/img/twitter.png', 'size_small-square position_short-top')
+  .col-1
+    = display_sns(@authorizer.creator.pixiv, '/img/pixiv.png', 'size_small-square position_short-top')
   // .col-1
-  //   = display_sns(@authorizer.creator.pixiv, '/img/pixiv.png', 'size-small-square position-top-short')
-  // .col-1
-  //   = display_sns(@authorizer.creator.instagram, '/img/instagram.png', 'size-small-square position-top-short')
+  //   = display_sns(@authorizer.creator.instagram, '/img/instagram.png', 'size_small-square position_short-top')
 .container
   .row.my-5
     = "ニックネーム：#{@authorizer.nickname}"

@@ -10,20 +10,20 @@
             %td= "リクエストID：#{@request.id}" 
         %tr
           - if not sender.nil?
-            %td= display_icon(sender.creator, 'size-small-square rounded-circle fit-cover') + '依頼者：' + sender.nickname
+            %td= display_icon(sender.creator, 'size_small-square rounded-circle fit-cover') + '依頼者：' + sender.nickname
           - else
             - if @request.sender_icon_url.empty?
-              %td=image_tag('/img/mobu.png', class: 'size-small-square rounded-circle fit-cover') + '依頼者：' + sender.nickname
+              %td=image_tag('/img/mobu.png', class: 'size_small-square rounded-circle fit-cover') + '依頼者：' + sender.nickname
             - else
-              %td=image_tag(@request.sender_icon_url, class: 'size-small-square rounded-circle fit-cover') + '依頼者：' + sender.nickname
+              %td=image_tag(@request.sender_icon_url, class: 'size_small-square rounded-circle fit-cover') + '依頼者：' + sender.nickname
         %tr
           - if not receiver.nil?
-            %td= display_icon(receiver.creator, 'size-small-square rounded-circle fit-cover') + '承認者：' + receiver.nickname
+            %td= display_icon(receiver.creator, 'size_small-square rounded-circle fit-cover') + '承認者：' + receiver.nickname
           - else
             - if @request.receiver_icon_url.empty?
-              %td=image_tag('/img/mobu.png', class: 'size-small-square rounded-circle fit-cover') + '承認者：' + receiver.nickname
+              %td=image_tag('/img/mobu.png', class: 'size_small-square rounded-circle fit-cover') + '承認者：' + receiver.nickname
             - else
-              %td=image_tag(@request.receiver_icon_url, class: 'size-small-square rounded-circle fit-cover') + '承認者：' + receiver.nickname
+              %td=image_tag(@request.receiver_icon_url, class: 'size_small-square rounded-circle fit-cover') + '承認者：' + receiver.nickname
         %tr
           %td= "状態：#{@request.status}"
         %tr

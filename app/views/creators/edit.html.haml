@@ -11,7 +11,7 @@
         = f.file_field :icon
         = f.submit '登録'
     .col-auto
-      = display_icon(@authorizer.creator, 'size-large-square fit-cover rounded-circle border-solid4 border_color-steelblue')
+      = display_icon(@authorizer.creator, 'size_large-square fit-cover rounded-circle border-solid4 border_color-steelblue')
     
   .row.my-5
     = form_with(model: @authorizer.creator, local:true) do |f|

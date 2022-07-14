@@ -29,7 +29,7 @@
       .container-fluid
         .row
           .col-auto
-            = link_to image_tag('/img/symbol.png', class: 'size-small-square'), homes_path
+            = link_to image_tag('/img/symbol.png', class: 'size_small-square'), homes_path
           .col-m0-auto
             %span.font-Xlarge
               %strong イラストライフ
@@ -39,7 +39,7 @@
           .col.text-right
             - if user_signed_in?
               = current_user.nickname + 'さん'
-              = display_icon(current_user.creator, 'size-small-square rounded-circle fit-cover')
+              = display_icon(current_user.creator, 'size_small-square rounded-circle fit-cover')
         .row
           .col.text-right
             - if user_signed_in?

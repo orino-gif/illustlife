@@ -9,7 +9,7 @@
       - @requests.reverse_each.with_index(1) do |request,index|
         - if (request.deliver_img?) && (request.status == '納品完了')
           .col3.m-2
-            = link_to image_tag(request.deliver_img.url, class: 'size-square_Xlarge fit-cover border-solid4'), request_path(request.id)
+            = link_to image_tag(request.deliver_img.url, class: 'size_Xlarge-square fit-cover border-solid4'), request_path(request.id)
             - index -= 1
         - break if index == 20
   .row
@@ -21,7 +21,7 @@
         - if not creator.user.soft_destroyed?
           .col-auto.text-center
             - if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示
-              = display_icon(creator, 'size-middle-square rounded-circle border-solid4 fit-cover border_color-steelblue')
+              = display_icon(creator, 'size_medium-square rounded-circle border-solid4 fit-cover border_color-steelblue')
               .font-small
               = creator.user.nickname
         - break if index == 20
