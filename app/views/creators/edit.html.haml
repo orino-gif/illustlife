@@ -5,21 +5,19 @@
 
 .container
   .row.my-5
-    .col-auto
-      = form_with(model: @authorizer.creator, local:true) do |f|
-        = f.label :icon, 'アイコン：'
-        = f.file_field :icon
-        = f.submit '登録'
-    .col-auto
-      = display_icon(@authorizer.creator, 'size_large-square fit-cover rounded-circle border-solid4 border_color-steelblue')
+    = form_with(model: @authorizer.creator, local:true) do |f|
+      = f.label :header , '紹介ページに表示する画像 ＆ ヘッダー：'
+      = f.file_field :header
+      = f.submit '登録'
+    .col
+      = display_header(@authorizer.creator, 'size_medium-rectangle fit-cover')
     
   .row.my-5
     = form_with(model: @authorizer.creator, local:true) do |f|
-      = f.label :header , 'ヘッダー：'
-      = f.file_field :header
+      = f.label :icon, 'アイコン：'
+      = f.file_field :icon
       = f.submit '登録'
-    = display_header(@authorizer.creator, 'size_medium-rectangle fit-cover')
-    
+    = display_icon(@authorizer.creator, 'size_medium-square fit-cover rounded-circle')
   .row.my-5
     = 'アカウント情報：'
     %table.table
@@ -32,9 +30,28 @@
       %tr
         %td='在籍 or 退会：在籍'
       %td
-        %button{:type => 'buton'}
-          = link_to '変更', edit_user_registration_path
-          
+        %button{:type => 'buton'}= link_to '変更', edit_user_registration_path
+  .row.my-5
+    = 'リンク先：'
+    %table.table
+      %tr
+        %td
+          = form_with(model: @authorizer.creator, local:true) do |f|
+            = f.label :twitter, 'twitter:'
+            = f.text_field :twitter
+            = f.submit '登録'
+      %tr
+        %td
+          = form_with(model: @authorizer.creator, local:true) do |f|
+            = f.label :pixiv, 'pixiv:'
+            = f.text_field :pixiv
+            = f.submit '登録'
+      %tr
+        %td
+          = form_with(model: @authorizer.creator, local:true) do |f|
+            = f.label :instagram, 'instagram:'
+            = f.text_field :instagram
+            = f.submit '登録'
   .row.my-5
     = 'リクエスト受付内容：'
     %table.table
@@ -61,40 +78,6 @@
               %button{:disabled => "disabled", :type => "submit"}='開始'
               = '※報酬受取先の口座登録が事前に必要です'
   .row.my-5
-    = 'NSFW：'
-    %table.table
-      %tr
-        %td
-          = form_with(model: @authorizer.creator, local:true) do |f|
-            = f.label :nsfw, '表示と受付:'
-            - if not @authorizer.creator.nsfw
-              = f.hidden_field :nsfw, value:true
-              = f.submit '不可'
-            - else
-              = f.hidden_field :nsfw, value:false
-              = f.submit '可'
-  .row.my-5
-    = 'リンク先：'
-    %table.table
-      %tr
-        %td
-          = form_with(model: @authorizer.creator, local:true) do |f|
-            = f.label :twitter, 'twitter:'
-            = f.text_field :twitter
-            = f.submit '登録'
-      %tr
-        %td
-          = form_with(model: @authorizer.creator, local:true) do |f|
-            = f.label :pixiv, 'pixiv:'
-            = f.text_field :pixiv
-            = f.submit '登録'
-      %tr
-        %td
-          = form_with(model: @authorizer.creator, local:true) do |f|
-            = f.label :instagram, 'instagram:'
-            = f.text_field :instagram
-            = f.submit '登録'
-  .row.my-5
     = 'クレジットカード：'
     %table.table
       %tr
@@ -116,7 +99,19 @@
       %td
         %button{:type => 'button'}
           =link_to '登録', credit_path
-          
+  .row.my-5
+    = 'NSFW：'
+    %table.table
+      %tr
+        %td
+          = form_with(model: @authorizer.creator, local:true) do |f|
+            = f.label :nsfw, '表示と受付:'
+            - if not @authorizer.creator.nsfw
+              = f.hidden_field :nsfw, value:true
+              = f.submit '不可'
+            - else
+              = f.hidden_field :nsfw, value:false
+              = f.submit '可'
   .row.my-5
     = '再開通知リスト：'
     %table.table
@@ -124,4 +119,3 @@
       %td
         %button{:type => 'button'}
           =link_to 'リスト表示', resume_path
-
