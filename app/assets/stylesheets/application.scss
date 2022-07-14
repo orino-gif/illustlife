@@ -14,7 +14,7 @@
   // body全体のフォント指定
   body { font-family: 'Kaisei Decol', serif, "メイリオ" ; }
   //フッダーの大きさを指定
-  footer { width: 100%; height: 100px; }
+  
   //ストロングとラベルタグの太字を無効化
   strong, label { font-weight: normal; }
   //色設定
@@ -53,10 +53,11 @@
     .size_small-square { width: $small; height: $small; }
   }
   //長方形の図のサイズを設定する関数
-  @mixin size_rectangle($large, $medium, $small) {
+  @mixin size_rectangle($large, $medium, $small, $Xsmall) {
     .size_large-rectangle { width: 100%; height: $large; }
     .size_medium-rectangle { width: 100%; height: $medium; }
     .size_small-rectangle { width: 100%; height: $small; }
+    .size_Xsmall-rectangle { width: 100%; height: $Xsmall; }
   }
   //配置の長さを設定する関数
   @mixin position_move($top_large, $top_medium, $top_short, $top_Xshort, $left_medium) {
@@ -72,34 +73,34 @@
   @media screen and (min-width: 1200px){
     @include size_font(2.8em, 1.5em, 1.1em, 0.9em, 0.8em);
     @include size_square(150px, 120px, 100px, 60px);
-    @include size_rectangle(300px, 180px, 50px);
+    @include size_rectangle(300px, 180px, 110px, 50px);
     @include position_move(-100px, -78px, -48px, -13px, 120px);
   }
   //Large
   @media screen and (max-width: 1199px){
     @include size_font(2.7em, 1.4em, 1.1em, 0.8em, 0.7em);
     @include size_square(150px, 110px, 90px, 50px);
-    @include size_rectangle(300px, 170px, 50px);
+    @include size_rectangle(300px, 170px, 105px, 50px);
     @include position_move(-95px, -72px, -38px, -12px, 100px);
   }
   //Medium
   @media screen and (max-width: 991px){
     @include size_font(2.5em, 1.3em, 1.0em, 0.7em, 0.6em);
-    @include size_square(150px, 100px, 80px, 40px);
-    @include size_rectangle(300px, 160px, 50px);
-    @include position_move(-90px, -72px, -33px, -11px, 90px);
+    @include size_square(150px, 100px, 90px, 40px);
+    @include size_rectangle(300px, 160px, 100px, 50px);
+    @include position_move(-90px, -72px, -33px, -11px, 100px);
   }
   //Small
   @media screen and (max-width: 767px){
     @include size_font(2.4em, 1.2em, 0.9em, 0.6em, 0.5em);
-    @include size_square(150px, 90px, 70px, 40px);
-    @include size_rectangle(300px, 150px, 50px);
-    @include position_move(-85px, -62px, -33px, -10px, 80px);
+    @include size_square(150px, 90px, 80px, 40px);
+    @include size_rectangle(300px, 150px, 98px, 50px);
+    @include position_move(-85px, -62px, -33px, -10px, 100px);
   }
   //Extra small
   @media screen and (max-width: 575px){
     @include size_font(1.8em, 1.1em, 0.8em, 0.5em, 0.4em);
     @include size_square(150px, 70px, 50px, 35px);
-    @include size_rectangle(300px, 120px, 50px);
-    @include position_move(-65px, -45px, -28px, -10px, 75px);
+    @include size_rectangle(300px, 120px, 95px, 50px);
+    @include position_move(-65px, -45px, -30px, -10px, 75px);
   }

@@ -73,12 +73,12 @@
     - else
       - color='background_color-whitesmoke'
     
-    %footer{class:"#{color} mt-5"}
+    %footer{class:"#{color} mt-5 size_small-rectangle font-medium"}
       .container
-        .row.m-4.font-small
+        .row.m-4
           .mx-3= link_to '利用規約', terms_explanations_path
           .mx-3= link_to 'プライバシーポリシー', policy_explanations_path
           .mx-3= link_to '特定商取引法に基づく表記', transaction_law_explanations_path
         .row.m-3
-          .col.font-small.text-right
+          .col.text-right
             %p © 2021-2022 イラストライフ株式会社
