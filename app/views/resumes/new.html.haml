@@ -5,4 +5,4 @@
   = @creator.user.nickname + "さんのリクエスト受付"
   = form_with(model: @resume, local: true) do |f|
     = f.hidden_field :resume_user, :value => params[:id]
-    = f.submit '再開時に通知メールを送る', class:'btn btn-light size-small-Horizontal_variable_rectangle font-large'
+    = f.submit '再開時に通知メールを送る', class:'btn btn-light size_small-rectangle font-large'

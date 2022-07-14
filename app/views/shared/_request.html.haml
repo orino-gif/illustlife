@@ -60,9 +60,9 @@
         - if @request.deliver_img.to_s.include?('.psd')
           - pdf = Magick::ImageList.new(@request.deliver_img.to_s)
           - pdf[0].write("public/img/conversion_psd/#{current_user.id}_#{@request.id}.png")
-          = link_to image_tag("/img/conversion_psd/#{current_user.id}_#{@request.id}.png", class:'size-large-Horizontal_variable_rectangle fit-cover'),"img/conversion_psd/#{current_user.id}_#{@request.id}.png"
+          = link_to image_tag("/img/conversion_psd/#{current_user.id}_#{@request.id}.png", class:'size_large-rectangle fit-cover'),"img/conversion_psd/#{current_user.id}_#{@request.id}.png"
         - else
-          = link_to image_tag(@request.deliver_img.url, class:'size-large-Horizontal_variable_rectangle fit-cover'), @request.deliver_img.url
+          = link_to image_tag(@request.deliver_img.url, class:'size_large-rectangle fit-cover'), @request.deliver_img.url
     .col-md-auto
       - if ('納品完了' == @request.status) && (user_signed_in?)
         - if sender.nickname == current_user.nickname

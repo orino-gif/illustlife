@@ -8,9 +8,8 @@
       = form_with(model: @request, local: true) do |f|
         .form-group.mt-4
           = f.label :money, '推奨金額(円)'
-          = f.text_field :money, class:'form-control Horizontal_rectangle font-large', value: @authorizer.creator.recommended_amount.to_s
+          = f.text_field :money, class:'form-control size_form font-large', value: @authorizer.creator.recommended_amount.to_s
           = f.label :money, '入力可能範囲:￥' + @authorizer.creator.minimum_amount.to_s(:delimited) + '～￥100,000', class:'font-Xsmall'
-        
         .form-group.mt-4
           = f.label :message, '本文(1000文字以内)'
           = f.text_area :message, autofocus: true, class:'form-control', size:'10x6'
@@ -27,7 +26,7 @@
           = f.check_box :is_autographed ,{},checked_value = "true",unchecked_value = "false"  
           = f.label :is_autographed, '宛名入りサイン'
         %br
-          = f.submit 'リクエスト送信', class:'btn btn-light size-small-Horizontal_variable_rectangle font-large'
+          = f.submit 'リクエスト送信', class:'btn btn-light size_small-rectangle font-large'
         %br/
         = hidden_field_tag :authorizer_id, params[:id]
       %div
