@@ -99,7 +99,7 @@
   //Extra small
   @media screen and (max-width: 575px){
     @include size_font(1.8em, 1.1em, 0.8em, 0.5em, 0.4em);
-    @include size_square(150px, 80px, 60px, 40px);
-    @include size_rectangle(300px, 140px, 50px);
-    @include position_move(-70px, -50px, -30px, -9px, 75px);
+    @include size_square(150px, 70px, 50px, 35px);
+    @include size_rectangle(300px, 120px, 50px);
+    @include position_move(-65px, -45px, -28px, -10px, 75px);
   }
