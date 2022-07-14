@@ -13,8 +13,6 @@
   a { color: steelblue; text-decoration: none !important; }
   // body全体のフォント指定
   body { font-family: 'Kaisei Decol', serif, "メイリオ" ; }
-  //フッダーの大きさを指定
-  
   //ストロングとラベルタグの太字を無効化
   strong, label { font-weight: normal; }
   //色設定
@@ -31,8 +29,8 @@
   .img_color-translucent{ opacity: 0.3; }
   //文字がコンテンツからあふれた場合に改行
   .string_indention{ word-wrap: break-word; max-width: 320px; }
-  //ボタンのデザイン
-  .button-text{ background-color: whitesmoke; padding: 3px; }
+  //通知ボタンのデザイン
+  .button-notice{ background-color: whitesmoke; padding: 3px; }
   //金額入力フォームの大きさ
   .size_form { width: 150px; height: 50px; }
 

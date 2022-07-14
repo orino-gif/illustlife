@@ -13,7 +13,7 @@
       = image_tag '/img/request_stop.png', class:'size_medium-square position_medium-top'
       - if user_signed_in? && (@authorizer.id != current_user.id) && (@notification_users.find_by(resume_user: params[:id]).nil?)
         .font-Xsmall.position_Xshort-top.position-left
-          = link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new", class:'button-text'
+          = link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new", class:'button-notice'
         
   .col-1
     = display_sns(@authorizer.creator.twitter, '/img/twitter.png', 'size_small-square position_short-top')
