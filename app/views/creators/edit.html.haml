@@ -38,19 +38,31 @@
         %td
           = form_with(model: @authorizer.creator, local:true) do |f|
             = f.label :twitter, 'twitter:'
-            = f.text_field :twitter
+            = f.text_field :twitter, class:'size_variable-form'
             = f.submit '登録'
       %tr
         %td
           = form_with(model: @authorizer.creator, local:true) do |f|
             = f.label :pixiv, 'pixiv:'
-            = f.text_field :pixiv
+            = f.text_field :pixiv, class:'size_variable-form'
             = f.submit '登録'
       %tr
         %td
           = form_with(model: @authorizer.creator, local:true) do |f|
             = f.label :instagram, 'instagram:'
-            = f.text_field :instagram
+            = f.text_field :instagram, class:'size_variable-form'
+            = f.submit '登録'
+      %tr
+        %td
+          = form_with(model: @authorizer.creator, local:true) do |f|
+            = f.label :youtube, 'youtube:'
+            = f.text_field :youtube, class:'size_variable-form'
+            = f.submit '登録'
+      %tr
+        %td
+          = form_with(model: @authorizer.creator, local:true) do |f|
+            = f.label :link, '他リンク先:'
+            = f.text_field :link, class:'size_variable-form'
             = f.submit '登録'
   .row.my-5
     = 'リクエスト受付内容：'

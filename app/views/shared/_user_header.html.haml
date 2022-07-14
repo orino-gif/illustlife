@@ -19,8 +19,8 @@
     = display_sns(@authorizer.creator.twitter, '/img/twitter.png', 'size_small-square position_short-top')
   .col-1
     = display_sns(@authorizer.creator.pixiv, '/img/pixiv.png', 'size_small-square position_short-top')
-  // .col-1
-  //   = display_sns(@authorizer.creator.instagram, '/img/instagram.png', 'size_small-square position_short-top')
+  .col-1
+    = display_sns(@authorizer.creator.instagram, '/img/instagram.png', 'size_small-square position_short-top')
 .container
   .row.my-5
     = "ニックネーム：#{@authorizer.nickname}"
