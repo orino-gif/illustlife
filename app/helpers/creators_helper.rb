@@ -6,12 +6,4 @@ module CreatorsHelper
       image_tag '/img/nothing.png', class:appearance
     end
   end
-  
-  def display_sns(creator_sns, place_img, appearance)
-    if creator_sns.present?
-      link_to image_tag(place_img, class:appearance), creator_sns
-    else
-      image_tag place_img, class:appearance + ' img_color-translucent'
-    end
-  end
 end

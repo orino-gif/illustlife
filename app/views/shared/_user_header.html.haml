@@ -14,13 +14,16 @@
       - if user_signed_in? && (@authorizer.id != current_user.id) && (@notification_users.find_by(resume_user: params[:id]).nil?)
         .font-Xsmall.position_Xshort-top.position-left
           = link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new", class:'button-notice'
-        
-  .col-1
-    = display_sns(@authorizer.creator.twitter, '/img/twitter.png', 'size_small-square position_short-top')
-  .col-1
-    = display_sns(@authorizer.creator.pixiv, '/img/pixiv.png', 'size_small-square position_short-top')
-  .col-1
-    = display_sns(@authorizer.creator.instagram, '/img/instagram.png', 'size_small-square position_short-top')
+  - if @authorizer.creator.twitter.present?
+    .col-1= link_to image_tag('/img/twitter.png', class:'size_small-square position_short-top'), @authorizer.creator.twitter
+  - if @authorizer.creator.pixiv.present?
+    .col-1= link_to image_tag('/img/pixiv.png', class:'size_small-square position_short-top'), @authorizer.creator.pixiv
+  - if @authorizer.creator.instagram.present?
+    .col-1= link_to image_tag('/img/instagram.png', class:'size_small-square position_short-top'), @authorizer.creator.instagram
+  - if @authorizer.creator.youtube.present?
+    .col-1= link_to image_tag('/img/youtube.png', class:'size_small-square position_short-top'), @authorizer.creator.youtube
+  - if @authorizer.creator.link.present?
+    .col-1= link_to image_tag('/img/link.png', class:'size_small-square position_short-top'), @authorizer.creator.link
 .container
   .row.my-5
     = "ニックネーム：#{@authorizer.nickname}"
