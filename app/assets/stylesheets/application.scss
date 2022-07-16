@@ -18,7 +18,7 @@
   //色設定
   .background_color-whitesmoke { background-color: whitesmoke; } 
   .background_color-crimson { background-color: crimson; } 
-  .border_color-steelblue { border-color: steelblue; } 
+  // .border_color-steelblue { border-color: steelblue; } 
   //ボーダーのデザイン
   .border-solid4 { border-style: solid; border-width: 4px; }
    //アスペクト比を維持して表示
@@ -98,7 +98,7 @@
   //Extra small
   @media screen and (max-width: 575px){
     @include size_font(1.8em, 1.1em, 0.8em, 0.5em, 0.4em);
-    @include size_square(150px, 70px, 40px, 25px);
+    @include size_square(100px, 70px, 40px, 25px);
     @include size_rectangle(300px, 120px, 95px, 50px);
     @include position_move(-65px, -35px, -18px, -10px, 75px);
   }
