@@ -38,7 +38,6 @@
             %strong ～イラスト、漫画、コスプレ写真をリクエスト～
           .col.text-right
             - if user_signed_in?
-              = current_user.nickname + 'さん'
               = display_icon(current_user.creator, 'size_small-square rounded-circle fit-cover')
         .row
           .col.text-right

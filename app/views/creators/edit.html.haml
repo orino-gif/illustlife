@@ -6,7 +6,7 @@
 .container
   .row.my-5
     = form_with(model: @authorizer.creator, local:true) do |f|
-      = f.label :header , '紹介ページに表示する画像 ＆ ヘッダー：'
+      = f.label :header , '私の代表作：'
       = f.file_field :header
       = f.submit '登録'
     .col
