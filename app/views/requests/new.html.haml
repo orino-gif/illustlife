@@ -26,7 +26,7 @@
           = f.check_box :is_autographed ,{},checked_value = "true",unchecked_value = "false"  
           = f.label :is_autographed, '宛名入りサイン'
         %br
-          = f.submit 'リクエスト送信', class:'btn btn-light size_Xsmall-rectangle font-large'
+          = f.submit 'リクエスト送信', class:'btn btn-light size_Xsmall-rectangle font-large', data: { confirm: "リクエストしますか？"}
         %br/
         = hidden_field_tag :authorizer_id, params[:id]
       %div

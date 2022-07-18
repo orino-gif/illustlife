@@ -3,5 +3,8 @@ class Creator < ApplicationRecord
   
   mount_uploader :header, CreatorUploader
   mount_uploader :icon, CreatorUploader
+
+  validates :recommended_amount, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1000}
+  validates :minimum_amount, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1000}
 end
 
