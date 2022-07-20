@@ -15,15 +15,16 @@ class CreatorsController < ApplicationController
   end
   
   def update
-    begin
-      @creator.update(creators_params)
+    if @creator.update(creators_params)
       if @creator.request_acceptance_permission
         UserMailer.info.deliver_later
       end
       redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
-    rescue => e
-      p e
-      redirect_to request.referer, alert: 'ファイルを選択してください'
+    else
+      p @creator.errors.full_messages
+      if @creator.errors.full_messages[0].include?("amount")
+        redirect_to request.referer, alert: '金額入力の数値が範囲外です'
+      end
     end
   end
   
