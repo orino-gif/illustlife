@@ -60,10 +60,11 @@ class UserMailer < ApplicationMailer
       )
   end
   
-  def info
-    mail(
-        to: "#{ENV['ADMINISTRATOR_MAIL']}",
-        subject: "[イラストライフ運営局]解除されました。"
+  def info(user)
+      @user = user
+      mail(
+        to: @user.email,
+        subject: "[イラストライフ運営局]#{@user.nickname}さんがリクエスト受付を開始しました。"
       )
   end
 end
