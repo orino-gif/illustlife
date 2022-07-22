@@ -82,7 +82,7 @@
             - if ((nil != @credit) && (nil != @credit.bank) && (nil != @credit.branch_name) && (nil != @credit.account_type) && (nil != @credit.account_number) && (nil != @credit.account_holder) || ('development' == ENV['RAILS_ENV']))
               - if true != @authorizer.creator.request_acceptance_permission
                 = f.hidden_field :request_acceptance_permission, value:true
-                = f.submit '開始'
+                = f.submit '開始', :name => 'open'
               - else
                 = f.hidden_field :request_acceptance_permission, value:false
                 = f.submit '停止'

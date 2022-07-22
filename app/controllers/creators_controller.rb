@@ -16,15 +16,19 @@ class CreatorsController < ApplicationController
   
   def update
     if @creator.update(creators_params)
-      # 再開通知リストに登録されている者へ再開のメールを送る
-      @resumes = Resume.where(resume_user: current_user.id)
-      p @resumes
-      if not @resumes.empty?
-        @resumes.each do |id|
-          @user = User.find(id.notification_user)
-          UserMailer.info(@user).deliver_later
+      
+      if params[:open]
+        # 再開通知リストに登録されている者へ再開のメールを送る
+        @resumes = Resume.where(resume_user: current_user.id)
+        p @resumes
+        if not @resumes.empty?
+          @resumes.each do |id|
+            @user = User.find(id.notification_user)
+            UserMailer.info(@user).deliver_later
+          end
         end
       end
+      
       redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
     else
       p @creator.errors.full_messages
