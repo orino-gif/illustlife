@@ -23,8 +23,9 @@ class CreatorsController < ApplicationController
         p @resumes
         if not @resumes.empty?
           @resumes.each do |id|
-            @user = User.find(id.notification_user)
-            UserMailer.info(@user).deliver_later
+            @notification_user = User.find(id.notification_user)
+            @resume_user = User.find(id.resume_user)
+            UserMailer.info(@notification_user, @resume_user).deliver_later
           end
         end
       end

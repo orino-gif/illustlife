@@ -60,11 +60,12 @@ class UserMailer < ApplicationMailer
       )
   end
   
-  def info(user)
-      @user = user
+  def info(notification_user, resume_user)
+      @notification_user = notification_user
+      @resume_user = resume_user
       mail(
-        to: @user.email,
-        subject: "[イラストライフ運営局]#{@user.nickname}さんがリクエスト受付を開始しました。"
+        to: @notification_user.email,
+        subject: "[イラストライフ運営局]#{@resume_user.nickname}さんがリクエスト受付を開始しました。"
       )
   end
 end
