@@ -27,6 +27,7 @@
 .container
   .row.my-5
     = "ニックネーム：#{@authorizer.nickname}"
+    = "、推奨金額：#{@authorizer.creator.recommended_amount}円"
     = "、作業予定日数：#{@authorizer.creator.working_days}日"
     ='、NSFW不可'
     - if 0 != @authorizer.creator.number_of_works
