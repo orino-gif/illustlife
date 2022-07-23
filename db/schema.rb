@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_09_173437) do
+ActiveRecord::Schema.define(version: 2022_07_23_051652) do
 
   create_table "cards", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2022_07_09_173437) do
     t.string "instagram"
     t.string "youtube"
     t.string "link"
-    t.integer "recommended_amount", default: 3000
+    t.integer "recommended_amount", default: 5000
     t.integer "minimum_amount", default: 1000
     t.integer "working_days", default: 14
     t.integer "number_of_request", default: 0

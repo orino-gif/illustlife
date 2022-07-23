@@ -24,7 +24,7 @@ Rails.application.configure do
   #config.public_file_server.enabled = true
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = Uglifier.new(harmony: true)
   #config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
@@ -41,7 +41,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  # config.active_storage.service = :local
+  #config.active_storage.service = :local
   config.active_storage.service = :amazon
 
   # Mount Action Cable outside main process or domain
@@ -50,7 +50,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -98,8 +98,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   
-  #config.action_mailer.default_url_options = {  :host => 'illustlife.com', :protocol => 'https' }
-  config.action_mailer.default_url_options = {  host: '35.76.52.50', port:3000}
+  config.action_mailer.default_url_options = {  :host => 'illustlife.com', :protocol => 'https' }
+  #config.action_mailer.default_url_options = {  host: '160.16.136.195', port:3000}
   
   # config/environments/{staging,development}.rb
   config.action_mailer.delivery_method = :ses
@@ -113,9 +113,6 @@ Rails.application.configure do
 	  address:              'mail.so-net.ne.jp',
 		domain:               'so-net.ne.jp',
 		user_name:            'xr274375@fc5.so-net.ne.jp',
-		# address:              '160.16.136.195',
-		# domain:               '160.16.136.195',
-		# user_name:            'operation@160.16.136.195',
 		password:             'orino1013',
 		authentication:       'login'
 		
