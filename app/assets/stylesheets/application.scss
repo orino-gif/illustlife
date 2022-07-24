@@ -22,7 +22,7 @@
   //ボーダーのデザイン
   .border-solid4 { border-style: solid; border-width: 4px; }
    //アスペクト比を維持して表示
-  .fit-cover { object-fit: cover; }
+  .fit_cover { object-fit: cover; }
   //コンテンツを中央に寄せる
   .position-center{ width: 80%; margin: 0 auto; max-width: 600px; }
   //文字がコンテンツからあふれた場合に改行
@@ -103,7 +103,6 @@
     @include position_move(-65px, -35px, -18px, -10px, 75px);
   }
   
-
 /* ---------- 吹き出し共通設定 ---------- */
 .block-baloon, .block-baloon-top, .block-baloon-right, .block-baloon-bottom, .block-baloon-left	{
 	display: table;

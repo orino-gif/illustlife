@@ -10,14 +10,14 @@
       = f.file_field :header
       = f.submit '登録'
     .col
-      = display_header(@authorizer.creator, 'size_medium-rectangle fit-cover')
+      = display_header(@authorizer.creator, 'size_medium-rectangle fit_cover')
     
   .row.my-5
     = form_with(model: @authorizer.creator, local:true) do |f|
       = f.label :icon, 'アイコン：'
       = f.file_field :icon
       = f.submit '登録'
-    = display_icon(@authorizer.creator, 'size_medium-square fit-cover rounded-circle')
+    = display_icon(@authorizer.creator, 'size_medium-square fit_cover rounded-circle')
   .row.my-5
     = 'アカウント情報：'
     %table.table
