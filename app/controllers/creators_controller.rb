@@ -1,5 +1,5 @@
 class CreatorsController < ApplicationController
-  before_action :set_creator, only: [:show, :update, :edit]
+  before_action :set_creator, only: [:show, :update, :edit, :earning]
   
   def show
     @requests = Request.where(receiver_id: @creator.user.id, status: '納品完了')

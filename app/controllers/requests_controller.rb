@@ -62,7 +62,7 @@ class RequestsController < ApplicationController
   
   def new
     @request = Request.new
-    @authorizer = User.find(params[:id])
+    @creator = Creator.find_by(user_id: params[:id])
   end
 
   def create

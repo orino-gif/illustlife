@@ -5,4 +5,9 @@
 
 .container
   .row
-    売上はありません
+    - if 0 < @creator.earnings
+      = @creator.user.nickname+"さんの売上:"
+      = @creator.earnings.to_s+"円"
+    
+    - else
+      売上はありません
