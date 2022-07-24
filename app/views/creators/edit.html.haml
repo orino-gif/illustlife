@@ -5,28 +5,28 @@
 
 .container
   .row.my-5
-    = form_with(model: @authorizer.creator, local:true) do |f|
+    = form_with(model: @creator, local:true) do |f|
       = f.label :header , '私の代表作：'
       = f.file_field :header
       = f.submit '登録'
     .col
-      = display_header(@authorizer.creator, 'size_medium-rectangle fit_cover')
+      = display_header(@creator, 'size_medium-rectangle fit_cover')
     
   .row.my-5
-    = form_with(model: @authorizer.creator, local:true) do |f|
+    = form_with(model: @creator, local:true) do |f|
       = f.label :icon, 'アイコン：'
       = f.file_field :icon
       = f.submit '登録'
-    = display_icon(@authorizer.creator, 'size_medium-square fit_cover rounded-circle')
+    = display_icon(@creator, 'size_medium-square fit_cover rounded-circle')
   .row.my-5
     = 'アカウント情報：'
     %table.table
       %tr
-        %td="Eメール：#{@authorizer.email}"
+        %td="Eメール：#{@creator.user.email}"
       %tr
         %td='パスワード: xxxxxxxxxxx'
       %tr
-        %td="ニックネーム：#{@authorizer.nickname}"
+        %td="ニックネーム：#{@creator.user.nickname}"
       %tr
         %td='在籍 or 退会：在籍'
       %td
@@ -36,31 +36,31 @@
     %table.table
       %tr
         %td
-          = form_with(model: @authorizer.creator, local:true) do |f|
+          = form_with(model: @creator, local:true) do |f|
             = f.label :twitter, 'twitter:'
             = f.text_field :twitter, class:'size_variable-form'
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @authorizer.creator, local:true) do |f|
+          = form_with(model: @creator, local:true) do |f|
             = f.label :pixiv, 'pixiv:'
             = f.text_field :pixiv, class:'size_variable-form'
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @authorizer.creator, local:true) do |f|
+          = form_with(model: @creator, local:true) do |f|
             = f.label :instagram, 'instagram:'
             = f.text_field :instagram, class:'size_variable-form'
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @authorizer.creator, local:true) do |f|
+          = form_with(model: @creator, local:true) do |f|
             = f.label :youtube, 'youtube:'
             = f.text_field :youtube, class:'size_variable-form'
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @authorizer.creator, local:true) do |f|
+          = form_with(model: @creator, local:true) do |f|
             = f.label :link, '他リンク先:'
             = f.text_field :link, class:'size_variable-form'
             = f.submit '登録'
@@ -69,7 +69,7 @@
     %table.table
       %tr
         %td
-          = form_with(model: @authorizer.creator, local:true) do |f|
+          = form_with(model: @creator, local:true) do |f|
             = f.label :recommended_amount, '推奨金額(円):'
             = f.text_field :recommended_amount
             = f.label :minimum_amount, '最低金額(円):'
@@ -77,10 +77,10 @@
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @authorizer.creator, local:true) do |f|
+          = form_with(model: @creator, local:true) do |f|
             = f.label :request_acceptance_permission, 'リクエスト受付:'
             - if ((nil != @credit) && (nil != @credit.bank) && (nil != @credit.branch_name) && (nil != @credit.account_type) && (nil != @credit.account_number) && (nil != @credit.account_holder) || ('development' == ENV['RAILS_ENV']))
-              - if true != @authorizer.creator.request_acceptance_permission
+              - if true != @creator.request_acceptance_permission
                 = f.hidden_field :request_acceptance_permission, value:true
                 = f.submit '開始', :name => 'open'
               - else
@@ -116,9 +116,9 @@
     %table.table
       %tr
         %td
-          = form_with(model: @authorizer.creator, local:true) do |f|
+          = form_with(model: @creator, local:true) do |f|
             = f.label :nsfw, '表示と受付:'
-            - if not @authorizer.creator.nsfw
+            - if not @creator.nsfw
               = f.hidden_field :nsfw, value:true
               = f.submit '不可'
             - else

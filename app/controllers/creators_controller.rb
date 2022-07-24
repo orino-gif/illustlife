@@ -1,12 +1,15 @@
 class CreatorsController < ApplicationController
-  before_action :set_authorizer, only: [:show, :edit]
-  before_action :set_creator, only: [:show, :update]
+  before_action :set_creator, only: [:show, :update, :edit]
   
   def show
     @requests = Request.where(receiver_id: @creator.user.id, status: '納品完了')
     if user_signed_in?
       @notification_users = Resume.where(notification_user:current_user.id)
     end
+  end
+  
+  def earning
+    
   end
   
   def edit
@@ -44,11 +47,7 @@ class CreatorsController < ApplicationController
   def creators_params
     params.require(:creator).permit(:header, :icon, :twitter, :pixiv, :instagram, :youtube, :link, :request_acceptance_permission, :recommended_amount, :minimum_amount, :nsfw)
   end
-  
-  def set_authorizer
-    @authorizer = User.find_by(id:params[:id])
-  end
-  
+
   def set_creator
     @creator = Creator.find(params[:id])
   end

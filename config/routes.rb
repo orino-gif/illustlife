@@ -8,10 +8,11 @@ Rails.application.routes.draw do
   get 'requests/:id/new', to: 'requests#new'
   get 'credits/:id/new', to: 'credits#new'
   get 'resumes/:id/new', to: 'resumes#new'
+  get 'creators/:id/earning', to: 'creators#earning'
   resources :resumes, only: [:index, :create, :show, :destroy]
   resources :credits, only: [:create, :show, :update]
   resources :homes, only: [:index]
-  resources :creators, only: [:create, :show, :edit, :update]
+  resources :creators, only: [:show, :edit, :update]
   resources :requests, only: [:index, :create, :show, :update] do
     member  do
       get 'download'
