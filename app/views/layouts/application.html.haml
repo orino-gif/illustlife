@@ -75,6 +75,8 @@
     %footer{class:"#{color} mt-5 size_small-rectangle font-medium"}
       .container
         .row.m-4
+          .mx-3= link_to 'イラスト付き利用説明', for_client_explanations_path
+        .row.m-4
           .mx-3= link_to '利用規約', terms_explanations_path
           .mx-3= link_to 'プライバシーポリシー', policy_explanations_path
           .mx-3= link_to '特定商取引法に基づく表記', transaction_law_explanations_path

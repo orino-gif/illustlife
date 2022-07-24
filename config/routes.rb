@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       get 'terms'
       get 'policy'
       get 'transaction_law'
+      get 'for_client'
     end
   end
 end
