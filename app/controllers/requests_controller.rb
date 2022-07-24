@@ -30,6 +30,7 @@ class RequestsController < ApplicationController
         @request.is_in_time_for_the_deadline = true
         @receiver.creator.number_of_works += 1
         @receiver.creator.evaluation_points += 3
+        @receiver.creator.earnings += @request.money
         p @requests.all.sum(:delivery_time)
         p Time.now - @request.approval_day
         @request.delivery_time =+ 1
@@ -99,8 +100,12 @@ class RequestsController < ApplicationController
   
   def download
     hoge = Request.find(params[:id])
-    image = hoge.deliver_img # imageはFugaUploaderオブジェクト
-    send_data(image.read, filename: "download#{File.extname(image.path)}")
+    if hoge.deliver_img?
+      image = hoge.deliver_img # imageはFugaUploaderオブジェクト
+      send_data(image.read, filename: "download#{File.extname(image.path)}")
+    else
+      redirect_to request.referer, alert: '画像がアップロードされていません'
+    end
   end
   
   def update
