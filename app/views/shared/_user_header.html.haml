@@ -12,7 +12,7 @@
     - else
       = image_tag '/img/request_stop.png', class:'size_medium-square position_medium-top'
       - if user_signed_in? && (@authorizer.id != current_user.id) && (@notification_users.find_by(resume_user: params[:id]).nil?)
-        .font-Xsmall.position_Xshort-top.position-left
+        .font-Xsmall.position_Xshort-top.position_midium-left
           = link_to "再開を通知", "/resumes/#{@authorizer.creator.user_id}/new", class:'button-notice'
   - if @authorizer.creator.twitter.present?
     .col-1= link_to image_tag('/img/twitter.png', class:'size_small-square position_short-top'), @authorizer.creator.twitter
