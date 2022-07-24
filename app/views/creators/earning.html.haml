@@ -1,13 +1,24 @@
 %meta{:content => "noindex", :name => "robots"}/
 
 - content_for(:html_title) { '売上' }
-%h1.font-Xlarge.background_color-whitesmoke 売上
+%h1.font-Xlarge.background_color-whitesmoke="#{@creator.user.nickname}さんの売上"
 
 .container
-  .row
-    - if 0 < @creator.earnings
-      = @creator.user.nickname+"さんの売上:"
-      = @creator.earnings.to_s+"円"
-    
+  - if 0 < @creator.earnings
+    - if true == @withdrawal_confirmation
+      .row
+        確認
     - else
+      .row
+        = "総売上:#{@creator.earnings}円"
+        %br
+        = "引き落とし可能額:#{@creator.earnings}円"
+      .row
+        %br
+      .row
+        = button_to "指定口座に引き落とす", {controller: 'creators', action: 'earning'}, {method: :get, params:{withdrawal_confirmation: true}}
+  - else
+    .row
       売上はありません
+    
+    

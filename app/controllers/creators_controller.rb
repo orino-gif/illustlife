@@ -9,7 +9,9 @@ class CreatorsController < ApplicationController
   end
   
   def earning
-    
+    if params[:withdrawal_confirmation]
+      @withdrawal_confirmation = true
+    end
   end
   
   def edit
