@@ -9,8 +9,9 @@ class CreatorsController < ApplicationController
   end
   
   def earning
-    if params[:withdrawal_confirmation]
-      @withdrawal_confirmation = true
+    if '確認' == params[:withdrawal_status]
+      @withdrawal_status = '確認'
+    elsif '引き落とし実行' == params[:withdrawal_status]
     end
   end
   
@@ -21,7 +22,6 @@ class CreatorsController < ApplicationController
   
   def update
     if @creator.update(creators_params)
-      
       if params[:open]
         # 再開通知リストに登録されている者へ再開のメールを送る
         @resumes = Resume.where(resume_user: current_user.id)

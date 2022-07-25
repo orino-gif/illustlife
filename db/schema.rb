@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2022_07_23_051652) do
     t.datetime "updated_at", null: false
     t.boolean "nsfw", default: false
     t.integer "earnings", default: 0
+    t.integer "withdrawal_amount", default: 0
   end
 
   create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
