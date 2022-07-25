@@ -12,6 +12,7 @@ class CreatorsController < ApplicationController
     if '確認' == params[:withdrawal_status]
       @withdrawal_status = '確認'
     elsif '引き落とし実行' == params[:withdrawal_status]
+      @withdrawal_status = '引き落とし実行'
     end
   end
   

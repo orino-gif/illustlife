@@ -15,7 +15,7 @@ default: &default
 
 development:
   <<: *default
-  database: illustlife_test
+  database: illustlife_development
 
 test:
   <<: *default

@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2022_07_23_051652) do
 
-  create_table "cards", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "cards", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "INTEGER PRIMARY KEY NOT NULL"
     t.string "customer_id", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2022_07_23_051652) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "creators", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "creators", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "icon"
     t.string "header"
     t.string "twitter"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2022_07_23_051652) do
     t.integer "withdrawal_amount", default: 0
   end
 
-  create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "bank"
     t.string "branch_name"
     t.string "account_type"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2022_07_23_051652) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "money"
     t.integer "sender_id"
     t.integer "receiver_id"
@@ -78,14 +78,14 @@ ActiveRecord::Schema.define(version: 2022_07_23_051652) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "resumes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "resumes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "resume_user"
     t.integer "notification_user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.boolean "accepted", default: false, null: false

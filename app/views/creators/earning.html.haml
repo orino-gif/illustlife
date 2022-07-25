@@ -1,11 +1,9 @@
 %meta{:content => "noindex", :name => "robots"}/
 
 - content_for(:html_title) { '売上' }
-%h1.font-Xlarge.background_color-whitesmoke="#{@creator.user.nickname}さんの売上"
+%h1.font-Xlarge.background_color-whitesmoke="#{@creator.user.nickname}さんの売上と報酬"
 
 .container
-  - @creator.earnings = 3000
-  - @creator.withdrawal_amount = 3000
   - if 0 < @creator.earnings
     - if '確認' == @withdrawal_status
       .row
@@ -17,6 +15,9 @@
           = button_to "はい", {controller: 'creators', action: 'earning'}, {method: :get, params:{withdrawal_status: '引き落とし実行'}}
         .col-1
           = button_to "いいえ", {controller: 'creators', action: 'earning'}, {method: :get, params:{withdrawal_status: 'キャンセル'}}
+    - elsif '引き落とし実行' == @withdrawal_status
+      = "引き落としを実行しました"
+      %br= '(※営業日により振込が数日遅れる場合があります)'
 
     - else
       .row
