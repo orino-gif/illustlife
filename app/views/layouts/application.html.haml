@@ -42,15 +42,16 @@
         .row
           .col.text-right
             - if user_signed_in?
-              -if 'requests' != controller.controller_name
-                %button.btn.btn-light.font-medium= link_to 'リクエスト状態', requests_path
-              - if (ENV['ADMINISTRATOR_MAIL'] == current_user.email) && ('creators' == controller.controller_name) && ('show' == controller.action_name)
-                %button.btn.btn-light= link_to 'アカウント編集', edit_creator_path(params[:id])
-              - elsif controller.action_name == 'show'
-                %button.btn.btn-light.font-medium= link_to 'ユーザー編集', edit_creator_path(current_user.id)
-              - elsif ('requests' == controller.controller_name) && ('index' == controller.action_name)
-                %button.btn.btn-light.font-medium= link_to '売上', "/creators/#{current_user.id}/earning"
-              %button.btn.btn-light.font-medium= link_to 'ログアウト', destroy_user_session_path, method: "delete"
+              - if 'homes' != controller.controller_name
+                - if 'requests' != controller.controller_name
+                  %button.btn.btn-light.font-medium= link_to 'リクエスト状態', requests_path
+                - if controller.action_name != 'earning'
+                  %button.btn.btn-light.font-medium= link_to '売上', "/creators/#{current_user.id}/earning"
+                - if (ENV['ADMINISTRATOR_MAIL'] == current_user.email) && ('creators' == controller.controller_name) && ('show' == controller.action_name)
+                  %button.btn.btn-light= link_to 'アカウント編集', edit_creator_path(params[:id])
+                - elsif controller.action_name == 'show'
+                  %button.btn.btn-light.font-medium= link_to 'ユーザー編集', edit_creator_path(current_user.id)
+                %button.btn.btn-light.font-medium= link_to 'ログアウト', destroy_user_session_path, method: "delete"
             - else
               %button.btn.btn-light.font-medium= link_to '新規登録', new_user_registration_path
               %button.btn.btn-light.font-medium= link_to 'ログイン', new_user_session_path
