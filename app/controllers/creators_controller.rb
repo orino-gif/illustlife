@@ -26,7 +26,6 @@ class CreatorsController < ApplicationController
       if params[:open]
         # 再開通知リストに登録されている者へ再開のメールを送る
         @resumes = Resume.where(resume_user: current_user.id)
-        p @resumes
         if not @resumes.empty?
           @resumes.each do |id|
             @notification_user = User.find(id.notification_user)
@@ -35,10 +34,8 @@ class CreatorsController < ApplicationController
           end
         end
       end
-      
       redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
     else
-      p @creator.errors.full_messages
       if @creator.errors.full_messages[0].include?("amount")
         redirect_to request.referer, alert: '金額入力の数値が範囲外です'
       end
@@ -48,7 +45,8 @@ class CreatorsController < ApplicationController
   private
 
   def creators_params
-    params.require(:creator).permit(:header, :icon, :twitter, :pixiv, :instagram, :youtube, :link, :request_acceptance_permission, :recommended_amount, :minimum_amount, :nsfw)
+    params.require(:creator).permit(:header, :icon, :twitter, :pixiv, :instagram, :youtube, :link,
+      :request_acceptance_permission, :recommended_amount, :working_days, :minimum_amount, :nsfw)
   end
 
   def set_creator

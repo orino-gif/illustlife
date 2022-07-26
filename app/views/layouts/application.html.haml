@@ -47,7 +47,7 @@
                   %button.btn.btn-light.font-medium= link_to 'リクエスト状態', requests_path
                 - if controller.action_name != 'earning'
                   %button.btn.btn-light.font-medium= link_to '売上', "/creators/#{current_user.id}/earning"
-                - if (ENV['ADMINISTRATOR_MAIL'] == current_user.email) && ('creators' == controller.controller_name) && ('show' == controller.action_name)
+                - if (ENV['ADMINISTRATOR_MAIL'] == current_user.email) && ('show' == controller.action_name)
                   %button.btn.btn-light= link_to 'アカウント編集', edit_creator_path(params[:id])
                 - elsif controller.action_name == 'show'
                   %button.btn.btn-light.font-medium= link_to 'ユーザー編集', edit_creator_path(current_user.id)

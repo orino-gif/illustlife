@@ -90,16 +90,14 @@
               %button{:disabled => "disabled", :type => "submit"}='開始'
               = '※報酬受取先の口座登録が事前に必要です'
   .row.my-5
-    = 'クレジットカード：'
+    = '作業予定日数：'
     %table.table
       %tr
-        -if nil != @card
-          %td='カード番号： xxxx-xxxx-xxxx-xxxx'
-        -else
-          %td='登録カードなし'
-      %td
-        %button{:type => 'button'}
-          = link_to '登録', new_card_path, data: {"turbolinks" => false}
+        %td
+          = form_with(model: @creator, local:true) do |f|
+            = f.label :working_days, '作業予定日数(日)：'
+            = f.text_field :working_days, :size=>"5"
+            = f.submit '変更'
   .row.my-5
     = '口座情報：'
     %table.table
@@ -111,6 +109,18 @@
       %td
         %button{:type => 'button'}
           =link_to '登録', credit_path
+  .row.my-5
+    = 'クレジットカード：'
+    %table.table
+      %tr
+        -if nil != @card
+          %td='カード番号： xxxx-xxxx-xxxx-xxxx'
+        -else
+          %td='登録カードなし'
+      %td
+        %button{:type => 'button'}
+          = link_to '登録', new_card_path, data: {"turbolinks" => false}
+  
   .row.my-5
     = 'NSFW：'
     %table.table
