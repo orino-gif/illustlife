@@ -36,8 +36,11 @@ class CreatorsController < ApplicationController
       end
       redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
     else
+      p @creator.errors.full_messages[0]
       if @creator.errors.full_messages[0].include?("amount")
         redirect_to request.referer, alert: '金額入力の数値が範囲外です'
+      elsif @creator.errors.full_messages[0].include?("extension_whitelist_error")
+        redirect_to request.referer, alert: '非対応のファイル形式です(対応形式:png,jpg,jpeg,gif)'
       end
     end
   end
