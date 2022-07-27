@@ -72,8 +72,7 @@ class RequestsController < ApplicationController
   end
 
   def create
-    @card = Card.find_by(user_id: current_user.id)
-    if (user_signed_in?) && ((nil != @card) || ('development' == ENV['RAILS_ENV']))
+    if (user_signed_in?) && ((nil != Card.find_by(user_id: current_user.id)) || ('development' == ENV['RAILS_ENV']))
       @sender = current_user
       @receiver = User.find(params[:authorizer_id])
       
@@ -91,8 +90,8 @@ class RequestsController < ApplicationController
         redirect_to request.referer, alert: '文字が許容範囲外(1000文字以下)です'
       end
     elsif false == user_signed_in?
-      redirect_to  '/users/sign_in', alert: 'ユーザー登録とログインが必要です。'
-    elsif nil == @card
+      redirect_to  '/users/sign_in', alert: 'ログインが必要です。'
+    elsif nil == Card.find_by(user_id: current_user.id)
       redirect_to request.referer, alert: 'クレジットカード登録が必要です。'
     end
   end
