@@ -68,4 +68,12 @@ class UserMailer < ApplicationMailer
         subject: "[イラストライフ運営局]#{@resume_user.nickname}さんがリクエスト受付を開始しました。"
       )
   end
+  
+  def info_withdrawal(creator)
+      @creator = creator
+      mail(
+        to: "#{@creator.user.email},#{ENV['ADMINISTRATOR_MAIL']}",
+        subject: "[イラストライフ運営局]#{@creator.user.nickname}さんからの引き落とし申請を受付ました。"
+      )
+  end
 end

@@ -37,8 +37,6 @@ class RequestsController < ApplicationController
         @receiver.creator.evaluation_points += 3
         @receiver.creator.earnings += @request.money
         @receiver.creator.withdrawal_amount += @request.money
-        p @requests.all.sum(:delivery_time)
-        p Time.now - @request.approval_day
         @request.delivery_time =+ 1
         @receiver.creator.average_delivery_time = 1 + (@requests.all.sum(:delivery_time) / @receiver.creator.number_of_works)
         UserMailer.deliver_email(@sender, @receiver, @request).deliver_later

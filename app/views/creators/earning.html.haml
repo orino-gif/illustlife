@@ -8,16 +8,21 @@
     - if @withdrawal_status.nil?
       .row
         = "総売上:#{@creator.earnings}円"
-        %br= "売上:#{@creator.withdrawal_amount}円"
-        = "サービス利用料15% : - #{(@creator.withdrawal_amount*0.15).to_i}円"
-        %br= "引き落とし可能額合計：#{@creator.withdrawal_amount-(@creator.withdrawal_amount*0.15).to_i}円"
+        %br= "引き落とし対象額:#{@creator.withdrawal_amount}円"
       .row
         %br
       .row
         %br= button_to "指定口座に引き落し申請", {controller: 'creators', action: 'earning'}, {method: :get, params:{withdrawal_status: '確認'}}
     - elsif '確認' == @withdrawal_status
       .row
-        %br= "引き落とし額：#{@creator.withdrawal_amount-(@creator.withdrawal_amount*0.15).to_i}円 - 銀行振込手数料"
+        %br= "■引き落とし申請内容"
+        = "引き落とし対象額 : #{@creator.withdrawal_amount}円"
+        %br= "サービス利用料15% : - #{(@creator.withdrawal_amount*0.15).to_i}円"
+        = "引き落とし額合計：#{@creator.withdrawal_amount-(@creator.withdrawal_amount*0.15).to_i}円"
+        %br= "お振込の額：#{@creator.withdrawal_amount-(@creator.withdrawal_amount*0.15).to_i}円 - 銀行振込手数料"
+      .row
+        %br= "■振込元"
+        = "口座名：三菱東京UFJ銀行, 名義：林範夫(イラストライフ運営局財務担当)"
       .row.my-5
         ="指定先の口座に引き落としますか？"
       .row.my-3
@@ -26,7 +31,7 @@
         .col-1
           = button_to "いいえ", {controller: 'creators', action: 'earning'}, {method: :get, params:{withdrawal_status: 'キャンセル'}}
     - elsif '引き落とし実行' == @withdrawal_status
-      = "引き落としを実行しました"
+      = "引き落とし申請を実行しました"
       %br= '(※営業日により振込が数日遅れる場合があります)'
 
   - else
