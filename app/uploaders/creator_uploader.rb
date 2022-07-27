@@ -50,6 +50,6 @@ class CreatorUploader < CarrierWave::Uploader::Base
   # end
   
   def size_range
-    1..2000.megabytes
+    1..1000.megabytes
   end
 end

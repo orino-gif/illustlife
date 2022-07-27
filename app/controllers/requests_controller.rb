@@ -76,9 +76,7 @@ class RequestsController < ApplicationController
       @request.sender_id = @sender.id
       @request.receiver_id = @receiver.id
       @request.status = '承認待ち'
-      @request.sender_icon_url = @sender.creator.icon
-      @request.receiver_icon_url = @receiver.creator.icon
-      
+
       if ((nil != @card) || ('development' == ENV['RAILS_ENV'])) && (@request.save)
         current_user.creator.number_of_request += 1
         current_user.creator.save
@@ -113,15 +111,22 @@ class RequestsController < ApplicationController
     if @requests.update(requests_params)
       redirect_to requests_path(@requests, anchor: 'page1')
     else
-      redirect_to request.referer, alert: 'ファイル形式かサイズ(2GB以下)が非対応です'
+      p @requests.errors.full_messages[0]
+      if @requests.errors.full_messages[0].include?("extension_whitelist_error")
+        redirect_to request.referer, alert: '本サービスのファイル対応形式(png,jpg,jpeg,gif)外です'
+      elsif @requests.errors.full_messages[0].include?("max_size_error")
+        redirect_to request.referer, alert: 'ファイルサイズが本サービスの対応外(1GBより大きい)です'
+      else  
+        redirect_to request.referer, alert: 'ファイルが選択されていません'
+      end
     end
   end
   
   private
 
   def requests_params
-    params.require(:request).permit(:money, :message, :deliver_img, :file_format, :sender_icon_url, :receiver_icon_url,
-    :is_nsfw, :is_anonymous, :is_autographed)
+    params.require(:request).permit(:money, :message, :deliver_img, :file_format, :is_nsfw,
+      :is_anonymous, :is_autographed)
   end
   
   def creator_params
