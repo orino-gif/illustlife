@@ -14,6 +14,7 @@ class CreatorsController < ApplicationController
     elsif '引き落とし実行' == params[:withdrawal_status]
       @withdrawal_status = '引き落とし実行'
       UserMailer.info_withdrawal(@creator).deliver_later
+      sleep(5)
       @creator.withdrawal_amount = 0
       @creator.save
     end
