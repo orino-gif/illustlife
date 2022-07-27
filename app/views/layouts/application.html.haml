@@ -42,14 +42,13 @@
         .row
           .col.text-right
             - if user_signed_in?
-              - if 'homes' != controller.controller_name
-                - if 'requests' != controller.controller_name
-                  %button.btn.btn-light.font-medium= link_to 'リクエスト状態', requests_path
-                - if controller.action_name != 'earning'
+              - if 'creators' == controller.controller_name
+                %button.btn.btn-light.font-medium= link_to 'リクエスト状態', requests_path
+                - if 'earning' != controller.action_name
                   %button.btn.btn-light.font-medium= link_to '売上', "/creators/#{current_user.id}/earning"
-                - if (ENV['ADMINISTRATOR_MAIL'] == current_user.email) && ('creators' == controller.controller_name) && (controller.action_name != 'edit')
+                - if (ENV['ADMINISTRATOR_MAIL'] == current_user.email) && ('edit' != controller.action_name)
                   %button.btn.btn-light= link_to 'アカウント編集', edit_creator_path(params[:id])
-                - elsif (controller.action_name == 'show') || (controller.action_name == 'index')
+                - elsif 'edit' != controller.action_name
                   %button.btn.btn-light.font-medium= link_to 'ユーザー編集', edit_creator_path(current_user.id)
                 %button.btn.btn-light.font-medium= link_to 'ログアウト', destroy_user_session_path, method: "delete"
             - else
