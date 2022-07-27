@@ -31,6 +31,7 @@ class RequestsController < ApplicationController
         @receiver.creator.number_of_works += 1
         @receiver.creator.evaluation_points += 3
         @receiver.creator.earnings += @request.money
+        @receiver.creator.withdrawal_amount += @request.money
         p @requests.all.sum(:delivery_time)
         p Time.now - @request.approval_day
         @request.delivery_time =+ 1
@@ -45,6 +46,8 @@ class RequestsController < ApplicationController
         
       elsif '手戻し' == params[:status]
         @receiver.creator.number_of_works -= 1
+        @receiver.creator.earnings -= @request.money
+        @receiver.creator.withdrawal_amount -= @request.money
         UserMailer.rework_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者への手戻りのメールを送信しました。'
       end
