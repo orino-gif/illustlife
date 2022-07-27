@@ -35,8 +35,9 @@
       = "平均納品日数：#{@creator.average_delivery_time}日、締切厳守率：#{@creator.deadline_strict_adherence_rate}%、"
       = "返信率:#{@creator.reply_rate}%"
     - else
-      %br
-      %br
-        = '納品作品なし'
+      - if 'new' != controller.action_name
+        %br
+        %br
+          = '納品作品なし'
   
   
