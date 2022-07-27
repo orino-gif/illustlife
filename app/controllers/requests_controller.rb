@@ -2,13 +2,18 @@ class RequestsController < ApplicationController
   require 'payjp' #これでpajpのメソッドが使用できます
 
   def index
+    #現在のユーザーのリクエスト
     @requests = Request.where(receiver_id: current_user.id).or(Request.where(sender_id: current_user.id))
+    #リクエストページのボタンが押された場合の処理
     if not params[:request_id].nil?
+      
+      #各リクエストIDに対応する情報を収集
       @request = Request.find(params[:request_id])
       @sender = User.find(Request.find(params[:request_id]).sender_id)
       @receiver = User.find(Request.find(params[:request_id]).receiver_id)
-
-      if '拒否' == params[:status] || (@request.created_at + 60*60*24*14) < Time.now
+      
+      #リクエストステータスに対応する処理を実行
+      if '拒否' == params[:status]
         UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者からのリクエストを拒否しました。'
         
@@ -51,10 +56,7 @@ class RequestsController < ApplicationController
         UserMailer.rework_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者への手戻りのメールを送信しました。'
       end
-      
-      p @requests.all.sum(:is_in_time_for_the_deadline)
-      p @receiver.creator.number_of_approval
-      
+
       if 0 != @receiver.creator.number_of_approval
         @receiver.creator.deadline_strict_adherence_rate = 100-(@requests.all.sum(:is_in_time_for_the_deadline) / @receiver.creator.number_of_approval)
       end
