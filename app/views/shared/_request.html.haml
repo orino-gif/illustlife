@@ -1,34 +1,45 @@
 - if nil != @request
   .row.my-5
     .col-md-auto
-      = "■申請日時：#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
       - sender = User.find(@request.sender_id)
       - receiver = User.find(@request.receiver_id)
+      
+      - if ((user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id))) || ('development' == ENV['RAILS_ENV'])
+        = "■申請日時：#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
       %table.table
         - if 'development' == ENV['RAILS_ENV']
           %tr
-            %td= "リクエストID：#{@request.id}" 
+            %td= "リクエストID：#{@request.id}"
         %tr
           %td= display_icon(sender.creator, 'size_small-square rounded-circle fit_cover') + '依頼者：' + sender.nickname
         %tr
           %td= display_icon(receiver.creator, 'size_small-square rounded-circle fit_cover') + '承認者：' + receiver.nickname
-        %tr
-          %td= "状態：#{@request.status}"
-        %tr
-          %td= "金額：#{@request.money}円"
+          
+        - if ((user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id))) || ('development' == ENV['RAILS_ENV'])
+          %tr
+            %td= "状態：#{@request.status}"
+          %tr
+            %td= "金額：#{@request.money}円"
         %tr
           %td.string_indention= "リクエスト内容：#{@request.message}"
-        %tr
-          - true == @request.is_nsfw ? nsfw='有':nsfw='無'
-          - true == @request.is_anonymous ? anonymous='有':anonymous='無'
-          - true == @request.is_autographed ? autographed='有':autographed='無'
-          %td.string_indention= "ファイル形式：#{@request.file_format},　NSFW:#{nsfw},　匿名:#{anonymous},　宛名入りサイン:#{autographed}"
-        %tr
-          - deadline = @request.created_at + (receiver.creator.working_days * 60 * 60 * 24)
-          %td.string_indention= "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
-        %tr
-          - if 0 < @request.delivery_time
-            %td.string_indention= "納品日数：#{@request.delivery_time}日"
+        - if ((user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id))) || ('development' == ENV['RAILS_ENV'])
+          %tr
+            - if true == @request.is_nsfw
+              - nsfw='有'
+            - else
+              - nsfw='無'
+            - if true == @request.is_anonymous
+              - anonymous='有'
+            - else
+              - anonymous='無'
+            - if true == @request.is_autographed
+              - autographed='有'
+            - else
+              - autographed='無'
+            %td.string_indention= "ファイル形式：#{@request.file_format},　NSFW:#{nsfw},　匿名:#{anonymous},　宛名入りサイン:#{autographed}"
+          %tr
+            - deadline = @request.created_at + (receiver.creator.working_days * 60 * 60 * 24)
+            %td.string_indention= "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
         %tr
           %td.string_indention
             - if not current_user.nil?
