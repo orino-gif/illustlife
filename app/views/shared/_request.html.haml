@@ -4,7 +4,7 @@
       - sender = User.find(@request.sender_id)
       - receiver = User.find(@request.receiver_id)
       
-      - if ((user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id))) || ('development' == ENV['RAILS_ENV'])
+      - if (user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id))
         = "■申請日時：#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
       %table.table
         - if 'development' == ENV['RAILS_ENV']
@@ -15,7 +15,7 @@
         %tr
           %td= display_icon(receiver.creator, 'size_small-square rounded-circle fit_cover') + '承認者：' + receiver.nickname
           
-        - if ((user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id))) || ('development' == ENV['RAILS_ENV'])
+        - if (user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id))
           %tr
             %td= "状態：#{@request.status}"
           %tr
@@ -36,9 +36,10 @@
           - else
             - autographed='無'
           %td.string_indention= "ファイル形式：#{@request.file_format},　NSFW:#{nsfw},　匿名:#{anonymous},　宛名入りサイン:#{autographed}"
-          %tr
-            - deadline = @request.created_at + (receiver.creator.working_days * 60 * 60 * 24)
-            %td.string_indention= "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
+          - if (user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id))
+            %tr
+              - deadline = @request.created_at + (receiver.creator.working_days * 60 * 60 * 24)
+              %td.string_indention= "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
         %tr
           %td.string_indention
             - if not current_user.nil?
