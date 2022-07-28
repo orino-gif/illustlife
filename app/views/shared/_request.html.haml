@@ -22,21 +22,20 @@
             %td= "金額：#{@request.money}円"
         %tr
           %td.string_indention= "リクエスト内容：#{@request.message}"
-        - if ((user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id))) || ('development' == ENV['RAILS_ENV'])
-          %tr
-            - if true == @request.is_nsfw
-              - nsfw='有'
-            - else
-              - nsfw='無'
-            - if true == @request.is_anonymous
-              - anonymous='有'
-            - else
-              - anonymous='無'
-            - if true == @request.is_autographed
-              - autographed='有'
-            - else
-              - autographed='無'
-            %td.string_indention= "ファイル形式：#{@request.file_format},　NSFW:#{nsfw},　匿名:#{anonymous},　宛名入りサイン:#{autographed}"
+        %tr
+          - if true == @request.is_nsfw
+            - nsfw='有'
+          - else
+            - nsfw='無'
+          - if true == @request.is_anonymous
+            - anonymous='有'
+          - else
+            - anonymous='無'
+          - if true == @request.is_autographed
+            - autographed='有'
+          - else
+            - autographed='無'
+          %td.string_indention= "ファイル形式：#{@request.file_format},　NSFW:#{nsfw},　匿名:#{anonymous},　宛名入りサイン:#{autographed}"
           %tr
             - deadline = @request.created_at + (receiver.creator.working_days * 60 * 60 * 24)
             %td.string_indention= "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
