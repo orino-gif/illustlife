@@ -5,7 +5,7 @@
     %meta{:charset => "UTF-8", :content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title
       = content_for?(:html_title) ? yield(:html_title) : ""
-      ｜ イラストや写真をリクエスト | イラストライフ株式会社
+      ｜ イラストや漫画をリクエスト | イラストライフ
     / integrity:html検証,crossorigin:ユーザー認証情報anonymous(不要)
     %link{:crossorigin => "anonymous", :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", :integrity => "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk", :rel => "stylesheet"}/
     %script{src: "https://js.pay.jp/v2/pay.js"}
@@ -23,6 +23,13 @@
     = csrf_meta_tags
     / コンテンツセキュリティポリシーの適用
     = csp_meta_tag
+    / Global site tag (gtag.js) - Google Analytics
+    %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=G-QJ06SMJ2Y5"}
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QJ06SMJ2Y5');
     
   %body
     %header
