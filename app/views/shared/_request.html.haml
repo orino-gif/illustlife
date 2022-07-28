@@ -23,15 +23,15 @@
         %tr
           %td.string_indention= "リクエスト内容：#{@request.message}"
         %tr
-          - if true == @request.is_nsfw
+          - if @request.is_nsfw?
             - nsfw='有'
           - else
             - nsfw='無'
-          - if true == @request.is_anonymous
+          - if @request.is_anonymous?
             - anonymous='有'
           - else
             - anonymous='無'
-          - if true == @request.is_autographed
+          - if @request.is_autographed?
             - autographed='有'
           - else
             - autographed='無'
