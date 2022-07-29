@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_23_051652) do
+ActiveRecord::Schema.define(version: 2022_07_29_061426) do
 
   create_table "cards", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "user_id"
@@ -65,8 +65,6 @@ ActiveRecord::Schema.define(version: 2022_07_23_051652) do
     t.string "status"
     t.text "message"
     t.string "file_format"
-    t.text "sender_icon_url"
-    t.text "receiver_icon_url"
     t.boolean "is_nsfw", default: false
     t.boolean "is_anonymous", default: false
     t.boolean "is_autographed", default: false
@@ -76,6 +74,7 @@ ActiveRecord::Schema.define(version: 2022_07_23_051652) do
     t.string "deliver_img"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "evaluation_comment"
   end
 
   create_table "resumes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

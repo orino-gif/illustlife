@@ -1,6 +1,6 @@
 - if nil != @request
   .row.my-5
-    .col-md-auto
+    .col-xl-auto
       - sender = User.find(@request.sender_id)
       - receiver = User.find(@request.receiver_id)
       
@@ -35,6 +35,7 @@
             - autographed='有'
           - else
             - autographed='無'
+            
           %td.string_indention= "ファイル形式：#{@request.file_format},　NSFW:#{nsfw},　匿名:#{anonymous},　宛名入りサイン:#{autographed}"
           - if (user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id))
             %tr
@@ -54,7 +55,7 @@
                   = f.submit '登録'
                 = button_to '納品', {controller:'requests', action:'index'}, {method: :get, params:{status:'納品完了', request_id:@request.id, amount:@request.money}}
                 = button_to '製作中断', {controller:'requests', action:'index'}, {method: :get, params:{status:'製作中断', request_id:@request.id}}
-    .col-md-auto
+    .col-xl-auto
       - if @request.deliver_img?
         - if @request.deliver_img.to_s.include?('.psd')
           - pdf = Magick::ImageList.new(@request.deliver_img.to_s)
@@ -62,9 +63,19 @@
           = link_to image_tag("/img/conversion_psd/#{current_user.id}_#{@request.id}.png", class:'size_large-rectangle fit_cover'),"img/conversion_psd/#{current_user.id}_#{@request.id}.png"
         - else
           = link_to image_tag(@request.deliver_img.url, class:'size_large-rectangle fit_cover'), @request.deliver_img.url
-    .col-md-auto
-      - if ('納品完了' == @request.status) && (user_signed_in?)
+    - if ('納品完了' == @request.status) && (user_signed_in?)
+      .col-xl-auto
         - if sender.nickname == current_user.nickname
           %button.btn.btn-light= link_to 'ダウンロード', download_request_path(@request)
+          - if @request.evaluation_comment.nil?
+            = form_with(model: @request, local: true) do |f|
+              .form-group.mt-4
+                = f.label :'コメント'
+                = f.text_area :evaluation_comment, class:'form-control', size:'15x10'
+                = f.hidden_field :request_id, :value => @request.id
+              = f.submit '送信', class:'btn btn-light'
         - elsif receiver.nickname == current_user.nickname
           = button_to '手戻し', {controller:'requests', action:'index'}, {method: :get, params:{status:'手戻し', request_id:@request.id}}
+    - if not @request.evaluation_comment.nil?
+      %br=sender.nickname + "さんからコメント"
+      %br=@request.evaluation_comment
