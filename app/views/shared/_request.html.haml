@@ -35,7 +35,6 @@
             %td.string_indention= "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
           %tr
             %td= "状態：#{@request.status}"
-          
         %tr
           %td.string_indention
             - if not current_user.nil?

@@ -27,6 +27,7 @@
   .position-center{ width: 80%; margin: 0 auto; max-width: 600px; }
   //文字がコンテンツからあふれた場合に改行
   .string_indention{ word-wrap: break-word; max-width: 320px; }
+  .string_indention-small{ word-wrap: break-word; width: 100px; }
   //通知ボタンのデザイン
   .button-notice{ background-color: whitesmoke; padding: 3px; }
   //金額入力フォームの大きさ
@@ -76,6 +77,10 @@
   @mixin position_right($right_medium) {
     .position_midium-right { position: relative; right: $right_medium; }
   }
+  //文字がコンテンツからあふれた場合に改行させる関数
+  @mixin string_indention($small) {
+    .string_indention-small { word-wrap: break-word; width: $small; }
+  }
 
 //メディアクエリ　bootstrapのブレークポイント値に合わせる//
   //Extra large
@@ -87,6 +92,7 @@
     @include position_top(-100px, -68px, -38px, -13px);
     @include position_left(120px);
     @include position_right(120px);
+    @include string_indention(150px);
   }
   //Large
   @media screen and (max-width: 1199px){
@@ -97,6 +103,7 @@
     @include position_top(-95px, -62px, -28px, -12px);
     @include position_left(100px);
     @include position_right(100px);
+    @include string_indention(150px);
   }
   //Medium
   @media screen and (max-width: 991px){
@@ -107,6 +114,7 @@
     @include position_top(-90px, -54px, -24px, -11px);
     @include position_left(100px);
     @include position_right(60px);
+    @include string_indention(150px);
   }
   //Small
   @media screen and (max-width: 767px){
@@ -117,6 +125,7 @@
     @include position_top(-85px, -42px, -22px, -10px);
     @include position_left(100px);
     @include position_right(20px);
+    @include string_indention(150px);
   }
   //Extra small
   @media screen and (max-width: 575px){
@@ -127,6 +136,7 @@
     @include position_top(-65px, -35px, -18px, -10px);
     @include position_left(75px);
     @include position_right(10px);
+    @include string_indention(100px);
   }
   
 /* ---------- 吹き出し共通設定 ---------- */

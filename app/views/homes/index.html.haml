@@ -22,8 +22,7 @@
           .col-auto.text-center
             - if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示
               = display_header(creator, 'size_Xlarge-square border-solid4 fit_cover')
-              .font-small
-              = creator.user.nickname
+              .font-small.string_indention-small.text-center= creator.user.nickname
         - break if index == 20
     - rescue => e
       = p e
