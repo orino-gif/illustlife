@@ -92,7 +92,7 @@
   @media screen and (max-width: 1199px){
     @include size_font(2.4em, 1.4em, 1.1em, 0.8em, 0.7em);
     @include size_square(150px, 110px, 70px, 40px);
-    @include size_rectangle(300px, 170px, 125px, 50px);
+    @include size_rectangle(250px, 170px, 125px, 50px);
     @include fixed_rectangle(640px, 360px);
     @include position_top(-95px, -62px, -28px, -12px);
     @include position_left(100px);
@@ -102,7 +102,7 @@
   @media screen and (max-width: 991px){
     @include size_font(2.3em, 1.3em, 1.0em, 0.7em, 0.6em);
     @include size_square(150px, 100px, 60px, 35px);
-    @include size_rectangle(300px, 160px, 110px, 50px);
+    @include size_rectangle(200px, 160px, 110px, 50px);
     @include fixed_rectangle(480px, 270px);
     @include position_top(-90px, -54px, -24px, -11px);
     @include position_left(100px);
@@ -112,7 +112,7 @@
   @media screen and (max-width: 767px){
     @include size_font(2.2em, 1.2em, 0.9em, 0.6em, 0.5em);
     @include size_square(150px, 90px, 50px, 30px);
-    @include size_rectangle(300px, 150px, 105px, 50px);
+    @include size_rectangle(100%, 150px, 105px, 50px);
     @include fixed_rectangle(480px, 270px);
     @include position_top(-85px, -42px, -22px, -10px);
     @include position_left(100px);
@@ -122,7 +122,7 @@
   @media screen and (max-width: 575px){
     @include size_font(1.8em, 1.1em, 0.8em, 0.5em, 0.4em);
     @include size_square(100px, 70px, 40px, 25px);
-    @include size_rectangle(300px, 120px, 100px, 50px);
+    @include size_rectangle(100%, 120px, 100px, 50px);
     @include fixed_rectangle(320px, 180px);
     @include position_top(-65px, -35px, -18px, -10px);
     @include position_left(75px);
