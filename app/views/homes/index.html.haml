@@ -1,29 +1,26 @@
-- content_for(:html_title) { '好きなイラストや漫画製作を手軽に依頼' }
+- content_for(:html_title) { '好きなイラスト・漫画製作を手軽に依頼' }
 %h1.font-Xlarge.background_color-whitesmoke クリエイター紹介
 
 .container
   .row
-    %h2.font-large ■新着作品
-  .row
+    %h2.font-large='■新着作品'
+  .row.margin_side-Xsmall
     - if not @requests.nil?
       - @requests.reverse_each.with_index(1) do |request,index|
-        - if (request.deliver_img?) && ('納品完了' == request.status)
-          .col-auto
+        - if (not request.deliver_img.nil?) && ('納品完了' == request.status)
+          .padding_side-small.text-center.py-2
             = link_to image_tag(request.deliver_img.url, class: 'size_Xlarge-square fit_cover border_solid-medium'), request_path(request.id)
             - index -= 1
         - break if index == 20
   .row
-    %h2.font-large ■クリエイター
-  .row
-    - begin
+    %h2.font-large='■クリエイター'
+  .row.margin_side-Xsmall
+    - if not @requests.nil?
       - @creators.each.with_index(1) do |creator,index| 
         // - user.restore ユーザーアカウントを復旧
         - if not creator.user.soft_destroyed?
-          .padding_side-small.text-center
+          .padding_side-small.text-center.py-1
             - if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示
               = display_header(creator, 'size_Xlarge-square border_solid-medium fit_cover')
               .font-small.string_indention-small.text-center= creator.user.nickname
         - break if index == 20
-    - rescue => e
-      = p e
-      

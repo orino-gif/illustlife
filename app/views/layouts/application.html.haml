@@ -13,7 +13,7 @@
     %title
       = content_for?(:html_title) ? yield(:html_title) : ""
       ｜イラストライフ
-    %meta{:content => "イラスト・漫画・アニメーションの製作を手軽に依頼できるコミッションサイト", :name => "description"}/
+    %meta{:content => "好きな作品の個人製作者にリクエストする形で支援するコミッションサイト", :name => "description"}/
     / integrity:html検証,crossorigin:ユーザー認証情報anonymous(不要)
     %link{:crossorigin => "anonymous", :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", :integrity => "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk", :rel => "stylesheet"}/
     %script{src: "https://js.pay.jp/v2/pay.js"}
@@ -43,7 +43,7 @@
               %strong イラストライフ
             
           .col-sm.d-flex.align-items-center
-            %strong ～好きなイラスト・漫画・アニメーションをリクエスト～
+            %strong ～好きな個人製作者にリクエストする形で支援する～
           .col.text-right
             - if user_signed_in?
               = display_icon(current_user.creator, 'size_small-square rounded-circle fit_cover')

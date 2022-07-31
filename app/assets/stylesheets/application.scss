@@ -32,7 +32,8 @@
   .size_large-form { width: 150px; height: 50px; }
   //幅可変入力フォーム
   .size_variable-form { width: 65%; }
-
+  //rowの-15pxマージンの調整
+  .margin_side-Xsmall { margin : 0 -10px; }
 
 //関数 引数のデフォルト値はExtra large//
   //文字の大きさを設定する関数 
@@ -115,7 +116,7 @@
     @include position_right(100px);
     @include string_indention(150px);
     @include padding_side(10px);
-    @include border_solid(3px);
+    @include border_solid(4px);
   }
   //Medium
   @media screen and (max-width: 991px){
@@ -128,7 +129,7 @@
     @include position_right(60px);
     @include string_indention(150px);
     @include padding_side(10px);
-    @include border_solid(3px);
+    @include border_solid(4px);
   }
   //Small
   @media screen and (max-width: 767px){
