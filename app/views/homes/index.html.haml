@@ -22,5 +22,5 @@
           .padding_side-small.text-center.py-1
             - if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示
               = display_header(creator, 'size_Xlarge-square border_solid-medium fit_cover')
-              .font-small.string_indention-small.text-center= creator.user.nickname
+              .font-small.string_indention-small= creator.user.nickname
         - break if index == 20
