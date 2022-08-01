@@ -19,3 +19,6 @@
     .form-group
       = f.submit  t('.sign_in'), class: 'btn btn-primary'
   = render 'devise/shared/links'
+  - if devise_mapping.omniauthable?
+    - resource_class.omniauth_providers.each do |provider|
+      = link_to image_tag('/img/twitter.png',class:"size_small-square"), omniauth_authorize_path(resource_name, provider), method: :post
