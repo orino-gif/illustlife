@@ -3,37 +3,36 @@
 - content_for(:html_title) { t('.sign_up') }
 %h1.font-Xlarge.background_color-whitesmoke= t('.sign_up')
 
-.container.w-75
+.container
   .row.my5
-    - if devise_mapping.omniauthable?
-      - resource_class.omniauth_providers.each do |provider|
-        = link_to image_tag('/img/twitter.png',class:"size_small-square"), omniauth_authorize_path(resource_name, provider), method: :post
-        // = link_to t("　ツイッターアカウントで登録", provider: OmniAuth::Utils.camelize(provider)), omniauth_authorize_path(resource_name, provider), method: :post
+    .col-8
+      = render 'devise/shared/twitter'
+  .row-my5.font-medium
+    .col-8
+      ='or'
   .row-my5
-    %br='or'
-    
-  .row-my5
-    %br= '新規アカウント作成'
-    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      = bootstrap_devise_error_messages!
-      .form-group
-        %br= f.label :ニックネーム
-        = f.text_field :nickname, class: 'form-control'
-        = f.label :email
-        = f.email_field :email, autocomplete: 'email', class: 'form-control'
-        = f.label :password
-        = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
-        - if @minimum_password_length
-          %small.form-text.text-muted= t('devise.shared.minimum_password_length', count: @minimum_password_length)
-        = f.label :password_confirmation
-        = f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control'
-      .field.text-left
-        = f.check_box :accepted ,{},checked_value = "true",unchecked_value = "false"
-        = link_to '利用規約', terms_explanations_path
-        = f.label '、及び、'
-        = link_to 'プライバシーポリシー', policy_explanations_path
-        = 'に同意する。又、登録する利用者本人のみがIDとパスワードを利用し、事業主ではない事を認める。'
-      .form-group
-        = f.submit t('.sign_up'), class: 'btn btn-light'
-  .row
-    = render 'devise/shared/links'
+    %br= '■新規アカウント作成'
+    .col-sm-8
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = bootstrap_devise_error_messages!
+        .form-group
+          %br= f.label :ニックネーム
+          = f.text_field :nickname, class: 'form-control'
+          = f.label :email
+          = f.email_field :email, autocomplete: 'email', class: 'form-control'
+          = f.label :password
+          = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
+          - if @minimum_password_length
+            %small.form-text.text-muted= t('devise.shared.minimum_password_length', count: @minimum_password_length)
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control'
+        .field.text-left
+          = f.check_box :accepted ,{},checked_value = "true",unchecked_value = "true"
+          = link_to '利用規約', terms_explanations_path
+          = f.label '、及び、'
+          = link_to 'プライバシーポリシー', policy_explanations_path
+          = 'に同意する。又、登録する利用者本人のみがIDとパスワードを利用し、事業主ではない事を認める。'
+        .form-group
+          = f.submit t('.sign_up'), class: 'btn btn-light'
+  // .row
+  //   = render 'devise/shared/links'
