@@ -62,7 +62,7 @@
             - else
               %button.btn.btn-light.font-medium= link_to '新規登録', new_user_registration_path
               %button.btn.btn-light.font-medium= link_to 'ログイン', new_user_session_path
-    - if (Rails.env.production?) && (controller.controller_name != 'registrations')
+    - if Rails.env.production?
       %script{:async => "", :src => '//accaii.com/orino/script.js'}
       %noscript
         %img{:src => '//accaii.com/orino/script?guid=on'}/
