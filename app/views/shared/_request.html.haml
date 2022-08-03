@@ -5,8 +5,9 @@
   .row.my-5
     .col-md-auto
       %table.table
-        // %tr
-        //   %td= "リクエストID：#{@request.id}"
+        - if Rails.env.development?
+          %tr
+            %td= "リクエストID：#{@request.id}"
         %tr
           %td= display_icon(sender.creator, 'size_small-square rounded-circle fit_cover') + '依頼者：' + sender.nickname
         %tr
@@ -24,7 +25,7 @@
         - if @request.is_nsfw?
           %tr
             %td= '宛名入りサイン:有 '
-        - if (user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id)) || 'development' == ENV['RAILS_ENV']
+        - if (user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id)) ||( Rails.env.development?)
           %tr
             %td= "金額：#{@request.money}円"
           

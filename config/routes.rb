@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :credits, only: [:create, :show, :update]
   resources :homes, only: [:index]
   resources :creators, only: [:show, :edit, :update]
-  resources :requests, only: [:index, :create, :show, :update] do
+  resources :requests do
     member  do
       get 'download'
     end

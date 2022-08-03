@@ -11,7 +11,7 @@ default: &default
   username: rio
   password: Orino_1013
   socket: /var/lib/mysql/mysql.sock
-  host: illustlife.cczbbshsk7se.ap-northeast-1.rds.amazonaws.com
+  host: illustlife2.cczbbshsk7se.ap-northeast-1.rds.amazonaws.com
 
 development:
   <<: *default

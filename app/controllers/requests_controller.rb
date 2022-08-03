@@ -1,9 +1,11 @@
 class RequestsController < ApplicationController
-  require 'payjp' #これでpajpのメソッドが使用できます
+  #pajpのメソッドを利用可能にする
+  require 'payjp' 
 
   def index
-    #現在のユーザーのリクエスト
+    #ログイン中のユーザーのリクエスト
     @requests = Request.where(receiver_id: current_user.id).or(Request.where(sender_id: current_user.id))
+    
     #リクエストページのボタンが押された場合の処理
     if not params[:request_id].nil?
       
