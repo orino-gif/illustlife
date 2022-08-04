@@ -3,7 +3,7 @@
 
 .container
   .row
-    %h2.font-large='■クリエイター'
+    %h2.font-large ■クリエイター
   .row.margin_side-Xsmall
     - if not @requests.nil?
       - @creators.each.with_index(1) do |creator,index| 
@@ -14,7 +14,7 @@
               .font-small.string_indention-small= creator.user.nickname
         - break if index == 20
   .row
-    %h2.font-large='■リクエスト作品'
+    %h2.font-large ■リクエスト作品
   .row.margin_side-Xsmall
     - if not @requests.nil?
       - @requests.reverse_each.with_index(1) do |request,index|

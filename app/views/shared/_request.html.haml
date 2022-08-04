@@ -50,7 +50,7 @@
                   = f.submit '登録'
                 = button_to '納品', {controller:'requests', action:'index'}, {method: :get, params:{status:'納品完了', request_id:@request.id, amount:@request.money}}
                 = button_to '製作中断', {controller:'requests', action:'index'}, {method: :get, params:{status:'製作中断', request_id:@request.id}}
-    .col-sm-auto
+    .col-sm-auto.on_center
       - if @request.deliver_img?
         - if @request.deliver_img.to_s.include?('.psd')
           - pdf = Magick::ImageList.new(@request.deliver_img.to_s)
@@ -58,8 +58,9 @@
           = link_to image_tag("/img/conversion_psd/#{current_user.id}_#{@request.id}.png", class:'size_large-rectangle fit_cover'),"img/conversion_psd/#{current_user.id}_#{@request.id}.png"
         - else
           = link_to image_tag(@request.deliver_img.url, class:'size_large-rectangle fit_cover'), @request.deliver_img.url
-    - if ('納品完了' == @request.status) && (user_signed_in?)
-      .col-sm-auto
+          %p.on_card SAMPLE
+    .col-sm-auto
+      - if ('納品完了' == @request.status) && (user_signed_in?)
         - if sender.nickname == current_user.nickname
           %button.btn.btn-light= link_to 'ダウンロード', download_request_path(@request)
           - if @request.evaluation_comment.nil?

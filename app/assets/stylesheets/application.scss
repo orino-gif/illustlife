@@ -245,3 +245,17 @@
 	bottom: calc( 4px - 1.5em );
 	border-top: solid 1.5em #f2f2f2;
 }
+
+.on_center{
+    width:100%;
+  }
+      
+p.on_card{
+  position: absolute;
+  top:0;
+  left:0;
+  font-size:30px;
+  color: red;
+  padding:0;
+  margin:0;
+}
