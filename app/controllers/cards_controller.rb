@@ -6,7 +6,6 @@ class CardsController < ApplicationController
   
   def new
     card = Card.where(user_id: current_user.id)
-    p 'bbb'
     gon.public_key = ENV['PAYJP_PRIVATE_KEY']
     redirect_to action: "show" if card.exists?
   end
