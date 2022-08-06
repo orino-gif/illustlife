@@ -26,4 +26,4 @@ test:
 #
 production:
   <<: *default
-  database: illustlifeDB
+  database: illustlife_test
