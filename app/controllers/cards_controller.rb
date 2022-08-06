@@ -44,33 +44,47 @@ class CardsController < ApplicationController
   )
   end
   
+  def delete
+    @card = Card.find_by(user_id: current_user.id)
+    if @card.blank?
+    else
+      begin
+        Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+        customer = Payjp::Customer.retrieve(@card.customer_id)
+        card = customer.cards.retrieve(@card.card_id)
+        card.delete
+        customer.delete
+      rescue Payjp::PayjpError => e
+        p "例外エラー:" + e.to_s
+        p "稼働元のレコードが削除されませんでした"
+        render :new
+      end
+    end
+    redirect_to action: "new"
+  end
+  
   def show #Cardのデータpayjpに送り情報を取り出します
     card = Card.find_by(user_id: current_user.id)
     p card
     if card.blank?
-      p 'aaa'
       redirect_to action: "new" 
     else
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      p Payjp.api_key
-      p card.customer_id
-      customer = Payjp::Customer.retrieve(card.customer_id)
-      p card.card_id
+      p "api_key: " + Payjp.api_key
+      p "customer_id: " + card.customer_id
+      begin
+        customer = Payjp::Customer.retrieve(card.customer_id)
+      p "card_id: " + card.card_id.to_s
       @default_card_information = customer.cards.retrieve(card.card_id)
-      p @default_card_information
+      p "default_card_information: " + @default_card_information.to_s
+      rescue Payjp::PayjpError => e
+        if Rails.env.development?
+          p "例外エラー:" + e.to_s
+          flash[:alert] = "payjpの顧客情報が消えて、稼働元のデータベースに顧客情報が残っている状態が起こりました" 
+          render :new
+        end
+      end
     end
-  end
-
-  def delete
-    card = Card.find_by(user_id: current_user.id)
-    if card.blank?
-    else
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      customer = Payjp::Customer.retrieve(card.customer_id)
-      customer.delete
-      card.delete
-    end
-    redirect_to action: "new"
   end
   
   private
