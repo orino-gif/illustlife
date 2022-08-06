@@ -246,16 +246,14 @@
 	border-top: solid 1.5em #f2f2f2;
 }
 
-.on_center{
-    width:100%;
-}
-      
 p.on_card{
   position: absolute;
-  top:0;
-  left:0;
-  font-size:30px;
-  color: red;
+  top:auto;
+  left:auto;
+  transform: translate(40%,-290%);
+  font-size:40px;
+  color: white;
   padding:0;
   margin:0;
+  opacity: 0.5;
 }
