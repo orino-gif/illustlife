@@ -36,14 +36,14 @@
     %header
       .container-fluid
         .row
-          .col-auto
+          .col-auto.d-flex.align-items-center
             = link_to image_tag('/img/symbol.png', class: 'size_small-square'), root_path
           .col-m0-auto
             %span.font-Xlarge
-              %strong='イラストライフ'
-            
-          .col-sm.d-flex.align-items-center
-            %strong='～ 好きなイラストやアニメーションをリクエスト ～'
+              %strong イラストライフ
+          .col-xs.d-flex.align-items-center
+            -if 'homes' == controller.controller_name
+              %strong ～ 好きなクリエーターに作品をリクエスト ～
           .col.text-right
             - if user_signed_in?
               = display_icon(current_user.creator, 'size_small-square rounded-circle fit_cover')

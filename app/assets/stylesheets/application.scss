@@ -134,7 +134,7 @@
   //Small
   @media screen and (max-width: 767px){
     @include size_font(2.2em, 1.2em, 0.9em, 0.6em, 0.5em);
-    @include size_square(150px, 90px, 50px, 30px);
+    @include size_square(150px, 90px, 50px, 32px);
     @include size_rectangle(100%, 150px, 105px, 50px);
     @include fixed_rectangle(480px, 270px);
     @include position_top(-85px, -42px, -22px, -10px);
@@ -147,7 +147,7 @@
   //Extra small
   @media screen and (max-width: 575px){
     @include size_font(1.8em, 1.1em, 0.8em, 0.5em, 0.4em);
-    @include size_square(110px, 70px, 40px, 25px);
+    @include size_square(110px, 70px, 40px, 28px);
     @include size_rectangle(100%, 120px, 100px, 50px);
     @include fixed_rectangle(320px, 180px);
     @include position_top(-65px, -35px, -18px, -10px);
@@ -248,7 +248,7 @@
 
 .on_center{
     width:100%;
-  }
+}
       
 p.on_card{
   position: absolute;
