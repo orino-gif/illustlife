@@ -21,7 +21,7 @@ class CreatorsController < ApplicationController
   end
   
   def edit
-    @card = Card.find_by(user_id:params[:id])
+    @card = Card.find_by(id:params[:id])
     @credit = Credit.find_by(user_id:params[:id])
   end
   

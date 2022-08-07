@@ -72,7 +72,7 @@ class RequestsController < ApplicationController
   end
 
   def create
-    if (user_signed_in?) && ((nil != Card.find_by(user_id: current_user.id)) || ('development' == ENV['RAILS_ENV']))
+    if (user_signed_in?) && ((nil != Card.find_by(id: current_user.id)) || ('development' == ENV['RAILS_ENV']))
       @sender = current_user
       @receiver = User.find(params[:authorizer_id])
       
@@ -91,7 +91,7 @@ class RequestsController < ApplicationController
       end
     elsif false == user_signed_in?
       redirect_to  '/users/sign_in', alert: 'ログインが必要です。'
-    elsif nil == Card.find_by(user_id: current_user.id)
+    elsif nil == Card.find_by(id: current_user.id)
       redirect_to request.referer, alert: 'クレジットカード登録が必要です。'
     end
   end

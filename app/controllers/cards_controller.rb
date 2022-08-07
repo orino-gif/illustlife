@@ -5,7 +5,7 @@ class CardsController < ApplicationController
   before_action :card_present, only:[:pay_charge]
   
   def new
-    card = Card.where(user_id: current_user.id)
+    card = Card.where(id: current_user.id)
     gon.public_key = ENV['PAYJP_PRIVATE_KEY']
     redirect_to action: "show" if card.exists?
   end
@@ -20,10 +20,10 @@ class CardsController < ApplicationController
       description: '登録テスト', #なくてもOK
       email: current_user.email, #なくてもOK
       card: params['payjp_token'],
-      metadata: {user_id: current_user.id}
+      metadata: {id: current_user.id}
       ) #念の為metadataにuser_idを入れましたがなくてもOK
       @card = Card.new(                  # カードテーブルのデータの作成
-        user_id: current_user.id,        # ここでcurrent_user.idがいるので、前もってsigninさせておく
+        id: current_user.id,        # ここでcurrent_user.idがいるので、前もってsigninさせておく
         customer_id: customer.id,        # customerは上で定義
         card_id: customer.default_card  # .default_cardを使うことで、customer定義時に紐付けされたカード情報を引っ張ってくる ここがnullなら上のcustomerのcard: params['payjp_token']が読み込めていないことが多い
       )
@@ -45,26 +45,24 @@ class CardsController < ApplicationController
   end
   
   def delete
-    @card = Card.find_by(user_id: current_user.id)
+    @card = Card.find_by(id: current_user.id)
     if @card.blank?
     else
       begin
         Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
         customer = Payjp::Customer.retrieve(@card.customer_id)
-        card = customer.cards.retrieve(@card.card_id)
-        card.delete
         customer.delete
+        Card.find(current_user.id).delete
       rescue Payjp::PayjpError => e
         p "例外エラー:" + e.to_s
         p "稼働元のレコードが削除されませんでした"
-        render :new
       end
     end
     redirect_to action: "new"
   end
   
   def show #Cardのデータpayjpに送り情報を取り出します
-    card = Card.find_by(user_id: current_user.id)
+    card = Card.find_by(id: current_user.id)
     p card
     if card.blank?
       redirect_to action: "new" 
@@ -90,6 +88,6 @@ class CardsController < ApplicationController
   private
   
   def card_present
-    @card = Card.where(user_id: current_user.id).first if Card.where(user_id: current_user.id).present?
+    @card = Card.where(id: current_user.id).first if Card.where(id: current_user.id).present?
   end
 end
