@@ -33,7 +33,7 @@ class RequestsController < ApplicationController
         redirect_to request.referer, notice: '依頼者へ中断のメールを送信しました。'
         
       elsif '納品完了' == params[:status]
-        @card = Card.find_by(user_id: @sender.id)
+        @card = Card.find_by(id: @sender.id)
         @request.is_in_time_for_the_deadline = true
         @receiver.creator.number_of_works += 1
         @receiver.creator.evaluation_points += 3
