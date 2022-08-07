@@ -25,4 +25,4 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 production:
   <<: *default
-  database: illustlife_test
+  database: illustlifeDB
