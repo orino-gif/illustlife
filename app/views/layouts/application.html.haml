@@ -46,7 +46,7 @@
               %strong ～ 好きなクリエーターに作品をリクエスト ～
           .col.text-right
             - if user_signed_in?
-              - if ('creators' == controller.controller_name) && ('edit' == controller.action_name)
+              - if ('creators' == controller.controller_name) && ('show' == controller.action_name)
                 ="#{current_user.creator.creator_points}ポイント"
               = display_icon(current_user.creator, 'size_small-square rounded-circle fit_cover')
         .row
