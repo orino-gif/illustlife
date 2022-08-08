@@ -29,10 +29,10 @@
     = "ニックネーム：#{@creator.user.nickname}"
     = "、推奨金額：#{@creator.recommended_amount}円"
     = "、作業予定日数：#{@creator.working_days}日"
-    ='、NSFW不可'
     - if 0 != @creator.number_of_works
       = "、納品数：#{@creator.number_of_works}点、"
-      = "平均納品日数：#{@creator.average_delivery_time}日、締切厳守率：#{@creator.deadline_strict_adherence_rate}%、"
+      // = "平均納品日数：#{@creator.average_delivery_time}日、"
+      = "締切厳守率：#{@creator.deadline_strict_adherence_rate}%、"
       = "返信率:#{@creator.reply_rate}%"
     - else
       - if 'new' != controller.action_name

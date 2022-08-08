@@ -39,8 +39,8 @@ class RequestsController < ApplicationController
         @receiver.creator.evaluation_points += 1
         @receiver.creator.earnings += @request.money
         @receiver.creator.withdrawal_amount += @request.money
-        @request.delivery_time =+ 1
-        @receiver.creator.average_delivery_time = 1 + (@requests.all.sum(:delivery_time) / @receiver.creator.number_of_works)
+        # @request.delivery_time =+ 3
+        # @receiver.creator.average_delivery_time = 1 + (@requests.all.sum(:delivery_time) / @receiver.creator.number_of_works)
         UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者への納品完了のメールを送信しました。'
         
@@ -59,7 +59,7 @@ class RequestsController < ApplicationController
       end
 
       if 0 != @receiver.creator.number_of_approval
-        @receiver.creator.deadline_strict_adherence_rate = 100-(@requests.all.sum(:is_in_time_for_the_deadline) / @receiver.creator.number_of_approval)
+        # @receiver.creator.deadline_strict_adherence_rate = 100-(@requests.all.sum(:is_in_time_for_the_deadline) / @receiver.creator.number_of_approval)
       end
       @request.status = params[:status]
       @request.save
