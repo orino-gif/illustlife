@@ -28,7 +28,7 @@ class RequestsController < ApplicationController
       elsif '製作中断' == params[:status]
         @request.is_in_time_for_the_deadline = false
         @receiver.creator.number_of_approval -= 1
-        @receiver.creator.evaluation_points -= 10
+        @receiver.creator.evaluation_points -= 1
         UserMailer.suspension_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者へ中断のメールを送信しました。'
         
@@ -36,7 +36,7 @@ class RequestsController < ApplicationController
         @card = Card.find_by(id: @sender.id)
         @request.is_in_time_for_the_deadline = true
         @receiver.creator.number_of_works += 1
-        @receiver.creator.evaluation_points += 3
+        @receiver.creator.evaluation_points += 1
         @receiver.creator.earnings += @request.money
         @receiver.creator.withdrawal_amount += @request.money
         @request.delivery_time =+ 1
@@ -44,12 +44,13 @@ class RequestsController < ApplicationController
         UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者への納品完了のメールを送信しました。'
         
-        if not @card.nil?
+        if (nil != @card) && (false == @request.is_reworked)
           Payjp.api_key = ENV['PAYJP_SECRET_KEY']
           Payjp::Charge.create(:amount => params[:amount], :customer => @card.customer_id, :currency => 'jpy')
         end
         
       elsif '手戻し' == params[:status]
+        @request.is_reworked = true
         @receiver.creator.number_of_works -= 1
         @receiver.creator.earnings -= @request.money
         @receiver.creator.withdrawal_amount -= @request.money

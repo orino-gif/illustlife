@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2022_08_01_145011) do
     t.string "deliver_img"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_reworked", default: false
     t.text "evaluation_comment"
   end
 

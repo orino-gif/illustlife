@@ -113,7 +113,7 @@
     = 'クレジットカード：'
     %table.table
       %tr
-        -if nil != @card
+        -if not @card.nil?
           %td='カード番号： xxxx-xxxx-xxxx-xxxx'
         -else
           %td='登録カードなし'
