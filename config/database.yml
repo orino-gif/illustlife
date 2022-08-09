@@ -6,7 +6,7 @@ default: &default
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: illustlifeDB
+  database: <%= ENV['DATABASE'] %>
   pool: 5
   username: rio
   password: Orino_1013
@@ -15,13 +15,13 @@ default: &default
 
 development:
   <<: *default
-  database: illustlife_development
+# database: illustlife_development
 
 test:
   <<: *default
-  database: illustlife_test
+  # database: illustlife_test
 
 
 production:
   <<: *default
-  database: illustlifeDB
+  # database: illustlifeDB

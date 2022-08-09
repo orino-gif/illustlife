@@ -30,6 +30,4 @@ vendor/bundle
 .env
 
 start
-
-; config/database.yml
-
+config/database.yml
