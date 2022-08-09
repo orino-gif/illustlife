@@ -31,5 +31,5 @@ vendor/bundle
 
 start
 
-config/database.yml
+; config/database.yml
 
