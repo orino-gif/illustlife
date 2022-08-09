@@ -1,7 +1,7 @@
 class HomesController < ApplicationController
 
   def index
-    @creators = Creator.all.order(number_of_works: 'DESC')
+    @creators = Creator.all.order(evaluation_points: 'DESC').order(created_at: 'DESC')
     @requests = Request.all
   end
 end
