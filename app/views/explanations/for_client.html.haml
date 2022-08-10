@@ -1,22 +1,62 @@
-- content_for(:html_title) { 'イラスト付き利用説明-目次' }
-%h1.font-Xlarge.background_color-whitesmoke='イラスト付き利用説明-目次'
+- content_for(:html_title) { 'イラスト付き利用説明' }
+%h1.font-Xlarge.background_color-whitesmoke='イラスト付き利用説明'
 
 .container
   .row.my-5
     .col-3
       = image_tag('/img/character/ディフォ姫前面_ここはどこ.gif', class:'size_Xlarge-square')
     .col-6.block-baloon-left.position_midium-right
-      マスター。ここは何をするところですか？
+      すみませ～ん。ここは何をするところですか？
   .row
     .col-1
     .col-6.block-baloon-right
-      本サービスの利用方法を、イラスト付きで説明しているところです。
-      この場所は、各説明の目次を表示しています。
+      気に入ったクリエーターに作品をリクエストできるサイトで、現在の所、テスト版としてリリースしております。
+      
     .col-3
       = image_tag('/img/character/リオ前面_説明.gif', class:'size_Xlarge-square')
+  .row.my-5
+    .col-3
+      = image_tag('/img/character/ディフォ姫測面_見上げる.png', class:'size_Xlarge-square')
+    .col-6.block-baloon-left.position_midium-right
+      テスト版ではどういった事を行いますか？
   .row
     .col-1
-    .col-7
-      = image_tag('/img/character/index.gif', class:'size_large-fixed_rectangle fit_cover')
+    .col-6.block-baloon-right
+      テスト版では、運営からクリエーターにテストを兼ねて依頼を行い、
+      不具合やバグがないかどうかを確認する事が中心となります。
+      なので、人を集める為の広告活動を行わず、了承された方のみ
+      登録していただく形になります。
+    .col-3
+      = image_tag('/img/character/リオ前面_どうぞ.png', class:'size_Xlarge-square')
+  .row.my-5
+    .col-3
+      = image_tag('/img/character/ディフォ姫前面_疑問.png', class:'size_Xlarge-square')
+    .col-6.block-baloon-left.position_midium-right
+      テスト版はいつ終わりますか？
+  .row
+    .col-1
+    .col-6.block-baloon-right
+      いつ終わるかは未定です。テスト版は、今後のアップデートでカードゲームの機能も組み込む予定なので、
+      当面の間は終わりそうにありません。
+    .col-3
+      = image_tag('/img/character/リオ前面_自分の値段.png', class:'size_Xlarge-square')
+  
+  .row.my-5
+    .col-3
+      = image_tag('/img/character/ディフォ姫前面_バイバイ.gif', class:'size_Xlarge-square')
+    .col-6.block-baloon-left.position_midium-right
+      了解しました。ありがとうございました。
+  .row
+    .col-1
+    .col-6.block-baloon-right
+      どういたしまして。
+    .col-3
+      = image_tag('/img/character/リオ前面_バイバイ.gif', class:'size_Xlarge-square')
+      
+  
+  // .row
+  //   .col-1
+  //   .col-7
+  //     = image_tag('/img/character/index.gif', class:'size_large-fixed_rectangle fit_cover')
     
       
