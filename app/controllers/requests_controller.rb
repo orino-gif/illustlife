@@ -5,7 +5,40 @@ class RequestsController < ApplicationController
   def index
     #ログイン中のユーザーのリクエスト
     @requests = Request.where(receiver_id: current_user.id).or(Request.where(sender_id: current_user.id))
-    
+  end
+  
+  def new
+    @request = Request.new
+    @creator = Creator.find_by(user_id: params[:id])
+  end
+
+  def create
+    if (user_signed_in?) && ((nil != Card.find_by(id: current_user.id)) || ('development' == ENV['RAILS_ENV']))
+      @sender = current_user
+      @receiver = User.find(params[:authorizer_id])
+      
+      @request = Request.new(requests_params)
+      @request.sender_id = @sender.id
+      @request.receiver_id = @receiver.id
+      @request.status = '承認待ち'
+
+      if @request.save
+        current_user.creator.number_of_request += 1
+        current_user.creator.save
+        UserMailer.request_email(@sender, @receiver, @request).deliver_later
+        redirect_to request_url(@request.id), notice: 'クリエイターへリクエストメールを送信しました。'
+      elsif @request.errors.full_messages[0].include?('too_long')
+        redirect_to request.referer, alert: '文字が許容範囲外(1000文字以下)です'
+      end
+    elsif false == user_signed_in?
+      redirect_to  '/users/sign_in', alert: 'ログインが必要です。'
+    elsif nil == Card.find_by(id: current_user.id)
+      redirect_to request.referer, alert: 'クレジットカード登録が必要です。'
+    end
+  end
+
+  def show
+    @request = Request.find(params[:id])
     #リクエストページのボタンが押された場合の処理
     if not params[:request_id].nil?
       
@@ -67,40 +100,6 @@ class RequestsController < ApplicationController
     end
   end
   
-  def new
-    @request = Request.new
-    @creator = Creator.find_by(user_id: params[:id])
-  end
-
-  def create
-    if (user_signed_in?) && ((nil != Card.find_by(id: current_user.id)) || ('development' == ENV['RAILS_ENV']))
-      @sender = current_user
-      @receiver = User.find(params[:authorizer_id])
-      
-      @request = Request.new(requests_params)
-      @request.sender_id = @sender.id
-      @request.receiver_id = @receiver.id
-      @request.status = '承認待ち'
-
-      if @request.save
-        current_user.creator.number_of_request += 1
-        current_user.creator.save
-        UserMailer.request_email(@sender, @receiver, @request).deliver_later
-        redirect_to requests_url, notice: 'クリエイターへリクエストメールを送信しました。'
-      elsif @request.errors.full_messages[0].include?('too_long')
-        redirect_to request.referer, alert: '文字が許容範囲外(1000文字以下)です'
-      end
-    elsif false == user_signed_in?
-      redirect_to  '/users/sign_in', alert: 'ログインが必要です。'
-    elsif nil == Card.find_by(id: current_user.id)
-      redirect_to request.referer, alert: 'クレジットカード登録が必要です。'
-    end
-  end
-
-  def show
-    @request = Request.find(params[:id])
-  end
-  
   def download
     hoge = Request.find(params[:id])
     if hoge.deliver_img?
@@ -112,14 +111,14 @@ class RequestsController < ApplicationController
   end
   
   def update
-    @requests = Request.find(params[:request][:request_id])
-    if @requests.update(requests_params)
-      redirect_to requests_path(@requests, anchor: 'page1')
+    @request = Request.find(params[:request][:request_id])
+    if @request.update(requests_params)
+      redirect_to request_path(@request.id)
     else
-      p @requests.errors.full_messages[0]
-      if @requests.errors.full_messages[0].include?("extension_whitelist_error")
+      p @request.errors.full_messages[0]
+      if @request.errors.full_messages[0].include?("extension_whitelist_error")
         redirect_to request.referer, alert: '本サービスのファイル対応形式(png,jpg,jpeg,gif)外です'
-      elsif @requests.errors.full_messages[0].include?("max_size_error")
+      elsif @request.errors.full_messages[0].include?("max_size_error")
         redirect_to request.referer, alert: 'ファイルサイズが本サービスの対応外(1GBより大きい)です'
       else  
         redirect_to request.referer, alert: 'ファイルが選択されていません'
