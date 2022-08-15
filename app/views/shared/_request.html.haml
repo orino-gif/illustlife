@@ -3,75 +3,84 @@
   - receiver = User.find(@request.receiver_id)
   
   .row.my-5
-    .col-md-auto
+    - if 'index' == controller.action_name
       %table.table
-        - if Rails.env.development?
-          %tr
-            %td= "リクエストID：#{@request.id}"
         %tr
+          %td= "申請日時：#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
           %td= display_icon(sender.creator, 'size_small-square rounded-circle fit_cover') + '依頼者：' + sender.nickname
-        %tr
           %td= display_icon(receiver.creator, 'size_small-square rounded-circle fit_cover') + '承認者：' + receiver.nickname
-        %tr
-          %td.string_indention= "リクエスト内容：\n#{@request.message}"
-        %tr
-          %td= "ファイル形式：#{@request.file_format}"
-        - if @request.is_nsfw?
-          %tr
-            %td= 'nsfw:有'
-        - if @request.is_nsfw?
-          %tr
-            %td= '匿名:有'
-        - if @request.is_nsfw?
-          %tr
-            %td= '宛名入りサイン:有 '
-        - if (user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id)) ||( Rails.env.development?)
-          %tr
-            %td= "金額：#{@request.money}円"
+          %td
+            %button.btn.btn-light.font-medium= link_to '詳細', request_path(@request.id)
           
+    - else
+      .col-md-auto
+        %table.table
+          - if Rails.env.development?
+            %tr
+              %td= "リクエストID：#{@request.id}"
           %tr
             %td= "申請日時：#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
           %tr
-            - deadline = @request.created_at + (receiver.creator.working_days * 60 * 60 * 24)
-            %td.string_indention= "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
+            %td= display_icon(sender.creator, 'size_small-square rounded-circle fit_cover') + '依頼者：' + sender.nickname
           %tr
-            %td= "状態：#{@request.status}"
-        %tr
-          %td.string_indention
-            - if not current_user.nil?
-              - if (receiver.nickname == current_user.nickname) && ('承認待ち' == @request.status)
-                = "#{sender.nickname}さんから#{receiver.nickname}さんへのリクエストを承認しますか？"
-                = button_to '承認', {controller:'requests', action:'index'}, {method: :get, params:{status:'製作中', request_id:@request.id}}
-                = button_to '拒否', {controller:'requests', action:'index'}, {method: :get, params:{status:'拒否', request_id:@request.id}}
-              - elsif (receiver.nickname == current_user.nickname) && ('製作中' == @request.status || '手戻し' == @request.status)
-                = form_with(model: @request, local: true) do |f|
-                  = f.file_field :deliver_img
+            %td= display_icon(receiver.creator, 'size_small-square rounded-circle fit_cover') + '承認者：' + receiver.nickname
+          %tr
+            %td.string_indention= "リクエスト内容：\n#{@request.message}"
+          %tr
+            %td= "ファイル形式：#{@request.file_format}"
+          - if @request.is_nsfw?
+            %tr
+              %td= 'nsfw:有'
+          - if @request.is_nsfw?
+            %tr
+              %td= '匿名:有'
+          - if @request.is_nsfw?
+            %tr
+              %td= '宛名入りサイン:有 '
+          - if (user_signed_in?) && ((sender.id == current_user.id) || (receiver.id == current_user.id)) ||( Rails.env.development?)
+            %tr
+              %td= "金額：#{@request.money}円"
+            %tr
+              - deadline = @request.created_at + (receiver.creator.working_days * 60 * 60 * 24)
+              %td.string_indention= "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
+            %tr
+              %td= "状態：#{@request.status}"
+          %tr
+            %td.string_indention
+              - if not current_user.nil?
+                - if (receiver.nickname == current_user.nickname) && ('承認待ち' == @request.status)
+                  = "#{sender.nickname}さんから#{receiver.nickname}さんへのリクエストを承認しますか？"
+                  = button_to '承認', {controller:'requests', action:'index'}, {method: :get, params:{status:'製作中', request_id:@request.id}}
+                  = button_to '拒否', {controller:'requests', action:'index'}, {method: :get, params:{status:'拒否', request_id:@request.id}}
+                - elsif (receiver.nickname == current_user.nickname) && ('製作中' == @request.status || '手戻し' == @request.status)
+                  = form_with(model: @request, local: true) do |f|
+                    = f.file_field :deliver_img
+                    = f.hidden_field :request_id, :value => @request.id
+                    = f.submit '登録'
+                  = button_to '納品', {controller:'requests', action:'index'}, {method: :get, params:{status:'納品完了', request_id:@request.id, amount:@request.money}}
+                  = button_to '製作中断', {controller:'requests', action:'index'}, {method: :get, params:{status:'製作中断', request_id:@request.id}}
+      .col-sm-auto
+        - if @request.deliver_img?
+          - if @request.deliver_img.to_s.include?('.psd')
+            - pdf = Magick::ImageList.new(@request.deliver_img.to_s)
+            - pdf[0].write("public/img/conversion_psd/#{current_user.id}_#{@request.id}.png")
+            = link_to image_tag("/img/conversion_psd/#{current_user.id}_#{@request.id}.png", class:'size_large-rectangle fit_cover'),"img/conversion_psd/#{current_user.id}_#{@request.id}.png"
+          - else
+            = link_to image_tag(@request.deliver_img.url, class:'size_large-rectangle fit_cover'), @request.deliver_img.url
+            %p.on_card SAMPLE
+      .col-sm-auto
+        - if ('納品完了' == @request.status) && (user_signed_in?)
+          - if sender.nickname == current_user.nickname
+            %button.btn.btn-light= link_to 'ダウンロード', download_request_path(@request)
+            - if @request.evaluation_comment.nil?
+              = form_with(model: @request, local: true) do |f|
+                .form-group.mt-4
+                  = f.label :'コメント'
+                  = f.text_area :evaluation_comment, class:'form-control', size:'15x10'
                   = f.hidden_field :request_id, :value => @request.id
-                  = f.submit '登録'
-                = button_to '納品', {controller:'requests', action:'index'}, {method: :get, params:{status:'納品完了', request_id:@request.id, amount:@request.money}}
-                = button_to '製作中断', {controller:'requests', action:'index'}, {method: :get, params:{status:'製作中断', request_id:@request.id}}
-    .col-sm-auto
-      - if @request.deliver_img?
-        - if @request.deliver_img.to_s.include?('.psd')
-          - pdf = Magick::ImageList.new(@request.deliver_img.to_s)
-          - pdf[0].write("public/img/conversion_psd/#{current_user.id}_#{@request.id}.png")
-          = link_to image_tag("/img/conversion_psd/#{current_user.id}_#{@request.id}.png", class:'size_large-rectangle fit_cover'),"img/conversion_psd/#{current_user.id}_#{@request.id}.png"
-        - else
-          = link_to image_tag(@request.deliver_img.url, class:'size_large-rectangle fit_cover'), @request.deliver_img.url
-          %p.on_card SAMPLE
-    .col-sm-auto
-      - if ('納品完了' == @request.status) && (user_signed_in?)
-        - if sender.nickname == current_user.nickname
-          %button.btn.btn-light= link_to 'ダウンロード', download_request_path(@request)
-          - if @request.evaluation_comment.nil?
-            = form_with(model: @request, local: true) do |f|
-              .form-group.mt-4
-                = f.label :'コメント'
-                = f.text_area :evaluation_comment, class:'form-control', size:'15x10'
-                = f.hidden_field :request_id, :value => @request.id
-              = f.submit '送信', class:'btn btn-light'
-        - elsif receiver.nickname == current_user.nickname
-          = button_to '手戻し', {controller:'requests', action:'index'}, {method: :get, params:{status:'手戻し', request_id:@request.id}}
-    - if not @request.evaluation_comment.nil?
-      %br=sender.nickname + "さんからコメント"
-      %br=@request.evaluation_comment
+                = f.submit '送信', class:'btn btn-light'
+          - elsif receiver.nickname == current_user.nickname
+            = button_to '手戻し', {controller:'requests', action:'index'}, {method: :get, params:{status:'手戻し', request_id:@request.id}}
+      - if not @request.evaluation_comment.nil?
+        %br=sender.nickname + "さんからコメント"
+        %br=@request.evaluation_comment
