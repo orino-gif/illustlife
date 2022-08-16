@@ -72,6 +72,11 @@ ActiveRecord::Schema.define(version: 2022_08_01_145011) do
     t.string "deliver_img"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "deliver_img2"
+    t.string "deliver_img3"
+    t.string "deliver_img4"
+    t.string "deliver_img5"
+    t.string "deliver_img6"
     t.boolean "is_reworked", default: false
     t.text "evaluation_comment"
   end

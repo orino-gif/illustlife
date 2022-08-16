@@ -112,6 +112,9 @@ class RequestsController < ApplicationController
   
   def update
     @request = Request.find(params[:request][:request_id])
+    if 'キャンセル' == params[:request][:is_cancel]
+      @request.deliver_img = 'NULL'
+    end
     if @request.update(requests_params)
       redirect_to request_path(@request.id)
     else
