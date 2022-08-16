@@ -3,8 +3,8 @@
 
 .container
   - if not @requests.empty? then
-    - @requests.reverse_each do |request|
+    - @requests.reverse_each.with_index(1) do |request|
       - @request = request
-      = render 'shared/request.html'
+      = render 'shared/request.html', index: @index
   - else
     = 'リクエストがまだ存在しません'

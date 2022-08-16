@@ -53,8 +53,6 @@ class RequestsController < ApplicationController
         redirect_to request.referer, notice: '依頼者からのリクエストを拒否しました。'
         
       elsif '製作中' == params[:status]
-        @receiver.creator.number_of_approval += 1
-        @request.approval_day = Time.now
         UserMailer.consent_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者へ承諾のメールを送信しました。'
         
@@ -104,6 +102,8 @@ class RequestsController < ApplicationController
     hoge = Request.find(params[:id])
     if hoge.deliver_img?
       image = hoge.deliver_img # imageはFugaUploaderオブジェクト
+      #extname:text.txtの.移行の文字列を返す
+      #send_data(送るデータ, オプション={failname:保存するときに使用するファイル名})
       send_data(image.read, filename: "download#{File.extname(image.path)}")
     else
       redirect_to request.referer, alert: '画像がアップロードされていません'

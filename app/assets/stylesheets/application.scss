@@ -14,7 +14,7 @@
   // body全体のフォント指定
   body { font-family: 'Kaisei Decol', serif, "メイリオ" ; }
   //ストロングとラベルタグの太字を無効化
-  strong, label { font-weight: normal; }
+  strong, label, th { font-weight: normal; }
   //色設定
   .background_color-whitesmoke { background-color: whitesmoke; } 
   .background_color-crimson { background-color: crimson; } 
