@@ -112,8 +112,10 @@ class RequestsController < ApplicationController
   
   def update
     @request = Request.find(params[:request][:request_id])
-    if 'キャンセル' == params[:request][:is_cancel]
+    if 'キャンセル' == params[:request][:cancel]
       @request.deliver_img = 'NULL'
+    elsif 'キャンセル2' == params[:request][:cancel]
+      @request.deliver_img2 = 'NULL'
     end
     if @request.update(requests_params)
       redirect_to request_path(@request.id)
@@ -133,7 +135,8 @@ class RequestsController < ApplicationController
 
   def requests_params
     params.require(:request).permit(:money, :message, :deliver_img, :file_format, :is_nsfw,
-      :is_anonymous, :is_autographed, :evaluation_comment)
+      :is_anonymous, :is_autographed, :deliver_img2, :deliver_img3, :deliver_img4, :deliver_img5, :deliver_img6,
+      :evaluation_comment)
   end
   
   def creator_params
