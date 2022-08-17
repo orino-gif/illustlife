@@ -70,16 +70,16 @@
               = link_to image_tag(@request.deliver_img.url, class:'size_large-rectangle fit_cover'), @request.deliver_img.url
               %p.on_card SAMPLE
               
-            - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @request.status)
-              = form_with(model: @request, local: true) do |f|
-                = f.hidden_field :request_id, :value => @request.id
-                - if @request.deliver_img.blank?
-                  = '1枚目'
-                  = f.file_field :deliver_img
-                  = f.submit '登録'
-                - else
-                  = f.hidden_field :cancel, :value => 'キャンセル'
-                  = f.submit '取り消し'
+          - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @request.status)
+            = form_with(model: @request, local: true) do |f|
+              = f.hidden_field :request_id, :value => @request.id
+              - if @request.deliver_img.blank?
+                = '1枚目'
+                = f.file_field :deliver_img
+                = f.submit '登録'
+              - else
+                = f.hidden_field :cancel, :value => 'キャンセル'
+                = f.submit '取り消し'
                 
           - if @request.deliver_img2?
             %br
