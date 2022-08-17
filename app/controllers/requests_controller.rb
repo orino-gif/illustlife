@@ -1,7 +1,6 @@
 class RequestsController < ApplicationController
   #pajpのメソッドを利用可能にする
   require 'payjp'
-  require 'zipruby'
 
   def index
     #ログイン中のユーザーのリクエスト
