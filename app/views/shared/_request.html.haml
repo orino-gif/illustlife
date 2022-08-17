@@ -180,7 +180,7 @@
                   = f.text_area :evaluation_comment, class:'form-control', size:'15x10'
                   = f.hidden_field :request_id, :value => @request.id
                 = f.submit '送信', class:'btn btn-light'
-          - elsif receiver.nickname == current_user.nickname
+          - elsif (user_signed_in?) && (receiver.nickname == current_user.nickname)
             = button_to '手戻し', {controller:'requests', action:'show'}, {method: :get, params:{status:'手戻し', request_id:@request.id}}
       - if not @request.evaluation_comment.nil?
         %br=sender.nickname + "さんからコメント"
