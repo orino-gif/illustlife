@@ -24,7 +24,6 @@ gem "fog-aws"
 gem 'pry-rails'
 gem 'payjp'
 gem 'aws-sdk', '~>1'
-gem 'zipruby'
 gem 'rails', '~> 5.2.6'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'puma', '~> 3.11'

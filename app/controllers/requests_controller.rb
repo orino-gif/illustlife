@@ -126,6 +126,7 @@ class RequestsController < ApplicationController
     elsif 'キャンセル6' == params[:request][:cancel]
       @request.deliver_img6 = 'NULL'
     end
+    
     if @request.update(requests_params)
       redirect_to request_path(@request.id)
     else
