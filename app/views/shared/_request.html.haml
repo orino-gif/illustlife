@@ -182,6 +182,6 @@
                 = f.submit '送信', class:'btn btn-light'
           - elsif (user_signed_in?) && (receiver.nickname == current_user.nickname)
             = button_to '手戻し', {controller:'requests', action:'show'}, {method: :get, params:{status:'手戻し', request_id:@request.id}}
-      - if (user_signed_in?) && (nil != @request.evaluation_comment)
-        %br=sender.nickname + "さんからコメント"
-        %br=@request.evaluation_comment
+      // - if (user_signed_in?) && (nil != @request.evaluation_comment)
+      //   %br=sender.nickname + "さんからコメント"
+      //   %br=@request.evaluation_comment
