@@ -86,8 +86,6 @@ class RequestsController < ApplicationController
       elsif '手戻し' == params[:status]
         @request.is_reworked = true
         @receiver.creator.number_of_works -= 1
-        @receiver.creator.earnings -= @request.money
-        @receiver.creator.withdrawal_amount -= @request.money
         UserMailer.rework_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者への手戻りのメールを送信しました。'
       end
