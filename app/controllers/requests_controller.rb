@@ -1,6 +1,7 @@
 class RequestsController < ApplicationController
   #pajpのメソッドを利用可能にする
-  require 'payjp' 
+  require 'payjp'
+  require 'zipruby'
 
   def index
     #ログイン中のユーザーのリクエスト
@@ -116,6 +117,14 @@ class RequestsController < ApplicationController
       @request.deliver_img = 'NULL'
     elsif 'キャンセル2' == params[:request][:cancel]
       @request.deliver_img2 = 'NULL'
+    elsif 'キャンセル3' == params[:request][:cancel]
+      @request.deliver_img3 = 'NULL'
+    elsif 'キャンセル4' == params[:request][:cancel]
+      @request.deliver_img4 = 'NULL'
+    elsif 'キャンセル5' == params[:request][:cancel]
+      @request.deliver_img5 = 'NULL'
+    elsif 'キャンセル6' == params[:request][:cancel]
+      @request.deliver_img6 = 'NULL'
     end
     if @request.update(requests_params)
       redirect_to request_path(@request.id)
