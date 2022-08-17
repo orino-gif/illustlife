@@ -66,10 +66,12 @@ class RequestsController < ApplicationController
       elsif '納品完了' == params[:status]
         @card = Card.find_by(id: @sender.id)
         @request.is_in_time_for_the_deadline = true
-        @receiver.creator.number_of_works += 1
-        @receiver.creator.evaluation_points += 1
-        @receiver.creator.earnings += @request.money
-        @receiver.creator.withdrawal_amount += @request.money
+        if true != @request.is_reworked
+          @receiver.creator.number_of_works += 1
+          @receiver.creator.evaluation_points += 1
+          @receiver.creator.earnings += @request.money
+          @receiver.creator.withdrawal_amount += @request.money
+        end
         # @request.delivery_time =+ 3
         # @receiver.creator.average_delivery_time = 1 + (@requests.all.sum(:delivery_time) / @receiver.creator.number_of_works)
         UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
