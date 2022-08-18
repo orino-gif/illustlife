@@ -57,7 +57,7 @@
           - if not current_user.nil?
             - if (receiver.nickname == current_user.nickname) && ('承認待ち' == @request.status)
               = "#{sender.nickname}さんから#{receiver.nickname}さんへのリクエストを承認しますか？"
-              = button_to '承認', {controller:'requests', action:'show'}, {method: :get, params:{status:'製作中', request_id:@request.id}}
+              = button_to '承認', {controller:'requests', action:'show'}, {method: :get, params:{status:'製作中', request_id:@request.id, amount:@request.money}}
               %br= button_to '拒否', {controller:'requests', action:'show'}, {method: :get, params:{status:'拒否', request_id:@request.id}}
       
         - if '承認待ち' != @request.status
@@ -70,7 +70,7 @@
               = link_to image_tag(@request.deliver_img.url, class:'size_large-rectangle fit_cover'), @request.deliver_img.url
               %p.on_card SAMPLE
               
-          - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @request.status)
+          - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('購入者クレジット不備によるキャンセル' != @request.status) && ('納品完了' != @request.status)
             = form_with(model: @request, local: true) do |f|
               = f.hidden_field :request_id, :value => @request.id
               - if @request.deliver_img.blank?
@@ -169,7 +169,7 @@
       .col-sm-auto
         - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('製作中' == @request.status || '手戻し' == @request.status)
           - if (@request.deliver_img?)
-            = button_to '納品', {controller:'requests', action:'show'}, {method: :get, params:{status:'納品完了', request_id:@request.id, amount:@request.money}}
+            = button_to '納品', {controller:'requests', action:'show'}, {method: :get, params:{status:'納品完了', request_id:@request.id}}
           %br= button_to '製作中断', {controller:'requests', action:'show'}, {method: :get, params:{status:'製作中断', request_id:@request.id}}
         - if (user_signed_in?) && ('納品完了' == @request.status)
           - if sender.nickname == current_user.nickname

@@ -53,8 +53,18 @@ class RequestsController < ApplicationController
         redirect_to request.referer, notice: '依頼者からのリクエストを拒否しました。'
         
       elsif '製作中' == params[:status]
-        UserMailer.consent_email(@sender, @receiver, @request).deliver_later
-        redirect_to request.referer, notice: '依頼者へ承諾のメールを送信しました。'
+        @card = Card.find_by(id: @sender.id)
+        Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+        begin
+          Payjp::Charge.create(:amount => params[:amount], :customer => @card.customer_id, :currency => 'jpy')
+          UserMailer.consent_email(@sender, @receiver, @request).deliver_later
+          redirect_to request.referer, notice: '依頼者へ承諾のメールを送信しました。'
+        rescue Payjp::PayjpError => e
+          @request.status = '購入者クレジット不備によるキャンセル'
+          p "例外エラー:" + e.to_s
+          flash[:alert] = "購入者側のクレジット決済で問題が発生しました為、キャンセルとなりました。" 
+          render :show
+        end
         
       elsif '製作中断' == params[:status]
         @request.is_in_time_for_the_deadline = false
@@ -64,9 +74,8 @@ class RequestsController < ApplicationController
         redirect_to request.referer, notice: '依頼者へ中断のメールを送信しました。'
         
       elsif '納品完了' == params[:status]
-        @card = Card.find_by(id: @sender.id)
         @request.is_in_time_for_the_deadline = true
-        if true != @request.is_reworked
+        if false == @request.is_reworked
           @receiver.creator.number_of_works += 1
           @receiver.creator.evaluation_points += 1
           @receiver.creator.earnings += @request.money
@@ -77,11 +86,6 @@ class RequestsController < ApplicationController
         # @receiver.creator.average_delivery_time = 1 + (@requests.all.sum(:delivery_time) / @receiver.creator.number_of_works)
         UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者への納品完了のメールを送信しました。'
-        
-        if (nil != @card) && (false == @request.is_reworked)
-          Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-          Payjp::Charge.create(:amount => params[:amount], :customer => @card.customer_id, :currency => 'jpy')
-        end
         
       elsif '手戻し' == params[:status]
         @request.is_reworked = true
