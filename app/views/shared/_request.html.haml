@@ -167,8 +167,9 @@
                   = f.hidden_field :cancel, :value => 'キャンセル6'
                   = f.submit '取り消し'
       .col-sm-auto
-        - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('製作中' == @request.status || '手戻し' == @request.status)    
-          = button_to '納品', {controller:'requests', action:'show'}, {method: :get, params:{status:'納品完了', request_id:@request.id, amount:@request.money}}
+        - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('製作中' == @request.status || '手戻し' == @request.status)
+          - if (@request.deliver_img?)
+            = button_to '納品', {controller:'requests', action:'show'}, {method: :get, params:{status:'納品完了', request_id:@request.id, amount:@request.money}}
           %br= button_to '製作中断', {controller:'requests', action:'show'}, {method: :get, params:{status:'製作中断', request_id:@request.id}}
         - if (user_signed_in?) && ('納品完了' == @request.status)
           - if sender.nickname == current_user.nickname
