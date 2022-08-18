@@ -87,7 +87,7 @@
               = link_to image_tag(@request.deliver_img2.url, class:'size_large-rectangle fit_cover'), @request.deliver_img2.url
               %p.on_card SAMPLE
                     
-          - if not @request.deliver_img.blank?
+          - if (not @request.deliver_img.blank?) || (@request.deliver_img2?)
             - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @request.status)
               = form_with(model: @request, local: true) do |f|
                 = f.hidden_field :request_id, :value => @request.id
@@ -103,8 +103,8 @@
             %br= '3枚目'
             = link_to image_tag(@request.deliver_img3.url, class:'size_large-rectangle fit_cover'), @request.deliver_img3.url
             %p.on_card SAMPLE
-                    
-          - if not @request.deliver_img2.blank?
+          
+          - if (not @request.deliver_img2.blank?) || (@request.deliver_img3?)          
             - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @request.status)
               = form_with(model: @request, local: true) do |f|
                 = f.hidden_field :request_id, :value => @request.id
@@ -120,8 +120,8 @@
             %br= '4枚目'
             = link_to image_tag(@request.deliver_img4.url, class:'size_large-rectangle fit_cover'), @request.deliver_img4.url
             %p.on_card SAMPLE
-                    
-          - if not @request.deliver_img3.blank?
+            
+          - if (not @request.deliver_img3.blank?) || (@request.deliver_img4?)           
             - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @request.status)
               = form_with(model: @request, local: true) do |f|
                 = f.hidden_field :request_id, :value => @request.id
@@ -137,8 +137,8 @@
             %br= '5枚目'
             = link_to image_tag(@request.deliver_img5.url, class:'size_large-rectangle fit_cover'), @request.deliver_img5.url
             %p.on_card SAMPLE
-                    
-          - if not @request.deliver_img4.blank?
+          
+          - if (not @request.deliver_img4.blank?) || (@request.deliver_img5?)          
             - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @request.status)
               = form_with(model: @request, local: true) do |f|
                 = f.hidden_field :request_id, :value => @request.id
@@ -155,7 +155,7 @@
             = link_to image_tag(@request.deliver_img6.url, class:'size_large-rectangle fit_cover'), @request.deliver_img6.url
             %p.on_card SAMPLE
                     
-          - if not @request.deliver_img5.blank?
+          - if (not @request.deliver_img5.blank?) || (@request.deliver_img6?) 
             - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @request.status)
               = form_with(model: @request, local: true) do |f|
                 = f.hidden_field :request_id, :value => @request.id

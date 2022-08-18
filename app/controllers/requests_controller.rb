@@ -85,6 +85,7 @@ class RequestsController < ApplicationController
         
       elsif '手戻し' == params[:status]
         @request.is_reworked = true
+        @request.is_in_time_for_the_deadline = false
         UserMailer.rework_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer, notice: '依頼者への手戻りのメールを送信しました。'
       end
