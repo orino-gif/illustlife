@@ -61,6 +61,7 @@ class RequestsController < ApplicationController
           redirect_to request.referer, notice: '依頼者へ承諾のメールを送信しました。'
         rescue Payjp::PayjpError => e
           @request.status = '購入者クレジット不備によるキャンセル'
+          UserMailer.card_declined_email(@sender, @receiver, @request).deliver_later
           p "例外エラー:" + e.to_s
           flash[:alert] = "購入者側のクレジット決済で問題が発生しました為、キャンセルとなりました。" 
           render :show

@@ -76,4 +76,14 @@ class UserMailer < ApplicationMailer
         subject: "[イラストライフ運営局]#{@creator.user.nickname}さんからの引き落とし申請を受付ました。"
       )
   end
+  
+  def card_declined_email(sender,receiver,requests)
+    @sender = sender
+    @receiver = receiver
+    @request = requests
+    mail(
+        to: "#{@receiver.email},#{ENV['ADMINISTRATOR_MAIL']}",
+        subject: "[イラストライフ運営局]#{@sender.nickname}さんのクレジットカード決済不備によるキャンセルの件。"
+      )
+  end
 end
