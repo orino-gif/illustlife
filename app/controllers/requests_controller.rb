@@ -63,7 +63,7 @@ class RequestsController < ApplicationController
           @request.status = '購入者クレジット不備によるキャンセル'
           UserMailer.card_declined_email(@sender, @receiver, @request).deliver_later
           p "例外エラー:" + e.to_s
-          flash[:alert] = "購入者側のクレジット決済で問題が発生しました為、キャンセルとなりました。" 
+          flash.now[:alert] = "購入者側のクレジット決済で問題が発生しました為、キャンセルとなりました。" 
           render :show
         end
         
@@ -98,7 +98,9 @@ class RequestsController < ApplicationController
       if 0 != @receiver.creator.number_of_approval
         @receiver.creator.deadline_strict_adherence_rate = 100
       end
-      @request.status = params[:status]
+      if @request.status != '購入者クレジット不備によるキャンセル'
+        @request.status = params[:status]
+      end
       @request.save
       @receiver.creator.save
     end
