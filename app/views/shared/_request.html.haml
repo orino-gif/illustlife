@@ -58,7 +58,7 @@
             - if (receiver.nickname == current_user.nickname) && ('承認待ち' == @request.status)
               = "#{sender.nickname}さんから#{receiver.nickname}さんへのリクエストを承認しますか？"
               = button_to '承認', {controller:'requests', action:'show'}, {method: :get, params:{status:'製作中', request_id:@request.id}}
-              = button_to '拒否', {controller:'requests', action:'show'}, {method: :get, params:{status:'拒否', request_id:@request.id}}
+              %br= button_to '拒否', {controller:'requests', action:'show'}, {method: :get, params:{status:'拒否', request_id:@request.id}}
       
         - if '承認待ち' != @request.status
           - if @request.deliver_img?
