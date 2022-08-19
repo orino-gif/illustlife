@@ -1,0 +1,11 @@
+%meta{:content => "noindex", :name => "robots"}/
+- content_for(:html_title) { '2.5D漫画' }
+%h1.font-Xlarge.background_color-whitesmoke イラストライフ
+
+.container
+  .row
+    %h2.font-large イラストライフ
+  .row
+    %h3.font-medium 第一話 次世代VR「ネクストライフ」
+  .row
+    =link_to image_tag('/img/mobu.png', class: 'size_Xlarge-square fit_cover border_solid-medium'), manga_path(2)

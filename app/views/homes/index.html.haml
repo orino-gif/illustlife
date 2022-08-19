@@ -2,6 +2,11 @@
 %h1.font-Xlarge.background_color-whitesmoke クリエイター紹介
 
 .container
+  - if Rails.env.development?
+    .row
+      %h2.font-large ■2.5D漫画
+    .row
+      =link_to image_tag('/img/mobu.png', class: 'size_Xlarge-square fit_cover border_solid-medium'), manga_path(1)
   .row
     %h2.font-large ■クリエイター
   .row.margin_side-Xsmall
