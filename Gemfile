@@ -5,7 +5,6 @@ ruby '2.7.2'
 
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
-gem 'jquery-rails'
 gem 'devise-bootstrap-views'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
@@ -37,6 +36,7 @@ gem 'rmagick'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'whenever', require: false
 gem 'kakurenbo-puti'
+gem 'jquery-rails'
 
 
 group :development, :test do
