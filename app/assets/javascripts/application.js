@@ -29,9 +29,9 @@ $(document).ready(function(){
   $(function() {
     $('.images').slick({
         slidesToShow: 2,
-        slidesToScroll: 2
+        slidesToScroll: 2,
+        adaptiveHeight: true
     });
   });
-
 });
 
