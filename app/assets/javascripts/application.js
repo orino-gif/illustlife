@@ -28,7 +28,8 @@ console.log("jQuery稼働OK");
 $(document).ready(function(){
   $(function() {
     $('.images').slick({
-        dots: true,
+        slidesToShow: 2,
+        slidesToScroll: 2
     });
   });
 
