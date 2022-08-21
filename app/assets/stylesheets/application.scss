@@ -258,19 +258,10 @@ p.on_card{
   opacity: 0.5;
 }
 
-/*--------画像サイズ調整---------*/
-.rollimg{
-  display: inline-block;
-	width:600px;
-	height:900px!important;
-	
+.images{
+  width: auto;
+  height: 100vh;
 }
-
-/*-----------height調整----------*/
-.slick-slide{
-	height:auto!important;
-}
-/*------------------------------*/
 
 
 /*-----------矢印表示----------*/
@@ -289,5 +280,3 @@ p.on_card{
     font-size: 50px!important;
     color:whitesmoke!important;
 }
-
-/*------------------------------*/

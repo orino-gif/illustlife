@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get 'resumes/:id/new', to: 'resumes#new'
   get 'creators/:id/earning', to: 'creators#earning'
   resources :resumes, only: [:index, :create, :show, :destroy]
-  resources :manga, only: [:show]
+  resources :mangas, only: [:index, :show]  do
+    resources :illustlifes, only: [:index, :show]
+  end
   resources :credits, only: [:create, :show, :update]
   resources :homes, only: [:index]
   resources :creators, only: [:show, :edit, :update]

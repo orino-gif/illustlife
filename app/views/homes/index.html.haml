@@ -4,11 +4,11 @@
 .container
   - if Rails.env.development?
     .row
-      %h2.font-large ■2.5D漫画
+      %h2.font-large ■アクティブ漫画
     .row
-      =link_to image_tag('/img/mobu.png', class: 'size_Xlarge-square fit_cover border_solid-medium'), manga_path(1)
+      =link_to image_tag('/img/mobu.png', class: 'size_Xlarge-square fit_cover border_solid-medium'), '/mangas/1/illustlifes'
       
-    %p jQuery稼働テスト(未稼働)
+    %p.jquerytest jQuery稼働テスト(未稼働)
     // :javascript
     //   $(document).ready(function() {
     //     $("p").text("jQuery稼働テスト(稼働中)");
