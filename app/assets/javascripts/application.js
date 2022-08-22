@@ -26,12 +26,9 @@ src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
 console.log("jQuery稼働OK");
 
 $(document).ready(function(){
-  $(function() {
     $('.images').slick({
         slidesToShow: 2,
-        slidesToScroll: 2,
-        adaptiveHeight: true
+        slidesToScroll: 2
     });
-  });
 });
 

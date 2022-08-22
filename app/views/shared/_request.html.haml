@@ -1,3 +1,4 @@
+%meta{:content => "noindex", :name => "robots"}/
 - if not @request.nil?
   - sender = User.find(@request.sender_id)
   - receiver = User.find(@request.receiver_id)
@@ -18,7 +19,6 @@
           %td= "#{@request.status}"
           %td
             %button.btn.btn-light.font-medium= link_to '詳細', request_path(@request.id)
-            
     - else
       .col-md-auto
         %table.table
