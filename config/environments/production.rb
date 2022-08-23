@@ -109,12 +109,12 @@ Rails.application.configure do
   
   config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = {
-	  port:                 587,
-	  address:              'mail.so-net.ne.jp',
-		domain:               'so-net.ne.jp',
-		user_name:            'xr274375@fc5.so-net.ne.jp',
-		password:             'orino1013',
-		authentication:       'login'
-		
+		user_name:             ENV['SMTP_USER'],
+    password:              ENV['SMTP_PASS'],
+    domain:                ENV['SMTP_DOMAIN'],
+    address:               'smtp.sendgrid.net',
+    port:                  587,
+    authentication:        :plain,
+    enable_starttls_auto:  true
 	 }
 end
