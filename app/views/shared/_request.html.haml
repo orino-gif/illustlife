@@ -73,7 +73,9 @@
           - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('購入者クレジット不備によるキャンセル' != @request.status) && ('納品完了' != @request.status)
             = form_with(model: @request, local: true) do |f|
               = f.hidden_field :request_id, :value => @request.id
-              - if @request.deliver_img.blank?
+              - if '拒否' == @request.status
+                = 'リクエストは拒否されました'
+              - elsif @request.deliver_img.blank?
                 = '1枚目'
                 = f.file_field :deliver_img
                 = f.submit '登録'
