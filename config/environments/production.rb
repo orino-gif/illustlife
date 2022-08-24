@@ -102,7 +102,6 @@ Rails.application.configure do
   #config.action_mailer.default_url_options = {  host: '160.16.136.195', port:3000}
   
   # config/environments/{staging,development}.rb
-  config.action_mailer.delivery_method = :ses
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
