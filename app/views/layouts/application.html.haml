@@ -49,15 +49,22 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     
     / slickライブラリ利用
-    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css",:rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css",:rel => "stylesheet", :type => "text/css"}/
-    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js",:type => "text/javascript"}
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css",
+      :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css",
+      :rel => "stylesheet", :type => "text/css"}/
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js",
+      :type => "text/javascript"}
     
     / クロスサイトリクエストフォージェリー対策
     = csrf_meta_tags
     
     / コンテンツセキュリティポリシーの適用
     = csp_meta_tag
+    
+    / テスト環境と本番の特定のページ以外は、google検索ページに表示しない
+    - if ('test' == ENV['RAILS_ENV']) || (controller.action_name != 'for_client')
+      %meta{:content => "noindex", :name => "robots"}/
     
   %body
     %header
