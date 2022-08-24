@@ -72,12 +72,12 @@
         .row
           .col-auto.d-flex.align-items-center
             = link_to image_tag('/img/symbol.png', class: 'size_small-square'), root_path
-          .col-m0-auto
+          .col-auto
             %span.font-Xlarge
               %strong イラストライフ
           .col-xs.d-flex.align-items-center
             -if 'homes' == controller.controller_name
-              %strong ～ 好きなクリエーターに作品をリクエスト ～
+              %strong ～ 好きなクリエーターに作品製作を依頼 ～
           .col.text-right
             - if user_signed_in?
               - if ('creators' == controller.controller_name) && ('show' == controller.action_name)
@@ -98,6 +98,7 @@
             - else
               %button.btn.btn-light.font-medium= link_to '新規登録', new_user_registration_path
               %button.btn.btn-light.font-medium= link_to 'ログイン', new_user_session_path
+              
     - if Rails.env.production?
       %script{:async => "", :src => '//accaii.com/orino/script.js'}
       %noscript
