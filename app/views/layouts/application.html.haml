@@ -30,14 +30,6 @@
     
     / payjpスクリプト利用
     %script{src: "https://js.pay.jp/v2/pay.js"}
-    
-    / slickライブラリ利用
-    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css",
-      :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css",
-      :rel => "stylesheet", :type => "text/css"}/
-    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js",
-      :type => "text/javascript"}
         
     -# googleフォント設定
     %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}/
@@ -55,6 +47,11 @@
       
     / jQuery設定
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    
+    / slickライブラリ利用
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css",:rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css",:rel => "stylesheet", :type => "text/css"}/
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js",:type => "text/javascript"}
     
     / クロスサイトリクエストフォージェリー対策
     = csrf_meta_tags
