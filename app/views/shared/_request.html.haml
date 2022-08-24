@@ -75,6 +75,8 @@
               = f.hidden_field :request_id, :value => @request.id
               - if '拒否' == @request.status
                 = 'リクエストは拒否されました'
+              - elsif '製作中断' == @request.status
+                = '製作が中断されました'
               - elsif @request.deliver_img.blank?
                 = '1枚目'
                 = f.file_field :deliver_img
