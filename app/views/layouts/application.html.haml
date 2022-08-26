@@ -63,7 +63,9 @@
     = csp_meta_tag
     
     / テスト環境と特定した本番のページ以外は、google検索ページに表示しない
-    - if ('test' == ENV['RAILS_ENV']) || ('homes' != controller.controller_name) || (controller.action_name != 'for_client')
+    - if ('test' != ENV['RAILS_ENV']) || ('homes' == controller.controller_name)
+    - elsif 'for_client' == controller.action_name
+    - else
       %meta{:content => "noindex", :name => "robots"}/
 
   %body
