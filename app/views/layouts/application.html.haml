@@ -69,8 +69,12 @@
       %meta{:content => "noindex", :name => "robots"}/
 
   %body
+  
+    / ヘッダーの内容を表示
     %header
       .container-fluid
+        
+        / シンボルマークとキャッチコピーとユーザーアイコンを表示
         .row
           .col-auto.d-flex.align-items-center
             = link_to image_tag('/img/symbol.png', class: 'size_small-square'), root_path
@@ -84,50 +88,74 @@
               - if ('creators' == controller.controller_name) && ('show' == controller.action_name)
                 ="#{current_user.creator.creator_points}ポイント"
               = display_icon(current_user.creator, 'size_small-square rounded-circle fit_cover')
+              
+        / メニューボタンを表示
         .row
           .col.text-right
             - if user_signed_in?
               - if 'creators' == controller.controller_name
                 %button.btn.btn-light.font-medium= link_to 'リクエスト状態', requests_path
                 - if 'earning' != controller.action_name
-                  %button.btn.btn-light.font-medium= link_to '売上', "/creators/#{current_user.id}/earning"
-                - if (ENV['ADMINISTRATOR_MAIL'] == current_user.email) && ('edit' != controller.action_name)
-                  %button.btn.btn-light= link_to 'アカウント編集', edit_creator_path(params[:id])
+                  %button.btn.btn-light.font-medium
+                    = link_to '売上', "/creators/#{current_user.id}/earning"
+                - if ENV['ADMINISTRATOR_MAIL'] == current_user.email
+                  %button.btn.btn-light
+                    = link_to 'アカウント編集', edit_creator_path(params[:id])
                 - elsif 'edit' != controller.action_name
-                  %button.btn.btn-light.font-medium= link_to 'ユーザー編集', edit_creator_path(current_user.id)
-                %button.btn.btn-light.font-medium= link_to 'ログアウト', destroy_user_session_path, method: "delete"
+                  %button.btn.btn-light.font-medium
+                    = link_to 'ユーザー編集', edit_creator_path(current_user.id)
+                %button.btn.btn-light.font-medium
+                  = link_to 'ログアウト', destroy_user_session_path, method: "delete"
             - else
-              %button.btn.btn-light.font-medium= link_to '新規登録', new_user_registration_path
-              %button.btn.btn-light.font-medium= link_to 'ログイン', new_user_session_path
-              
+              %button.btn.btn-light.font-medium
+                = link_to '新規登録', new_user_registration_path
+              %button.btn.btn-light.font-medium
+                = link_to 'ログイン', new_user_session_path
+                
+    / アクセス解析          
     - if Rails.env.production?
       %script{:async => "", :src => '//accaii.com/orino/script.js'}
       %noscript
         %img{:src => '//accaii.com/orino/script?guid=on'}/
+        
+    / 通知とエラー情報を表示
     - if notice.present?
       .alert.alert-dismissable.alert-success
         %button.close{"data-dismiss" => "alert", :type => "button"} ×
-        %p= notice
+        = notice
     - if alert.present?
       .alert.alert-dismissable.alert-danger
         %button.close{"data-dismiss" => "alert", :type => "button"} ×
-        %p= alert
+        = alert
+    
+    / 各ページの内容を表示
     = yield
 
+    / 管理者用アカウントでログインした場合にフッダーの色を変更
     - if (nil != current_user) && (ENV['ADMINISTRATOR_MAIL'] == current_user.email)
       - color='background_color-crimson'
       ='管理者用のページ'
     - else
       - color='background_color-whitesmoke'
     
+    / フッダーの内容を表示
     %footer{class:"#{color} mt-5 size_small-rectangle font-medium"}
       .container
+        / マニュアルページへのリンクテキストを表示
         .row.m-4
-          .mx-3= link_to 'イラスト付き利用説明', for_client_explanations_path
+          .mx-3
+            = link_to 'イラスト付き利用説明', for_client_explanations_path
+        
+        / 各規約ページへのリンクテキストを表示
         .row.m-4
-          .mx-3= link_to '利用規約', terms_explanations_path
-          .mx-3= link_to 'プライバシーポリシー', policy_explanations_path
-          .mx-3= link_to '特定商取引法に基づく表記', transaction_law_explanations_path
+          .mx-3
+            = link_to '利用規約', terms_explanations_path
+          .mx-3
+            = link_to 'プライバシーポリシー', policy_explanations_path
+          .mx-3
+            = link_to '特定商取引法に基づく表記', transaction_law_explanations_path
+        
+        / 著作権表示
         .row.m-3
           .col.text-right
-            %p © 2021-2022 イラストライフ運営局
+            © 2021-2022 イラストライフ運営局
