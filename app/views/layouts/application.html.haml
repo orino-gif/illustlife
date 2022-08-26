@@ -62,10 +62,10 @@
     / コンテンツセキュリティポリシーの適用
     = csp_meta_tag
     
-    / テスト環境と本番の特定のページ以外は、google検索ページに表示しない
-    - if ('test' == ENV['RAILS_ENV']) || (controller.action_name != 'for_client')
+    / テスト環境と特定した本番のページ以外は、google検索ページに表示しない
+    - if ('test' == ENV['RAILS_ENV']) || ('homes' != controller.controller_name) || (controller.action_name != 'for_client')
       %meta{:content => "noindex", :name => "robots"}/
-    
+
   %body
     %header
       .container-fluid
@@ -76,8 +76,7 @@
             %span.font-Xlarge
               %strong イラストライフ
           .col-xs.d-flex.align-items-center
-            -if 'homes' == controller.controller_name
-              %strong ～ 個人で手軽にイラスト、漫画、アニメ制作 ～
+            %strong ～ 個人で手軽にイラスト、漫画、アニメ制作 ～
           .col.text-right
             - if user_signed_in?
               - if ('creators' == controller.controller_name) && ('show' == controller.action_name)

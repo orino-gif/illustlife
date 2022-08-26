@@ -151,9 +151,9 @@ class RequestsController < ApplicationController
   private
 
   def requests_params
-    params.require(:request).permit(:money, :message, :deliver_img, :file_format, :is_nsfw,
-      :is_anonymous, :is_autographed, :deliver_img2, :deliver_img3, :deliver_img4, :deliver_img5, :deliver_img6,
-      :evaluation_comment)
+    params.require(:request).permit(:money, :message, :deliver_img, :file_format,
+      :is_nsfw,:is_anonymous, :is_autographed, :deliver_img2, :deliver_img3,
+      :deliver_img4, :deliver_img5, :deliver_img6,:evaluation_comment)
   end
   
   def creator_params

@@ -91,7 +91,6 @@
   @mixin border_solid($medium) {
     .border_solid-medium { border-style: solid; border-width: $medium; }
   }
-  
 
 //メディアクエリ　bootstrapのブレークポイント値に合わせる//
   //Extra large
