@@ -14,7 +14,9 @@ Rails.application.routes.draw do
     resources :illustlifes, only: [:index, :show]
   end
   resources :credits, only: [:create, :show, :update]
-  resources :homes, only: [:index]
+  resources :homes, only: [:index] do
+    resources :manuals, only: [:index, :show]
+  end
   resources :creators, only: [:show, :edit, :update]
   resources :requests do
     member  do
