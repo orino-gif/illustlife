@@ -40,7 +40,12 @@
   
   //rowの-15pxマージンの調整
   .margin_side-Xsmall { margin : 0 -10px; }
-
+  
+  .string_indention-large { word-wrap: break-word; max-width: 100px; }
+  
+  .fixed_column { table-layout: fixed; width: 100%; }
+  .hidden_overflow { overflow: hidden; }
+  
   //文字の大きさを設定する関数 
   @mixin size_font($Xlarge, $large, $medium, $small, $Xsmall) {
     .font-Xlarge { font-size: $Xlarge; }

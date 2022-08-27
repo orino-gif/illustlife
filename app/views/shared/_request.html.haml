@@ -4,17 +4,11 @@
   
   .row.my-5
     - if 'index' == controller.action_name
-      %table.table
-        %tr
-          %th="申請日時"
-          %th="依頼者"
-          %th="承認者"
-          %th="状態"
-          %th=""
+      %table.fixed_column
         %tr
           %td= "#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
-          %td= display_icon(sender.creator, 'size_small-square rounded-circle fit_cover') + sender.nickname
-          %td= display_icon(receiver.creator, 'size_small-square rounded-circle fit_cover') + receiver.nickname
+          %td.aaa= display_icon(sender.creator, 'size_small-square rounded-circle fit_cover') + sender.nickname
+          %td.aaa= display_icon(receiver.creator, 'size_small-square rounded-circle fit_cover') + receiver.nickname
           %td= "#{@request.status}"
           %td
             %button.btn.btn-light.font-medium= link_to '詳細', request_path(@request.id)

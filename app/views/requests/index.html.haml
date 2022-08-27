@@ -1,7 +1,15 @@
 - content_for(:html_title) { 'リクエスト一覧' }
-%h1.font-Xlarge.background_color-whitesmoke='リクエスト一覧'
+%h1.font-Xlarge.background_color-whitesmoke リクエスト一覧
 
 .container
+  .row
+    %table.table
+      %tr
+        %th="申請日時"
+        %th="依頼者"
+        %th="承認者"
+        %th="状態"
+        %th=""
   - if not @requests.empty? then
     - @requests.reverse_each.with_index(1) do |request|
       - @request = request

@@ -3,8 +3,9 @@ class RequestsController < ApplicationController
   require 'payjp'
 
   def index
-    #ログイン中のユーザーのリクエスト
-    @requests = Request.where(receiver_id: current_user.id).or(Request.where(sender_id: current_user.id))
+    #ログインユーザーに関係するレコード達を@requestsに格納
+    @requests = Request.where(receiver_id: current_user.id)
+      .or(Request.where(sender_id: current_user.id))
   end
   
   def new
