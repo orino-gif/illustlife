@@ -12,15 +12,18 @@
 
     / 文字コード設定
     %meta{:charset => "UTF-8"}/
+    
     / 画面をレスポンシブ対応
     %meta{:content => "width=device-width",:name => "viewport"}/
-    / サイト説明
-    %meta{:content => "好きな作品の個人製作者に
-      リクエストする形で支援するコミッションサイト", :name => "description"}/
+    
     / タイトル
     %title
       = content_for?(:html_title) ? yield(:html_title) : ""
       ｜イラストライフ
+    
+    / サイト説明
+    %meta{:content => "好きな作品の個人製作者に
+      リクエストする形で支援するコミッションサイト", :name => "description"}/
       
     / integrity:html検証,crossorigin:ユーザー認証情報anonymous(不要)
     %link{:crossorigin => "anonymous",
@@ -32,9 +35,8 @@
     %script{src: "https://js.pay.jp/v2/pay.js"}
         
     / googleフォント設定
-    %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}/
-    %link{:crossorigin => "", :href => "https://fonts.gstatic.com",
-      :rel => "preconnect"}/
+    %link{:href => "https://fonts.googleapis.com", :rel => "preconnect", :crossorigin => "",
+      :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
     %link{:href => "https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500&family=Kosugi+Maru&family=Potta+One&family=Yomogi&display=swap",
       :rel => "stylesheet"}/
     
@@ -63,9 +65,7 @@
     = csp_meta_tag
     
     / テスト環境と特定した本番のページ以外は、google検索ページに表示しない
-    - if ('test' != ENV['RAILS_ENV']) || ('homes' == controller.controller_name)
-    - elsif 'for_client' == controller.action_name
-    - else
+    - if ('test' == ENV['RAILS_ENV']) || ('homes' != controller.controller_name) || ('for_client' == controller.action_name)
       %meta{:content => "noindex", :name => "robots"}/
 
   %body
@@ -94,18 +94,20 @@
           .col.text-right
             - if user_signed_in?
               - if 'creators' == controller.controller_name
-                %button.btn.btn-light.font-medium= link_to 'リクエスト状態', requests_path
-                - if 'earning' != controller.action_name
+                - page_path = request.path.split('/')
+                - if (current_user.id == page_path[2].to_i)
+                  %button.btn.btn-light.font-medium= link_to 'リクエスト状態', requests_path
+                  - if 'earning' != controller.action_name
+                    %button.btn.btn-light.font-medium
+                      = link_to '売上', "/creators/#{current_user.id}/earning"
+                  - if ENV['ADMINISTRATOR_MAIL'] == current_user.email
+                    %button.btn.btn-light
+                      = link_to 'アカウント編集', edit_creator_path(params[:id])
+                  - elsif 'edit' != controller.action_name
+                    %button.btn.btn-light.font-medium
+                      = link_to 'ユーザー編集', edit_creator_path(current_user.id)
                   %button.btn.btn-light.font-medium
-                    = link_to '売上', "/creators/#{current_user.id}/earning"
-                - if ENV['ADMINISTRATOR_MAIL'] == current_user.email
-                  %button.btn.btn-light
-                    = link_to 'アカウント編集', edit_creator_path(params[:id])
-                - elsif 'edit' != controller.action_name
-                  %button.btn.btn-light.font-medium
-                    = link_to 'ユーザー編集', edit_creator_path(current_user.id)
-                %button.btn.btn-light.font-medium
-                  = link_to 'ログアウト', destroy_user_session_path, method: "delete"
+                    = link_to 'ログアウト', destroy_user_session_path, method: "delete"
             - else
               %button.btn.btn-light.font-medium
                 = link_to '新規登録', new_user_registration_path
