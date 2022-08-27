@@ -2,16 +2,20 @@
   - sender = User.find(@request.sender_id)
   - receiver = User.find(@request.receiver_id)
   
+  / 表体を表示
   .row.my-5
     - if 'index' == controller.action_name
       %table.fixed_column
         %tr
           %td= "#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
-          %td.aaa= display_icon(sender.creator, 'size_small-square rounded-circle fit_cover') + sender.nickname
-          %td.aaa= display_icon(receiver.creator, 'size_small-square rounded-circle fit_cover') + receiver.nickname
+          %td.hidden_overflow= display_icon(sender.creator,
+            'size_small-square rounded-circle fit_cover') + sender.nickname
+          %td.hidden_overflow= display_icon(receiver.creator,
+            'size_small-square rounded-circle fit_cover') + receiver.nickname
           %td= "#{@request.status}"
           %td
-            %button.btn.btn-light.font-medium= link_to '詳細', request_path(@request.id)
+            %button.btn.btn-light.font-medium
+              = link_to '詳細', request_path(@request.id)
     - else
       .col-md-auto
         %table.table
