@@ -3,7 +3,12 @@ class Creator < ApplicationRecord
   
   mount_uploader :header, CreatorUploader
   mount_uploader :icon, CreatorUploader
+  mount_uploader :temp_img, CreatorUploader
+  mount_uploader :temp_img2, CreatorUploader
+  mount_uploader :temp_img3, CreatorUploader
 
-  validates :recommended_amount, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1000}
-  validates :minimum_amount, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1000}
+  validates :recommended_amount, presence: true,
+    numericality: {only_integer: true, greater_than_or_equal_to: 1000}
+  validates :minimum_amount, presence: true,
+    numericality: {only_integer: true, greater_than_or_equal_to: 1000}
 end

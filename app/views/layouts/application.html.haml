@@ -1,6 +1,7 @@
 !!!
 %html
   %head
+  
     / Googleアナリティクス　解析コード
     %script{:async => "", 
       :src => "https://www.googletagmanager.com/gtag/js?id=G-QJ06SMJ2Y5"}
@@ -35,7 +36,8 @@
     %script{src: "https://js.pay.jp/v2/pay.js"}
         
     / googleフォント設定
-    %link{:href => "https://fonts.googleapis.com", :rel => "preconnect", :crossorigin => "",
+    %link{:href => "https://fonts.googleapis.com", :rel => "preconnect",
+      :crossorigin => "",
       :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
     %link{:href => "https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500&family=Kosugi+Maru&family=Potta+One&family=Yomogi&display=swap",
       :rel => "stylesheet"}/
@@ -69,45 +71,67 @@
       %meta{:content => "noindex", :name => "robots"}/
 
   %body
-  
     / ヘッダーの内容を表示
     %header
       .container-fluid
-        
-        / シンボルマークとキャッチコピーとユーザーアイコンを表示
+        / ヘッダー部を表示
         .row
+          / シンボルマークを表示
           .col-auto.d-flex.align-items-center
-            = link_to image_tag('/img/symbol.png', class: 'size_small-square'), root_path
+            = link_to image_tag('/img/symbol.png',
+              class: 'size_small-square'), root_path
+          
+          / サービス名を表示
           .col-auto
             %span.font-Xlarge
               %strong イラストライフ
+          
+          / キャッチコピーを表示    
           .col-xs.d-flex.align-items-center
-            %strong ～ 個人で手軽にイラスト、漫画、アニメ制作 ～
+            %strong ～ 個人で手軽に、イラスト、漫画、アニメ制作 ～
+
           .col.text-right
             - if user_signed_in?
-              - if ('creators' == controller.controller_name) && ('show' == controller.action_name)
-                ="#{current_user.creator.creator_points}ポイント"
-              = display_icon(current_user.creator, 'size_small-square rounded-circle fit_cover')
+              / ポイント表示
+              - if 'creators' == controller.controller_name
+                - if  'show' == controller.action_name
+                  ="#{current_user.creator.creator_points}ポイント"
+                  
+              / ログインユーザーアイコン表示    
+              = display_icon(current_user.creator,
+                'size_small-square rounded-circle fit_cover')
+                
+            - else
+              // ='キャンペーン!! 9/1～9/16迄'
+              // %br= '新規登録者様に、1000ポイントプレゼント!!'
               
         / メニューボタンを表示
         .row
           .col.text-right
             - if user_signed_in?
               - if 'creators' == controller.controller_name
+              
                 - page_path = request.path.split('/')
                 - if (current_user.id == page_path[2].to_i)
-                  %button.btn.btn-light.font-medium= link_to 'リクエスト状態', requests_path
+                  %button.btn.btn-light.font-medium= link_to 'リクエスト状態',
+                    requests_path
+                    
                   - if 'earning' != controller.action_name
                     %button.btn.btn-light.font-medium
                       = link_to '売上', "/creators/#{current_user.id}/earning"
+                      
                   - if ENV['ADMINISTRATOR_MAIL'] == current_user.email
                     %button.btn.btn-light
                       = link_to 'アカウント編集', edit_creator_path(params[:id])
+                      
                   - elsif 'edit' != controller.action_name
                     %button.btn.btn-light.font-medium
-                      = link_to 'ユーザー編集', edit_creator_path(current_user.id)
+                      = link_to 'ユーザー編集',
+                        edit_creator_path(current_user.id)
+                        
                   %button.btn.btn-light.font-medium
-                    = link_to 'ログアウト', destroy_user_session_path, method: "delete"
+                    = link_to 'ログアウト',
+                      destroy_user_session_path, method: "delete"
             - else
               %button.btn.btn-light.font-medium
                 = link_to '新規登録', new_user_registration_path
@@ -120,11 +144,13 @@
       %noscript
         %img{:src => '//accaii.com/orino/script?guid=on'}/
         
-    / 通知とエラー情報を表示
+    / 通知表示
     - if notice.present?
       .alert.alert-dismissable.alert-success
         %button.close{"data-dismiss" => "alert", :type => "button"} ×
         = notice
+        
+    / エラー表示    
     - if alert.present?
       .alert.alert-dismissable.alert-danger
         %button.close{"data-dismiss" => "alert", :type => "button"} ×
@@ -134,9 +160,10 @@
     = yield
 
     / 管理者用アカウントでログインした場合にフッダーの色を変更
-    - if (nil != current_user) && (ENV['ADMINISTRATOR_MAIL'] == current_user.email)
-      - color='background_color-crimson'
-      ='管理者用のページ'
+    - if nil != current_user
+      - if ENV['ADMINISTRATOR_MAIL'] == current_user.email
+        - color='background_color-crimson'
+        ='管理者用のページ'
     - else
       - color='background_color-whitesmoke'
     
@@ -156,7 +183,8 @@
           .mx-3
             = link_to 'プライバシーポリシー', policy_explanations_path
           .mx-3
-            = link_to '特定商取引法に基づく表記', transaction_law_explanations_path
+            = link_to '特定商取引法に基づく表記',
+              transaction_law_explanations_path
         
         / 著作権表示
         .row.m-3

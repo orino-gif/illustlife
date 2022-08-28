@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_01_145011) do
+ActiveRecord::Schema.define(version: 2022_08_28_123337) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "customer_id", null: false
@@ -44,6 +44,9 @@ ActiveRecord::Schema.define(version: 2022_08_01_145011) do
     t.boolean "nsfw", default: false
     t.integer "earnings", default: 0
     t.integer "withdrawal_amount", default: 0
+    t.string "temp_img"
+    t.string "temp_img2"
+    t.string "temp_img3"
   end
 
   create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -52,6 +55,14 @@ ActiveRecord::Schema.define(version: 2022_08_01_145011) do
     t.string "account_type"
     t.integer "account_number"
     t.string "account_holder"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "materials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "idea_img"
+    t.string "idea_img2"
+    t.string "idea_img3"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -79,6 +90,12 @@ ActiveRecord::Schema.define(version: 2022_08_01_145011) do
     t.string "deliver_img6"
     t.boolean "is_reworked", default: false
     t.text "evaluation_comment"
+    t.string "idea_img"
+    t.string "idea_img2"
+    t.string "idea_img3"
+    t.string "request_field"
+    t.string "img_size"
+    t.string "fix_num"
   end
 
   create_table "resumes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

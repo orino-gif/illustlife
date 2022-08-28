@@ -26,6 +26,7 @@ class CreatorsController < ApplicationController
   end
   
   def update
+    p 'ccc'
     if @creator.update(creators_params)
       if params[:open]
         # 再開通知リストに登録されている者へ再開のメールを送る
@@ -42,9 +43,11 @@ class CreatorsController < ApplicationController
     else
       p @creator.errors.full_messages[0]
       if @creator.errors.full_messages[0].include?("amount")
-        redirect_to request.referer, alert: '金額入力の数値が範囲外です'
-      elsif @creator.errors.full_messages[0].include?("extension_whitelist_error")
-        redirect_to request.referer, alert: '非対応のファイル形式です(対応形式:png,jpg,jpeg,gif)'
+        redirect_to request.referer,
+          alert: '金額入力の数値が範囲外です'
+      elsif @creator.errors.full_messages[0].include?("whitelist_error")
+        redirect_to request.referer,
+          alert: '非対応のファイル形式です(対応形式:png,jpg,jpeg,gif)'
       end
     end
   end
@@ -52,8 +55,9 @@ class CreatorsController < ApplicationController
   private
 
   def creators_params
-    params.require(:creator).permit(:header, :icon, :twitter, :pixiv, :instagram, :youtube, :link,
-      :request_acceptance_permission, :recommended_amount, :working_days, :minimum_amount, :nsfw)
+    params.require(:creator).permit(:header, :icon, :twitter, :pixiv, :instagram,
+      :youtube, :link, :request_acceptance_permission, :recommended_amount,
+      :working_days, :minimum_amount, :nsfw, :temp_img)
   end
 
   def set_creator

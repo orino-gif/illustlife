@@ -1,9 +1,10 @@
 class RequestsController < ApplicationController
-  #pajpのメソッドを利用可能にする
+  
+  # pajpのメソッドを利用可能にする
   require 'payjp'
 
   def index
-    #ログインユーザーに関係するレコード達を@requestsに格納
+    # ログインユーザーに関係するレコード達を@requestsに格納
     @requests = Request.where(receiver_id: current_user.id)
       .or(Request.where(sender_id: current_user.id))
   end
@@ -14,7 +15,14 @@ class RequestsController < ApplicationController
   end
 
   def create
-    if (user_signed_in?) && ((nil != Card.find_by(id: current_user.id)) || ('development' == ENV['RAILS_ENV']))
+    p params[:is_img]
+    p aaa
+    if 'test' == params[:is_img]
+      @request = Request.new(requests_params)
+      if @request.save
+        redirect_to request.referer, notice: 'test。'
+      end
+    elsif (user_signed_in?) && ((nil != Card.find_by(id: current_user.id)) || ('development' == ENV['RAILS_ENV']))
       @sender = current_user
       @receiver = User.find(params[:authorizer_id])
       
@@ -147,6 +155,11 @@ class RequestsController < ApplicationController
         redirect_to request.referer, alert: 'ファイルが選択されていません'
       end
     end
+    
+    if @request.update(creator_params)
+      p 'bbb'
+      redirect_to request_path(@request.id)
+    end
   end
   
   private
@@ -154,10 +167,11 @@ class RequestsController < ApplicationController
   def requests_params
     params.require(:request).permit(:money, :message, :deliver_img, :file_format,
       :is_nsfw,:is_anonymous, :is_autographed, :deliver_img2, :deliver_img3,
-      :deliver_img4, :deliver_img5, :deliver_img6,:evaluation_comment)
+      :deliver_img4, :deliver_img5, :deliver_img6, :evaluation_comment, :idea_img,
+      :idea_img2, :idea_img3)
   end
   
   def creator_params
-    params.require(:creator).permit(:number_of_request)
+    params.require(:creator).permit(:number_of_request,:temp_img)
   end
 end
