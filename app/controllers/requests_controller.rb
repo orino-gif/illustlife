@@ -16,7 +16,7 @@ class RequestsController < ApplicationController
 
   def create
     p params[:is_img]
-    p aaa
+    p 'aaa'
     if 'test' == params[:is_img]
       @request = Request.new(requests_params)
       if @request.save

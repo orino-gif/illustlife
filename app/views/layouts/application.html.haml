@@ -160,12 +160,11 @@
     = yield
 
     / 管理者用アカウントでログインした場合にフッダーの色を変更
+    - color='background_color-whitesmoke'
     - if nil != current_user
       - if ENV['ADMINISTRATOR_MAIL'] == current_user.email
         - color='background_color-crimson'
         ='管理者用のページ'
-    - else
-      - color='background_color-whitesmoke'
     
     / フッダーの内容を表示
     %footer{class:"#{color} mt-5 size_small-rectangle font-medium"}
