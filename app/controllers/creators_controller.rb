@@ -2,6 +2,7 @@ class CreatorsController < ApplicationController
   before_action :set_creator, only: [:show, :update, :edit, :earning]
   
   def show
+    
     @requests = Request.where(receiver_id: @creator.user.id, status: '納品完了')
     if user_signed_in?
       @notification_users = Resume.where(notification_user:current_user.id)
@@ -26,7 +27,10 @@ class CreatorsController < ApplicationController
   end
   
   def update
-    p 'ccc'
+    if 'キャンセル' == params[:creator][:cancel]
+      @creator.temp_img = 'NULL'
+      @creator.save
+    end
     if @creator.update(creators_params)
       if params[:open]
         # 再開通知リストに登録されている者へ再開のメールを送る
@@ -39,7 +43,13 @@ class CreatorsController < ApplicationController
           end
         end
       end
+    if 'fist_img' == params[:referer_img]
+      redirect_to request.referer
+      p "KKK"
+    else
       redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
+    end
+      
     else
       p @creator.errors.full_messages[0]
       if @creator.errors.full_messages[0].include?("amount")

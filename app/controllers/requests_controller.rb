@@ -22,23 +22,28 @@ class RequestsController < ApplicationController
       if @request.save
         redirect_to request.referer, notice: 'test。'
       end
-    elsif (user_signed_in?) && ((nil != Card.find_by(id: current_user.id)) || ('development' == ENV['RAILS_ENV']))
-      @sender = current_user
-      @receiver = User.find(params[:authorizer_id])
-      
-      @request = Request.new(requests_params)
-      @request.sender_id = @sender.id
-      @request.receiver_id = @receiver.id
-      @request.status = '承認待ち'
+    elsif user_signed_in?
+      if (nil != Card.find_by(id: current_user.id)) || ('development' == ENV['RAILS_ENV'])
+        @sender = current_user
+        @receiver = User.find(params[:authorizer_id])
+        
+        @request = Request.new(requests_params)
+        @request.sender_id = @sender.id
+        @request.receiver_id = @receiver.id
+        @request.status = '承認待ち'
 
-      if @request.save
-        current_user.creator.number_of_request += 1
-        current_user.creator.save
-        UserMailer.request_email(@sender, @receiver, @request).deliver_later
-        redirect_to request_url(@request.id), notice: 'クリエイターへリクエストメールを送信しました。'
-      elsif @request.errors.full_messages[0].include?('too_long')
-        redirect_to request.referer, alert: '文字が許容範囲外(1000文字以下)です'
+        if @request.save
+          current_user.creator.number_of_request += 1
+          current_user.creator.save
+          UserMailer.request_email(@sender, @receiver, @request).deliver_later
+          redirect_to request_url(@request.id),
+            notice: 'クリエイターへリクエストメールを送信しました。'
+        elsif @request.errors.full_messages[0].include?('too_long')
+          redirect_to request.referer,
+            alert: '文字が許容範囲外(1000文字以下)です'
+        end
       end
+      
     elsif false == user_signed_in?
       redirect_to  '/users/sign_in', alert: 'ログインが必要です。'
     elsif nil == Card.find_by(id: current_user.id)
@@ -59,18 +64,22 @@ class RequestsController < ApplicationController
       #リクエストステータスに対応する処理を実行
       if '拒否' == params[:status]
         UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
-        redirect_to request.referer, notice: '依頼者からのリクエストを拒否しました。'
+        redirect_to request.referer,
+          notice: '依頼者からのリクエストを拒否しました。'
         
       elsif '製作中' == params[:status]
         @card = Card.find_by(id: @sender.id)
         Payjp.api_key = ENV['PAYJP_SECRET_KEY']
         begin
-          Payjp::Charge.create(:amount => params[:amount], :customer => @card.customer_id, :currency => 'jpy')
+          Payjp::Charge.create(:amount => params[:amount],
+            :customer => @card.customer_id, :currency => 'jpy')
           UserMailer.consent_email(@sender, @receiver, @request).deliver_later
-          redirect_to request.referer, notice: '依頼者へ承諾のメールを送信しました。'
+          redirect_to request.referer,
+            notice: '依頼者へ承諾のメールを送信しました。'
         rescue Payjp::PayjpError => e
           @request.status = '購入者クレジット不備によるキャンセル'
-          UserMailer.card_declined_email(@sender, @receiver, @request).deliver_later
+          UserMailer.card_declined_email(@sender,
+            @receiver, @request).deliver_later
           p "例外エラー:" + e.to_s
           flash.now[:alert] = "購入者側のクレジット決済で問題が発生しました為、キャンセルとなりました。" 
           render :show
@@ -81,7 +90,8 @@ class RequestsController < ApplicationController
         @receiver.creator.number_of_approval -= 1
         @receiver.creator.evaluation_points -= 1
         UserMailer.suspension_email(@sender, @receiver, @request).deliver_later
-        redirect_to request.referer, notice: '依頼者へ中断のメールを送信しました。'
+        redirect_to request.referer,
+          notice: '依頼者へ中断のメールを送信しました。'
         
       elsif '納品完了' == params[:status]
         @request.is_in_time_for_the_deadline = true
@@ -95,13 +105,15 @@ class RequestsController < ApplicationController
         # @request.delivery_time =+ 3
         # @receiver.creator.average_delivery_time = 1 + (@requests.all.sum(:delivery_time) / @receiver.creator.number_of_works)
         UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
-        redirect_to request.referer, notice: '依頼者への納品完了のメールを送信しました。'
+        redirect_to request.referer,
+          notice: '依頼者への納品完了のメールを送信しました。'
         
       elsif '手戻し' == params[:status]
         @request.is_reworked = true
         @request.is_in_time_for_the_deadline = false
         UserMailer.rework_email(@sender, @receiver, @request).deliver_later
-        redirect_to request.referer, notice: '依頼者への手戻りのメールを送信しました。'
+        redirect_to request.referer,
+          notice: '依頼者への手戻りのメールを送信しました。'
       end
 
       if 0 != @receiver.creator.number_of_approval
@@ -120,7 +132,7 @@ class RequestsController < ApplicationController
     if hoge.deliver_img?
       image = hoge.deliver_img # imageはFugaUploaderオブジェクト
       #extname:text.txtの.移行の文字列を返す
-      #send_data(送るデータ, オプション={failname:保存するときに使用するファイル名})
+      #send_data(送るデータ, オプション={failname:保存するときのファイル名})
       send_data(image.read, filename: "download#{File.extname(image.path)}")
     else
       redirect_to request.referer, alert: '画像がアップロードされていません'
@@ -148,9 +160,11 @@ class RequestsController < ApplicationController
     else
       p @request.errors.full_messages[0]
       if @request.errors.full_messages[0].include?("extension_whitelist_error")
-        redirect_to request.referer, alert: '本サービスのファイル対応形式(png,jpg,jpeg,gif)外です'
+        redirect_to request.referer,
+          alert: '本サービスのファイル対応形式(png,jpg,jpeg,gif)外です'
       elsif @request.errors.full_messages[0].include?("max_size_error")
-        redirect_to request.referer, alert: 'ファイルサイズが本サービスの対応外(1GBより大きい)です'
+        redirect_to request.referer,
+          alert: 'ファイルサイズが本サービスの対応外(1GBより大きい)です'
       else  
         redirect_to request.referer, alert: 'ファイルが選択されていません'
       end
@@ -167,8 +181,8 @@ class RequestsController < ApplicationController
   def requests_params
     params.require(:request).permit(:money, :message, :deliver_img, :file_format,
       :is_nsfw,:is_anonymous, :is_autographed, :deliver_img2, :deliver_img3,
-      :deliver_img4, :deliver_img5, :deliver_img6, :evaluation_comment, :idea_img,
-      :idea_img2, :idea_img3)
+      :deliver_img4, :deliver_img5, :deliver_img6, :evaluation_comment,
+      :idea_img, :idea_img2, :idea_img3)
   end
   
   def creator_params

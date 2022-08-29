@@ -160,7 +160,8 @@
   }
   
 /* ---------- 吹き出し共通設定 ---------- */
-.block-baloon, .block-baloon-top, .block-baloon-right, .block-baloon-bottom, .block-baloon-left	{
+.block-baloon, .block-baloon-top, .block-baloon-right,
+.block-baloon-bottom, .block-baloon-left	{
 	display: table;
 	padding: 1em;
 	margin-bottom: 1em;
@@ -169,7 +170,10 @@
 	border: 2px solid #222;
 	border-radius: 0.5em;
 }
-.block-baloon:before, .block-baloon:after, .block-baloon-top:before, .block-baloon-top:after, .block-baloon-right:before, .block-baloon-right:after, .block-baloon-bottom:before, .block-baloon-bottom:after, .block-baloon-left:before, .block-baloon-left:after	{
+.block-baloon:before, .block-baloon:after, .block-baloon-top:before,
+.block-baloon-top:after, .block-baloon-right:before, .block-baloon-right:after,
+.block-baloon-bottom:before, .block-baloon-bottom:after,
+.block-baloon-left:before, .block-baloon-left:after	{
 	content: '';
 	position: absolute;
 }
