@@ -24,22 +24,28 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   
   #private
 
-  # common callback method
+  # 連携の為のコールバック関数
   def callback_for(provider)
+   
     new_record = [false]
     @user = User.from_omniauth(request.env["omniauth.auth"],new_record)
-    p @user
-    p new_record[0]
-    if new_record[0] == true
+    if true == new_record[0]
       resource.build_creator
       resource.build_credit
       resource.save
     end
     
+    # persisted・・・ActiveRecord::Baseを継承
+    # インスタンスがデータベースに保存されていればtrue。いなければfalse。
+    # ユーザー情報が保存されている場合、
     if @user.persisted?
-      sign_in_and_redirect @user, event: :authentication #this will throw if @user is not activated
-      set_flash_message(:notice, :success, kind: "#{provider}".capitalize) if is_navigational_format?
+      sign_in_and_redirect @user,
+        event: :authentication # this will throw if @user is not activated
+        
+      set_flash_message(:notice, :success,
+        kind: "#{provider}".capitalize) if is_navigational_format?
       @user.restore #ユーザーアカウントを復旧
+      
     else
       session["devise.#{provider}_data"] = request.env["omniauth.auth"].except("extra")
       redirect_to new_user_registration_url

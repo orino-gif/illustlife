@@ -45,12 +45,7 @@ class CreatorsController < ApplicationController
           end
         end
       end
-    if 'fist_img' == params[:referer_img]
-      redirect_to request.referer
-      p "KKK"
-    else
-      redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
-    end
+    redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
       
     else
       p @creator.errors.full_messages[0]
