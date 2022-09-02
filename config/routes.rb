@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'products/index'
-  post 'products/pay'
   root to: 'homes#index' 
   devise_for :users, controllers: { registrations: 'users/registrations',
     sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks'}

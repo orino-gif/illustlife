@@ -10,20 +10,17 @@ class RequestsController < ApplicationController
   end
   
   def new
+    # リクエストのレコード作成と、クリエーター情報を表示する
     @request = Request.new
     @creator = Creator.find_by(user_id: params[:id])
   end
 
   def create
-    p params[:is_img]
-    p 'aaa'
-    if 'test' == params[:is_img]
-      @request = Request.new(requests_params)
-      if @request.save
-        redirect_to request.referer, notice: 'test。'
-      end
-    elsif user_signed_in?
-      if (nil != Card.find_by(id: current_user.id)) || ('development' == ENV['RAILS_ENV'])
+    # ログイン状態で、カード登録済みか開発環境の場合、リクエスト処理を実行
+    if user_signed_in?
+      if (nil != Card.find_by(id: current_user.id)) \
+        || ('development' == ENV['RAILS_ENV'])
+        
         @sender = current_user
         @receiver = User.find(params[:authorizer_id])
         
@@ -31,37 +28,36 @@ class RequestsController < ApplicationController
         @request.sender_id = @sender.id
         @request.receiver_id = @receiver.id
         @request.status = '承認待ち'
-
+        
         if @request.save
-          current_user.creator.number_of_request += 1
-          current_user.creator.save
           UserMailer.request_email(@sender, @receiver, @request).deliver_later
           redirect_to request_url(@request.id),
             notice: 'クリエイターへリクエストメールを送信しました。'
+            
         elsif @request.errors.full_messages[0].include?('too_long')
           redirect_to request.referer,
-            alert: '文字が許容範囲外(1000文字以下)です'
+            alert: '文字が許容範囲外(700文字より大きい)です'
         end
       end
       
     elsif false == user_signed_in?
       redirect_to  '/users/sign_in', alert: 'ログインが必要です。'
+      
     elsif nil == Card.find_by(id: current_user.id)
       redirect_to request.referer, alert: 'クレジットカード登録が必要です。'
     end
   end
 
   def show
+    # リクエストページのボタンが押された場合の処理
     @request = Request.find(params[:id])
-    #リクエストページのボタンが押された場合の処理
     if not params[:request_id].nil?
-      
-      #各リクエストIDに対応する情報を収集
+      # 各リクエストIDに対応する情報を収集
       @request = Request.find(params[:request_id])
       @sender = User.find(Request.find(params[:request_id]).sender_id)
       @receiver = User.find(Request.find(params[:request_id]).receiver_id)
       
-      #リクエストステータスに対応する処理を実行
+      # リクエストステータスに対応する処理を実行
       if '拒否' == params[:status]
         UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer,
@@ -131,8 +127,8 @@ class RequestsController < ApplicationController
     hoge = Request.find(params[:id])
     if hoge.deliver_img?
       image = hoge.deliver_img # imageはFugaUploaderオブジェクト
-      #extname:text.txtの.移行の文字列を返す
-      #send_data(送るデータ, オプション={failname:保存するときのファイル名})
+      # extname:text.txtの.移行の文字列を返す
+      # send_data(送るデータ, オプション={failname:保存するときのファイル名})
       send_data(image.read, filename: "download#{File.extname(image.path)}")
     else
       redirect_to request.referer, alert: '画像がアップロードされていません'
@@ -181,8 +177,7 @@ class RequestsController < ApplicationController
   def requests_params
     params.require(:request).permit(:money, :message, :deliver_img, :file_format,
       :is_nsfw,:is_anonymous, :is_autographed, :deliver_img2, :deliver_img3,
-      :deliver_img4, :deliver_img5, :deliver_img6, :evaluation_comment,
-      :idea_img, :idea_img2, :idea_img3)
+      :deliver_img4, :deliver_img5, :deliver_img6, :evaluation_comment)
   end
   
   def creator_params

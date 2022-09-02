@@ -2,7 +2,9 @@
 %h1.font-Xlarge.background_color-whitesmoke 新規リクエスト
 
 .container
+  // クリエーターの情報を表示
   = render 'shared/user_header'
+  // リクエスト票を表示
   .row.my-2
     .col-md-8.border.border-secondary.position-center
       = form_with(model: @request, local: true) do |f|
@@ -47,21 +49,3 @@
         納品後に不服申し立てを行わない。<br>
         ・商用利用する場合は用途を明記する。<br>
       %br
-      
-    .col-md-8.border.border-secondary.position-center
-      = form_with(model: @creator, local: true) do |f|
-        = hidden_field_tag :referer_img, 'fist_img'
-        .form-group
-          = '参考資料'
-          %br= f.label :message, '1枚目'
-          = f.file_field :temp_img
-          = f.submit '登録'
-            
-          - if @creator.temp_img?
-            = link_to image_tag(@creator.temp_img.url,
-              class:'size_large-rectangle fit_cover'), @creator.temp_img.url
-            = form_with(model: @creator, local: true) do |f|
-              = f.hidden_field :cancel, :value => 'キャンセル'
-              = f.submit '取り消し'
-              
-            

@@ -44,9 +44,9 @@ ActiveRecord::Schema.define(version: 2022_08_28_123337) do
     t.boolean "nsfw", default: false
     t.integer "earnings", default: 0
     t.integer "withdrawal_amount", default: 0
-    t.string "temp_img"
-    t.string "temp_img2"
-    t.string "temp_img3"
+    t.string "chara_design"
+    t.string "chara_design2"
+    t.string "chara_design3"
   end
 
   create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -90,9 +90,6 @@ ActiveRecord::Schema.define(version: 2022_08_28_123337) do
     t.string "deliver_img6"
     t.boolean "is_reworked", default: false
     t.text "evaluation_comment"
-    t.string "idea_img"
-    t.string "idea_img2"
-    t.string "idea_img3"
     t.string "request_field"
     t.string "img_size"
     t.string "fix_num"

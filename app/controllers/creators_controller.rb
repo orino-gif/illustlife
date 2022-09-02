@@ -2,7 +2,6 @@ class CreatorsController < ApplicationController
   before_action :set_creator, only: [:show, :update, :edit, :earning]
   
   def show
-    
     @requests = Request.where(receiver_id: @creator.user.id, status: '納品完了')
     if user_signed_in?
       @notification_users = Resume.where(notification_user:current_user.id)
@@ -12,12 +11,14 @@ class CreatorsController < ApplicationController
   def earning
     if '確認' == params[:withdrawal_status]
       @withdrawal_status = '確認'
+      
     elsif '引き落とし実行' == params[:withdrawal_status]
       @withdrawal_status = '引き落とし実行'
       UserMailer.info_withdrawal(@creator).deliver_later
       sleep(5)
       @creator.withdrawal_amount = 0
       @creator.save
+      
     end
   end
   
@@ -31,6 +32,7 @@ class CreatorsController < ApplicationController
       @creator.temp_img = 'NULL'
       @creator.save
     end
+    
     if @creator.update(creators_params)
       if params[:open]
         # 再開通知リストに登録されている者へ再開のメールを送る

@@ -1,7 +1,0 @@
-%h1 Products#index
-%p Find me in app/views/products/index.html.haml
-
-= form_with local: true, url: products_pay_path do |form|
-  金額：#{form.text_field :amount}
-  %script.payjp-button{"data-key" => ENV["PAYJP_PRIVATE_KEY"], :src => "https://checkout.pay.jp", :type => "text/javascript"}
-    :cdata
