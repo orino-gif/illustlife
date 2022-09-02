@@ -90,6 +90,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       creator_path(@user)
   end
   
+  # パスワード入力無しで更新
   def update_resource(resource, params)
     resource.update_without_password(params)
   end

@@ -10,7 +10,7 @@ class CardsController < ApplicationController
     redirect_to action: "show" if card.exists?
   end
   
-  def pay#payjpとCardのデータベース作成
+  def pay # payjpとCardのデータベース作成
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     if params['payjp_token'].blank?
       redirect_to action: "new"
