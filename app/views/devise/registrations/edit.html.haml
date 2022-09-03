@@ -1,30 +1,34 @@
-%meta{:content => "noindex", :name => "robots"}/
-
 - content_for(:html_title) { 'ユーザー認証情報変更' }
 %h1.font-Xlarge.background_color-whitesmoke ユーザー認証情報変更
 
 .container
   .row
     .col-md-6.px-0
-      = form_for(resource, as: resource_name, url: registration_path(resource_name),
-        html: { method: :put }) do |f|
+      = form_for(resource, as: resource_name,
+        url: registration_path(resource_name), html: { method: :put }) do |f|
         = bootstrap_devise_error_messages!
+        
         .form-group
           = f.label :email
           = f.email_field :email, autofocus: true, autocomplete: 'email',
             class: 'form-control'
           
-          = f.label :nickname, 'ニックネーム'
-          = f.text_field :nickname, class: 'form-control'
         // .form-group
         //   = f.label :password
-        //   = f.password_field :password, autocomplete: 'new-password', class: 'form-control'
+        //   = f.password_field :password, autocomplete: 'new-password',
+        //     class: 'form-control'
         //   %small.form-text.text-muted= t('.leave_blank_if_you_don_t_want_to_change_it')
+          
         // .form-group
         //   = f.label :password_confirmation
-        //   = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'
+        //   = f.password_field :password_confirmation, autocomplete: 'new-password',
+        //     class: 'form-control'
+        
+        .form-group 
+          = f.label :nickname, 'ニックネーム'
+          = f.text_field :nickname, class: 'form-control'
     
-        %hr/
+        // %hr/
         // .form-group
         //   = f.label :current_password
         //   = f.password_field :current_password, autocomplete: 'current-password', class: 'form-control'
