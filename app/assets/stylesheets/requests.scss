@@ -1,3 +1,13 @@
 // Place all the styles related to the requests controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*
+ *= require_tree .
+ */
+ 
+// リクエスト票を中央に寄せる
+.position-center { width: 80%; margin: 0 auto; max-width: 600px; }
+
+// リクエスト受付額の入力フォームの大きさ
+.size_large-form { max-width: 150px; height: 50px; }

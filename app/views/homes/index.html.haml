@@ -5,11 +5,13 @@
   - if Rails.env.development?
     .row
       %h2.font-large ■アクティブ漫画
+      
     .row
       =link_to image_tag('/img/mobu.png', class: 'size_Xlarge-square fit_cover border_solid-medium'), '/mangas/1/illustlifes'
 
   .row
     %h2.font-large ■クリエイター
+    
   .row.margin_side-Xsmall
     - if not @requests.nil?
       - @creators.each.with_index(1) do |creator,index| 
@@ -21,6 +23,7 @@
         - break if index == 20
   .row
     %h2.font-large ■リクエスト作品
+    
   .row.margin_side-Xsmall
     - if not @requests.nil?
       - @requests.each.with_index(1) do |request,index|
