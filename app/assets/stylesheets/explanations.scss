@@ -1,3 +1,98 @@
 // Place all the styles related to the explanations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/*
+ *= require_tree .
+ */
+
+/* ---------- 吹き出し共通設定 ---------- */
+.block-baloon, .block-baloon-top, .block-baloon-right,
+.block-baloon-bottom, .block-baloon-left	{
+	display: table;
+	padding: 1em;
+	margin-bottom: 1em;
+	position: relative;
+	background-color: #f2f2f2;
+	border: 2px solid #222;
+	border-radius: 0.5em;
+}
+.block-baloon:before, .block-baloon:after, .block-baloon-top:before,
+.block-baloon-top:after, .block-baloon-right:before, .block-baloon-right:after,
+.block-baloon-bottom:before, .block-baloon-bottom:after,
+.block-baloon-left:before, .block-baloon-left:after	{
+	content: '';
+	position: absolute;
+}
+
+/* ---------- 吹き出し：左 ---------- */
+.block-baloon-left {
+	margin-left: 1.5em;
+	max-width: calc( 100% - 1.5em );
+}
+.block-baloon-left:before, .block-baloon-left:after	{
+	top: 50%;
+	transform: translateY( -50% );
+	left: -1.5em;
+	border-top: 10px solid transparent;
+	border-right: 1.5em solid #222;
+	border-bottom: 10px solid transparent;
+}
+.block-baloon-left:after	{
+	left: calc( 4px - 1.5em );
+	border-right: solid 1.5em #f2f2f2;
+}
+
+/* ---------- 吹き出し：右 ---------- */
+.block-baloon-right	{
+	margin-right: 1.5em;
+	max-width: calc( 100% - 1.5em );
+}
+.block-baloon-right:before, .block-baloon-right:after	{
+	top: 50%;
+	transform: translateY(-50%);
+	right: -1.5em;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 1.5em solid #222;
+}
+.block-baloon-right:after	{
+	right: calc( 4px - 1.5em );
+	border-left: solid 1.5em #f2f2f2;
+}
+
+/* ---------- 吹き出し：上 ---------- */
+.block-baloon-top	{
+	margin-top: 2.5em;
+}
+.block-baloon-top:first-child	{
+	margin-top: 1.5em;
+}
+.block-baloon-top:before, .block-baloon-top:after	{
+	top: -1.5em;
+	left: 50%;
+	transform: translateX(-50%);
+	border-right: 10px solid transparent;
+	border-bottom: solid 1.5em #222;
+	border-left: 10px solid transparent;
+}
+.block-baloon-top:after	{
+	top: calc( 4px - 1.5em );
+	border-bottom: solid 1.5em #f2f2f2;
+}
+
+/* ---------- 吹き出し：下 ---------- */
+.block-baloon-bottom	{
+	margin-bottom: 2.5em;
+}
+.block-baloon-bottom:before, .block-baloon-bottom:after	{
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: -1.5em;
+	border-top: 1.5em solid #222;
+	border-right: 10px solid transparent;
+	border-left: 10px solid transparent;
+}
+.block-baloon-bottom:after	{
+	bottom: calc( 4px - 1.5em );
+	border-top: solid 1.5em #f2f2f2;
+}
