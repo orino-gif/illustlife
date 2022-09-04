@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations',
     sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks'}
 
-  get 'requests/:id/new', to: 'requests#new'
+  # get 'requests/:id/new', to: 'requests#new'
   get 'credits/:id/new', to: 'credits#new'
   get 'resumes/:id/new', to: 'resumes#new'
   get 'creators/:id/earning', to: 'creators#earning'
@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   resources :creators, only: [:show, :edit, :update]
   resources :requests do
     member  do
+      get 'new'
+    end
+    collection do
       get 'download'
     end
   end  

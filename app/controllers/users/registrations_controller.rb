@@ -15,12 +15,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
       super
       resource.build_creator
       resource.build_credit
-      # resource.build_card
       resource.save
+      
     rescue => e
       p e
-      e.to_s.include?('Duplicate')
-      redirect_to request.referer, alert: '既に登録されているメールアドレスです'
+      if e.to_s.include?('Duplicate')
+        flash.now[:alert] = "既に登録されているメールアドレスです" 
+        
+      elsif e.to_s.include?('attribute')
+        flash.now[:alert] = "レコード生成時に不明なカラムを検知しました" 
+      else
+        flash.now[:alert] = "ユーザー登録に失敗しました" 
+      end
+      render :new
     end
   end
 

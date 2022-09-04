@@ -1,6 +1,7 @@
 /*
  *app/assets/stylesheets以下の全ての階層のスタイルシートを読込。*
  *= require_self
+ *= require_tree .
  */
  
 @import "bootstrap-sprockets";
@@ -159,3 +160,4 @@ p.on_card { position: absolute;top:auto; left:auto;
   @include padding_side(3px);
   @include border_solid(3px);
 }
+
