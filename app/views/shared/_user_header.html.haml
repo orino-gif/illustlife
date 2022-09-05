@@ -1,49 +1,56 @@
+/ creators/show/:idとrequests/:id/newで利用
+
 .row
+  / ヘッダー表示
   = display_header(@creator, 'size_medium-rectangle fit_cover')
+
 .row
   .col-2
-    = display_icon(@creator, 
+    / ユーザーアイコン表示
+    = display_icon(@creator,
       'size_large-square rounded-circle fit_cover position_large-top')
-      
+  
+  
   .col-4
-    - if (('new' == controller.action_name) || ('show' == controller.action_name)) && (true == @creator.request_acceptance_permission)
-      - if (user_signed_in?) && (@creator.user.id == current_user.id)
-        = image_tag '/img/request.png',
-          class:'size_medium-square position_medium-top'
-      - else
+    / requestコントローラーの領域以外の場合、リクエストアイコンを表示
+    - if 'requests' != controller.controller_name
+    
+      / リクエストを受付ていない場合は、STOP画像を表示
+      - if true == @creator.request_acceptance_permission
         = link_to image_tag('/img/request.png',
           class:'size_medium-square position_medium-top'),
-          "/requests/#{@creator.user_id}/new"
-    - else
-      = image_tag '/img/request_stop.png',
-        class:'size_medium-square position_medium-top'
-        
-      - if (user_signed_in?) && (@creator.user.id != current_user.id) && (@notification_users.find_by(resume_user: params[:id]).nil?)
-        .font-Xsmall.position_Xshort-top.position_midium-left
-          = link_to "再開を通知", "/resumes/#{@creator.user_id}/new",
-            class:'button-notice'
-            
-  - if @creator.twitter.present?
-    .col-1= link_to image_tag('/img/twitter.png',
-      class:'size_small-square position_short-top'), @creator.twitter
+          request_path(@creator.user_id)
+      - else
+        = image_tag '/img/request_stop.png',
+          class:'size_medium-square position_medium-top'
       
-  - if @creator.pixiv.present?
-    .col-1= link_to image_tag('/img/pixiv.png',
-      class:'size_small-square position_short-top'), @creator.pixiv
-      
-  - if @creator.instagram.present?
-    .col-1= link_to image_tag('/img/instagram.png',
-      class:'size_small-square position_short-top'), @creator.instagram
-      
-  - if @creator.youtube.present?
-    .col-1= link_to image_tag('/img/youtube.png',
-      class:'size_small-square position_short-top'), @creator.youtube
-      
-  - if @creator.link.present?
-    .col-1= link_to image_tag('/img/link.png',
-      class:'size_small-square position_short-top'), @creator.link
+      / ログイン中のユーザーに再開通知ボタンを表示
+      - if user_signed_in?
+        - resume_notice = Resume.where(notification_user:current_user.id)
+        - if @creator.user.id != current_user.id
+          - if resume_notice.find_by(resume_user: params[:id]).nil?
+            .font-Xsmall.position_Xshort-top.position_midium-left
+              = link_to "再開を通知", "/resumes/#{@creator.user_id}/new",
+                class:'button-notice'
+  
+  / SNSリンク先のアイコンを表示
+  .col-1
+    = display_sns(@creator, 'twitter')
+    
+  .col-1
+    = display_sns(@creator, 'pixiv')
+    
+  .col-1
+    = display_sns(@creator, 'instagram')
+    
+  .col-1
+    = display_sns(@creator, 'youtube')
+    
+  .col-1
+    = display_sns(@creator, 'link')
       
 .container
+  / 実績表示
   .row.my-5
     = "ニックネーム：#{@creator.user.nickname}"
     = "、推奨金額：#{@creator.recommended_amount}円"
@@ -51,7 +58,6 @@
     
     - if 0 != @creator.number_of_works
       = "、納品数：#{@creator.number_of_works}点、"
-      // = "平均納品日数：#{@creator.average_delivery_time}日、"
       = "締切厳守率：#{@creator.deadline_strict_adherence_rate}%、"
       = "返信率:#{@creator.reply_rate}%"
     - else

@@ -1,5 +1,3 @@
-%meta{:content => "noindex", :name => "robots"}/
-
 - content_for(:html_title) { 'ユーザー情報' }
 %h1.font-Xlarge.background_color-whitesmoke ユーザー情報
 
@@ -12,31 +10,6 @@
           // deliver_img(x)がNULLでない場合
           - if request.deliver_img  
             = link_to image_tag(request.deliver_img.url,
-              class: 'size_Xlarge-square fit_cover border_solid-medium'),
-              request_path(request.id)
-              
-          - elsif request.deliver_img2?
-            = link_to image_tag(request.deliver_img2.url,
-              class: 'size_Xlarge-square fit_cover border_solid-medium'),
-              request_path(request.id)
-              
-          - elsif request.deliver_img3?
-            = link_to image_tag(request.deliver_img3.url,
-              class: 'size_Xlarge-square fit_cover border_solid-medium'),
-              request_path(request.id)
-              
-          - elsif request.deliver_img4?
-            = link_to image_tag(request.deliver_img4.url,
-              class: 'size_Xlarge-square fit_cover border_solid-medium'),
-              request_path(request.id)
-              
-          - elsif request.deliver_img5?
-            = link_to image_tag(request.deliver_img5.url,
-              class: 'size_Xlarge-square fit_cover border_solid-medium'),
-              request_path(request.id)
-              
-          - elsif request.deliver_img6?
-            = link_to image_tag(request.deliver_img6.url,
               class: 'size_Xlarge-square fit_cover border_solid-medium'),
               request_path(request.id)
               

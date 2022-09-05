@@ -1,25 +1,11 @@
 class CreatorsController < ApplicationController
+  
+  # @creator = Creator.find(params[:id]) が記載されている関数
   before_action :set_creator, only: [:show, :update, :edit, :earning]
   
+  # 
   def show
     @requests = Request.where(receiver_id: @creator.user.id, status: '納品完了')
-    if user_signed_in?
-      @notification_users = Resume.where(notification_user:current_user.id)
-    end
-  end
-  
-  def earning
-    if '確認' == params[:withdrawal_status]
-      @withdrawal_status = '確認'
-      
-    elsif '引き落とし実行' == params[:withdrawal_status]
-      @withdrawal_status = '引き落とし実行'
-      UserMailer.info_withdrawal(@creator).deliver_later
-      sleep(5)
-      @creator.withdrawal_amount = 0
-      @creator.save
-      
-    end
   end
   
   def edit
@@ -57,6 +43,20 @@ class CreatorsController < ApplicationController
         redirect_to request.referer,
           alert: '非対応のファイル形式です(対応形式:png,jpg,jpeg,gif)'
       end
+    end
+  end
+  
+  def earning
+    if '確認' == params[:withdrawal_status]
+      @withdrawal_status = '確認'
+      
+    elsif '引き落とし実行' == params[:withdrawal_status]
+      @withdrawal_status = '引き落とし実行'
+      UserMailer.info_withdrawal(@creator).deliver_later
+      sleep(5)
+      @creator.withdrawal_amount = 0
+      @creator.save
+      
     end
   end
   

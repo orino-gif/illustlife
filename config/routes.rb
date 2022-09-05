@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       post 'delete', to: 'cards#delete'
     end
   end
+  
+  resources :creators, only: [:show, :edit, :update]
     
   root to: 'homes#index' 
 
@@ -27,7 +29,7 @@ Rails.application.routes.draw do
   resources :homes, only: [:index] do
     resources :manuals, only: [:index, :show]
   end
-  resources :creators, only: [:show, :edit, :update]
+  
   resources :requests, only: [:index, :create, :show] do
     member  do
       get 'new'
