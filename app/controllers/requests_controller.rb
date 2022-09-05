@@ -31,7 +31,7 @@ class RequestsController < ApplicationController
         
         if @request.save
           UserMailer.request_email(@sender, @receiver, @request).deliver_later
-          redirect_to requests_url(@request.id),
+          redirect_to requests_url,
             notice: 'クリエイターへリクエストメールを送信しました。'
             
         elsif @request.errors.full_messages[0].include?('too_long')
