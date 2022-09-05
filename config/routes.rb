@@ -1,8 +1,19 @@
 Rails.application.routes.draw do
-
-  root to: 'homes#index' 
+  
   devise_for :users, controllers: { registrations: 'users/registrations',
     sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks'}
+  
+  resources :cards, only: [:new, :show] do
+    collection do
+      # get 'index', to: 'cards#index'
+      # post 'pay_charge', to: 'cards#pay_charge'
+      post 'show', to: 'cards#show'
+      post 'pay', to: 'cards#pay'
+      post 'delete', to: 'cards#delete'
+    end
+  end
+    
+  root to: 'homes#index' 
 
   # get 'requests/:id/new', to: 'requests#new'
   get 'credits/:id/new', to: 'credits#new'
@@ -17,7 +28,7 @@ Rails.application.routes.draw do
     resources :manuals, only: [:index, :show]
   end
   resources :creators, only: [:show, :edit, :update]
-  resources :requests do
+  resources :requests, only: [:index, :create, :show] do
     member  do
       get 'new'
     end
@@ -25,15 +36,7 @@ Rails.application.routes.draw do
       get 'download'
     end
   end  
-  resources :cards, only: [:index, :new, :create, :show, :pay_charge] do
-    collection do
-      get 'index', to: 'cards#index'
-      post 'pay_charge', to: 'cards#pay_charge'
-      post 'show', to: 'cards#show'
-      post 'pay', to: 'cards#pay'
-      post 'delete', to: 'cards#delete'
-    end
-  end
+  
   resources :explanations, only: [:index, :new, :create] do
     collection  do
       get 'terms'

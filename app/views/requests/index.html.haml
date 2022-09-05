@@ -12,7 +12,8 @@
         %th="承認者"
         %th="状態"
         %th=""
-        
+  
+  / 表体を表示
   - if not @requests.empty? then
     - @requests.reverse_each.with_index(1) do |request|
       - @request = request

@@ -7,6 +7,7 @@ $(function () {
     
     //公開鍵を記述
     var payjp = Payjp(PUBLICKEY);
+    
     //Elements インスタンスを生成します。
     var elements = payjp.elements();
     var numberElement = elements.create('cardNumber');

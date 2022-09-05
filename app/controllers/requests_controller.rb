@@ -31,12 +31,15 @@ class RequestsController < ApplicationController
         
         if @request.save
           UserMailer.request_email(@sender, @receiver, @request).deliver_later
-          redirect_to request_url(@request.id),
+          redirect_to requests_url(@request.id),
             notice: 'クリエイターへリクエストメールを送信しました。'
             
         elsif @request.errors.full_messages[0].include?('too_long')
-          redirect_to request.referer,
-            alert: '文字が許容範囲外(700文字より大きい)です'
+          flash.now[:alert] = '文字が許容範囲外(700文字より大きい)です'
+          render :new
+        else
+          flash.now[:alert] = 'リクエスト送信に失敗しました'
+          render :new
         end
       end
       
@@ -44,7 +47,8 @@ class RequestsController < ApplicationController
       redirect_to  '/users/sign_in', alert: 'ログインが必要です。'
       
     elsif nil == Card.find_by(id: current_user.id)
-      redirect_to request.referer, alert: 'クレジットカード登録が必要です。'
+      flash.now[:alert] = "クレジットカード登録が必要です。" 
+      render :new
     end
   end
 

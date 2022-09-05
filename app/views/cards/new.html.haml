@@ -8,7 +8,8 @@
         %p#number-form.payjs-outer
         %p#expiry-form.payjs-outer
         %p#cvc-form.payjs-outer
+        
       .form-group
         = form_with url: pay_cards_path, method: :post, id: "card_form" do |f|
           #card_token
-          = f.submit "登録する", class:"btn btn-light", id: "info_submit"
+          = f.submit "登録する", class: "btn btn-light", id: "info_submit"

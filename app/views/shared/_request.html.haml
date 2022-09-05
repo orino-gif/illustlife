@@ -20,7 +20,7 @@
           
           %td
             %button.btn.btn-light.font-medium
-              = link_to '詳細', request_path(@request.id)
+              = link_to '詳細', "/requests/#{@request.id}"
     - else
       .col-md-auto
         %table.table
