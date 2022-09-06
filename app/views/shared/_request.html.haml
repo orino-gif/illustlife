@@ -210,7 +210,7 @@
         - if (user_signed_in?) && ('納品完了' == @request.status)
           - if sender.nickname == current_user.nickname
             = button_to('ダウンロード',
-              download_requests_path(@request), method: :get)
+              download_requests_path, {method: :get,params:{request_id: params[:id]}})
             - if @request.evaluation_comment.nil?
               = form_with(model: @request, local: true) do |f|
                 .form-group.mt-4

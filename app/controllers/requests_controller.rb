@@ -134,10 +134,10 @@ class RequestsController < ApplicationController
   end
   
   def download
-    hoge = Request.find(params[:id])
-    if hoge.deliver_img?
-      image = hoge.deliver_img # imageはFugaUploaderオブジェクト
-      # extname:text.txtの.移行の文字列を返す
+    @request = Request.find(params[:request_id])
+    if @request.deliver_img?
+      image = @request.deliver_img # imageはUploaderオブジェクト
+      # extnameは「.」以降の拡張子にあたる文字列を返す
       # send_data(送るデータ, オプション={failname:保存するときのファイル名})
       send_data(image.read, filename: "download#{File.extname(image.path)}")
     else
@@ -149,14 +149,19 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:request][:request_id])
     if 'キャンセル' == params[:request][:cancel]
       @request.deliver_img = 'NULL'
+      
     elsif 'キャンセル2' == params[:request][:cancel]
       @request.deliver_img2 = 'NULL'
+      
     elsif 'キャンセル3' == params[:request][:cancel]
       @request.deliver_img3 = 'NULL'
+      
     elsif 'キャンセル4' == params[:request][:cancel]
       @request.deliver_img4 = 'NULL'
+      
     elsif 'キャンセル5' == params[:request][:cancel]
       @request.deliver_img5 = 'NULL'
+      
     elsif 'キャンセル6' == params[:request][:cancel]
       @request.deliver_img6 = 'NULL'
     end
