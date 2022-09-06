@@ -2,12 +2,15 @@
 %h1.font-Xlarge.background_color-whitesmoke クリエイター紹介
 
 .container
+  / 開発中の漫画ビュワー
   - if Rails.env.development?
     .row
-      %h2.font-large ■アクティブ漫画
+      %h2.font-large ■投稿作品
       
     .row
-      =link_to image_tag('/img/mobu.png', class: 'size_Xlarge-square fit_cover border_solid-medium'), '/mangas/1/illustlifes'
+      =link_to image_tag('/img/mobu.png',
+        class: 'size_Xlarge-square fit_cover border_solid-medium'),
+        '/mangas/1/illustlifes'
 
   .row
     %h2.font-large ■クリエイター
@@ -18,7 +21,8 @@
         - if not creator.user.soft_destroyed?
           .padding_side-small.text-center.py-1
             - if creator.user.confirmed_at? #ユーザー認証済みの場合画像を表示
-              = display_header(creator, 'size_Xlarge-square border_solid-medium fit_cover')
+              = display_header(creator,
+                'size_Xlarge-square border_solid-medium fit_cover')
               .font-small.string_indention-small= creator.user.nickname
         - break if index == 20
   .row
@@ -29,6 +33,8 @@
       - @requests.each.with_index(1) do |request,index|
         - if not request.deliver_img.blank?
           .padding_side-small.text-center.py-2
-            = link_to image_tag(request.deliver_img.url, class: 'size_Xlarge-square fit_cover border_solid-medium'), request_path(request.id)
+            = link_to image_tag(request.deliver_img.url,
+              class: 'size_Xlarge-square fit_cover border_solid-medium'),
+              "/requests/#{request.id}"
             - index -= 1
         - break if index == 20

@@ -10,7 +10,6 @@
     = display_icon(@creator,
       'size_large-square rounded-circle fit_cover position_large-top')
   
-  
   .col-4
     / requestコントローラーの領域以外の場合、リクエストアイコンを表示
     - if 'requests' != controller.controller_name
@@ -36,34 +35,27 @@
   / SNSリンク先のアイコンを表示
   .col-1
     = display_sns(@creator, 'twitter')
-    
   .col-1
     = display_sns(@creator, 'pixiv')
-    
   .col-1
     = display_sns(@creator, 'instagram')
-    
   .col-1
     = display_sns(@creator, 'youtube')
-    
   .col-1
     = display_sns(@creator, 'link')
-      
-.container
-  / 実績表示
-  .row.my-5
-    = "ニックネーム：#{@creator.user.nickname}"
-    = "、推奨金額：#{@creator.recommended_amount}円"
-    = "、作業予定日数：#{@creator.working_days}日"
-    
-    - if 0 != @creator.number_of_works
-      = "、納品数：#{@creator.number_of_works}点、"
-      = "締切厳守率：#{@creator.deadline_strict_adherence_rate}%、"
-      = "返信率:#{@creator.reply_rate}%"
-    - else
-      - if 'new' != controller.action_name
-        %br
-        %br
-          = '納品作品なし'
+
+/ 実績表示
+.row.my-5.mx-5
+  = "ニックネーム：#{@creator.user.nickname}"
+  = "、推奨金額：#{@creator.recommended_amount}円"
+  = "、作業予定日数：#{@creator.working_days}日"
   
-  
+  - if 0 != @creator.number_of_works
+    = "、納品数：#{@creator.number_of_works}点、"
+    = "締切厳守率：#{@creator.deadline_strict_adherence_rate}%、"
+    = "返信率:#{@creator.reply_rate}%"
+  - else
+    - if 'new' != controller.action_name
+      %br
+      %br
+        = '納品作品なし'

@@ -12,7 +12,6 @@ Rails.application.routes.draw do
       post 'delete', to: 'cards#delete'
     end
   end
-  
   resources :creators, only: [:show, :edit, :update]
     
   root to: 'homes#index' 

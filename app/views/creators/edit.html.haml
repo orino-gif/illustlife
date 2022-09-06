@@ -1,9 +1,9 @@
-%meta{:content => "noindex", :name => "robots"}/
-
+/ クリエーター情報の編集を行う
 - content_for(:html_title) { 'ユーザー編集' }
 %h1.font-Xlarge.background_color-whitesmoke ユーザー編集
 
 .container
+  / ヘッダー表示の設定
   .row.my-5
     = form_with(model: @creator, local:true) do |f|
       = f.label :header , '私の代表作：'
@@ -11,13 +11,17 @@
       = f.submit '登録'
     .col
       = display_header(@creator, 'size_medium-rectangle fit_cover')
-    
+  
+  / アイコン表示の設定
   .row.my-5
     = form_with(model: @creator, local:true) do |f|
       = f.label :icon, 'アイコン：'
       = f.file_field :icon
       = f.submit '登録'
+      
     = display_icon(@creator, 'size_medium-square fit_cover rounded-circle')
+  
+  
   .row.my-5
     = 'アカウント情報：'
     %table.table
@@ -28,7 +32,8 @@
       %tr
         %td='在籍 or 退会：在籍'
       %td
-        %button{:type => 'buton'}= link_to '変更', edit_user_registration_path
+        = button_to '変更', edit_user_registration_path
+        
   .row.my-5
     = 'リンク先：'
     %table.table
@@ -62,6 +67,7 @@
             = f.label :link, '他リンク先:'
             = f.text_field :link, class:'size_variable-form'
             = f.submit '登録'
+            
   .row.my-5
     = 'リクエスト受付内容：'
     %table.table
@@ -77,7 +83,8 @@
         %td
           = form_with(model: @creator, local:true) do |f|
             = f.label :request_acceptance_permission, 'リクエスト受付:'
-            - if ((nil != @credit) && (nil != @credit.bank) && (nil != @credit.branch_name) && (nil != @credit.account_type) && (nil != @credit.account_number) && (nil != @credit.account_holder) || ('development' == ENV['RAILS_ENV']))
+            // @creditの値がnilかfailsでなく、口座情報の値が全て埋まっている場合
+            - if @is_credit_all || ('development' == ENV['RAILS_ENV'])
               - if true != @creator.request_acceptance_permission
                 = f.hidden_field :request_acceptance_permission, value:true
                 = f.submit '開始', :name => 'open'
@@ -94,48 +101,32 @@
         %td
           = form_with(model: @creator, local:true) do |f|
             = f.label :working_days, '作業予定日数(日)：'
-            = f.text_field :working_days, :size=>"5"
+            = f.text_field :working_days, :size => '5'
             = f.submit '変更'
   .row.my-5
     = '口座情報：'
     %table.table
       %tr
-        -if (nil != @credit) && (nil != @credit.bank)
+        -if @is_credit_all
           %td='銀行口座： xxxxxxxxxxx'
         -else
           %td='登録口座なし'
       %td
-        %button{:type => 'button'}
-          =link_to '登録', credit_path
+        = button_to '登録', credit_path, method: :get
   .row.my-5
     = 'クレジットカード：'
     %table.table
       %tr
-        -if not @card.nil?
+        -if @card
           %td='カード番号： xxxx-xxxx-xxxx-xxxx'
         -else
           %td='登録カードなし'
       %td
-        %button{:type => 'button'}
-          = link_to '登録', new_card_path, data: {"turbolinks" => false}
-  
-  .row.my-5
-    = 'NSFW：'
-    %table.table
-      %tr
-        %td
-          = form_with(model: @creator, local:true) do |f|
-            = f.label :nsfw, '表示と受付:'
-            - if not @creator.nsfw
-              = f.hidden_field :nsfw, value:true
-              = f.submit '不可'
-            - else
-              = f.hidden_field :nsfw, value:false
-              = f.submit '可'
+        = button_to '登録', new_card_path, method: :get,
+          data: {"turbolinks" => false}
   .row.my-5
     = '再開通知リスト：'
     %table.table
       %tr
       %td
-        %button{:type => 'button'}
-          =link_to 'リスト表示', resume_path
+        = button_to 'リスト表示', resume_path, method: :get

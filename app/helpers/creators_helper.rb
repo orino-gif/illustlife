@@ -29,4 +29,5 @@ module CreatorsHelper
         class: 'size_small-square position_short-top'), creator.send(sns)
     end
   end
+  
 end

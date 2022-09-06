@@ -13,10 +13,11 @@
           = f.text_field :branch_name, autofocus: true, class: 'form-control'
         .form-group
           = f.label :'口座の種類'
-          %br = f.radio_button :account_type, :'普通'
-          = f.label :account_type, '普通', {value: :'普通'}
-          = f.radio_button :account_type, :'当座'
-          = f.label :account_type, '当座', {value: :'当座'}
+          %br
+            = f.radio_button :account_type, :'普通'
+            = f.label :account_type, '普通', {value: :'普通'}
+            = f.radio_button :account_type, :'当座'
+            = f.label :account_type, '当座', {value: :'当座'}
         .form-group
           = f.label :'口座番号'
           = f.text_field :account_number, autofocus: true, class: 'form-control'

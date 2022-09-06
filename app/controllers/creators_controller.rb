@@ -3,14 +3,23 @@ class CreatorsController < ApplicationController
   # @creator = Creator.find(params[:id]) が記載されている関数
   before_action :set_creator, only: [:show, :update, :edit, :earning]
   
-  # 
+  
   def show
+    # 納品済みの作品を表示する為に利用
     @requests = Request.where(receiver_id: @creator.user.id, status: '納品完了')
   end
   
   def edit
-    @card = Card.find_by(id:params[:id])
-    @credit = Credit.find_by(user_id:params[:id])
+    # カード登録情報の有無を確認する為に利用
+    @card = Card.find(params[:id])
+    
+    # 口座登録情報の有無を確認する為に利用
+    credit = Credit.find_by(user_id:params[:id])
+    
+    if credit["bank"] && credit["branch_name"] && credit["account_type"] \
+      && credit["account_number"] && credit["account_holder"]
+      @is_credit_all = true
+    end
   end
   
   def update

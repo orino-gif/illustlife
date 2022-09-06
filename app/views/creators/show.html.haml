@@ -1,17 +1,20 @@
+/ クリエーターの情報と実績を表示する
 - content_for(:html_title) { 'ユーザー情報' }
 %h1.font-Xlarge.background_color-whitesmoke ユーザー情報
 
 .container
+  / ユーザーヘッダーの表示
   = render 'shared/user_header'
+  
+  / 納品したリクエストのリンク付き画像を表示
   .row
-    - if not @requests.nil?
+    - if @requests
       - @requests.reverse_each do |request|
         .col3.m-2
-          // deliver_img(x)がNULLでない場合
           - if request.deliver_img  
             = link_to image_tag(request.deliver_img.url,
               class: 'size_Xlarge-square fit_cover border_solid-medium'),
-              request_path(request.id)
+              requests_path(request.id)
               
           - else
             .alert.alert-dismissable.alert-danger
