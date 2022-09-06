@@ -14,7 +14,7 @@
           - if request.deliver_img  
             = link_to image_tag(request.deliver_img.url,
               class: 'size_Xlarge-square fit_cover border_solid-medium'),
-              requests_path(request.id)
+              "/requests/#{request.id}"
               
           - else
             .alert.alert-dismissable.alert-danger
