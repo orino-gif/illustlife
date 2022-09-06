@@ -51,7 +51,7 @@
               %td= '宛名入りサイン:有'
               
           - if user_signed_in?
-            - if ((sender.id == current_user.id) || (receiver.id == current_user.id)) ||( Rails.env.development?)
+            - if ((sender.id == current_user.id) || (receiver.id == current_user.id)) || ( Rails.env.development?)
               %tr
                 %td= "金額：#{@request.money}円"
               %tr
@@ -210,7 +210,7 @@
         - if (user_signed_in?) && ('納品完了' == @request.status)
           - if sender.nickname == current_user.nickname
             = button_to('ダウンロード',
-              download_request_path(@request), method: :get)
+              download_requests_path(@request), method: :get)
             - if @request.evaluation_comment.nil?
               = form_with(model: @request, local: true) do |f|
                 .form-group.mt-4
