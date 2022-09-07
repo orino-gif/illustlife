@@ -23,13 +23,7 @@ class RequestsController < ApplicationController
         
         @sender = current_user
         @receiver = User.find(params[:authorizer_id])
-        
-        # 自分自身にリクエストした場合はnewアクションへ戻す
-        if @sender.id == @receiver.id
-          flash.now[:alert] = '自分自身にリクエストできません'
-          render :new
-        end
-        
+
         @request = Request.new(requests_params)
         @request.sender_id = @sender.id
         @request.receiver_id = @receiver.id

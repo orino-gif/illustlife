@@ -8,9 +8,15 @@
     = yield
     %br
       以上、宜しくお願い致します。<br>
-      ++++++++++++++++++++++++++++++++++++++++<br>
-      イラストライフ運営局<br>
-      URL https://illustlife.com<br>
-      TEL: 070-3304-9100<br>
-      email: operation@illustlife.sakura.ne.jp<br>
-      ++++++++++++++++++++++++++++++++++++++++<br>
+
+      %p ――――――――――――――――――――――――――――――
+      = ENV['APP_NAME']
+      運営局
+      %br/
+      URL ： 
+      = ENV['HOME_ADDRESS']
+      %br/
+      Mail ：
+      = ENV['ADMINISTRATOR_MAIL']
+      %br/
+      %p ――――――――――――――――――――――――――――――
