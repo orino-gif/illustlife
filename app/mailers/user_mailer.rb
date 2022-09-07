@@ -60,7 +60,8 @@ class UserMailer < ApplicationMailer
       )
   end
   
-  def info(notification_user, resume_user)
+  # リクエスト受付開始を通知希望者へ連絡
+  def resume_info(notification_user, resume_user)
       @notification_user = notification_user
       @resume_user = resume_user
       mail(

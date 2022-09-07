@@ -85,9 +85,10 @@
             = f.label :request_acceptance_permission, 'リクエスト受付:'
             // @creditの値がnilかfailsでなく、口座情報の値が全て埋まっている場合
             - if @is_credit_all || ('development' == ENV['RAILS_ENV'])
+            
               - if true != @creator.request_acceptance_permission
                 = f.hidden_field :request_acceptance_permission, value:true
-                = f.submit '開始', :name => 'open'
+                = f.submit '開始', :name => 'accepting_requests'
               - else
                 = f.hidden_field :request_acceptance_permission, value:false
                 = f.submit '停止'

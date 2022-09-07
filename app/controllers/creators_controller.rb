@@ -42,28 +42,38 @@ class CreatorsController < ApplicationController
   
   def update
     if @creator.update(creators_params)
-      if params[:open]
+      
+      # リクエスト受付開始ボタンが押された場合
+      if params[:accepting_requests]
+        
+        # 通知リストに登録されている者をリストアップ
+        notification_users = Resume.where(resume_user: current_user.id)
+        
         # 再開通知リストに登録されている者へ再開のメールを送る
-        @resumes = Resume.where(resume_user: current_user.id)
-        if not @resumes.empty?
-          @resumes.each do |id|
-            @notification_user = User.find(id.notification_user)
-            @resume_user = User.find(id.resume_user)
-            UserMailer.info(@notification_user, @resume_user).deliver_later
+        if notification_users
+          notification_users.each do |user|
+            @notification_user = User.find(user.notification_user)
+            @resume_user = User.find(user.resume_user)
+            UserMailer.resume_info(@notification_user,
+              @resume_user).deliver_later
           end
         end
+        
       end
-    redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
       
-    else
+      redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
+      
+    else # ユーザー編集後の値の保存に失敗した場合
+    
       p @creator.errors.full_messages[0]
+      
       if @creator.errors.full_messages[0].include?("amount")
-        redirect_to request.referer,
-          alert: '金額入力の数値が範囲外です'
+        flash.now[:alert] = "金額入力の数値が範囲外です" 
+        render :edit
           
       elsif @creator.errors.full_messages[0].include?("whitelist_error")
-        redirect_to request.referer,
-          alert: '非対応のファイル形式です(対応形式:png,jpg,jpeg,gif)'
+        flash.now[:alert] = "非対応のファイル形式です(対応:png,jpg,jpeg,gif)" 
+        render :edit
       end
     end
   end
