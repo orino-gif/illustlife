@@ -22,12 +22,25 @@ class CreatorsController < ApplicationController
     end
   end
   
-  def update
-    if 'キャンセル' == params[:creator][:cancel]
-      @creator.temp_img = 'NULL'
+  # 総売上と引き落とし可能額を表示し、引き落とし申請を行う。
+  def earning 
+    if @withdrawal_status.nil?
+      @withdrawal_status = '引き落とし申請前'
+    end
+      
+    if '引き落とし内容確認' == params[:withdrawal_status]
+      @withdrawal_status = '引き落とし内容確認'
+      
+    elsif '引き落とし実行' == params[:withdrawal_status]
+      @withdrawal_status = '引き落とし実行'
+      UserMailer.info_withdrawal(@creator).deliver_later
+      sleep(5)
+      @creator.withdrawal_amount = 0
       @creator.save
     end
-    
+  end
+  
+  def update
     if @creator.update(creators_params)
       if params[:open]
         # 再開通知リストに登録されている者へ再開のメールを送る
@@ -52,20 +65,6 @@ class CreatorsController < ApplicationController
         redirect_to request.referer,
           alert: '非対応のファイル形式です(対応形式:png,jpg,jpeg,gif)'
       end
-    end
-  end
-  
-  def earning
-    if '確認' == params[:withdrawal_status]
-      @withdrawal_status = '確認'
-      
-    elsif '引き落とし実行' == params[:withdrawal_status]
-      @withdrawal_status = '引き落とし実行'
-      UserMailer.info_withdrawal(@creator).deliver_later
-      sleep(5)
-      @creator.withdrawal_amount = 0
-      @creator.save
-      
     end
   end
   

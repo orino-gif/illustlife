@@ -1,37 +1,59 @@
-
 - content_for(:html_title) { '売上' }
-%h1.font-Xlarge.background_color-whitesmoke="#{@creator.user.nickname}さんの売上と報酬"
+%h1.font-Xlarge.background_color-whitesmoke
+  ="#{@creator.user.nickname}さんの売上と引き落とし申請"
 
+/ 総売上と引き落とし対象額を表示して、引き落とし申請を行う
 .container
   - if 0 < @creator.earnings
-    - if @withdrawal_status.nil?
-      .row
+    - if '引き落とし申請前' == @withdrawal_status
+      .row.my-5.font-medium.margin_side-small
         = "総売上:#{@creator.earnings}円"
-        %br= "引き落とし対象額:#{@creator.withdrawal_amount}円"
-      .row
         %br
-      .row
-        %br= button_to "指定口座に引き落し申請", {controller: 'creators', action: 'earning'}, {method: :get, params:{withdrawal_status: '確認'}}
-    - elsif '確認' == @withdrawal_status
-      .row
-        %br= "■引き落とし申請内容"
-        = "引き落とし対象額 : #{@creator.withdrawal_amount}円"
-        %br= "サービス利用料15% : - #{(@creator.withdrawal_amount*0.15).to_i}円"
-        = "引き落とし額合計：#{@creator.withdrawal_amount-(@creator.withdrawal_amount*0.15).to_i}円"
-        %br= "お振込の額：#{@creator.withdrawal_amount-(@creator.withdrawal_amount*0.15).to_i}円 - 銀行振込手数料"
-      .row
-        %br= "■振込元"
-        = "口座名：三菱東京UFJ銀行, 名義：林範夫(イラストライフ運営局財務担当)"
-      .row.my-5
-        ="指定先の口座に引き落としますか？"
-      .row.my-3
+          = "引き落とし対象額:#{@creator.withdrawal_amount}円"
+          
+      .row.margin_side-small
+        %br
+          = button_to "指定口座に引き落し申請",
+            {controller: 'creators', action: 'earning'},
+            {method: :get, class: "btn btn-light font-medium",
+            params:{withdrawal_status: '引き落とし内容確認'}}
+
+    - elsif '引き落とし内容確認' == @withdrawal_status
+      .row.font-medium.margin_side-small.border.border-secondary
+        %br
+          = "\ 引き落とし対象額 : #{@creator.withdrawal_amount}円"
+        %br
+          = "サービス利用料15% :"
+          = "- #{(@creator.withdrawal_amount*0.15).to_i}円"
+        %br
+          = "引き落とし額合計："
+          = @creator.withdrawal_amount-(@creator.withdrawal_amount*0.15).to_i
+          = "円"
+        %br
+          = "お振込の額："
+          = @creator.withdrawal_amount-(@creator.withdrawal_amount*0.15).to_i
+          = "円 - 銀行振込手数料"
+        %br
+          = "振込元口座名：三菱東京UFJ銀行,"
+          = "名義：林範夫(イラストライフ運営局財務担当)"
+        %br
+          
+      .row.my-5.font-medium.margin_side-small
+        = "指定先の口座に引き落としますか？"
+        
+      .row.my-3.font-medium.margin_side-small
         .col-1
-          = button_to "はい", {controller: 'creators', action: 'earning'}, {method: :get, params:{withdrawal_status: '引き落とし実行'}}
+          = button_to "はい", {controller: 'creators', action: 'earning'},
+            {method: :get, params:{withdrawal_status: '引き落とし実行'}}
+            
         .col-1
-          = button_to "いいえ", {controller: 'creators', action: 'earning'}, {method: :get, params:{withdrawal_status: 'キャンセル'}}
+          = button_to "いいえ", {controller: 'creators', action: 'earning'},
+            {method: :get, params:{withdrawal_status: '引き落とし申請前'}}
+            
     - elsif '引き落とし実行' == @withdrawal_status
       = "引き落とし申請を実行しました"
-      %br= '(※営業日により振込が数日遅れる場合があります)'
+      %br
+        = '(※営業日により振込が数日遅れる場合があります)'
 
   - else
     .row

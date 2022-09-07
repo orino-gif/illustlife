@@ -18,9 +18,12 @@ Rails.application.routes.draw do
 
   # get 'requests/:id/new', to: 'requests#new'
   get 'credits/:id/new', to: 'credits#new'
-  get 'resumes/:id/new', to: 'resumes#new'
   get 'creators/:id/earning', to: 'creators#earning'
-  resources :resumes, only: [:index, :create, :show, :destroy]
+  resources :resumes, only: [:create, :show] do
+    member do
+      get 'new'
+    end
+  end
   resources :mangas, only: [:index, :show]  do
     resources :illustlifes, only: [:index, :show]
   end

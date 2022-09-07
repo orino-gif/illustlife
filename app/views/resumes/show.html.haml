@@ -1,13 +1,19 @@
 - content_for(:html_title) { '再開通知者リスト' }
 %h1.font-Xlarge.background_color-whitesmoke 再開通知者リスト
 
+// 再開通知者リストの表示と登録者の削除
 .container
-  
-  - @notification_users.each do |notification_user|
-    .row.my-5
-      .col
-        =User.find(notification_user.resume_user).nickname
-      .col
-        =button_to '削除', {controller:'resumes', action:'show'}, {method: :get, params: {record_delete:notification_user.id}}
-      .col
-        %br
+  .row.my-5
+    / テーブルのセルの幅を均等に分ける
+    %table.table.fixed_column
+      %tr
+        %th ニックネーム
+        %th 
+      
+      - @resumes.each do |resume|
+        / ニックネームを表示。セルをはみ出した場合は隠す
+        %tr
+          %td.hidden_overflow= User.find(resume.resume_user).nickname
+          / 各resume.idのレコードの削除ボタンを表示
+          %td= button_to '削除', {controller:'resumes', action:'show'},
+            {method: :get, params:{class:"text-center", record_delete: resume.id}}

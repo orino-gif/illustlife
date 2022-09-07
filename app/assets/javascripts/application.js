@@ -17,8 +17,8 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-// src="https://code.jquery.com/jquery-3.2.1.min.js"
-// src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+src="https://code.jquery.com/jquery-3.2.1.min.js"
+src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
 
 //衝突を避ける
 // jQuery.noConflict();

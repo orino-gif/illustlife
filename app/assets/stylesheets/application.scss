@@ -35,6 +35,10 @@ strong, label, th { font-weight: normal; }
 // 文字がリクエスト一覧の表のセルをはみ出した場合に、文字を隠す
 .hidden_overflow { overflow: hidden; }
 
+ // コンテンツの横のマージンの調整
+.margin_side-Xsmall { margin : 0 -10px; }
+.margin_side-small { margin : 0 10px; }
+
 /*-----------矢印表示----------*/
 .slick-next{ right:0!important; }
 .slick-prev{ left:0!important;}

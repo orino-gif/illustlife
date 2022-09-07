@@ -1,8 +1,12 @@
 - content_for(:html_title) { '再開通知' }
 %h1.font-Xlarge.background_color-whitesmoke 再開通知
 
+/ 希望者の再開通知者リストに、再開者のIDを登録する
 .container
-  = @creator.user.nickname + "さんのリクエスト受付"
-  = form_with(model: @resume, local: true) do |f|
-    = f.hidden_field :resume_user, :value => params[:id]
-    = f.submit '再開時に通知メールを送る', class:'btn btn-light size_Xsmall-rectangle font-large'
+  .row.my-3.margin_side-small
+    = @creator.user.nickname + "さんのリクエスト受付"
+    
+  .row.margin_side-small
+    = form_with(model: @resume, local: true) do |f|
+      = f.hidden_field :resume_user, :value => params[:id]
+      = f.submit '再開時に通知メールを送る', class:'btn btn-light font-medium'
