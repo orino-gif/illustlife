@@ -1,8 +1,12 @@
 class CreditsController < ApplicationController
   before_action :authenticate_user!
+  
+  # @credits = Credit.find(params[:id])をセット
   before_action :set_credits, only: [:new, :show, :update]
 
   def update
+    @credits = Credit.find(params[:id])
+    
     if @credits.update(credits_params)
       redirect_to credit_url(@credits), notice: '登録を変更しました。'
     else
@@ -13,7 +17,8 @@ class CreditsController < ApplicationController
   private
 
   def credits_params
-    params.require(:credit).permit(:bank, :branch_name, :account_type, :account_number, :account_holder)
+    params.require(:credit).permit(:bank, :branch_name, :account_type,
+      :account_number, :account_holder)
   end
   
   def set_credits

@@ -2,23 +2,25 @@ Rails.application.routes.draw do
   
   devise_for :users, controllers: { registrations: 'users/registrations',
     sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks'}
+    
+  root to: 'homes#index'
   
   resources :cards, only: [:new, :show] do
     collection do
-      # get 'index', to: 'cards#index'
-      # post 'pay_charge', to: 'cards#pay_charge'
       post 'show', to: 'cards#show'
       post 'pay', to: 'cards#pay'
       post 'delete', to: 'cards#delete'
     end
   end
-  resources :creators, only: [:show, :edit, :update]
-    
-  root to: 'homes#index' 
+  resources :creators, only: [:show, :edit, :update] do
+    collection do
+      get '/:id/earning', to: 'creators#earning'
+    end
+  end
 
   # get 'requests/:id/new', to: 'requests#new'
   get 'credits/:id/new', to: 'credits#new'
-  get 'creators/:id/earning', to: 'creators#earning'
+  # get 'creators/:id/earning', to: 'creators#earning'
   resources :resumes, only: [:create, :show] do
     collection do
       get '/:id/new', to: 'resumes#new'
