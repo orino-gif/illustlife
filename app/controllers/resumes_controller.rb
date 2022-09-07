@@ -17,7 +17,8 @@ class ResumesController < ApplicationController
     @resume.notification_user = current_user.id
     
     if @resume.save
-      redirect_to "/resumes/#{current_user.id}", notice: '再開通知を設定しました'
+      redirect_to "/resumes/#{current_user.id}",
+        notice: '再開通知者を登録しました'
     end
   end
   
