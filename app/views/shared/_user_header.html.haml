@@ -30,11 +30,14 @@
         = image_tag '/img/request_stop.png',
           class:'size_medium-square position_medium-top'
       
-      / ログイン中のユーザーに再開通知ボタンを表示
-      - if user_signed_in?
-        - resume_notice = Resume.where(notification_user:current_user.id)
-        - if @creator.user.id != current_user.id
-          - if resume_notice.find_by(resume_user: params[:id]).nil?
+        / ログイン中のユーザーに再開通知ボタンを表示
+        - if user_signed_in?
+        
+          / 再開者のリストアップ
+          - resumes = Resume.where(notification_user:current_user.id)
+          / 再開通知リストに登録していない場合
+          - if resumes.find_by(resume_user: params[:id]).nil?
+          
             .font-Xsmall.position_Xshort-top.position_midium-left
               = link_to "再開を通知", "/resumes/#{@creator.user_id}/new",
                 class:'button-notice'
