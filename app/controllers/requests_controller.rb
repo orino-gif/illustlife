@@ -175,10 +175,10 @@ class RequestsController < ApplicationController
       end
     end
     
-    if @request.update(creator_params)
-      p 'bbb'
-      redirect_to request_path(@request.id)
-    end
+    # if @request.update(creator_params)
+    #   p 'bbb'
+    #   redirect_to request_path(@request.id)
+    # end
   end
   
   private

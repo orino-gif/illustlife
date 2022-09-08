@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # get 'requests/:id/new', to: 'requests#new'
+  get 'requests/:id/new', to: 'requests#new'
   get 'credits/:id/new', to: 'credits#new'
   # get 'creators/:id/earning', to: 'creators#earning'
   resources :resumes, only: [:create, :show] do
@@ -34,9 +34,8 @@ Rails.application.routes.draw do
     resources :manuals, only: [:index, :show]
   end
   
-  resources :requests, only: [:index, :create, :show] do
+  resources :requests, only: [:index, :create, :show, :update] do
     collection do
-      get ':id/new', to: 'requests#new'
       get 'download'
     end
   end  
