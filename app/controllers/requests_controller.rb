@@ -167,6 +167,7 @@ class RequestsController < ApplicationController
       if @request.errors.full_messages[0].include?("extension_whitelist_error")
         redirect_to request.referer,
           alert: '本サービスのファイル対応形式(png,jpg,jpeg,gif)外です'
+          
       elsif @request.errors.full_messages[0].include?("max_size_error")
         redirect_to request.referer,
           alert: 'ファイルサイズが本サービスの対応外(1GBより大きい)です'

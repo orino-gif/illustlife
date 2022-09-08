@@ -12,13 +12,14 @@ Rails.application.routes.draw do
       post 'delete', to: 'cards#delete'
     end
   end
+  
   resources :creators, only: [:show, :edit, :update] do
     collection do
       get '/:id/earning', to: 'creators#earning'
     end
   end
 
-  get 'requests/:id/new', to: 'requests#new'
+  
   get 'credits/:id/new', to: 'credits#new'
   # get 'creators/:id/earning', to: 'creators#earning'
   resources :resumes, only: [:create, :show] do
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
   
   resources :requests, only: [:index, :create, :show, :update] do
     collection do
+      get '/:id/new', to: 'requests#new'
       get 'download'
     end
   end  
