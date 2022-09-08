@@ -18,19 +18,23 @@ Rails.application.routes.draw do
       get '/:id/earning', to: 'creators#earning'
     end
   end
-
   
-  get 'credits/:id/new', to: 'credits#new'
-  # get 'creators/:id/earning', to: 'creators#earning'
+  resources :credits, only: [:show, :update] do
+    collection do
+      get '/:id/new', to: 'credits#new'
+    end
+  end
+  
   resources :resumes, only: [:create, :show] do
     collection do
       get '/:id/new', to: 'resumes#new'
     end
   end
+  
   resources :mangas, only: [:index, :show]  do
     resources :illustlifes, only: [:index, :show]
   end
-  resources :credits, only: [:create, :show, :update]
+  
   resources :homes, only: [:index] do
     resources :manuals, only: [:index, :show]
   end

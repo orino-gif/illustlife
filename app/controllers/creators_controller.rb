@@ -11,7 +11,8 @@ class CreatorsController < ApplicationController
   
   def edit
     # カード登録情報の有無を確認する為に利用
-    @card = Card.find(params[:id])
+    # Card.find(params[:id])だと、NothingErrになる為、find_byを使用
+    @card =  Card.find_by(id: params[:id])
     
     # 口座登録情報の有無を確認する為に利用
     credit = Credit.find_by(user_id:params[:id])
