@@ -35,10 +35,8 @@ Rails.application.routes.draw do
   end
   
   resources :requests, only: [:index, :create, :show] do
-    member  do
-      get 'new'
-    end
     collection do
+      get ':id/new', to: 'requests#new'
       get 'download'
     end
   end  
