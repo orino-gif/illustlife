@@ -2,6 +2,7 @@ class ExplanationsController < ApplicationController
   def index
     @explanations = Explanation.all
   end
+  
   def new
     @explanations = Explanation.new
   end
@@ -13,6 +14,10 @@ class ExplanationsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    
   end
 
   private

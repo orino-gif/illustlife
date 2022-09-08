@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
-  
+
   devise_for :users, controllers: { registrations: 'users/registrations',
     sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks'}
     
   root to: 'homes#index'
+  
+  resource :agreement, only: [:index] do
+    collection do
+      get 'terms'
+      get 'policy'
+      get 'transaction_law'
+    end
+  end
   
   resources :cards, only: [:new, :show] do
     collection do
@@ -25,18 +33,18 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :resumes, only: [:create, :show] do
-    collection do
-      get '/:id/new', to: 'resumes#new'
+  resources :explanations, only: [:index, :new, :create, :show]
+
+  resources :homes, only: [:index] do
+    resources :manuals, only: [:index, :show] do
+      collection  do
+        get 'for_client'
+      end
     end
   end
   
   resources :mangas, only: [:index, :show]  do
     resources :illustlifes, only: [:index, :show]
-  end
-  
-  resources :homes, only: [:index] do
-    resources :manuals, only: [:index, :show]
   end
   
   resources :requests, only: [:index, :create, :show, :update] do
@@ -46,12 +54,9 @@ Rails.application.routes.draw do
     end
   end  
   
-  resources :explanations, only: [:index, :new, :create] do
-    collection  do
-      get 'terms'
-      get 'policy'
-      get 'transaction_law'
-      get 'for_client'
+  resources :resumes, only: [:create, :show] do
+    collection do
+      get '/:id/new', to: 'resumes#new'
     end
   end
 end

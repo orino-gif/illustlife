@@ -11,7 +11,7 @@
           
         .form-group
           = f.label :'支店名'
-          = f.text_field :branch_name, autofocus: true, class: 'form-control'
+          = f.text_field :branch_name, class: 'form-control'
           
         .form-group
           = f.label :'口座の種類'
@@ -23,11 +23,12 @@
             
         .form-group
           = f.label :'口座番号'
-          = f.text_field :account_number, autofocus: true, class: 'form-control'
+          = f.text_field :account_number, class: 'form-control'
           
         .form-group
           = f.label :'口座名義'
-          = f.text_field :account_holder, autofocus: true, class: 'form-control'
+          = f.text_field :account_holder, class: 'form-control'
+          
         %div
           = f.submit '口座登録'
         %br/

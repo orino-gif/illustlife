@@ -172,17 +172,17 @@
         / マニュアルページへのリンクテキストを表示
         .row.m-4
           .mx-3
-            = link_to 'イラスト付き利用説明', for_client_explanations_path
+            = link_to 'イラスト付き利用説明', for_client_home_manuals_path(1)
         
         / 各規約ページへのリンクテキストを表示
         .row.m-4
           .mx-3
-            = link_to '利用規約', terms_explanations_path
+            = link_to '利用規約', terms_agreement_path
           .mx-3
-            = link_to 'プライバシーポリシー', policy_explanations_path
+            = link_to 'プライバシーポリシー', policy_agreement_path
           .mx-3
             = link_to '特定商取引法に基づく表記',
-              transaction_law_explanations_path
+              transaction_law_agreement_path
         
         / 著作権表示
         .row.m-3

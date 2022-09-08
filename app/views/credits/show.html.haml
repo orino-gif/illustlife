@@ -21,4 +21,4 @@
           %td 口座名義
           %td= @credits.account_holder
     .col-md-3
-      %button{:type => "button"}= link_to '登録', "/credits/#{params[:id]}/new"
+      = button_to '登録', "/credits/#{params[:id]}/new", method: :get
