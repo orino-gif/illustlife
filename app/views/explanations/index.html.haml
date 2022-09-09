@@ -1,7 +1,18 @@
-- content_for(:html_title) { 'ご意見・通報一覧' }
-%h1.font-Xlarge.background_color-whitesmoke ご意見・通報一覧
+- content_for(:html_title) { 'ご意見一覧' }
+%h1.font-Xlarge.background_color-whitesmoke ご意見一覧
 
 .container
-  .row
+  .row.mt-3
     - @explanations.each do |explanation|
-      = explanation.letter_body
+      - adviser = User.find_by(id:explanation.adviser_id)
+     
+      .col-3.d-flex.align-items-center
+        = display_icon(adviser.creator,
+          'size_medium-square rounded-circle fit_cover')
+        = adviser.nickname
+        
+      .col-auto.border
+        = explanation.created_at.strftime('%Y/%m/%d %H:%M')
+        %br
+          = explanation.letter_body
+      

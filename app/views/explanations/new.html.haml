@@ -7,4 +7,4 @@
   .row
     = form_with(model: @explanations, local: true) do |f|
       = f.text_area :letter_body, size: "80x20"
-      = f.submit '送信'
+      = f.submit '送信', :name => 'accepting_requests'
