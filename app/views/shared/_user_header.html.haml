@@ -16,16 +16,16 @@
     
       / リクエストを受付ていない場合は、STOP画像を表示
       - if true == @creator.request_acceptance_permission
+        / リクエスト先が自分自身の場合、リンクを付与しない
+        - if (user_signed_in?) && (params[:id].to_i == current_user.id.to_i)
+          = image_tag '/img/request.png',
+            class:'size_medium-square position_medium-top'
         
-        / リクエスト先が自分自身の以外の場合、リンク先を付与
-        - if params[:id].to_i != current_user.id.to_i
+        - else
           = link_to image_tag('/img/request.png',
             class:'size_medium-square position_medium-top'),
             "/requests/#{@creator.user_id}/new"
-
-        - else
-          = image_tag '/img/request.png',
-            class:'size_medium-square position_medium-top'
+            
       - else
         = image_tag '/img/request_stop.png',
           class:'size_medium-square position_medium-top'
