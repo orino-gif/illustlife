@@ -90,9 +90,10 @@ p.on_card { position: absolute;top:auto; left:auto;
   .position_midium-right { position: relative; right: $medium; }
 }
 // 文字がコンテンツからあふれた場合に改行させる関数
-@mixin string_indention($small, $medium) {
+@mixin string_indention($small, $medium, $large) {
   .string_indention-small { word-wrap: break-word; width: $small; }
   .string_indention-medium { word-wrap: break-word; max-width: $medium; }
+  .string_indention-large { word-wrap: break-word; max-width: $large; }
 }
 // 全体の横幅によりpaddingの調整をする関数
 @mixin padding_side($small) {
@@ -112,7 +113,7 @@ p.on_card { position: absolute;top:auto; left:auto;
   @include position_top(-100px, -68px, -38px, -13px);
   @include position_left(120px);
   @include position_right(120px);
-  @include string_indention(150px, 320px);
+  @include string_indention(150px, 320px, 575px);
   @include padding_side(15px);
   @include border_solid(4px);
 }
@@ -124,7 +125,7 @@ p.on_card { position: absolute;top:auto; left:auto;
   @include position_top(-95px, -62px, -28px, -12px);
   @include position_left(100px);
   @include position_right(100px);
-  @include string_indention(150px, 320px);
+  @include string_indention(150px, 320px, 575px);
   @include padding_side(10px);
   @include border_solid(4px);
 }
@@ -136,7 +137,7 @@ p.on_card { position: absolute;top:auto; left:auto;
   @include position_top(-90px, -54px, -24px, -11px);
   @include position_left(100px);
   @include position_right(60px);
-  @include string_indention(150px, 320px);
+  @include string_indention(150px, 320px, 575px);
   @include padding_side(10px);
   @include border_solid(4px);
 }
@@ -148,7 +149,7 @@ p.on_card { position: absolute;top:auto; left:auto;
   @include position_top(-85px, -42px, -22px, -10px);
   @include position_left(100px);
   @include position_right(20px);
-  @include string_indention(150px, 320px);
+  @include string_indention(150px, 320px, 575px);
   @include padding_side(7px);
   @include border_solid(3px);
 }
@@ -160,7 +161,7 @@ p.on_card { position: absolute;top:auto; left:auto;
   @include position_top(-65px, -35px, -18px, -10px);
   @include position_left(75px);
   @include position_right(10px);
-  @include string_indention(110px, 320px);
+  @include string_indention(110px, 320px, 575px);
   @include padding_side(3px);
   @include border_solid(3px);
 }

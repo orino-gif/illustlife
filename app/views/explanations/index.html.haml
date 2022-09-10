@@ -1,18 +1,24 @@
-- content_for(:html_title) { 'ご意見一覧' }
-%h1.font-Xlarge.background_color-whitesmoke ご意見一覧
+- content_for(:html_title) { 'ご意見板' }
+%h1.font-Xlarge.background_color-whitesmoke ご意見板
 
 .container
-  .row.mt-3
-    - @explanations.each do |explanation|
-      - adviser = User.find_by(id:explanation.adviser_id)
-     
-      .col-3.d-flex.align-items-center
+  
+  - @explanations.each do |explanation|
+    - adviser = User.find_by(id: explanation.adviser_id)
+    
+    / 投稿された意見達を表示
+    .row.my-4
+      .col-lg-3.d-flex.align-items-center
         = display_icon(adviser.creator,
           'size_medium-square rounded-circle fit_cover')
         = adviser.nickname
         
-      .col-auto.border
+      .col-lg-auto.border.string_indention-large.padding_side-small
         = explanation.created_at.strftime('%Y/%m/%d %H:%M')
         %br
           = explanation.letter_body
-      
+  
+  / ボタンが押されたら、投稿フォームへ移動  
+  .row.my-5
+    .col-3
+      = button_to '投稿', new_explanation_path, method: :get

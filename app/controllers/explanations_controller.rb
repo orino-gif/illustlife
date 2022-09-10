@@ -1,5 +1,5 @@
 class ExplanationsController < ApplicationController
-  # ログインしていない場合は、ログイン画面へ移動させる
+  # ログインしていない場合は、投稿させないで、ログイン画面へ移動させる
   before_action :authenticate_user!, only: [:new]
   
   def index
@@ -13,9 +13,7 @@ class ExplanationsController < ApplicationController
   def create
     @explanations = Explanation.new(explanations_params)
     @explanations.adviser_id = current_user.id
-    
-    p params[:accepting_requests]
-    
+
     if @explanations.save
       redirect_to explanations_url, notice: '運営へご意見を送信しました。'
     else
