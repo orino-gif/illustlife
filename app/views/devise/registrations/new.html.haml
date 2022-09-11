@@ -40,9 +40,9 @@
           .field.text-left
             = f.check_box :accepted ,{},checked_value = "true",
               unchecked_value = "false"
-            = link_to '利用規約', terms_explanations_path
+            = link_to '利用規約', terms_agreement_path
             = f.label 'と'
-            = link_to 'プライバシーポリシー', policy_explanations_path
+            = link_to 'プライバシーポリシー', policy_agreement_path
             = 'に同意する。又、登録する利用者本人のみがIDとパスワードを利用し、'
             = '事業主ではない事を認める。'
             

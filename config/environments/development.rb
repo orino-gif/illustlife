@@ -24,6 +24,9 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
   config.assets.debug = true
   config.assets.quiet = true
+
+  # アセットを圧縮
+  config.assets.compress = true
   
   # config.action_view.raise_on_missing_translations = true
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
