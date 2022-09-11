@@ -16,6 +16,7 @@
     
       / リクエストを受付ていない場合は、STOP画像を表示
       - if true == @creator.request_acceptance_permission
+      
         / リクエスト先が自分自身の場合、リンクを付与しない
         - if (user_signed_in?) && (params[:id].to_i == current_user.id.to_i)
           = image_tag '/img/request.png',
@@ -35,6 +36,7 @@
         
           / 再開者のリストアップ
           - resumes = Resume.where(notification_user:current_user.id)
+          
           / 再開通知リストに登録していない場合
           - if resumes.find_by(resume_user: params[:id]).nil?
           

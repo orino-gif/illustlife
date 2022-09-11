@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   end
   
   resources :explanations, only: [:index, :new, :create]
-
+  
   resources :homes, only: [:index] do
     resources :manuals, only: [:index, :show] do
       collection  do
