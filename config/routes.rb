@@ -37,9 +37,6 @@ Rails.application.routes.draw do
   
   resources :homes, only: [:index] do
     resources :manuals, only: [:index, :show] do
-      collection  do
-        get 'for_client'
-      end
     end
   end
   

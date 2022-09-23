@@ -67,7 +67,7 @@
     = csp_meta_tag
     
     / テスト環境と特定した本番のページ以外は、google検索ページに表示しない
-    - if ('test' == ENV['RAILS_ENV']) || ('homes' != controller.controller_name) || ('for_client' == controller.action_name)
+    - if ('homes' != controller.controller_name) && ('manuals' != controller.controller_name)
       %meta{:content => "noindex", :name => "robots"}/
 
   %body
@@ -172,7 +172,7 @@
         / マニュアルページへのリンクテキストを表示
         .row.m-4
           .mx-3
-            = link_to 'イラスト付き利用説明', for_client_home_manuals_path(1)
+            = link_to 'イラスト付き利用説明', home_manuals_path(1)
         
         / 各規約ページへのリンクテキストを表示
         .row.m-4
