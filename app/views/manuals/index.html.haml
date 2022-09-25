@@ -6,11 +6,11 @@
     .col-3
       = image_tag('/img/character/ディフォ姫前面_ここはどこ.gif',
         class:'size_Xlarge-square')
-    .col-6.block-baloon-left.position_midium-right
+    .col-6.block-baloon-left.position_midium-right.font-medium
       このサイトでは何ができますか？
   .row
     .col-1
-    .col-6.block-baloon-right
+    .col-6.block-baloon-right.font-medium
       このサイトでは、簡単なイラスト、漫画、アニメの製作やアドバイスを、
       クリエーターにリクエスト出来ます。
       詳しい内容は、以下のリンク先を参照してください。
@@ -23,7 +23,7 @@
     .col-1
     .col-6
       %h2 目次
-      = link_to "テスト版について", home_manual_path(1,1)
+      = link_to "テスト版について", home_manual_path(1,1), class:"font-medium"
       %br
-        = link_to "キャラクタデザイン機能", home_manual_path(1,2)
+        = link_to "キャラクタデザイン機能", home_manual_path(1,2), class:"font-medium"
  
