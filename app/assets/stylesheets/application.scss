@@ -9,6 +9,7 @@
 
 // 見出しのデザイン
 h1 {padding: 0.2em 0.8em; }
+h2 {border-bottom: 3px dotted black;}
 
 // 色変更、下線装飾無し(!importantで優先順位を上げる)
 a { color: steelblue; text-decoration: none !important; }
