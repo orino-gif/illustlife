@@ -5,7 +5,7 @@
   - if Rails.env.development?
     / 開発中の漫画ビュワー
     .row
-      %h2.font-large ■投稿作品
+      %h2.font-large 投稿作品
       
     .row
       =link_to image_tag('/img/mobu.png',
@@ -15,7 +15,7 @@
     
   - if @requests
     .row
-      %h2.font-large ■クリエイター
+      %h2.font-large クリエイター
       
     / クリエーターのヘッダー画像を評価が高い順に30点表示
     .row.margin_side-Xsmall
@@ -33,7 +33,7 @@
          
     
     .row
-      %h2.font-large ■リクエスト作品
+      %h2.font-large リクエスト作品
     
     / 納品された作品を作成日時が新しい順に30点表示 
     .row.margin_side-Xsmall

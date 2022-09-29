@@ -11,9 +11,10 @@
   .row
     .col-1
     .col-6.block-baloon-right.font-medium
-      このサイトでは、簡単なイラスト、漫画、アニメの製作やアドバイスを、
-      クリエーターにリクエスト出来ます。
-      詳しい内容は、以下のリンク先を参照してください。
+      このサイトでは、漫画やイラストの製作を、
+      他のクリエーターの力を借りる事により、
+      安価か無料で行えます。<br>
+      詳しくは、以下のリンク先を参照してください。
       
     .col-3
       = image_tag('/img/character/リオ前面_説明.gif',
@@ -23,7 +24,10 @@
     .col-1
     .col-6
       %h2 目次
-      = link_to "テスト版について", home_manual_path(1,1), class:"font-medium"
+      = link_to "このサイトでできる事", home_manual_path(1,3),
+        class:"font-medium"
       %br
-        = link_to "キャラクタデザイン機能", home_manual_path(1,2), class:"font-medium"
+        = link_to "キャラクタデザイン機能", home_manual_path(1,2),
+          class:"font-medium"
+      = link_to "テスト版について", home_manual_path(1,1), class:"font-medium"
  
