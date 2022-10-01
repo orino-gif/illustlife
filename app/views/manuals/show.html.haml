@@ -2,6 +2,7 @@
 %h1.font-Xlarge.background_color-whitesmoke='イラスト付き利用説明'
 
 .container
+  = render 'manuals/parts/index'
   - case params[:id]
   - when '1'
     = render 'manuals/parts/test'
