@@ -1,15 +1,19 @@
-- if not @request.nil?
+- if @request
 
   - sender = User.find(@request.sender_id)
   - receiver = User.find(@request.receiver_id)
   
   / 表体を表示
   .row.my-5
+    / 一覧表示の場合
     - if 'index' == controller.action_name
+      / 表体のセルの幅の長さを「table全幅/セル数」にする
       %table.fixed_column
+      
         %tr
           %td= "#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
           
+          / 文字が一覧の表のセルをはみ出した場合に、はみ出した文字を隠す
           %td.hidden_overflow= display_icon(sender.creator,
             'size_small-square rounded-circle fit_cover') + sender.nickname
             
@@ -21,45 +25,58 @@
           %td
             %button.btn.btn-light.font-medium
               = link_to '詳細', request_path(@request.id)
-    - else
+    - else 
       .col-md-auto
+      
         %table.table
-          - if Rails.env.development?
-            %tr
-              %td= "リクエストID：#{@request.id}"
+          %tr
+            %td= "リクエストID：#{@request.id}"
           %tr
             %td= "申請日時：#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
+            
           %tr
+            - client_name = '依頼者：' + sender.nickname
             %td= display_icon(sender.creator,
-              'size_small-square rounded-circle fit_cover') + '依頼者：' + sender.nickname
+              'size_small-square rounded-circle fit_cover') + client_name
           %tr
+            - authorizer_name = '承認者：' + receiver.nickname
             %td= display_icon(receiver.creator,
-              'size_small-square rounded-circle fit_cover') + '承認者：' + receiver.nickname
+              'size_small-square rounded-circle fit_cover') + authorizer_name
+              
           %tr
-            %td.string_indention-medium= "リクエスト内容：\n#{@request.message}"
+            %td.string_indention-medium リクエスト内容：<br> #{@request.message}
+            
           %tr
             %td= "ファイル形式：#{@request.file_format}"
-          // - if @request.is_nsfw?
-          //   %tr
-          //     %td= 'nsfw:有'
-          - if @request.is_nsfw?
+            
+          - if @request.is_anonymous?
             %tr
               %td= '非公開:有'
               
-          - if @request.is_nsfw?
+          - if @request.is_autographed?
             %tr
               %td= '宛名入りサイン:有'
               
           - if user_signed_in?
-            - if ((sender.id == current_user.id) || (receiver.id == current_user.id)) || ( Rails.env.development?)
+          
+            /　このリクエストの関係者のみ以下を表示
+            - party_to_the_request = false
+            - if sender.id == current_user.id || receiver.id == current_user.id
+              - party_to_the_request = true
+            
+            - if party_to_the_request || Rails.env.development?
               %tr
                 %td= "金額：#{@request.money}円"
+                
               %tr
-                - deadline = @request.created_at + (receiver.creator.working_days * 60 * 60 * 24)
+                - working_days = receiver.creator.working_days * 60 * 60 * 24
+                - deadline = @request.created_at + working_days
                 %td.string_indention-medium
                   = "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
+                  
               %tr
                 %td= "状態：#{@request.status}"
+                
       .col-sm-auto
         .string_indention-medium
           - if not current_user.nil?

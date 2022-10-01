@@ -55,7 +55,8 @@ class RequestsController < ApplicationController
   def show
     # リクエストページのボタンが押された場合の処理
     @request = Request.find(params[:id])
-    if not params[:request_id].nil?
+    
+    if params[:request_id]
       # 各リクエストIDに対応する情報を収集
       @request = Request.find(params[:request_id])
       @sender = User.find(Request.find(params[:request_id]).sender_id)
@@ -81,7 +82,7 @@ class RequestsController < ApplicationController
           UserMailer.card_declined_email(@sender,
             @receiver, @request).deliver_later
           p "例外エラー:" + e.to_s
-          flash.now[:alert] = "購入者側のクレジット決済で問題が発生しました為、キャンセルとなりました。" 
+          flash.now[:alert] = "購入者側の決済の問題でキャンセルとなりました。" 
           render :show
         end
         
@@ -102,8 +103,6 @@ class RequestsController < ApplicationController
           @receiver.creator.withdrawal_amount += @request.money
           @request.approval_day = Time.now
         end
-        # @request.delivery_time =+ 3
-        # @receiver.creator.average_delivery_time = 1 + (@requests.all.sum(:delivery_time) / @receiver.creator.number_of_works)
         UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
         redirect_to request.referer,
           notice: '依頼者への納品完了のメールを送信しました。'

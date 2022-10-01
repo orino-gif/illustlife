@@ -1,9 +1,11 @@
-%meta{:content => "noindex", :name => "robots"}/
 - content_for(:html_title) { 'イラストライフ' }
 %h1.font-Xlarge.background_color-whitesmoke='イラストライフ'
 
 .container
+  / 一話ずつ一覧で表示
   .row
     ='第一話 次世代VRネクストライフ'
-    =link_to image_tag('/img/mobu.png', class: 'size_Xlarge-square fit_cover border_solid-medium'), '/mangas/1/illustlifes/1', data: {"turbolinks" => false}
+    =link_to image_tag('/img/mobu.png',
+      class: 'size_Xlarge-square fit_cover border_solid-medium'),
+      '/mangas/1/illustlifes/1', data: {"turbolinks" => false}
 

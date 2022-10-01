@@ -30,10 +30,10 @@ strong, label, th { font-weight: normal; }
 // ユーザーヘッダーの小さい通知ボタンのデザイン
 .button-notice { background-color: whitesmoke; padding: 3px; }
 
-// リクエスト一覧の表体のセルの幅をブラウザ幅100%/セル数にする
+// 表体のセルの幅の長さを「table全幅/セル数」にする
 .fixed_column { table-layout: fixed; width: 100%; }
 
-// 文字がリクエスト一覧の表のセルをはみ出した場合に、文字を隠す
+// 文字が表のセルをはみ出した場合に、はみ出した文字を隠す
 .hidden_overflow { overflow: hidden; }
 
  // コンテンツの横のマージンの調整
