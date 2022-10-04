@@ -18,8 +18,8 @@ class RequestsController < ApplicationController
   def create
     # ログイン状態で、カード登録済みか開発環境の場合、リクエスト処理を実行
     if user_signed_in?
-      if (nil != Card.find_by(id: current_user.id)) \
-        || ('development' == ENV['RAILS_ENV'])
+      if Card.find_by(id: current_user.id) || \
+        ('development' == ENV['RAILS_ENV'])
         
         @sender = current_user
         @receiver = User.find(params[:authorizer_id])
@@ -30,7 +30,7 @@ class RequestsController < ApplicationController
         @request.status = '承認待ち'
         
         if @request.save
-          UserMailer.request_email(@sender, @receiver, @request).deliver_later
+          UserMailer.request_email(@sender, @receiver).deliver_later
           redirect_to requests_url,
             notice: 'クリエイターへリクエストメールを送信しました。'
             
@@ -53,74 +53,89 @@ class RequestsController < ApplicationController
   end
 
   def show
-    # リクエストページのボタンが押された場合の処理
-    @request = Request.find(params[:id])
-    
-    if params[:request_id]
-      # 各リクエストIDに対応する情報を収集
+    # リクエスト詳細ページのボタンが押された場合の処理
+    if params[:request_id].nil?
+      @request = Request.find(params[:id])
+      
+    elsif params[:request_id]
+      # リクエストIDに対応する依頼者と承認者のインスタンスの生成
       @request = Request.find(params[:request_id])
-      @sender = User.find(Request.find(params[:request_id]).sender_id)
-      @receiver = User.find(Request.find(params[:request_id]).receiver_id)
+      @sender = User.find(@request.sender_id)
+      @receiver = User.find(@request.receiver_id)
       
       # リクエストステータスに対応する処理を実行
       if '拒否' == params[:status]
-        UserMailer.refusal_email(@sender, @receiver, @request).deliver_later
-        redirect_to request.referer,
-          notice: '依頼者からのリクエストを拒否しました。'
+        UserMailer.refusal_email(@sender, @receiver).deliver_later
         
+         flash.now[:notice] = '依頼者からのリクエストを拒否しました。'
+         render :show
+
       elsif '製作中' == params[:status]
         @card = Card.find_by(id: @sender.id)
         Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+        
         begin
           Payjp::Charge.create(:amount => params[:amount],
             :customer => @card.customer_id, :currency => 'jpy')
-          UserMailer.consent_email(@sender, @receiver, @request).deliver_later
-          redirect_to request.referer,
-            notice: '依頼者へ承諾のメールを送信しました。'
+            
+          UserMailer.consent_email(@sender, @receiver).deliver_later
+          
+          flash.now[:notice] = '依頼者へ承諾のメールを送信しました。'
+          render :show
+
         rescue Payjp::PayjpError => e
           @request.status = '購入者クレジット不備によるキャンセル'
+          
           UserMailer.card_declined_email(@sender,
             @receiver, @request).deliver_later
+            
           p "例外エラー:" + e.to_s
+          
           flash.now[:alert] = "購入者側の決済の問題でキャンセルとなりました。" 
           render :show
         end
         
       elsif '製作中断' == params[:status]
         @request.is_in_time_for_the_deadline = false
-        @receiver.creator.number_of_approval -= 1
-        @receiver.creator.evaluation_points -= 1
-        UserMailer.suspension_email(@sender, @receiver, @request).deliver_later
-        redirect_to request.referer,
-          notice: '依頼者へ中断のメールを送信しました。'
+        @receiver.creator.evaluation_points -= 20
         
+        UserMailer.suspension_email(@sender, @receiver).deliver_later
+        flash.now[:notice] = '依頼者へ作業中断のメールを送信しました。'
+        render :show
+         
       elsif '納品完了' == params[:status]
         @request.is_in_time_for_the_deadline = true
+        
         if false == @request.is_reworked
           @receiver.creator.number_of_works += 1
-          @receiver.creator.evaluation_points += 1
+          @receiver.creator.evaluation_points += 10
+          
           @receiver.creator.earnings += @request.money
           @receiver.creator.withdrawal_amount += @request.money
           @request.approval_day = Time.now
         end
-        UserMailer.deliver_email(@sender, @receiver, @request).deliver_later
-        redirect_to request.referer,
-          notice: '依頼者への納品完了のメールを送信しました。'
         
+        UserMailer.deliver_email(@sender, @receiver).deliver_later
+        flash.now[:notice] = '依頼者への納品完了のメールを送信しました。'
+        render :show
+
       elsif '手戻し' == params[:status]
         @request.is_reworked = true
         @request.is_in_time_for_the_deadline = false
-        UserMailer.rework_email(@sender, @receiver, @request).deliver_later
-        redirect_to request.referer,
-          notice: '依頼者への手戻りのメールを送信しました。'
+        
+        UserMailer.rework_email(@sender, @receiver).deliver_later
+        flash.now[:notice] = '依頼者への手戻りのメールを送信しました。'
+        render :show
       end
 
       if 0 != @receiver.creator.number_of_approval
         @receiver.creator.deadline_strict_adherence_rate = 100
       end
+      
       if @request.status != '購入者クレジット不備によるキャンセル'
         @request.status = params[:status]
       end
+      
       @request.save
       @receiver.creator.save
     end
@@ -134,7 +149,8 @@ class RequestsController < ApplicationController
       # send_data(送るデータ, オプション={failname:保存するときのファイル名})
       send_data(image.read, filename: "download#{File.extname(image.path)}")
     else
-      redirect_to request.referer, alert: '画像がアップロードされていません'
+      flash.now[:alert] = '画像がアップロードされていません。'
+      render :show
     end
   end
   
@@ -174,11 +190,6 @@ class RequestsController < ApplicationController
         redirect_to request.referer, alert: 'ファイルが選択されていません'
       end
     end
-    
-    # if @request.update(creator_params)
-    #   p 'bbb'
-    #   redirect_to request_path(@request.id)
-    # end
   end
   
   private

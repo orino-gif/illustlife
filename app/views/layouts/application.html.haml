@@ -23,7 +23,7 @@
       ｜イラストライフ
     
     / サイト説明
-    %meta{:content => "好きな作品の個人製作者に
+    %meta{:content => "漫画やイラスト制作のスキルや資金が不足している個人製作者に
       リクエストする形で支援するコミッションサイト", :name => "description"}/
       
     / integrity:html検証,crossorigin:ユーザー認証情報anonymous(不要)
@@ -66,9 +66,10 @@
     / コンテンツセキュリティポリシーの適用
     = csp_meta_tag
     
-    / テスト環境と特定した本番のページ以外は、google検索ページに表示しない
-    - if ('homes' != controller.controller_name) && ('manuals' != controller.controller_name)
-      %meta{:content => "noindex", :name => "robots"}/
+    / homesとmanualsのページ以外は、google検索に表示しない
+    - if 'homes' != controller.controller_name
+      - if 'manuals' != controller.controller_name
+        %meta{:content => "noindex", :name => "robots"}/
 
   %body
     / ヘッダーの内容を表示
@@ -80,7 +81,7 @@
           .col-auto.d-flex.align-items-center
             = link_to image_tag('/img/symbol.png',
               class: 'size_small-square'), root_path
-          
+
           / サービス名を表示
           .col-auto
             %span.font-Xlarge

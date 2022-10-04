@@ -79,15 +79,18 @@
                 
       .col-sm-auto
         .string_indention-medium
-          - if not current_user.nil?
-            - if receiver.nickname == current_user.nickname
-              - if '承認待ち' == @request.status
-                = "#{sender.nickname}さんから#{receiver.nickname}さんへのリクエストを承認しますか？"
-                = button_to '承認', {controller:'requests', action:'show'},
-                  {method: :get, params:{status:'製作中', request_id:@request.id,
-                  amount:@request.money}}
-                %br= button_to '拒否', {controller:'requests', action:'show'},
-                  {method: :get, params:{status:'拒否', request_id:@request.id}}
+          - if user_signed_in? && receiver.id == current_user.id
+            - if '承認待ち' == @request.status
+              = "#{sender.nickname}さんから"
+              = "#{receiver.nickname}さんへのリクエストを承認しますか？"
+              
+              = button_to '承認', {controller:'requests', action:'show'},
+                {method: :get, params:{status:'製作中', request_id:@request.id,
+                amount:@request.money}}
+                
+              %br
+                = button_to '拒否', {controller:'requests', action:'show'},
+                {method: :get, params:{status:'拒否', request_id:@request.id}}
       
         - if '承認待ち' != @request.status
           - if @request.deliver_img?
@@ -134,9 +137,9 @@
                 @request.deliver_img2.url
               %p.on_card SAMPLE
                     
-          - if (not @request.deliver_img.blank?) || (@request.deliver_img2?)
+          - if (not @request.deliver_img.blank?) || @request.deliver_img2?
             - if user_signed_in?
-              - if receiver.nickname == current_user.nickname
+              - if receiver.id == current_user.id
                 - if '納品完了' != @request.status
                   = form_with(model: @request, local: true) do |f|
                     = f.hidden_field :request_id, :value => @request.id
