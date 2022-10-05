@@ -67,8 +67,8 @@ class RequestsController < ApplicationController
       if '拒否' == params[:status]
         UserMailer.refusal_email(@sender, @receiver).deliver_later
         
-         flash.now[:notice] = '依頼者からのリクエストを拒否しました。'
-         render :show
+         redirect_to request.referer,
+          notice: '依頼者からのリクエストを拒否しました'
 
       elsif '製作中' == params[:status]
         @card = Card.find_by(id: @sender.id)
@@ -80,8 +80,8 @@ class RequestsController < ApplicationController
             
           UserMailer.consent_email(@sender, @receiver).deliver_later
           
-          flash.now[:notice] = '依頼者へ承諾のメールを送信しました。'
-          render :show
+          redirect_to request.referer,
+          notice: '依頼者へ承諾のメールを送信しました'
 
         rescue Payjp::PayjpError => e
           @request.status = '購入者クレジット不備によるキャンセル'
@@ -90,9 +90,8 @@ class RequestsController < ApplicationController
             @receiver, @request).deliver_later
             
           p "例外エラー:" + e.to_s
-          
-          flash.now[:alert] = "購入者側の決済の問題でキャンセルとなりました。" 
-          render :show
+          redirect_to request.referer,
+          alert: '購入者側の決済の問題でキャンセルとなりました'
         end
         
       elsif '製作中断' == params[:status]
@@ -100,8 +99,9 @@ class RequestsController < ApplicationController
         @receiver.creator.evaluation_points -= 20
         
         UserMailer.suspension_email(@sender, @receiver).deliver_later
-        flash.now[:notice] = '依頼者へ作業中断のメールを送信しました。'
-        render :show
+        redirect_to request.referer,
+          notice: '依頼者へ作業中断のメールを送信しました'
+
          
       elsif '納品完了' == params[:status]
         @request.is_in_time_for_the_deadline = true
@@ -116,16 +116,18 @@ class RequestsController < ApplicationController
         end
         
         UserMailer.deliver_email(@sender, @receiver).deliver_later
-        flash.now[:notice] = '依頼者への納品完了のメールを送信しました。'
-        render :show
+        
+        redirect_to request.referer,
+          notice: '依頼者への納品完了のメールを送信しました'
 
       elsif '手戻し' == params[:status]
         @request.is_reworked = true
         @request.is_in_time_for_the_deadline = false
         
         UserMailer.rework_email(@sender, @receiver).deliver_later
-        flash.now[:notice] = '依頼者への手戻りのメールを送信しました。'
-        render :show
+        
+        redirect_to request.referer,
+          notice: '依頼者への手戻りのメールを送信しました'
       end
 
       if 0 != @receiver.creator.number_of_approval
@@ -180,14 +182,16 @@ class RequestsController < ApplicationController
     else
       p @request.errors.full_messages[0]
       if @request.errors.full_messages[0].include?("extension_whitelist_error")
-        redirect_to request.referer,
-          alert: '本サービスのファイル対応形式(png,jpg,jpeg,gif)外です'
-          
+        flash.now[:alert] = 'ファイル対応形式(png,jpg,jpeg,gif)外です。'
+        render :show
+
       elsif @request.errors.full_messages[0].include?("max_size_error")
-        redirect_to request.referer,
-          alert: 'ファイルサイズが本サービスの対応外(1GBより大きい)です'
-      else  
-        redirect_to request.referer, alert: 'ファイルが選択されていません'
+        flash.now[:alert] = 'ファイルサイズが対応外(1GBより大きい)です'
+        render :show
+
+      else
+        flash.now[:alert] = 'ファイルが選択されていません'
+        render :show
       end
     end
   end
