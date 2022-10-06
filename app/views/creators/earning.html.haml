@@ -17,11 +17,7 @@
             {controller: 'creators', action: 'earning'},
             {method: :get, class: "btn btn-light font-medium",
             params:{withdrawal_status: '引き落とし内容確認'}}
-            
-    - elsif 0 == @creator.withdrawal_amount.to_i
-      .row.my-5.font-medium.margin_side-small
-        = "引き落とし対象額が0円の為、申請できません。"
-        
+
     - elsif '引き落とし内容確認' == @withdrawal_status
       .row.font-medium.margin_side-small.border.border-secondary
         %br
