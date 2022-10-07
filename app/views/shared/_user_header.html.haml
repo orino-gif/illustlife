@@ -63,9 +63,8 @@
   = "、作業予定日数：#{@creator.working_days}日"
   
   - if 0 != @creator.number_of_works
-    = "、納品数：#{@creator.number_of_works}点、"
-    = "締切厳守率：#{@creator.deadline_strict_adherence_rate}%、"
-    = "返信率:#{@creator.reply_rate}%"
+    = "、締切厳守率：#{@creator.deadline_strict_adherence_rate}%"
+    = "、返信率:#{@creator.reply_rate}%"
   - else
     - if 'new' != controller.action_name
       %br

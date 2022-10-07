@@ -71,27 +71,34 @@ class RequestsController < ApplicationController
           notice: '依頼者からのリクエストを拒否しました'
 
       elsif '製作中' == params[:status]
-        @card = Card.find_by(id: @sender.id)
-        Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+        if @card = Card.find_by(id: @sender.id)
+          Payjp.api_key = ENV['PAYJP_SECRET_KEY']
         
-        begin
-          Payjp::Charge.create(:amount => params[:amount],
-            :customer => @card.customer_id, :currency => 'jpy')
+          begin
+            Payjp::Charge.create(:amount => params[:amount],
+              :customer => @card.customer_id, :currency => 'jpy')
+              
+          rescue Payjp::PayjpError => e
+            @request.status = '購入者の決済設定不備によるキャンセル'
             
-          UserMailer.consent_email(@sender, @receiver).deliver_later
+            # 承認者へ決済不備によるキャンセルを知らせる
+            UserMailer.card_declined_email(@sender,
+              @receiver, @request).deliver_later
+              
+            p "例外エラー:" + e.to_s
+            redirect_to request.referer,
+            alert: '購入者側の決済の問題でキャンセルとなりました'
+          end
           
+          UserMailer.consent_email(@sender, @receiver).deliver_later
           redirect_to request.referer,
           notice: '依頼者へ承諾のメールを送信しました'
-
-        rescue Payjp::PayjpError => e
-          @request.status = '購入者クレジット不備によるキャンセル'
           
-          UserMailer.card_declined_email(@sender,
-            @receiver, @request).deliver_later
-            
-          p "例外エラー:" + e.to_s
+        else
+          @request.status = '購入者の決済設定不備によるキャンセル'
+          
           redirect_to request.referer,
-          alert: '購入者側の決済の問題でキャンセルとなりました'
+            alert: '購入者側のクレジットが未登録の為、キャンセルとなりました'
         end
         
       elsif '製作中断' == params[:status]

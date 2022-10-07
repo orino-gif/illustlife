@@ -14,7 +14,7 @@
         %th=""
   
   / 表体を表示
-  - if not @requests.empty? then
+  - if not @requests.empty?
     - @requests.reverse_each.with_index(1) do |request|
       - @request = request
       = render 'shared/request.html'

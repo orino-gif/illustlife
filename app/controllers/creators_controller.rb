@@ -30,7 +30,12 @@ class CreatorsController < ApplicationController
     end
       
     if '引き落とし内容確認' == params[:withdrawal_status]
-      @withdrawal_status = '引き落とし内容確認'
+      if @creator.withdrawal_amount > 0
+        @withdrawal_status = '引き落とし内容確認'
+      else
+        flash.now[:alert] = '引き落とし対象額が0円です'
+          render :earning
+      end
       
     elsif '引き落とし実行' == params[:withdrawal_status]
       @withdrawal_status = '引き落とし実行'
@@ -55,6 +60,7 @@ class CreatorsController < ApplicationController
           notification_users.each do |user|
             @notification_user = User.find(user.notification_user)
             @resume_user = User.find(user.resume_user)
+            
             UserMailer.resume_info(@notification_user,
               @resume_user).deliver_later
           end

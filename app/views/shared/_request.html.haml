@@ -108,7 +108,7 @@
               
           - if user_signed_in?
             - if receiver.nickname == current_user.nickname
-              - if '購入者クレジット不備によるキャンセル' != @request.status
+              - if '購入者の決済設定不備によるキャンセル' != @request.status
               
                 - if '納品完了' != @request.status
                 
@@ -193,17 +193,18 @@
               class:'size_large-rectangle fit_cover'), @request.deliver_img5.url
             %p.on_card SAMPLE
           
-          - if (not @request.deliver_img4.blank?) || (@request.deliver_img5?)          
-            - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @request.status)
-              = form_with(model: @request, local: true) do |f|
-                = f.hidden_field :request_id, :value => @request.id
-                - if @request.deliver_img5.blank?
-                  %br= '5枚目'
-                  = f.file_field :deliver_img5
-                  = f.submit '登録'
-                - else
-                  = f.hidden_field :cancel, :value => 'キャンセル5'
-                  = f.submit '取り消し'
+          - if (not @request.deliver_img4.blank?) || @request.deliver_img5?
+            - if user_signed_in? && receiver.nickname == current_user.nickname
+              - if '納品完了' != @request.status
+                = form_with(model: @request, local: true) do |f|
+                  = f.hidden_field :request_id, :value => @request.id
+                  - if @request.deliver_img5.blank?
+                    %br= '5枚目'
+                    = f.file_field :deliver_img5
+                    = f.submit '登録'
+                  - else
+                    = f.hidden_field :cancel, :value => 'キャンセル5'
+                    = f.submit '取り消し'
                   
           - if @request.deliver_img6?
             %br= '6枚目'
