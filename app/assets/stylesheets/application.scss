@@ -8,7 +8,7 @@
 @import "bootstrap";
 
 // 見出しのデザイン
-h1 {padding: 0.2em 0.8em; }
+h1 {padding: 0.4em 0.8em; }
 h2 {border-bottom: 3px dotted black;}
 
 // 色変更、下線装飾無し(!importantで優先順位を上げる)
@@ -108,7 +108,7 @@ p.on_card { position: absolute;top:auto; left:auto;
 // メディアクエリ　bootstrapのブレークポイント値に合わせる//
 // Extra large
 @media screen and (min-width: 1200px){
-  @include size_font(2.5em, 1.5em, 1.1em, 0.9em, 0.8em);
+  @include size_font(2.0em, 1.5em, 1.1em, 0.9em, 0.8em);
   @include size_square(150px, 120px, 80px, 50px);
   @include size_rectangle(300px, 180px, 130px, 50px);
   @include position_top(-100px, -68px, -38px, -13px);

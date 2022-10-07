@@ -1,17 +1,16 @@
-- content_for(:html_title) { '好きなイラスト・漫画製作を手軽に依頼' }
-%h1.font-Xlarge.background_color-whitesmoke クリエイター紹介
+- content_for(:html_title) { '伝えたい事をイラストで伝える' }
+%h1.font-Xlarge.background_color-whitesmoke トップページ
 
 .container
   - if Rails.env.development?
     / 開発中の漫画ビュワー
     .row
-      %h2.font-large 投稿作品
+      %h2.font-large プチ個展
       
     .row
       =link_to image_tag('/img/mobu.png',
         class: 'size_Xlarge-square fit_cover border_solid-medium'),
         '/mangas/1/illustlifes'
-          
     
   - if @requests
     .row
