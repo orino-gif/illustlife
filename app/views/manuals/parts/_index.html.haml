@@ -1,11 +1,14 @@
 .container
   .row.my-5.border
     .col-1
-    .col-6
+    .col-6.pb-3
       %h2 目次
       = link_to "このサイトで出来る事", home_manual_path(1,3),
         class:"font-medium"
       %br
         = link_to "プチ個展（※開発中）", home_manual_path(1,2),
           class:"font-medium"
-      = link_to "テスト版(2022/7月～現在)について", home_manual_path(1,1), class:"font-medium"
+      = link_to "テスト版(2022/7月～現在)について", home_manual_path(1,1),
+        class:"font-medium"
+      %br
+        = link_to "開発者より", home_manual_path(1,4), class:"font-medium"
