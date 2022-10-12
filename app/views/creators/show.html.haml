@@ -7,8 +7,10 @@
   = render 'shared/user_header'
   
   / 納品したリクエストのリンク付き画像を表示
-  .row
-    - if @requests
+  - if not @requests.empty?
+    .row
+      %h2.font-large= "リクエスト作品"
+    .row
       - @requests.reverse_each do |request|
         .col3.m-2
           - if request.deliver_img  
