@@ -5,11 +5,14 @@
 .container
   / ユーザーヘッダーの表示
   = render 'shared/user_header'
-  
+  .row
+    %h2.font-large イラスト晒し
+  .row
+    = button_to '晒す', new_exposure_path, class:"font-large", method: :get
   / 納品したリクエストのリンク付き画像を表示
   - if not @requests.empty?
     .row
-      %h2.font-large= "リクエスト作品"
+      %h2.font-large リクエスト作品
     .row
       - @requests.reverse_each do |request|
         .col3.m-2

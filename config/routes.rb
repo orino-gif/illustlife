@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   end
   
   resources :explanations, only: [:index, :new, :create]
+  resources :exposures, only: [:index, :new, :create, :show]
   
   resources :homes, only: [:index] do
     resources :manuals, only: [:index, :show] do

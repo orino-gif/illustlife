@@ -71,9 +71,7 @@ class CreatorsController < ApplicationController
       redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
       
     else # ユーザー編集後の値の保存に失敗した場合
-    
       p @creator.errors.full_messages[0]
-      
       if @creator.errors.full_messages[0].include?("amount")
         flash.now[:alert] = "金額入力の数値が範囲外です" 
         render :edit

@@ -27,6 +27,9 @@ strong, label, th { font-weight: normal; }
  // アスペクト比を維持して表示
 .fit_cover { object-fit: cover; }
 
+ // 画面の中に画像を表示
+.fit_contain { object-fit: contain; }
+
 // ユーザーヘッダーの小さい通知ボタンのデザイン
 .button-notice { background-color: whitesmoke; padding: 3px; }
 
@@ -41,15 +44,15 @@ strong, label, th { font-weight: normal; }
 .margin_side-small { margin : 0 10px; }
 
 /*-----------矢印表示----------*/
-.slick-next{ right:0!important; }
-.slick-prev{ left:0!important;}
+.slick-next{ right: 0!important; }
+.slick-prev{ left: 0!important;}
 .slick-arrow { width: initial!important; height: initial!important;
   z-index:2!important;}
-.slick-arrow:before { font-size: 50px!important;  color:whitesmoke!important; }
+.slick-arrow:before { font-size: 50px!important;  color: whitesmoke!important; }
 
 // 画像の上にSAMPLE文字を表示
-p.on_card { position: absolute;top:auto; left:auto;
-  transform: translate(40%,-290%);  font-size:40px; color: white; padding:0;
+p.on_card { position: absolute; top: auto; left: auto;
+  transform: translate(40%,-290%);  font-size: 40px; color: white; padding: 0;
   margin:0; opacity: 0.5;
 }
 
@@ -120,7 +123,7 @@ p.on_card { position: absolute;top:auto; left:auto;
 }
 // Large
 @media screen and (max-width: 1199px){
-  @include size_font(2.4em, 1.4em, 1.1em, 0.8em, 0.7em);
+  @include size_font(1.9em, 1.4em, 1.1em, 0.8em, 0.7em);
   @include size_square(150px, 110px, 70px, 40px);
   @include size_rectangle(250px, 170px, 125px, 50px);
   @include position_top(-95px, -62px, -28px, -12px);
@@ -132,7 +135,7 @@ p.on_card { position: absolute;top:auto; left:auto;
 }
 // Medium
 @media screen and (max-width: 991px){
-  @include size_font(2.3em, 1.3em, 1.0em, 0.7em, 0.6em);
+  @include size_font(1.8em, 1.3em, 1.0em, 0.7em, 0.6em);
   @include size_square(150px, 100px, 60px, 35px);
   @include size_rectangle(200px, 160px, 110px, 50px);
   @include position_top(-90px, -54px, -24px, -11px);
@@ -144,7 +147,7 @@ p.on_card { position: absolute;top:auto; left:auto;
 }
 // Small
 @media screen and (max-width: 767px){
-  @include size_font(2.2em, 1.2em, 0.9em, 0.6em, 0.5em);
+  @include size_font(1.7em, 1.2em, 0.9em, 0.6em, 0.5em);
   @include size_square(150px, 90px, 50px, 32px);
   @include size_rectangle(100%, 150px, 105px, 50px);
   @include position_top(-85px, -42px, -22px, -10px);
@@ -156,7 +159,7 @@ p.on_card { position: absolute;top:auto; left:auto;
 }
 // Extra small
 @media screen and (max-width: 575px){
-  @include size_font(1.8em, 1.1em, 0.8em, 0.5em, 0.4em);
+  @include size_font(1.6em, 1.1em, 0.8em, 0.5em, 0.4em);
   @include size_square(110px, 70px, 40px, 28px);
   @include size_rectangle(100%, 120px, 100px, 50px);
   @include position_top(-65px, -35px, -18px, -10px);

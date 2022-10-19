@@ -14,10 +14,10 @@
           
           = f.text_field :money, class:'form-control font-large size_large-form',
             value: @creator.recommended_amount.to_s
-            
+          
+          - input_range = @creator.minimum_amount.to_s(:delimited) + '～￥99,999'
           = f.label :money, 
-            '入力範囲:￥' + @creator.minimum_amount.to_s(:delimited) + '～￥99,999', 
-            class:'font-Xsmall'
+            '入力範囲:￥' + input_range, class:'font-Xsmall'
             
         .form-group.mt-4
           = f.label :message, '本文(700文字以内)'
