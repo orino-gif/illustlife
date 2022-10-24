@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_12_180637) do
+ActiveRecord::Schema.define(version: 2022_10_24_144341) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "customer_id", null: false
@@ -27,26 +27,20 @@ ActiveRecord::Schema.define(version: 2022_10_12_180637) do
     t.string "instagram"
     t.string "youtube"
     t.string "link"
-    t.integer "recommended_amount", default: 5000
-    t.integer "minimum_amount", default: 1000
-    t.integer "working_days", default: 14
-    t.integer "number_of_request", default: 0
-    t.integer "number_of_approval", default: 0
-    t.integer "number_of_works", default: 0
-    t.float "average_delivery_time", default: 0.0
-    t.float "deadline_strict_adherence_rate", default: 100.0
-    t.float "reply_rate", default: 100.0
-    t.boolean "request_acceptance_permission", default: false
-    t.integer "creator_points", default: 0
-    t.integer "evaluation_points", default: 50
+    t.integer "recommend", default: 5000
+    t.integer "minimum", default: 1000
+    t.integer "working", default: 14
+    t.integer "painting", default: 0
+    t.float "deadline", default: 100.0
+    t.float "reply", default: 100.0
+    t.boolean "opening", default: false
+    t.integer "points", default: 0
+    t.integer "evaluation", default: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "nsfw", default: false
     t.integer "earnings", default: 0
-    t.integer "withdrawal_amount", default: 0
-    t.string "chara_design"
-    t.string "chara_design2"
-    t.string "chara_design3"
+    t.integer "withdrawal", default: 0
   end
 
   create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -104,9 +98,6 @@ ActiveRecord::Schema.define(version: 2022_10_12_180637) do
     t.string "deliver_img6"
     t.boolean "is_reworked", default: false
     t.text "evaluation_comment"
-    t.string "request_field"
-    t.string "img_size"
-    t.string "fix_num"
   end
 
   create_table "resumes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

@@ -4,5 +4,5 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
     %br="#{@creator.user.nickname}さんからの引き落とし申請を受付ました。"
-    %br="引き落とし額：#{(@creator.withdrawal_amount*0.85).to_i}円 - 銀行振込手数料"
+    %br="引き落とし額：#{(@creator.withdrawal*0.85).to_i}円 - 銀行振込手数料"
     %br="※金融機関や運営局の営業日により２～３日遅れる事があります。予めご了承ください。"

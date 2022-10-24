@@ -15,7 +15,7 @@
     - if 'requests' != controller.controller_name
     
       / リクエストを受付ていない場合は、STOP画像を表示
-      - if true == @creator.request_acceptance_permission
+      - if true == @creator.opening
       
         / リクエスト先が自分自身の場合、リンクを付与しない
         - if (user_signed_in?) && (params[:id].to_i == current_user.id.to_i)
@@ -59,12 +59,12 @@
 / 実績表示
 .row.my-5.mx-5
   = "ニックネーム：#{@creator.user.nickname}"
-  = "、推奨金額：#{@creator.recommended_amount}円"
-  = "、作業予定日数：#{@creator.working_days}日"
+  = "、推奨金額：#{@creator.recommend}円"
+  = "、作業予定日数：#{@creator.working}日"
   
-  - if 0 != @creator.number_of_works
-    = "、締切厳守率：#{@creator.deadline_strict_adherence_rate}%"
-    = "、返信率:#{@creator.reply_rate}%"
+  - if 0 != @creator.painting
+    = "、締切厳守率：#{@creator.deadline}%"
+    = "、返信率:#{@creator.reply}%"
   - else
     - if 'new' != controller.action_name
       %br

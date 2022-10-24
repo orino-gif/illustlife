@@ -73,23 +73,23 @@
       %tr
         %td
           = form_with(model: @creator, local:true) do |f|
-            = f.label :recommended_amount, '推奨金額(円):'
-            = f.text_field :recommended_amount
-            = f.label :minimum_amount, '最低金額(円):'
-            = f.text_field :minimum_amount
+            = f.label :recommend, '推奨金額(円):'
+            = f.text_field :recommend
+            = f.label :minimum, '最低金額(円):'
+            = f.text_field :minimum
             = f.submit '登録'
       %tr
         %td
           = form_with(model: @creator, local:true) do |f|
-            = f.label :request_acceptance_permission, 'リクエスト受付:'
+            = f.label :opening, 'リクエスト受付:'
             // @creditの値がnilかfailsでなく、口座情報の値が全て埋まっている場合
             - if @is_credit_all || ('development' == ENV['RAILS_ENV'])
             
-              - if true != @creator.request_acceptance_permission
-                = f.hidden_field :request_acceptance_permission, value:true
+              - if true != @creator.opening
+                = f.hidden_field :opening, value:true
                 = f.submit '開始', :name => 'accepting_requests'
               - else
-                = f.hidden_field :request_acceptance_permission, value:false
+                = f.hidden_field :opening, value:false
                 = f.submit '停止'
             - else
               %button{:disabled => "disabled", :type => "submit"}='開始'
@@ -101,8 +101,8 @@
       %tr
         %td
           = form_with(model: @creator, local:true) do |f|
-            = f.label :working_days, '作業予定日数(日)：'
-            = f.text_field :working_days, :size => '5'
+            = f.label :working, '作業予定日数(日)：'
+            = f.text_field :working, :size => '5'
             = f.submit '変更'
             
   .row.my-5

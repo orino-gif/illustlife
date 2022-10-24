@@ -8,7 +8,7 @@
       %h2.font-large プチ個展
       
     .row
-      =link_to image_tag('/img/mobu.png',
+      = link_to image_tag('/img/mobu.png',
         class: 'size_Xlarge-square fit_cover border_solid-medium'),
         '/mangas/1/illustlifes'
     
@@ -31,8 +31,8 @@
         - break if 30 == index
          
     
-    .row
-      %h2.font-large リクエスト作品
+    // .row
+    //   %h2.font-large リクエスト作品
     
     / 納品された作品を作成日時が新しい順に30点表示 
     .row.margin_side-Xsmall
@@ -41,7 +41,7 @@
         - if request.deliver_img
           .padding_side-small.text-center.py-2
           
-            = link_to image_tag(request.deliver_img.url,
-              class: 'size_Xlarge-square fit_cover border_solid-medium'),
-              "/requests/#{request.id}"
+            // = link_to image_tag(request.deliver_img.url,
+            //   class: 'size_Xlarge-square fit_cover border_solid-medium'),
+            //   "/requests/#{request.id}"
         - break if 30 === index

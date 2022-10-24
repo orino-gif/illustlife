@@ -4,15 +4,12 @@ class Creator < ApplicationRecord
   # 新規ユーザー登録時に生成されるcreatorレコードと連動する
   mount_uploader :header, CreatorUploader
   mount_uploader :icon, CreatorUploader
-  mount_uploader :chara_design, CreatorUploader
-  mount_uploader :chara_design2, CreatorUploader
-  mount_uploader :chara_design3, CreatorUploader
 
   # 推奨金額入力値が1000以上の数字のみ。空でないこと。
-  validates :recommended_amount, presence: true,
+  validates :recommend, presence: true,
     numericality: {only_integer: true, greater_than_or_equal_to: 1000}
     
   # 最小金額入力値が1000以上の数字のみ。空でないこと。
-  validates :minimum_amount, presence: true,
+  validates :minimum, presence: true,
     numericality: {only_integer: true, greater_than_or_equal_to: 1000}
 end

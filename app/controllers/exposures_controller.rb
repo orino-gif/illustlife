@@ -9,7 +9,7 @@ class ExposuresController < ApplicationController
   def create
     @exposure = Exposure.new(exposures_params)
     if @exposure.save
-      redirect_to exposures_url
+      redirect_to exposure_contributors_url(1,1)
     end
   end
 

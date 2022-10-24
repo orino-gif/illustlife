@@ -30,7 +30,7 @@ class CreatorsController < ApplicationController
     end
       
     if '引き落とし内容確認' == params[:withdrawal_status]
-      if @creator.withdrawal_amount > 0
+      if @creator.withdrawal > 0
         @withdrawal_status = '引き落とし内容確認'
       else
         flash.now[:alert] = '引き落とし対象額が0円です'
@@ -41,7 +41,7 @@ class CreatorsController < ApplicationController
       @withdrawal_status = '引き落とし実行'
       UserMailer.info_withdrawal(@creator).deliver_later
       sleep(5)
-      @creator.withdrawal_amount = 0
+      @creator.withdrawal = 0
       @creator.save
     end
   end
@@ -87,8 +87,7 @@ class CreatorsController < ApplicationController
 
   def creators_params
     params.require(:creator).permit(:header, :icon, :twitter, :pixiv, :instagram,
-      :youtube, :link, :request_acceptance_permission, :recommended_amount,
-      :working_days, :minimum_amount, :nsfw, :temp_img)
+      :youtube, :link, :opening, :recommend, :working, :minimum, :nsfw, :temp_img)
   end
 
   def set_creator

@@ -96,7 +96,7 @@
               / ポイント表示
               - if 'creators' == controller.controller_name
                 - if 'show' == controller.action_name
-                  ="#{current_user.creator.creator_points}ポイント"
+                  ="#{current_user.creator.points}ポイント"
                   
               / ログインユーザーアイコン表示    
               = display_icon(current_user.creator,

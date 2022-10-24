@@ -7,5 +7,7 @@
     = form_with(model: @exposure, local:true) do |f|
       = f.label :exposed_img , '晒すイラスト：'
       = f.file_field :exposed_img, class:"preview-uploader"
+      
       .preview.background_color-whitesmoke.size_medium-rectangle
+      = f.hidden_field :contributor_id, value:params[:id]
       = f.submit '晒す'

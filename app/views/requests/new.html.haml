@@ -13,9 +13,9 @@
           = f.label :money, '推奨金額(円)'
           
           = f.text_field :money, class:'form-control font-large size_large-form',
-            value: @creator.recommended_amount.to_s
+            value: @creator.recommend.to_s
           
-          - input_range = @creator.minimum_amount.to_s(:delimited) + '～￥99,999'
+          - input_range = @creator.minimum.to_s(:delimited) + '～￥99,999'
           = f.label :money, 
             '入力範囲:￥' + input_range, class:'font-Xsmall'
             
@@ -32,7 +32,7 @@
           = f.check_box :is_anonymous ,{},checked_value = "true",
             unchecked_value = "false"
           = f.label :is_anonymous, '非公開'
-          
+
           %br
           = f.check_box :is_autographed ,{},checked_value = "true",
             unchecked_value = "false"

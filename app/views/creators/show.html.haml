@@ -8,7 +8,7 @@
   .row
     %h2.font-large イラスト晒し
   .row
-    = button_to '晒す', new_exposure_path, class:"font-large", method: :get
+    = button_to '晒す', "/exposures/#{params[:id]}/new", class:"font-large", method: :get
   / 納品したリクエストのリンク付き画像を表示
   - if not @requests.empty?
     .row
@@ -16,7 +16,7 @@
     .row
       - @requests.reverse_each do |request|
         .col3.m-2
-          - if request.deliver_img  
+          - if request.deliver_img
             = link_to image_tag(request.deliver_img.url,
               class: 'size_Xlarge-square fit_cover border_solid-medium'),
               "/requests/#{request.id}"

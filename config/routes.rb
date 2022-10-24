@@ -34,11 +34,15 @@ Rails.application.routes.draw do
   end
   
   resources :explanations, only: [:index, :new, :create]
-  resources :exposures, only: [:index, :new, :create, :show]
+  resources :exposures, only: [:index, :create, :show] do
+    collection do
+      get '/:id/new', to: 'exposures#new'
+    end
+    resources :contributors, only: [:index, :show]
+  end
   
   resources :homes, only: [:index] do
-    resources :manuals, only: [:index, :show] do
-    end
+    resources :manuals, only: [:index, :show]
   end
   
   resources :mangas, only: [:index, :show]  do

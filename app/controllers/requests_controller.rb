@@ -103,7 +103,7 @@ class RequestsController < ApplicationController
         
       elsif '製作中断' == params[:status]
         @request.is_in_time_for_the_deadline = false
-        @receiver.creator.evaluation_points -= 20
+        @receiver.creator.evaluation -= 20
         
         UserMailer.suspension_email(@sender, @receiver).deliver_later
         redirect_to request.referer,
@@ -114,11 +114,11 @@ class RequestsController < ApplicationController
         @request.is_in_time_for_the_deadline = true
         
         if false == @request.is_reworked
-          @receiver.creator.number_of_works += 1
-          @receiver.creator.evaluation_points += 10
+          @receiver.creator.painting += 1
+          @receiver.creator.evaluation += 10
           
           @receiver.creator.earnings += @request.money
-          @receiver.creator.withdrawal_amount += @request.money
+          @receiver.creator.withdrawal += @request.money
           @request.approval_day = Time.now
         end
         
@@ -137,9 +137,9 @@ class RequestsController < ApplicationController
           notice: '依頼者への手戻りのメールを送信しました'
       end
 
-      if 0 != @receiver.creator.number_of_approval
-        @receiver.creator.deadline_strict_adherence_rate = 100
-      end
+
+      @receiver.creator.deadline = 100
+
       
       if @request.status != '購入者クレジット不備によるキャンセル'
         @request.status = params[:status]
