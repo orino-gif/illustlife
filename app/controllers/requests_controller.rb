@@ -62,6 +62,7 @@ class RequestsController < ApplicationController
       @request = Request.find(params[:request_id])
       @sender = User.find(@request.sender_id)
       @receiver = User.find(@request.receiver_id)
+      # @receiver_p = Performance.find_by(creator_id:@request.receiver_id)
       
       # リクエストステータスに対応する処理を実行
       if '拒否' == params[:status]
@@ -102,8 +103,7 @@ class RequestsController < ApplicationController
         end
         
       elsif '製作中断' == params[:status]
-        @request.is_in_time_for_the_deadline = false
-        @receiver.creator.evaluation -= 20
+        @receiver.creator.performance.evaluation -= 20
         
         UserMailer.suspension_email(@sender, @receiver).deliver_later
         redirect_to request.referer,
@@ -111,14 +111,13 @@ class RequestsController < ApplicationController
 
          
       elsif '納品完了' == params[:status]
-        @request.is_in_time_for_the_deadline = true
-        
         if false == @request.is_reworked
-          @receiver.creator.painting += 1
-          @receiver.creator.evaluation += 10
+
+          @receiver.creator.performance.painting += 1
+          @receiver.creator.performance.evaluation += 10
           
-          @receiver.creator.earnings += @request.money
-          @receiver.creator.withdrawal += @request.money
+          @receiver.creator.performance.earnings += @request.money
+          @receiver.creator.performance.withdrawal += @request.money
           @request.approval_day = Time.now
         end
         
@@ -137,9 +136,7 @@ class RequestsController < ApplicationController
           notice: '依頼者への手戻りのメールを送信しました'
       end
 
-
-      @receiver.creator.deadline = 100
-
+      @receiver.creator.performance.deadline = 100
       
       if @request.status != '購入者クレジット不備によるキャンセル'
         @request.status = params[:status]
@@ -147,6 +144,7 @@ class RequestsController < ApplicationController
       
       @request.save
       @receiver.creator.save
+      @receiver.creator.performance.save
     end
   end
   

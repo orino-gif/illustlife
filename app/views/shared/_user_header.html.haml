@@ -62,9 +62,9 @@
   = "、推奨金額：#{@creator.recommend}円"
   = "、作業予定日数：#{@creator.working}日"
   
-  - if 0 != @creator.painting
-    = "、締切厳守率：#{@creator.deadline}%"
-    = "、返信率:#{@creator.reply}%"
+  - if 0 != @creator.performance.painting
+    = "、締切厳守率：#{@creator.performance.deadline}%"
+    = "、返信率:#{@creator.performance.reply}%"
   - else
     - if 'new' != controller.action_name
       %br

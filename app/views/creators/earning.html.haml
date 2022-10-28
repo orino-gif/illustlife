@@ -4,12 +4,15 @@
 
 / 総売上と引き落とし対象額を表示して、引き落とし申請を行う
 .container
-  - if 0 < @creator.earnings
+  - if 0 < @creator.performance.earnings
+    - amount_withdrawal = @creator.performance.withdrawal
+    - userge_fee = amount_withdrawal*0.15
+    
     - if '引き落とし申請前' == @withdrawal_status
       .row.my-5.font-medium.margin_side-small
-        = "総売上:#{@creator.earnings}円"
+        = "総売上:#{@creator.performance.earnings}円"
         %br
-          = "引き落とし対象額:#{@creator.withdrawal}円"
+          = "引き落とし対象額:#{amount_withdrawal}円"
           
       .row.margin_side-small
         %br
@@ -21,17 +24,17 @@
     - elsif '引き落とし内容確認' == @withdrawal_status
       .row.font-medium.margin_side-small.border.border-secondary
         %br
-          = "\ 引き落とし対象額 : #{@creator.withdrawal}円"
+          = "\ 引き落とし対象額 : #{amount_withdrawal}円"
         %br
           = "サービス利用料15% :"
-          = "- #{(@creator.withdrawal*0.15).to_i}円"
+          = "- #{userge_fee.to_i}円"
         %br
-          = "引き落とし額合計："
-          = @creator.withdrawal-(@creator.withdrawal*0.15).to_i
+          = "引き落とし額："
+          = amount_withdrawal-userge_fee
           = "円"
         %br
           = "お振込の額："
-          = @creator.withdrawal-(@creator.withdrawal*0.15).to_i
+          = amount_withdrawal-userge_fee
           = "円 - 銀行振込手数料"
         %br
           = "振込元口座名：三菱東京UFJ銀行,"

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :confirmable,:omniauthable, omniauth_providers: [:twitter] # ,:validatable,
+         :recoverable, :rememberable, :confirmable,
+         :omniauthable, omniauth_providers: [:twitter] # ,:validatable,
          
   soft_deletable # <- kakurenbo-putiを使えるようにする
          
@@ -28,9 +29,12 @@ class User < ApplicationRecord
   # 論理削除に対応するため、validationをカスタマイズする
   validates :email, presence: true, length: { maximum: 255 }
   validates_uniqueness_of :email, scope: :soft_destroyed_at
-  validates_format_of :email, with: Devise.email_regexp, if: :will_save_change_to_email?
-  validates :password, presence: true, confirmation: true, length: { in: Devise.password_length }, on: :create
-  validates :password, confirmation: true, length: { in: Devise.password_length }, allow_blank: true, on: :update
+  validates_format_of :email, with: Devise.email_regexp,
+    if: :will_save_change_to_email?
+  validates :password, presence: true, confirmation: true,
+    length: { in: Devise.password_length }, on: :create
+  validates :password, confirmation: true,
+    length: { in: Devise.password_length }, allow_blank: true, on: :update
   
   # データベース認証時に使われるメソッドを上書きして、
   # without_soft_destroyedを追加する
@@ -40,7 +44,7 @@ class User < ApplicationRecord
   end
          
   #dependent: :destroyは、userレコードの削除に伴って生成したレコードを削除するコード。
-  has_one :creator , dependent: :destroy 
+  has_one :creator , dependent: :destroy
   has_one :credit , dependent: :destroy
   # has_one :card, dependent: :destroy
 end

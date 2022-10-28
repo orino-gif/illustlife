@@ -17,6 +17,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.build_credit
       resource.save
       
+      Performance.create(creator_id:resource.id)
+      
     rescue => e
       p e
       if e.to_s.include?('Duplicate')
@@ -27,7 +29,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       else
         flash.now[:alert] = "ユーザー登録に失敗しました" 
       end
-      render :new
     end
   end
 

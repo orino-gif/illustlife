@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_24_144341) do
+ActiveRecord::Schema.define(version: 2022_10_25_032902) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "customer_id", null: false
@@ -30,17 +30,10 @@ ActiveRecord::Schema.define(version: 2022_10_24_144341) do
     t.integer "recommend", default: 5000
     t.integer "minimum", default: 1000
     t.integer "working", default: 14
-    t.integer "painting", default: 0
-    t.float "deadline", default: 100.0
-    t.float "reply", default: 100.0
     t.boolean "opening", default: false
-    t.integer "points", default: 0
-    t.integer "evaluation", default: 50
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.boolean "nsfw", default: false
-    t.integer "earnings", default: 0
-    t.integer "withdrawal", default: 0
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -73,6 +66,16 @@ ActiveRecord::Schema.define(version: 2022_10_24_144341) do
     t.string "idea_img3"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "performances", primary_key: "creator_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "painting", default: 0
+    t.float "deadline", default: 100.0
+    t.float "reply", default: 100.0
+    t.integer "points", default: 100
+    t.integer "evaluation", default: 50
+    t.integer "earnings", default: 0
+    t.integer "withdrawal", default: 0
   end
 
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

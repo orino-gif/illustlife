@@ -5,14 +5,17 @@
 .container
   / ユーザーヘッダーの表示
   = render 'shared/user_header'
-  .row
-    %h2.font-large イラスト晒し
-  .row
-    = button_to '晒す', "/exposures/#{params[:id]}/new", class:"font-large", method: :get
-  / 納品したリクエストのリンク付き画像を表示
+  - if 'production' != ENV['RAILS_ENV']
+    .row
+      %h2.font-large イラスト晒し
+    .row
+      = button_to '晒す', "/exposures/#{params[:id]}/new", class:"font-large", method: :get
+  
   - if not @requests.empty?
     .row
       %h2.font-large リクエスト作品
+      
+    / 納品したリクエストのリンク付き画像を表示
     .row
       - @requests.reverse_each do |request|
         .col3.m-2
