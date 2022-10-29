@@ -87,11 +87,10 @@ class CreatorsController < ApplicationController
 
   def creators_params
     params.require(:creator).permit(:header, :icon, :twitter, :pixiv, :instagram,
-      :youtube, :link, :opening, :recommend, :working, :minimum, :nsfw, :temp_img)
+      :youtube, :link)
   end
 
   def set_creator
     @creator = Creator.joins(:performance).find(params[:id])
-    p @creator
   end
 end

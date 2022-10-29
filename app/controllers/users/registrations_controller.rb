@@ -18,6 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.save
       
       Performance.create(creator_id:resource.id)
+      Performance.create(id:resource.id)
       
     rescue => e
       p e

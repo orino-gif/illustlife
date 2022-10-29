@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_25_032902) do
+ActiveRecord::Schema.define(version: 2022_10_29_130006) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "customer_id", null: false
@@ -27,11 +27,6 @@ ActiveRecord::Schema.define(version: 2022_10_25_032902) do
     t.string "instagram"
     t.string "youtube"
     t.string "link"
-    t.integer "recommend", default: 5000
-    t.integer "minimum", default: 1000
-    t.integer "working", default: 14
-    t.boolean "opening", default: false
-    t.boolean "nsfw", default: false
     t.datetime "updated_at"
     t.datetime "created_at"
   end
@@ -108,6 +103,14 @@ ActiveRecord::Schema.define(version: 2022_10_25_032902) do
     t.integer "notification_user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "settings", primary_key: "creator_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "recommend", default: 5000
+    t.integer "minimum", default: 1000
+    t.integer "working", default: 14
+    t.boolean "opening", default: false
+    t.boolean "nsfw", default: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

@@ -69,7 +69,7 @@
                 %td= "金額：#{@request.money}円"
                 
               %tr
-                - working_days = receiver.creator.working * 60 * 60 * 24
+                - working_days = receiver.creator.setting.working * 60 * 60 * 24
                 - deadline = @request.created_at + working_days
                 %td.string_indention-medium
                   = "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"

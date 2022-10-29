@@ -13,9 +13,9 @@
           = f.label :money, '推奨金額(円)'
           
           = f.text_field :money, class:'form-control font-large size_large-form',
-            value: @creator.recommend.to_s
+            value: @creator.setting.recommend.to_s
           
-          - input_range = @creator.minimum.to_s(:delimited) + '～￥99,999'
+          - input_range = @creator.setting.minimum.to_s(:delimited) + '～￥99,999'
           = f.label :money, 
             '入力範囲:￥' + input_range, class:'font-Xsmall'
             
