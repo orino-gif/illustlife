@@ -61,4 +61,5 @@ Rails.application.routes.draw do
       get '/:id/new', to: 'resumes#new'
     end
   end
+  resources :settings, only: [:update]
 end

@@ -72,7 +72,7 @@
     %table.table
       %tr
         %td
-          = form_with(model: @creator.setting, local:true) do |f|
+          = form_with(model: @setting, local:true) do |f|
             = f.label :recommend, '推奨金額(円):'
             = f.text_field :recommend
             = f.label :minimum, '最低金額(円):'
@@ -80,12 +80,12 @@
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @creator.setting, local:true) do |f|
+          = form_with(model: @setting, local:true) do |f|
             = f.label :opening, 'リクエスト受付:'
             // @creditの値がnilかfailsでなく、口座情報の値が全て埋まっている場合
             - if @is_credit_all || ('development' == ENV['RAILS_ENV'])
             
-              - if true != f.opening
+              - if true != @setting.opening
                 = f.hidden_field :opening, value:true
                 = f.submit '開始', :name => 'accepting_requests'
               - else
@@ -100,7 +100,7 @@
     %table.table
       %tr
         %td
-          = form_with(model: @creator.setting, local:true) do |f|
+          = form_with(model: @setting, local:true) do |f|
             = f.label :working, '作業予定日数(日)：'
             = f.text_field :working, :size => '5'
             = f.submit '変更'

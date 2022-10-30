@@ -10,6 +10,9 @@ class CreatorsController < ApplicationController
   end
   
   def edit
+    @setting =  Setting.find_by(creator_id: params[:id])
+    p @setting
+    
     # カード登録情報の有無を確認する為に利用
     # Card.find(params[:id])だと、NothingErrになる為、find_byを使用
     @card =  Card.find_by(id: params[:id])
