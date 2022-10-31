@@ -15,13 +15,13 @@ class CreatorsController < ApplicationController
     
     # カード登録情報の有無を確認する為に利用
     # Card.find(params[:id])だと、NothingErrになる為、find_byを使用
-    @card =  Card.find_by(id: params[:id])
+    @card =  Card.find_by(user_id: params[:id])
     
     # 口座登録情報の有無を確認する為に利用
     credit = Credit.find_by(user_id:params[:id])
     
-    if credit["bank"] && credit["branch_name"] && credit["account_type"] \
-      && credit["account_number"] && credit["account_holder"]
+    if credit["bank"] && credit["branch"] && credit["account_type"] \
+      && credit["number"] && credit["holder"]
       @is_credit_all = true
     end
   end

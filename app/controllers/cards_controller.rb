@@ -7,13 +7,13 @@ class CardsController < ApplicationController
   def new 
     gon.public_key = ENV['PAYJP_PRIVATE_KEY']
 
-    @card = Card.where(id: current_user.id)
+    @card = Card.where(user_id: current_user.id)
     redirect_to action: "show" if @card.exists?
   end
   
   # cardsのログインユーザーのレコードをpayjpに送りカード情報を取り出す
   def show 
-    card = Card.find_by(id: current_user.id)
+    card = Card.find_by(user_id: current_user.id)
     if card.blank?
       render :new
       
@@ -37,19 +37,17 @@ class CardsController < ApplicationController
   
   # ログインユーザーのクレジットカード登録情報を削除する
   def delete 
-    @card = Card.find_by(id: current_user.id)
-    if @card.blank?
-      # Nothing
-    else
+    @card = Card.find_by(user_id: current_user.id)
+    if not @card.blank?
       begin
         Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
         customer = Payjp::Customer.retrieve(@card.customer_id)
         customer.delete
-        Card.find(current_user.id).delete
+        Card.find_by(user_id: current_user.id).delete
         redirect_to action: "new"
         
       rescue Payjp::PayjpError => e
-        p "クレジットカード削除が失敗されました:" + e.to_s
+        p "クレジットカード削除に失敗しました:" + e.to_s
         p "稼働元のレコードが削除されませんでした"
         flash.now[:alert] = "クレジットカードの削除に失敗しました" 
         render :show
@@ -65,16 +63,11 @@ class CardsController < ApplicationController
       redirect_to action: "new"
       
     else
-      customer = Payjp::Customer.create(
-      card: params['payjp_token'],
-      # description: '登録テスト', #なくてもOK
-      # email: current_user.email, #なくてもOK
-      # metadata: {id: current_user.id}
-      ) #念の為metadataにuser_idを入れましたがなくてもOK
+      customer = Payjp::Customer.create(card: params['payjp_token']) 
       
       # カードテーブルのデータの作成
       @card = Card.new(
-        id: current_user.id,
+        user_id: current_user.id,
         customer_id: customer.id,
         card_id: customer.default_card
       )
@@ -87,19 +80,4 @@ class CardsController < ApplicationController
       end
     end
   end
-  
-  # def pay_charge
-  #   Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-  #   Payjp::Charge.create(
-  #   :amount => params[:amount],
-  #   :customer => @card.customer_id,
-  #   :currency => 'jpy'
-  # )
-  # end
-  
-  # private
-  
-  # def card_present
-  #   @card = Card.where(id: current_user.id).first if Card.where(id: current_user.id).present?
-  # end
 end

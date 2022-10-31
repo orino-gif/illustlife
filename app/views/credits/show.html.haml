@@ -10,15 +10,15 @@
           %td{:width => "200"}= @credits.bank
         %tr
           %td 支店名
-          %td= @credits.branch_name
+          %td= @credits.branch
         %tr
           %td 口座の種類
           %td= @credits.account_type
         %tr
           %td 口座番号
-          %td= @credits.account_number
+          %td= @credits.number
         %tr
           %td 口座名義
-          %td= @credits.account_holder
+          %td= @credits.holder
     .col-md-3
       = button_to '登録', "/credits/#{params[:id]}/new", method: :get

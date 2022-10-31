@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_29_130006) do
+ActiveRecord::Schema.define(version: 2022_10_31_142059) do
 
-  create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "cards", primary_key: "user_id", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "customer_id", null: false
     t.string "card_id", null: false
     t.datetime "created_at", null: false
@@ -33,10 +33,10 @@ ActiveRecord::Schema.define(version: 2022_10_29_130006) do
 
   create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "bank"
-    t.string "branch_name"
+    t.string "branch"
     t.string "account_type"
-    t.integer "account_number"
-    t.string "account_holder"
+    t.integer "number"
+    t.string "holder"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

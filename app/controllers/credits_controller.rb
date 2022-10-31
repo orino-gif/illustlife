@@ -17,8 +17,7 @@ class CreditsController < ApplicationController
   private
 
   def credits_params
-    params.require(:credit).permit(:bank, :branch_name, :account_type,
-      :account_number, :account_holder)
+    params.require(:credit).permit(:bank, :branch, :account_type, :number, :holder)
   end
   
   def set_credits
