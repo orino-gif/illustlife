@@ -18,7 +18,7 @@ class RequestsController < ApplicationController
   def create
     # ログイン状態で、カード登録済みか開発環境の場合、リクエスト処理を実行
     if user_signed_in?
-      if Card.find_by(id: current_user.id) || \
+      if Card.find_by(user_id: current_user.id) || \
         ('development' == ENV['RAILS_ENV'])
         
         @sender = current_user
@@ -46,7 +46,7 @@ class RequestsController < ApplicationController
     elsif false == user_signed_in?
       redirect_to  '/users/sign_in', alert: 'ログインが必要です。'
       
-    elsif nil == Card.find_by(id: current_user.id)
+    elsif nil == Card.find_by(user_id: current_user.id)
       flash.now[:alert] = "クレジットカード登録が必要です。" 
       render :new
     end
@@ -72,7 +72,7 @@ class RequestsController < ApplicationController
           notice: '依頼者からのリクエストを拒否しました'
 
       elsif '製作中' == params[:status]
-        if @card = Card.find_by(id: @sender.id)
+        if @card = Card.find_by(user_id: @sender.id)
           Payjp.api_key = ENV['PAYJP_SECRET_KEY']
         
           begin
