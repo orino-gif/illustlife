@@ -47,7 +47,6 @@ class WorksController < ApplicationController
       @work.save
       @work.request.save
     end
-    
   end
   
   def update

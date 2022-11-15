@@ -49,8 +49,8 @@
               %tr
                 %td= "金額：#{@req.money}円"
               %tr
-                - working_days = receiver.creator.setting.working * 60 * 60 * 24
-                - deadline = @req.created_at + working_days
+                - num_days = receiver.creator.setting.work_d * 60 * 60 * 24
+                - deadline = @req.created_at + num_days
                 %td.m_line
                   = "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
               %tr

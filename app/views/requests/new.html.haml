@@ -11,8 +11,8 @@
         .form-group.mt-4
           = f.label :money, '推奨金額(円)'
           = f.text_field :money, class:'form-control font-large size_large-form',
-            value: @creator.setting.recommend.to_s
-          - input_range = @creator.setting.minimum.to_s(:delimited) + '～￥99,999'
+            value: @creator.setting.recom.to_s
+          - input_range = @creator.setting.min.to_s(:delimited) + '～￥99,999'
           = f.label :money, 
             '入力範囲:￥' + input_range, class:'font-Xsmall'
         .form-group.mt-4

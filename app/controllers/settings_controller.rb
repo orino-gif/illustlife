@@ -10,7 +10,7 @@ class SettingsController < ApplicationController
   private
   
   def settings_params
-    params.require(:setting).permit(:recommend, :minimum,
-      :working, :opening, :nsfw)
+    params.require(:setting).permit(:recom, :min,
+      :work_d, :start, :nsfw)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_15_090809) do
+ActiveRecord::Schema.define(version: 2022_11_15_141248) do
 
   create_table "cards", primary_key: "user_id", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "customer_id", null: false
@@ -86,10 +86,10 @@ ActiveRecord::Schema.define(version: 2022_11_15_090809) do
   end
 
   create_table "settings", primary_key: "creator_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "recommend", default: 5000
-    t.integer "minimum", default: 1000
-    t.integer "working", default: 14
-    t.boolean "opening", default: false
+    t.integer "recom", default: 5000
+    t.integer "min", default: 1000
+    t.integer "work_d", default: 14
+    t.boolean "start", default: false
     t.boolean "nsfw", default: false
   end
 
