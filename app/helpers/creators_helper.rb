@@ -26,7 +26,7 @@ module CreatorsHelper
   def display_sns(creator, sns)
     if creator.send(sns).present?
       link_to image_tag("/img/#{sns}.png",
-        class: 'size_small-square position_short-top'), creator.send(sns)
+        class: 's_square position_short-top'), creator.send(sns)
     end
   end
   

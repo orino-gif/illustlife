@@ -6,7 +6,13 @@ class CreatorsController < ApplicationController
   
   def show
     # 納品済みの作品を表示する為に利用
-    @requests = Request.where(receiver_id: @creator.user.id, status: '納品完了')
+    @requests = Request.where(rx_id: @creator.user.id, status: '納品完了')
+    # @works = Work.find_by(request_id:66)
+    # @works = Work.find(66,67,68)#プライマリーを設定している場合
+    # @works = Work.find_by(request_id:66)
+    # @works = Work.all
+    # @works = Request.joins(:work)
+
   end
   
   def edit
@@ -42,7 +48,7 @@ class CreatorsController < ApplicationController
       
     elsif '引き落とし実行' == params[:withdrawal_status]
       @withdrawal_status = '引き落とし実行'
-      UserMailer.info_withdrawal(@creator).deliver_later
+      UserMailer.wdl(@creator).deliver_later
       sleep(5)
       @creator.performance.withdrawal = 0
       @creator.save
@@ -64,7 +70,7 @@ class CreatorsController < ApplicationController
             @notification_user = User.find(user.notification_user)
             @resume_user = User.find(user.resume_user)
             
-            UserMailer.resume_info(@notification_user,
+            UserMailer.resume(@notification_user,
               @resume_user).deliver_later
           end
         end

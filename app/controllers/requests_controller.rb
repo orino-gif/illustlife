@@ -5,8 +5,8 @@ class RequestsController < ApplicationController
 
   def index
     # ログインユーザーに関係するレコード達を@requestsに格納
-    @requests = Request.where(receiver_id: current_user.id)
-      .or(Request.where(sender_id: current_user.id))
+    @requests = Request.where(rx_id: current_user.id)
+      .or(Request.where(tx_id: current_user.id))
   end
   
   def new
@@ -20,19 +20,16 @@ class RequestsController < ApplicationController
     if user_signed_in?
       if Card.find_by(user_id: current_user.id) || \
         ('development' == ENV['RAILS_ENV'])
-        
         @sender = current_user
         @receiver = User.find(params[:authorizer_id])
-
         @request = Request.new(requests_params)
-        @request.sender_id = @sender.id
-        @request.receiver_id = @receiver.id
-        @request.status = '承認待ち'
-        
+        @request.tx_id = @sender.id
+        @request.rx_id = @receiver.id
+        @request.stts = '承認待ち'
         if @request.save
-          UserMailer.request_email(@sender, @receiver).deliver_later
-          redirect_to requests_url,
-            notice: 'クリエイターへリクエストメールを送信しました。'
+          Work.create(request_id:@request.id)
+          UserMailer.req(@sender, @receiver).deliver_later
+          redirect_to requests_url, notice: 'リクエストを送信しました。'
             
         elsif @request.errors.full_messages[0].include?('too_long')
           flash.now[:alert] = '文字が許容範囲外(700文字より大きい)です'
@@ -43,10 +40,10 @@ class RequestsController < ApplicationController
         end
       end
       
-    elsif false == user_signed_in?
+    elsif (not user_signed_in?)
       redirect_to  '/users/sign_in', alert: 'ログインが必要です。'
       
-    elsif nil == Card.find_by(user_id: current_user.id)
+    elsif Card.find_by(user_id: current_user.id).nil?
       flash.now[:alert] = "クレジットカード登録が必要です。" 
       render :new
     end
@@ -56,102 +53,85 @@ class RequestsController < ApplicationController
     # リクエスト詳細ページのボタンが押された場合の処理
     if params[:request_id].nil?
       @request = Request.find(params[:id])
+      @work = Work.find_by(request_id:params[:id])
       
     elsif params[:request_id]
       # リクエストIDに対応する依頼者と承認者のインスタンスの生成
       @request = Request.find(params[:request_id])
-      @sender = User.find(@request.sender_id)
-      @receiver = User.find(@request.receiver_id)
-      # @receiver_p = Performance.find_by(creator_id:@request.receiver_id)
-      
+      @sender = User.find(@request.tx_id)
+      @receiver = User.find(@request.rx_id)
+      # @receiver_p = Performance.find_by(creator_id:@request.rx_id)
+      @work = Work.new(request_id: @request.id)
       # リクエストステータスに対応する処理を実行
-      if '拒否' == params[:status]
-        UserMailer.refusal_email(@sender, @receiver).deliver_later
-        
-         redirect_to request.referer,
-          notice: '依頼者からのリクエストを拒否しました'
+      if '拒否' == params[:stts]
+        UserMailer.refusal(@sender, @receiver).deliver_later
+         redirect_to request.referer, notice: 'リクエストを拒否しました'
 
-      elsif '製作中' == params[:status]
+      elsif '製作中' == params[:stts]
         if @card = Card.find_by(user_id: @sender.id)
           Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-        
           begin
             Payjp::Charge.create(:amount => params[:amount],
-              :customer => @card.customer_id, :currency => 'jpy')
-              
+            :customer => @card.customer_id, :currency => 'jpy')
           rescue Payjp::PayjpError => e
-            @request.status = '購入者の決済設定不備によるキャンセル'
-            
+            @request.stts = '購入者キャンセル'
             # 承認者へ決済不備によるキャンセルを知らせる
-            UserMailer.card_declined_email(@sender,
-              @receiver, @request).deliver_later
-              
+            UserMailer.declined(@sender, @receiver, @request).deliver_later
             p "例外エラー:" + e.to_s
             redirect_to request.referer,
             alert: '購入者側の決済の問題でキャンセルとなりました'
           end
-          
-          UserMailer.consent_email(@sender, @receiver).deliver_later
+          UserMailer.consent(@sender, @receiver).deliver_later
           redirect_to request.referer,
           notice: '依頼者へ承諾のメールを送信しました'
-          
         else
-          @request.status = '購入者の決済設定不備によるキャンセル'
-          
+          @request.stts = '購入者キャンセル'
           redirect_to request.referer,
-            alert: '購入者側のクレジットが未登録の為、キャンセルとなりました'
+          alert: '購入者側のクレジットが未登録の為、キャンセルとなりました'
         end
         
-      elsif '製作中断' == params[:status]
+      elsif '製作中断' == params[:stts]
         @receiver.creator.performance.evaluation -= 20
-        
-        UserMailer.suspension_email(@sender, @receiver).deliver_later
+        UserMailer.quit(@sender, @receiver).deliver_later
         redirect_to request.referer,
           notice: '依頼者へ作業中断のメールを送信しました'
-
-         
-      elsif '納品完了' == params[:status]
-        if false == @request.is_reworked
-
+      elsif '納品完了' == params[:stts]
+        if false == @request.work.rework
           @receiver.creator.performance.painting += 1
           @receiver.creator.performance.evaluation += 10
-          
           @receiver.creator.performance.earnings += @request.money
           @receiver.creator.performance.withdrawal += @request.money
-          @request.approval_day = Time.now
+          @request.work.d_time = Time.now
         end
         
-        UserMailer.deliver_email(@sender, @receiver).deliver_later
-        
+        UserMailer.del(@sender, @receiver).deliver_later
         redirect_to request.referer,
-          notice: '依頼者への納品完了のメールを送信しました'
+        notice: '依頼者への納品完了のメールを送信しました'
 
-      elsif '手戻し' == params[:status]
-        @request.is_reworked = true
-        @request.is_in_time_for_the_deadline = false
+      elsif '手戻し' == params[:stts]
+        @request.work.rework = true
+        @request.work.in_time = false
         
-        UserMailer.rework_email(@sender, @receiver).deliver_later
-        
+        UserMailer.rework(@sender, @receiver).deliver_later
         redirect_to request.referer,
-          notice: '依頼者への手戻りのメールを送信しました'
+        notice: '依頼者への手戻りのメールを送信しました'
       end
 
       @receiver.creator.performance.deadline = 100
-      
-      if @request.status != '購入者クレジット不備によるキャンセル'
-        @request.status = params[:status]
+      if @request.stts != '購入者キャンセル'
+        @request.stts = params[:stts]
       end
-      
       @request.save
+      @request.work.save
       @receiver.creator.save
       @receiver.creator.performance.save
     end
   end
   
   def download
-    @request = Request.find(params[:request_id])
-    if @request.deliver_img?
-      image = @request.deliver_img # imageはUploaderオブジェクト
+    @work = Work.find_by(request_id: params[:request_id])
+    if @request.work.img1?
+      image = @request.work.img1 # imageはUploaderオブジェクト
       # extnameは「.」以降の拡張子にあたる文字列を返す
       # send_data(送るデータ, オプション={failname:保存するときのファイル名})
       send_data(image.read, filename: "download#{File.extname(image.path)}")
@@ -162,24 +142,24 @@ class RequestsController < ApplicationController
   end
   
   def update
-    @request = Request.find(params[:request][:request_id])
+    @work = Work.find_by(params[:request][:request_id])
     if 'キャンセル' == params[:request][:cancel]
-      @request.deliver_img = 'NULL'
+      @request.work.img1 = 'NULL'
       
     elsif 'キャンセル2' == params[:request][:cancel]
-      @request.deliver_img2 = 'NULL'
+      @request.work.img2 = 'NULL'
       
     elsif 'キャンセル3' == params[:request][:cancel]
-      @request.deliver_img3 = 'NULL'
+      @request.work.img3 = 'NULL'
       
     elsif 'キャンセル4' == params[:request][:cancel]
-      @request.deliver_img4 = 'NULL'
+      @request.work.img4 = 'NULL'
       
     elsif 'キャンセル5' == params[:request][:cancel]
-      @request.deliver_img5 = 'NULL'
+      @request.work.img5 = 'NULL'
       
     elsif 'キャンセル6' == params[:request][:cancel]
-      @request.deliver_img6 = 'NULL'
+      @request.work.img6 = 'NULL'
     end
     
     if @request.update(requests_params)
@@ -204,9 +184,7 @@ class RequestsController < ApplicationController
   private
 
   def requests_params
-    params.require(:request).permit(:money, :message, :deliver_img, :file_format,
-      :is_nsfw,:is_anonymous, :is_autographed, :deliver_img2, :deliver_img3,
-      :deliver_img4, :deliver_img5, :deliver_img6, :evaluation_comment)
+    params.require(:request).permit(:money,:stts,:fmt,:nsfw,:anon,:auto)
   end
   
   def creator_params

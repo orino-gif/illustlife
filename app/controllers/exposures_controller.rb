@@ -17,7 +17,6 @@ class ExposuresController < ApplicationController
     
   end
   
-  
   private
 
   def exposures_params

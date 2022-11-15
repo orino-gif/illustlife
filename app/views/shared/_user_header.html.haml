@@ -2,13 +2,13 @@
 
 .row
   / ヘッダー表示
-  = display_header(@creator, 'size_medium-rectangle fit_cover')
+  = display_header(@creator, 'size_medium-rectangle fit_c')
 
 .row
   .col-2
     / ユーザーアイコン表示
-    = display_icon(@creator,
-      'size_large-square rounded-circle fit_cover position_large-top')
+    = icon(@creator,
+      'size_large-square rounded-circle fit_c position_large-top')
   
   .col-4
     / requestコントローラーの領域以外の場合、リクエストアイコンを表示

@@ -11,20 +11,21 @@
     .row
       = button_to '晒す', "/exposures/#{params[:id]}/new", class:"font-large", method: :get
   
-  - if not @requests.empty?
+  - if @works
     .row
       %h2.font-large リクエスト作品
       
     / 納品したリクエストのリンク付き画像を表示
     .row
-      - @requests.reverse_each do |request|
+      // - @works.reverse_each do |work|
+      - @works.each do |work|
         .col3.m-2
-          - if request.deliver_img
-            = link_to image_tag(request.deliver_img.url,
-              class: 'size_Xlarge-square fit_cover border_solid-medium'),
-              "/requests/#{request.id}"
+          - if not work.img1.blank?
+            = link_to image_tag(work.img1.url,
+              class: 'size_Xlarge-square fit_c border_solid-medium'),
+              "/requests/#{work.request_id}"
               
           - else
             .alert.alert-dismissable.alert-danger
               %button.close{"data-dismiss" => "alert", :type => "button"} ×
-              %p="request_id#{request.id}の画像が見つかりません"
+              %p="request_id#{work.request_id}の画像が見つかりません"

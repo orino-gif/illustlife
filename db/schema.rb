@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_31_142059) do
+ActiveRecord::Schema.define(version: 2022_11_15_033923) do
 
   create_table "cards", primary_key: "user_id", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "customer_id", null: false
@@ -55,14 +55,6 @@ ActiveRecord::Schema.define(version: 2022_10_31_142059) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "materials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "idea_img"
-    t.string "idea_img2"
-    t.string "idea_img3"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "performances", primary_key: "creator_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "painting", default: 0
     t.float "deadline", default: 100.0
@@ -75,27 +67,15 @@ ActiveRecord::Schema.define(version: 2022_10_31_142059) do
 
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "money"
-    t.integer "sender_id"
-    t.integer "receiver_id"
-    t.string "status"
-    t.text "message"
-    t.string "file_format"
-    t.boolean "is_nsfw", default: false
-    t.boolean "is_anonymous", default: false
-    t.boolean "is_autographed", default: false
-    t.datetime "approval_day"
-    t.integer "delivery_time", default: 0
-    t.integer "is_in_time_for_the_deadline", default: 0
-    t.string "deliver_img"
+    t.integer "tx_id"
+    t.integer "rx_id"
+    t.string "stts"
+    t.string "fmt"
+    t.boolean "nsfw", default: false
+    t.boolean "anon", default: false
+    t.boolean "auto", default: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "deliver_img2"
-    t.string "deliver_img3"
-    t.string "deliver_img4"
-    t.string "deliver_img5"
-    t.string "deliver_img6"
-    t.boolean "is_reworked", default: false
-    t.text "evaluation_comment"
+    t.text "msg"
   end
 
   create_table "resumes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -134,4 +114,20 @@ ActiveRecord::Schema.define(version: 2022_10_31_142059) do
     t.index ["nickname"], name: "index_users_on_nickname"
   end
 
+  create_table "works", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "request_id"
+    t.datetime "d_time"
+    t.boolean "in_time", default: false
+    t.boolean "rework", default: false
+    t.timestamp "updated_at"
+    t.string "img1"
+    t.string "img2"
+    t.string "img3"
+    t.string "img4"
+    t.string "img5"
+    t.string "img6"
+    t.index ["request_id"], name: "index_works_on_request_id"
+  end
+
+  add_foreign_key "works", "requests"
 end

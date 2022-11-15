@@ -1,100 +1,58 @@
 class UserMailer < ApplicationMailer
-  def request_email(sender, receiver)
-    @sender = sender
-    @receiver = receiver
-
-    mail(
-        to: "#{@receiver.email}, #{ENV['ADMINISTRATOR_MAIL']}",
-        subject: "[#{ENV['APP_NAME']}]" + @sender.nickname + \
-        'さんからリクエストが送信されました'
-      )
+  def req(tx, rx)
+    @tx = tx
+    @rx = rx
+    mail(to: "#{@rx.email}, #{ENV['ADMIN']}", subject: "[#{ENV['APP_NAME']}]"+ \
+    @tx.nickname + 'さんからリクエストが送信されました')
   end
-  
-  def refusal_email(sender, receiver)
-    @sender = sender
-    @receiver = receiver
-    
-    mail(
-        to: "#{@sender.email}, #{ENV['ADMINISTRATOR_MAIL']}",
-        subject: "[#{ENV['APP_NAME']}]" + @sender.nickname + \
-        'さんからのリクエストが拒否されました'
-      )
+  def refusal(tx, rx)
+    @tx = tx
+    @rx = rx
+    mail(to: "#{@tx.email}, #{ENV['ADMIN']}", subject: "[#{ENV['APP_NAME']}]"+ \
+    @tx.nickname + 'さんからのリクエストが拒否されました')
   end
-
-  def consent_email(sender, receiver)
-    @sender = sender
-    @receiver = receiver
-
-    mail(
-        to: "#{@sender.email}, #{ENV['ADMINISTRATOR_MAIL']}",
-        subject: "[#{ENV['APP_NAME']}]" + @sender.nickname + \
-        'さんからのリクエストが承認されました'
-      )
+  def consent(tx, rx)
+    @tx = tx
+    @rx = rx
+    mail(to: "#{@tx.email}, #{ENV['ADMIN']}", subject: "[#{ENV['APP_NAME']}]"+ \
+    @tx.nickname + 'さんからのリクエストが承認されました')
   end
-  
-  def suspension_email(sender, receiver)
-    @sender = sender
-    @receiver = receiver
-
-    mail(
-        to: "#{@sender.email}, #{ENV['ADMINISTRATOR_MAIL']}",
-        subject: "[#{ENV['APP_NAME']}]" + @sender.nickname + \
-        'さんの作業が中断されました'
-      )
+  def quit(tx, rx)
+    @tx = tx
+    @rx = rx
+    mail(to: "#{@tx.email}, #{ENV['ADMIN']}", subject: "[#{ENV['APP_NAME']}]"+ \
+    @tx.nickname + 'さんの作業が中断されました')
   end
-  
-  def deliver_email(sender, receiver)
-    @sender = sender
-    @receiver = receiver
-
-    mail(
-        to: "#{@sender.email},#{ENV['ADMINISTRATOR_MAIL']}",
-        subject: "[#{ENV['APP_NAME']}]" + @sender.nickname + \
-        'さんへの納品が完了しました'
-      )
+  def del(tx, rx)
+    @tx = tx
+    @rx = rx
+    mail(to: "#{@tx.email},#{ENV['ADMIN']}", subject: "[#{ENV['APP_NAME']}]"+ \
+    @tx.nickname + 'さんへの納品が完了しました')
   end
-  
-  def rework_email(sender,receiver)
-    @sender = sender
-    @receiver = receiver
-    
-    mail(
-        to: "#{@sender.email},#{ENV['ADMINISTRATOR_MAIL']}",
-        subject: "[#{ENV['APP_NAME']}]" + @sender.nickname + \
-        'さんへの納品の手戻りがありました'
-      )
+  def rework(tx, rx)
+    @tx = tx
+    @rx = rx
+    mail(to: "#{@tx.email},#{ENV['ADMIN']}", subject: "[#{ENV['APP_NAME']}]"+ \
+    @tx.nickname + 'さんへの納品の手戻りがありました')
   end
-  
-  # リクエスト受付開始を通知希望者へ連絡
-  def resume_info(notification_user, resume_user)
-      @notification_user = notification_user
-      @resume_user = resume_user
-      
-      mail(
-        to: @notification_user.email,
-        subject: "[#{ENV['APP_NAME']}]" + @resume_user.nickname + \
-        'さんがリクエスト受付を開始しました'
-      )
+  def resume(notification_user, resume_user)
+    @notification_user = notification_user
+    @resume_user = resume_user
+    mail(to: @notification_user.email, subject: "[#{ENV['APP_NAME']}]"+ \
+    @resume_user.nickname + 'さんがリクエスト受付を開始しました')
   end
-  
-  def info_withdrawal(creator)
-      @creator = creator
-      mail(
-        to: "#{@creator.user.email},#{ENV['ADMINISTRATOR_MAIL']}",
-        subject: "[#{ENV['APP_NAME']}]" + @creator.user.nickname + \
-        'さんからの引き落とし申請を受付ました'
-      )
+  def wdl(creator)
+    @creator = creator
+    mail(to: "#{@creator.user.email},#{ENV['ADMIN']}",
+    subject: "[#{ENV['APP_NAME']}]" + @creator.user.nickname + \
+    'さんからの引き落とし申請を受付ました')
   end
-  
-  def card_declined_email(sender, receiver, requests)
-    @sender = sender
-    @receiver = receiver
+  def declined(tx, rx, requests)
+    @tx = tx
+    @rx = rx
     @request = requests
-    
-    mail(
-        to: "#{@receiver.email},#{ENV['ADMINISTRATOR_MAIL']}",
-        subject: "[#{ENV['APP_NAME']}]" + @sender.nickname + \
-        'さんのクレジットカード決済不備によるキャンセルの件'
-      )
+    mail(to: "#{@rx.email},#{@tx.email},#{ENV['ADMIN']}",
+    subject: "[#{ENV['APP_NAME']}]" + @tx.nickname + \
+    'さんのクレジットカード決済不備によるキャンセルの件')
   end
 end

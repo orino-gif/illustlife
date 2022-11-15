@@ -1,0 +1,18 @@
+- content_for(:html_title) { 'リクエストの詳細' }
+%h1.font-Xlarge.background_color-whitesmoke リクエストの詳細
+.container
+  .row.my-5
+    .col-md-auto
+      // リクエストの伝票
+      = render 'works/parts/voucher'
+    .col-sm-auto
+      .m_line
+        - if user_signed_in? && @rx.id == current_user.id
+          // 進行状態に応じて表示を変更
+          - case @work.request.stts
+          - when '承認待ち'
+            = render 'works/parts/approval'
+          - when '製作中'
+            = render 'works/parts/mfr'
+            
+            

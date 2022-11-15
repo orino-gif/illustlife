@@ -4,13 +4,11 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
     To
-    = @sender.nickname
+    = @tx.nickname
     さん
     <br><br>
-    = @sender.nickname
-    さんから
-    = @receiver.nickname
-    さんへのリクエストが承認されました<br>
-    作品納品時に再度ご連絡致します。<br>
+    = @rx.nickname
+    さんへのリクエストが拒否されました。<br>
+    価格や内容を変更する事で承認される事があります。<br>
     = link_to '詳細リンク先', ENV['HOME_ADDRESS'] + "/requests"
     <br>

@@ -10,7 +10,7 @@
       = f.file_field :header
       = f.submit '登録'
     .col
-      = display_header(@creator, 'size_medium-rectangle fit_cover')
+      = display_header(@creator, 'size_medium-rectangle fit_c')
   
   / アイコン表示の設定
   .row.my-5
@@ -19,7 +19,7 @@
       = f.file_field :icon
       = f.submit '登録'
       
-    = display_icon(@creator, 'size_medium-square fit_cover rounded-circle')
+    = icon(@creator, 'size_medium-square fit_c rounded-circle')
 
   .row.my-5
     = 'アカウント情報：'

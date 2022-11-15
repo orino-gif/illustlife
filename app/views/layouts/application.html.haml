@@ -80,7 +80,7 @@
           / シンボルマークを表示
           .col-auto.d-flex.align-items-center
             = link_to image_tag('/img/symbol.png',
-              class: 'size_small-square'), root_path
+              class: 's_square'), root_path
 
           / サービス名を表示
           .col-auto
@@ -99,8 +99,8 @@
                   ="#{current_user.creator.performance.points}ポイント"
                   
               / ログインユーザーアイコン表示    
-              = display_icon(current_user.creator,
-                'size_small-square rounded-circle fit_cover')
+              = icon(current_user.creator,
+                's_square rounded-circle fit_c')
                 
             - else
               -# ='キャンペーン!! 9/1～9/16迄'
@@ -121,7 +121,7 @@
                     %button.btn.btn-light.font-medium
                       = link_to '売上', "/creators/#{current_user.id}/earning"
                       
-                  - if ENV['ADMINISTRATOR_MAIL'] == current_user.email
+                  - if ENV['ADMIN'] == current_user.email
                     %button.btn.btn-light
                       = link_to 'アカウント編集', edit_creator_path(params[:id])
                       
@@ -163,7 +163,7 @@
     / 管理者用アカウントでログインした場合にフッダーの色を変更
     - color='background_color-whitesmoke'
     - if nil != current_user
-      - if ENV['ADMINISTRATOR_MAIL'] == current_user.email
+      - if ENV['ADMIN'] == current_user.email
         - color='background_color-crimson'
         ='管理者用のページ'
     

@@ -9,10 +9,10 @@
       
     .row
       = link_to image_tag('/img/mobu.png',
-        class: 'size_Xlarge-square fit_cover border_solid-medium'),
+        class: 'size_Xlarge-square fit_c border_solid-medium'),
         '/mangas/1/illustlifes'
     
-  - if @requests
+  - if @works
     .row
       %h2.font-large クリエイター
       
@@ -25,7 +25,7 @@
           
             - if creator.user.confirmed_at?
               = display_header(creator,
-                'size_Xlarge-square border_solid-medium fit_cover')
+                'size_Xlarge-square border_solid-medium fit_c')
                 
               .font-small.string_indention-small= creator.user.nickname
         - break if 30 == index
@@ -36,12 +36,12 @@
     
     / 納品された作品を作成日時が新しい順に30点表示 
     .row.margin_side-Xsmall
-      - @requests.each.with_index(1) do |request,index|
+      - @works.each.with_index(1) do |work,index|
       
-        - if request.deliver_img
+        - if work.img1
           .padding_side-small.text-center.py-2
           
-            // = link_to image_tag(request.deliver_img.url,
-            //   class: 'size_Xlarge-square fit_cover border_solid-medium'),
-            //   "/requests/#{request.id}"
+            // = link_to image_tag(work.img1.url,
+            //   class: 'size_Xlarge-square fit_c border_solid-medium'),
+            //   "/requests/#{work.id}"
         - break if 30 === index
