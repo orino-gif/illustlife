@@ -34,10 +34,10 @@ class WorksController < ApplicationController
         UserMailer.quit(@tx, @rx).deliver_later
         noti('作業を中断しました')
       when '納品完了'
-        perf_update(@rx.creator.performance, @request)
+        perf_update(@rx.creator.performance, @req, @tx, @rx)
       when '手戻し'
-        @request.work.rework = true
-        @request.work.in_time = false
+        @req.work.rework = true
+        @req.work.in_time = false
         UserMailer.rework(@tx, @rx).deliver_later
         noti('依頼者への手戻りのメールを送信しました')
       end
@@ -47,6 +47,7 @@ class WorksController < ApplicationController
       @work.save
       @work.request.save
     end
+    
   end
   
   def update

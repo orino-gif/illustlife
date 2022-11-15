@@ -1,6 +1,6 @@
-- if @request
-  - sender = User.find(@request.tx_id)
-  - receiver = User.find(@request.rx_id)
+- if @req
+  - sender = User.find(@req.tx_id)
+  - receiver = User.find(@req.rx_id)
   / 表体を表示
   .row.my-5
     / 一覧表示の場合
@@ -8,17 +8,17 @@
       / 表体のセルの幅の長さを「table全幅/セル数」にする
       %table.fixed_column
         %tr
-          %td.hidden_over="#{@request.created_at.strftime("%Y/%m/%d %H:%M")}"
+          %td.hidden_over="#{@req.created_at.strftime("%Y/%m/%d %H:%M")}"
           / 文字が一覧の表のセルをはみ出した場合に、はみ出した文字を隠す
-          %td.hidden_over= @request.id
+          %td.hidden_over= @req.id
           %td.hidden_over= icon(sender.creator,
             's_square rounded-circle fit_c') + sender.nickname
           %td.hidden_over= icon(receiver.creator,
             's_square rounded-circle fit_c') + receiver.nickname
-          %td= "#{@request.stts}"
+          %td= "#{@req.stts}"
           %td
             %button.btn.btn-light.font-medium
-              = link_to '詳細', work_path(@request.id)
+              = link_to '詳細', work_path(@req.id)
     - else 
       .col-md-auto
         %table.table
@@ -31,13 +31,13 @@
             %td= icon(receiver.creator,
               's_square rounded-circle fit_c') + authorizer_name
           %tr
-            %td.m_line リクエスト内容：<br> #{@request.msg}
+            %td.m_line リクエスト内容：<br> #{@req.msg}
           %tr
-            %td= "ファイル形式：#{@request.fmt}"
-          - if @request.anon?
+            %td= "ファイル形式：#{@req.fmt}"
+          - if @req.anon?
             %tr
               %td= '非公開:有'
-          - if @request.auto?
+          - if @req.auto?
             %tr
               %td= '宛名入りサイン:有'
           - if user_signed_in?
@@ -47,135 +47,135 @@
               - relation = true
             - if relation || Rails.env.development?
               %tr
-                %td= "金額：#{@request.money}円"
+                %td= "金額：#{@req.money}円"
               %tr
                 - working_days = receiver.creator.setting.working * 60 * 60 * 24
-                - deadline = @request.created_at + working_days
+                - deadline = @req.created_at + working_days
                 %td.m_line
                   = "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
               %tr
-                %td= "状態：#{@request.stts}"
+                %td= "状態：#{@req.stts}"
       .col-sm-auto
         .m_line
           - if user_signed_in? && receiver.id == current_user.id
-            - if '承認待ち' == @request.stts
+            - if '承認待ち' == @req.stts
               = "#{sender.nickname}さんから"
               = "#{receiver.nickname}さんへのリクエストを承認しますか？"
               = button_to '承認', {controller:'requests', action:'show'},
-                {method: :get, params:{status:'製作中', request_id:@request.id,
-                amount:@request.money}}
+                {method: :get, params:{status:'製作中', request_id:@req.id,
+                amount:@req.money}}
               %br
                 = button_to '拒否', {controller:'requests', action:'show'},
-                {method: :get, params:{status:'拒否', request_id:@request.id}}
-        - if '承認待ち' != @request.stts
-          - if @request.work.img1?
-            - if @request.work.img1.to_s.include?('.psd')
-              - pdf = Magick::ImageList.new(@request.work.img1.to_s)
-              - pdf[0].write("public/img/conversion_psd/#{current_user.id}_#{@request.id}.png")
-              = link_to image_tag("/img/conversion_psd/#{current_user.id}_#{@request.id}.png",
+                {method: :get, params:{status:'拒否', request_id:@req.id}}
+        - if '承認待ち' != @req.stts
+          - if @req.work.img1?
+            - if @req.work.img1.to_s.include?('.psd')
+              - pdf = Magick::ImageList.new(@req.work.img1.to_s)
+              - pdf[0].write("public/img/conversion_psd/#{current_user.id}_#{@req.id}.png")
+              = link_to image_tag("/img/conversion_psd/#{current_user.id}_#{@req.id}.png",
                 class:'size_large-rectangle fit_c'),
-                "img/conversion_psd/#{current_user.id}_#{@request.id}.png"
+                "img/conversion_psd/#{current_user.id}_#{@req.id}.png"
             - else
-              = link_to image_tag(@request.work.img1.url,
+              = link_to image_tag(@req.work.img1.url,
                 class:'size_large-rectangle fit_c'),
-                @request.work.img1.url
+                @req.work.img1.url
               %p.on_card SAMPLE
           - if user_signed_in?
             - if receiver.nickname == current_user.nickname
-              - if '購入者の決済設定不備によるキャンセル' != @request.stts
-                - if '納品完了' != @request.stts
+              - if '購入者の決済設定不備によるキャンセル' != @req.stts
+                - if '納品完了' != @req.stts
                   = form_with(model: @work, local: true) do |f|
-                    = f.hidden_field :request_id, :value => @request.work.request_id
-                    - if '拒否' == @request.stts
+                    = f.hidden_field :request_id, :value => @req.work.request_id
+                    - if '拒否' == @req.stts
                       = 'リクエストは拒否されました'
-                    - elsif '製作中断' == @request.stts
+                    - elsif '製作中断' == @req.stts
                       = '製作が中断されました'
-                    - elsif @request.work.img1.blank?
+                    - elsif @req.work.img1.blank?
                       = '1枚目'
                       = f.file_field :img1
                       = f.submit '登録'
                     - else
                       = f.hidden_field :cancel, :value => 'キャンセル'
                       = f.submit '取り消し'
-          - if @request.work.img2?
+          - if @req.work.img2?
             %br
               %br= '2枚目'
-              = link_to image_tag(@request.work.img2.url,
+              = link_to image_tag(@req.work.img2.url,
                 class:'size_large-rectangle fit_c'),
-                @request.work.img2.url
+                @req.work.img2.url
               %p.on_card SAMPLE
-          - if (not @request.work.img1.blank?) || @request.work.img2?
+          - if (not @req.work.img1.blank?) || @req.work.img2?
             - if user_signed_in?
               - if receiver.id == current_user.id
-                - if '納品完了' != @request.stts
+                - if '納品完了' != @req.stts
                   = form_with(model: @work, local: true) do |f|
-                    = f.hidden_field :request_id, :value => @request.work.request_id
-                    - if @request.work.img2.blank?
+                    = f.hidden_field :request_id, :value => @req.work.request_id
+                    - if @req.work.img2.blank?
                       %br= '2枚目'
                       = f.file_field :img2
                       = f.submit '登録'
                     - else
                       = f.hidden_field :cancel, :value => 'キャンセル2'
                       = f.submit '取り消し'
-          - if @request.work.img3?
+          - if @req.work.img3?
             %br= '3枚目'
-            = link_to image_tag(@request.work.img3.url,
-              class:'size_large-rectangle fit_c'), @request.work.img3.url
+            = link_to image_tag(@req.work.img3.url,
+              class:'size_large-rectangle fit_c'), @req.work.img3.url
             %p.on_card SAMPLE
-          - if (not @request.work.img2.blank?) || (@request.work.img3?)          
-            - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @request.stts)
+          - if (not @req.work.img2.blank?) || (@req.work.img3?)          
+            - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @req.stts)
               = form_with(model: @work, local: true) do |f|
-                = f.hidden_field :request_id, :value => @request.work.request_id
-                - if @request.work.img3.blank?
+                = f.hidden_field :request_id, :value => @req.work.request_id
+                - if @req.work.img3.blank?
                   %br= '3枚目'
                   = f.file_field :img3
                   = f.submit '登録'
                 - else
                   = f.hidden_field :cancel, :value => 'キャンセル3'
                   = f.submit '取り消し'
-          - if @request.work.img4?
+          - if @req.work.img4?
             %br= '4枚目'
-            = link_to image_tag(@request.work.img4.url,
-              class:'size_large-rectangle fit_c'), @request.work.img4.url
+            = link_to image_tag(@req.work.img4.url,
+              class:'size_large-rectangle fit_c'), @req.work.img4.url
             %p.on_card SAMPLE
-          - if (not @request.work.img3.blank?) || (@request.work.img4?)           
-            - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @request.stts)
+          - if (not @req.work.img3.blank?) || (@req.work.img4?)           
+            - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @req.stts)
               = form_with(model: @work, local: true) do |f|
-                = f.hidden_field :request_id, :value => @request.work.request_id
-                - if @request.work.img4.blank?
+                = f.hidden_field :request_id, :value => @req.work.request_id
+                - if @req.work.img4.blank?
                   %br= '4枚目'
                   = f.file_field :img4
                   = f.submit '登録'
                 - else
                   = f.hidden_field :cancel, :value => 'キャンセル4'
                   = f.submit '取り消し'
-          - if @request.work.img5?
+          - if @req.work.img5?
             %br= '5枚目'
-            = link_to image_tag(@request.work.img5.url,
-              class:'size_large-rectangle fit_c'), @request.work.img5.url
+            = link_to image_tag(@req.work.img5.url,
+              class:'size_large-rectangle fit_c'), @req.work.img5.url
             %p.on_card SAMPLE
-          - if (not @request.work.img4.blank?) || @request.work.img5?
+          - if (not @req.work.img4.blank?) || @req.work.img5?
             - if user_signed_in? && receiver.nickname == current_user.nickname
-              - if '納品完了' != @request.stts
+              - if '納品完了' != @req.stts
                 = form_with(model: @work, local: true) do |f|
-                  = f.hidden_field :request_id, :value => @request.work.request_id
-                  - if @request.work.img5.blank?
+                  = f.hidden_field :request_id, :value => @req.work.request_id
+                  - if @req.work.img5.blank?
                     %br= '5枚目'
                     = f.file_field :img5
                     = f.submit '登録'
                   - else
                     = f.hidden_field :cancel, :value => 'キャンセル5'
                     = f.submit '取り消し'
-          - if @request.work.img6?
+          - if @req.work.img6?
             %br= '6枚目'
-            = link_to image_tag(@request.work.img6.url,
-              class:'size_large-rectangle fit_c'), @request.work.img6.url
+            = link_to image_tag(@req.work.img6.url,
+              class:'size_large-rectangle fit_c'), @req.work.img6.url
             %p.on_card SAMPLE
-          - if (not @request.work.img5.blank?) || (@request.work.img6?) 
-            - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @request.stts)
+          - if (not @req.work.img5.blank?) || (@req.work.img6?) 
+            - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @req.stts)
               = form_with(model: @work, local: true) do |f|
-                = f.hidden_field :request_id, :value => @request.work.request_id
-                - if @request.work.img6.blank?
+                = f.hidden_field :request_id, :value => @req.work.request_id
+                - if @req.work.img6.blank?
                   %br= '6枚目'
                   = f.file_field :img6
                   = f.submit '登録'
@@ -183,28 +183,28 @@
                   = f.hidden_field :cancel, :value => 'キャンセル6'
                   = f.submit '取り消し'
       .col-sm-auto
-        - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('製作中' == @request.stts || '手戻し' == @request.stts)
-          - if (@request.work.img1?)
+        - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('製作中' == @req.stts || '手戻し' == @req.stts)
+          - if (@req.work.img1?)
             = button_to '納品', {controller:'requests', action:'show'},
-              {method: :get, params:{status:'納品完了', request_id:@request.id}}
+              {method: :get, params:{status:'納品完了', request_id:@req.id}}
           %br= button_to '製作中断', {controller:'requests', action:'show'},
-            {method: :get, params:{status:'製作中断', request_id:@request.id}}
-        - if (user_signed_in?) && ('納品完了' == @request.stts)
+            {method: :get, params:{status:'製作中断', request_id:@req.id}}
+        - if (user_signed_in?) && ('納品完了' == @req.stts)
           - if sender.nickname == current_user.nickname
             = button_to('ダウンロード',
               download_requests_path, {method: :get,params:{request_id: params[:id]}})
-            // - if @request.evaluation_comment.nil?
-            //   = form_with(model: @request, local: true) do |f|
+            // - if @req.evaluation_comment.nil?
+            //   = form_with(model: @req, local: true) do |f|
             //     .form-group.mt-4
             //       = f.label :'コメント'
             //       = f.text_area :evaluation_comment,
             //         class:'form-control', size:'15x10'
-            //       = f.hidden_field :request_id, :value => @request.id
+            //       = f.hidden_field :request_id, :value => @req.id
             //     = f.submit '送信', class:'btn btn-light'
           - elsif (user_signed_in?) && (receiver.nickname == current_user.nickname)
             = button_to '手戻し', {controller:'requests', action:'show'}, 
-              {method: :get, params:{status:'手戻し', request_id:@request.id}}
-      // - if (user_signed_in?) && (nil != @request.evaluation_comment)
+              {method: :get, params:{status:'手戻し', request_id:@req.id}}
+      // - if (user_signed_in?) && (nil != @req.evaluation_comment)
       // - if (user_signed_in?) 
       //   %br=sender.nickname + "さんからコメント"
-      //   %br=@request.evaluation_comment
+      //   %br=@req.evaluation_comment

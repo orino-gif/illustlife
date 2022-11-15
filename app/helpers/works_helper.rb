@@ -22,7 +22,9 @@ module WorksHelper
     end
   end
   
-  def perf_update(perf, req)
+  def perf_update(perf, req, tx, rx)
+    @tx = tx
+    @rx = rx
     if false == req.work.rework
       perf.painting += 1
       perf.evaluation += 10
@@ -30,7 +32,7 @@ module WorksHelper
       perf.withdrawal += req.money
       req.work.d_time = Time.now
     end
-    UserMailer.del(@sender, @receiver).deliver_later
+    UserMailer.del(@tx, @rx).deliver_later
     noti('依頼者への納品完了のメールを送信しました')
   end
 end

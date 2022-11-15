@@ -24,7 +24,7 @@
           .padding_side-small.text-center.py-1
           
             - if creator.user.confirmed_at?
-              = display_header(creator,
+              = display_hdr(creator,
                 'size_Xlarge-square border_solid-medium fit_c')
                 
               .font-small.string_indention-small= creator.user.nickname

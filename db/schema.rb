@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_15_033923) do
+ActiveRecord::Schema.define(version: 2022_11_15_090809) do
 
   create_table "cards", primary_key: "user_id", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "customer_id", null: false
@@ -21,11 +21,11 @@ ActiveRecord::Schema.define(version: 2022_11_15_033923) do
 
   create_table "creators", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "icon"
-    t.string "header"
-    t.string "twitter"
+    t.string "hdr"
+    t.string "twtr"
     t.string "pixiv"
-    t.string "instagram"
-    t.string "youtube"
+    t.string "insta"
+    t.string "yt"
     t.string "link"
     t.datetime "updated_at"
     t.datetime "created_at"

@@ -6,7 +6,7 @@ class CreatorsController < ApplicationController
   
   def show
     # 納品済みの作品を表示する為に利用
-    @requests = Request.where(rx_id: @creator.user.id, status: '納品完了')
+    @reqs = Request.where(rx_id: @creator.user.id, status: '納品完了')
     # @works = Work.find_by(request_id:66)
     # @works = Work.find(66,67,68)#プライマリーを設定している場合
     # @works = Work.find_by(request_id:66)
@@ -95,8 +95,8 @@ class CreatorsController < ApplicationController
   private
 
   def creators_params
-    params.require(:creator).permit(:header, :icon, :twitter, :pixiv, :instagram,
-      :youtube, :link)
+    params.require(:creator).permit(:hdr, :icon, :twtr, :pixiv, :insta,
+    :yt, :link)
   end
 
   def set_creator

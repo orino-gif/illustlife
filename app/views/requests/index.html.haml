@@ -15,9 +15,9 @@
         %th=""
   
   / 表体を表示
-  - if not @requests.empty?
-    - @requests.reverse_each.with_index(1) do |request|
-      - @request = request
+  - if not @reqs.empty?
+    - @reqs.reverse_each.with_index(1) do |request|
+      - @req = request
       = render 'shared/request.html'
   - else
     = 'リクエストがまだ存在しません'

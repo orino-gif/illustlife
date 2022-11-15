@@ -50,7 +50,7 @@ class UserMailer < ApplicationMailer
   def declined(tx, rx, requests)
     @tx = tx
     @rx = rx
-    @request = requests
+    @req = requests
     mail(to: "#{@rx.email},#{@tx.email},#{ENV['ADMIN']}",
     subject: "[#{ENV['APP_NAME']}]" + @tx.nickname + \
     'さんのクレジットカード決済不備によるキャンセルの件')
