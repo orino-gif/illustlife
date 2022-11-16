@@ -14,8 +14,8 @@ class CardsController < ApplicationController
     else
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       begin
-        customer = Payjp::Customer.retrieve(card.customer_id)
-        @default_card_information = customer.cards.retrieve(card.card_id)
+        customer = Payjp::Customer.retrieve(card.cus_id)
+        @default_card_information = customer.cards.retrieve(card.car_id)
       rescue Payjp::PayjpError => e
         if Rails.env.development?
           p "例外エラー:" + e.to_s
@@ -32,7 +32,7 @@ class CardsController < ApplicationController
     if not @card.blank?
       begin
         Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-        customer = Payjp::Customer.retrieve(@card.customer_id)
+        customer = Payjp::Customer.retrieve(@card.cus_id)
         customer.delete
         Card.find_by(user_id: current_user.id).delete
         redirect_to action: "new"
@@ -54,8 +54,8 @@ class CardsController < ApplicationController
       # カードテーブルのデータの作成
       @card = Card.new(
         user_id: current_user.id,
-        customer_id: customer.id,
-        card_id: customer.default_card
+        cus_id: customer.id,
+        car_id: customer.default_card
       )
       if @card.save
         redirect_to action: "show", notice: "クレジットカードが登録されました"

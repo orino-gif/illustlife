@@ -72,7 +72,7 @@ class RequestsController < ApplicationController
           Payjp.api_key = ENV['PAYJP_SECRET_KEY']
           begin
             Payjp::Charge.create(:amount => params[:amount],
-            :customer => @card.customer_id, :currency => 'jpy')
+            :customer => @card.cus_id, :currency => 'jpy')
           rescue Payjp::PayjpError => e
             @req.stts = '購入者キャンセル'
             # 承認者へ決済不備によるキャンセルを知らせる
@@ -99,7 +99,7 @@ class RequestsController < ApplicationController
         if false == @req.work.rework
           @rx.creator.performance.pic += 1
           @rx.creator.performance.eval += 10
-          @rx.creator.performance.earnings += @req.money
+          @rx.creator.performance.sales += @req.money
           @rx.creator.performance.wdl += @req.money
           @req.work.d_time = Time.now
         end

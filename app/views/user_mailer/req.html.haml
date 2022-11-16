@@ -4,10 +4,10 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
     To
-    =@rx.nickname
+    =@rx.nick
     さん
     <br><br>
-    = @tx.nickname
+    = @tx.nick
     さんから、リクエストが送信されました。<br>
     リクエスト承認の可否決定を以下のリンク先よりお願い致します。<br> 
     = link_to '承認リンク先', ENV['HOME_ADDRESS'] + "/requests"

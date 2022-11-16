@@ -1,16 +1,16 @@
 - content_for(:html_title) { '売上' }
 %h1.font-Xlarge.background_color-whitesmoke
-  ="#{@creator.user.nickname}さんの売上と引き落とし申請"
+  ="#{@creator.user.nick}さんの売上と引き落とし申請"
 
 / 総売上と引き落とし対象額を表示して、引き落とし申請を行う
 .container
-  - if 0 < @creator.performance.earnings
+  - if 0 < @creator.performance.sales
     - amount_wdl = @creator.performance.wdl
     - userge_fee = amount_wdl*0.15
     
     - if '引き落とし申請前' == @wdl_status
       .row.my-5.font-medium.margin_side-small
-        = "総売上:#{@creator.performance.earnings}円"
+        = "総売上:#{@creator.performance.sales}円"
         %br
           = "引き落とし対象額:#{amount_wdl}円"
           

@@ -1,6 +1,6 @@
 - if @req
-  - sender = User.find(@req.tx_id)
-  - receiver = User.find(@req.rx_id)
+  - tx = User.find(@req.tx_id)
+  - rx = User.find(@req.rx_id)
   / 表体を表示
   .row.my-5
     / 一覧表示の場合
@@ -11,10 +11,10 @@
           %td.hidden_over="#{@req.created_at.strftime("%Y/%m/%d %H:%M")}"
           / 文字が一覧の表のセルをはみ出した場合に、はみ出した文字を隠す
           %td.hidden_over= @req.id
-          %td.hidden_over= icon(sender.creator,
-            's_square rounded-circle fit_c') + sender.nickname
-          %td.hidden_over= icon(receiver.creator,
-            's_square rounded-circle fit_c') + receiver.nickname
+          %td.hidden_over= icon(tx.creator,
+            's_square rounded-circle fit_c') + tx.nick
+          %td.hidden_over= icon(rx.creator,
+            's_square rounded-circle fit_c') + rx.nick
           %td= "#{@req.stts}"
           %td
             %button.btn.btn-light.font-medium
@@ -23,12 +23,12 @@
       .col-md-auto
         %table.table
           %tr
-            - client_name = '依頼者：' + sender.nickname
-            %td= icon(sender.creator,
+            - client_name = '依頼者：' + tx.nick
+            %td= icon(tx.creator,
               's_square rounded-circle fit_c') + client_name
           %tr
-            - authorizer_name = '承認者：' + receiver.nickname
-            %td= icon(receiver.creator,
+            - authorizer_name = '承認者：' + rx.nick
+            %td= icon(rx.creator,
               's_square rounded-circle fit_c') + authorizer_name
           %tr
             %td.m_line リクエスト内容：<br> #{@req.msg}
@@ -43,13 +43,13 @@
           - if user_signed_in?
             /　このリクエストの関係者のみ以下を表示
             - party_to_the_request = false
-            - if sender.id == current_user.id || receiver.id == current_user.id
+            - if tx.id == current_user.id || rx.id == current_user.id
               - relation = true
             - if relation || Rails.env.development?
               %tr
                 %td= "金額：#{@req.money}円"
               %tr
-                - num_days = receiver.creator.setting.work_d * 60 * 60 * 24
+                - num_days = rx.creator.setting.work_d * 60 * 60 * 24
                 - dl = @req.created_at + num_days
                 %td.m_line
                   = "締め切り日：#{dl.strftime('%Y/%m/%d %H:%M')}"
@@ -57,10 +57,10 @@
                 %td= "状態：#{@req.stts}"
       .col-sm-auto
         .m_line
-          - if user_signed_in? && receiver.id == current_user.id
+          - if user_signed_in? && rx.id == current_user.id
             - if '承認待ち' == @req.stts
-              = "#{sender.nickname}さんから"
-              = "#{receiver.nickname}さんへのリクエストを承認しますか？"
+              = "#{tx.nick}さんから"
+              = "#{rx.nick}さんへのリクエストを承認しますか？"
               = button_to '承認', {controller:'requests', action:'show'},
                 {method: :get, params:{status:'製作中', request_id:@req.id,
                 amount:@req.money}}
@@ -81,7 +81,7 @@
                 @req.work.img1.url
               %p.on_card SAMPLE
           - if user_signed_in?
-            - if receiver.nickname == current_user.nickname
+            - if rx.nick == current_user.nick
               - if '購入者の決済設定不備によるキャンセル' != @req.stts
                 - if '納品完了' != @req.stts
                   = form_with(model: @work, local: true) do |f|
@@ -106,7 +106,7 @@
               %p.on_card SAMPLE
           - if (not @req.work.img1.blank?) || @req.work.img2?
             - if user_signed_in?
-              - if receiver.id == current_user.id
+              - if rx.id == current_user.id
                 - if '納品完了' != @req.stts
                   = form_with(model: @work, local: true) do |f|
                     = f.hidden_field :request_id, :value => @req.work.request_id
@@ -123,7 +123,7 @@
               class:'size_large-rectangle fit_c'), @req.work.img3.url
             %p.on_card SAMPLE
           - if (not @req.work.img2.blank?) || (@req.work.img3?)          
-            - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @req.stts)
+            - if (user_signed_in?) && (rx.nick == current_user.nick) && ('納品完了' != @req.stts)
               = form_with(model: @work, local: true) do |f|
                 = f.hidden_field :request_id, :value => @req.work.request_id
                 - if @req.work.img3.blank?
@@ -139,7 +139,7 @@
               class:'size_large-rectangle fit_c'), @req.work.img4.url
             %p.on_card SAMPLE
           - if (not @req.work.img3.blank?) || (@req.work.img4?)           
-            - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @req.stts)
+            - if (user_signed_in?) && (rx.nick == current_user.nick) && ('納品完了' != @req.stts)
               = form_with(model: @work, local: true) do |f|
                 = f.hidden_field :request_id, :value => @req.work.request_id
                 - if @req.work.img4.blank?
@@ -155,7 +155,7 @@
               class:'size_large-rectangle fit_c'), @req.work.img5.url
             %p.on_card SAMPLE
           - if (not @req.work.img4.blank?) || @req.work.img5?
-            - if user_signed_in? && receiver.nickname == current_user.nickname
+            - if user_signed_in? && rx.nick == current_user.nick
               - if '納品完了' != @req.stts
                 = form_with(model: @work, local: true) do |f|
                   = f.hidden_field :request_id, :value => @req.work.request_id
@@ -172,7 +172,7 @@
               class:'size_large-rectangle fit_c'), @req.work.img6.url
             %p.on_card SAMPLE
           - if (not @req.work.img5.blank?) || (@req.work.img6?) 
-            - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('納品完了' != @req.stts)
+            - if (user_signed_in?) && (rx.nick == current_user.nick) && ('納品完了' != @req.stts)
               = form_with(model: @work, local: true) do |f|
                 = f.hidden_field :request_id, :value => @req.work.request_id
                 - if @req.work.img6.blank?
@@ -183,16 +183,16 @@
                   = f.hidden_field :cancel, :value => 'キャンセル6'
                   = f.submit '取り消し'
       .col-sm-auto
-        - if (user_signed_in?) && (receiver.nickname == current_user.nickname) && ('製作中' == @req.stts || '手戻し' == @req.stts)
+        - if (user_signed_in?) && (rx.nick == current_user.nick) && ('製作中' == @req.stts || '手戻し' == @req.stts)
           - if (@req.work.img1?)
             = button_to '納品', {controller:'requests', action:'show'},
               {method: :get, params:{status:'納品完了', request_id:@req.id}}
           %br= button_to '製作中断', {controller:'requests', action:'show'},
             {method: :get, params:{status:'製作中断', request_id:@req.id}}
         - if (user_signed_in?) && ('納品完了' == @req.stts)
-          - if sender.nickname == current_user.nickname
+          - if tx.nick == current_user.nick
             = button_to('ダウンロード',
               download_requests_path, {method: :get,params:{request_id: params[:id]}})
-          - elsif (user_signed_in?) && (receiver.nickname == current_user.nickname)
+          - elsif (user_signed_in?) && (rx.nick == current_user.nick)
             = button_to '手戻し', {controller:'requests', action:'show'}, 
               {method: :get, params:{status:'手戻し', request_id:@req.id}}

@@ -13,8 +13,8 @@ class User < ApplicationRecord
       user.id = auth.id
       user.created_at = DateTime.now
       user.updated_at = DateTime.now
-      user.accepted = true
-      user.nickname = auth.info.nickname
+      user.agree = true
+      user.nick = auth.info.nick
       user.confirmed_at = DateTime.now
       user.provider = auth.provider
       user.uid = auth.uid
@@ -24,7 +24,7 @@ class User < ApplicationRecord
     end
   end
   
-  validates :accepted, presence: {message: ':利用規約にチェックを入力してください'}
+  validates :agree, presence: {message: ':利用規約にチェックを入力してください'}
 
   # 論理削除に対応するため、validationをカスタマイズする
   validates :email, presence: true, length: { maximum: 255 }

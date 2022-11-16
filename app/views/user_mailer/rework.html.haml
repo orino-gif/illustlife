@@ -4,10 +4,10 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
     To
-    =@tx.nickname
+    =@tx.nick
     さん
     <br><br>
-    = @rx.nickname
+    = @rx.nick
     さんより納品物が戻されました。<br>
     再納品されましたら、再度ご連絡致します。<br> 
     = link_to '詳細リンク先', ENV['HOME_ADDRESS'] + "/requests"
