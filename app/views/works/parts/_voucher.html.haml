@@ -24,8 +24,8 @@
         %td= "金額：#{@work.request.money}円"
       %tr
         - num_days = @rx.creator.setting.work_d * 60 * 60 * 24
-        - deadline = @work.request.created_at + num_days
+        - dl = @work.request.created_at + num_days
         %td.m_line
-          = "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
+          = "締め切り日：#{dl.strftime('%Y/%m/%d %H:%M')}"
       %tr
         %td= "状態：#{@work.request.stts}"

@@ -50,9 +50,9 @@
                 %td= "金額：#{@req.money}円"
               %tr
                 - num_days = receiver.creator.setting.work_d * 60 * 60 * 24
-                - deadline = @req.created_at + num_days
+                - dl = @req.created_at + num_days
                 %td.m_line
-                  = "締め切り日：#{deadline.strftime('%Y/%m/%d %H:%M')}"
+                  = "締め切り日：#{dl.strftime('%Y/%m/%d %H:%M')}"
               %tr
                 %td= "状態：#{@req.stts}"
       .col-sm-auto
@@ -193,18 +193,6 @@
           - if sender.nickname == current_user.nickname
             = button_to('ダウンロード',
               download_requests_path, {method: :get,params:{request_id: params[:id]}})
-            // - if @req.evaluation_comment.nil?
-            //   = form_with(model: @req, local: true) do |f|
-            //     .form-group.mt-4
-            //       = f.label :'コメント'
-            //       = f.text_area :evaluation_comment,
-            //         class:'form-control', size:'15x10'
-            //       = f.hidden_field :request_id, :value => @req.id
-            //     = f.submit '送信', class:'btn btn-light'
           - elsif (user_signed_in?) && (receiver.nickname == current_user.nickname)
             = button_to '手戻し', {controller:'requests', action:'show'}, 
               {method: :get, params:{status:'手戻し', request_id:@req.id}}
-      // - if (user_signed_in?) && (nil != @req.evaluation_comment)
-      // - if (user_signed_in?) 
-      //   %br=sender.nickname + "さんからコメント"
-      //   %br=@req.evaluation_comment

@@ -29,8 +29,7 @@ class WorksController < ApplicationController
       when '製作中'
         card_settlement(@tx, @rx, @work)
       when '製作中断'
-        @rx.creator.performance.evaluation -= 20
-        @work.request.stts
+        @rx.creator.performance.eval -= 20
         UserMailer.quit(@tx, @rx).deliver_later
         noti('作業を中断しました')
       when '納品完了'

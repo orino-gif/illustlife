@@ -26,10 +26,10 @@ module WorksHelper
     @tx = tx
     @rx = rx
     if false == req.work.rework
-      perf.painting += 1
-      perf.evaluation += 10
+      perf.pic += 1
+      perf.eval += 10
       perf.earnings += req.money
-      perf.withdrawal += req.money
+      perf.wdl += req.money
       req.work.d_time = Time.now
     end
     UserMailer.del(@tx, @rx).deliver_later

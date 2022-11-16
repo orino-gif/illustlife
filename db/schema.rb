@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_15_141248) do
+ActiveRecord::Schema.define(version: 2022_11_16_101732) do
 
   create_table "cards", primary_key: "user_id", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "customer_id", null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2022_11_15_141248) do
   create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "bank"
     t.string "branch"
-    t.string "account_type"
+    t.string "a_type"
     t.integer "number"
     t.string "holder"
     t.datetime "created_at", null: false
@@ -56,13 +56,13 @@ ActiveRecord::Schema.define(version: 2022_11_15_141248) do
   end
 
   create_table "performances", primary_key: "creator_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "painting", default: 0
-    t.float "deadline", default: 100.0
+    t.integer "pic", default: 0
+    t.float "dl", default: 100.0
     t.float "reply", default: 100.0
-    t.integer "points", default: 100
-    t.integer "evaluation", default: 50
-    t.integer "earnings", default: 0
-    t.integer "withdrawal", default: 0
+    t.integer "point", default: 100
+    t.integer "eval", default: 50
+    t.integer "sales", default: 0
+    t.integer "wdl", default: 0
   end
 
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

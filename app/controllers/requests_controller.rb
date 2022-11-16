@@ -91,16 +91,16 @@ class RequestsController < ApplicationController
         end
         
       elsif '製作中断' == params[:stts]
-        @rx.creator.performance.evaluation -= 20
+        @rx.creator.performance.eval -= 20
         UserMailer.quit(@tx, @rx).deliver_later
         redirect_to request.referer,
           notice: '依頼者へ作業中断のメールを送信しました'
       elsif '納品完了' == params[:stts]
         if false == @req.work.rework
-          @rx.creator.performance.painting += 1
-          @rx.creator.performance.evaluation += 10
+          @rx.creator.performance.pic += 1
+          @rx.creator.performance.eval += 10
           @rx.creator.performance.earnings += @req.money
-          @rx.creator.performance.withdrawal += @req.money
+          @rx.creator.performance.wdl += @req.money
           @req.work.d_time = Time.now
         end
         
@@ -117,7 +117,7 @@ class RequestsController < ApplicationController
         notice: '依頼者への手戻りのメールを送信しました'
       end
 
-      @rx.creator.performance.deadline = 100
+      @rx.creator.performance.dl = 100
       if @req.stts != '購入者キャンセル'
         @req.stts = params[:stts]
       end

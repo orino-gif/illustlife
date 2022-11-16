@@ -34,23 +34,23 @@ class CreatorsController < ApplicationController
   
   # 総売上と引き落とし可能額を表示し、引き落とし申請を行う。
   def earning 
-    if @withdrawal_status.nil?
-      @withdrawal_status = '引き落とし申請前'
+    if @wdl_status.nil?
+      @wdl_status = '引き落とし申請前'
     end
       
-    if '引き落とし内容確認' == params[:withdrawal_status]
-      if @creator.performance.withdrawal > 0
-        @withdrawal_status = '引き落とし内容確認'
+    if '引き落とし内容確認' == params[:wdl_status]
+      if @creator.performance.wdl > 0
+        @wdl_status = '引き落とし内容確認'
       else
         flash.now[:alert] = '引き落とし対象額が0円です'
           render :earning
       end
       
-    elsif '引き落とし実行' == params[:withdrawal_status]
-      @withdrawal_status = '引き落とし実行'
+    elsif '引き落とし実行' == params[:wdl_status]
+      @wdl_status = '引き落とし実行'
       UserMailer.wdl(@creator).deliver_later
       sleep(5)
-      @creator.performance.withdrawal = 0
+      @creator.performance.wdl = 0
       @creator.save
     end
   end
