@@ -1,0 +1,9 @@
+= form_with(model:@work, local: true) do |f|
+  = f.hidden_field :request_id, :value => @work.request_id
+  - if @work.img1.blank?
+    = '1枚目'
+    = f.file_field :img1
+    = f.submit '登録'
+  - else
+    = f.hidden_field :cancel, :value => 'キャンセル'
+    = f.submit '取り消し'

@@ -70,11 +70,11 @@
         - if '承認待ち' != @req.stts
           - if @req.work.img1?
             - if @req.work.img1.to_s.include?('.psd')
-              - pdf = Magick::ImageList.new(@req.work.img1.to_s)
-              - pdf[0].write("public/img/conversion_psd/#{current_user.id}_#{@req.id}.png")
-              = link_to image_tag("/img/conversion_psd/#{current_user.id}_#{@req.id}.png",
-                class:'size_large-rectangle fit_c'),
-                "img/conversion_psd/#{current_user.id}_#{@req.id}.png"
+              // - pdf = Magick::ImageList.new(@req.work.img1.to_s)
+              // - pdf[0].write("public/img/conversion_psd/#{current_user.id}_#{@req.id}.png")
+              // = link_to image_tag("/img/conversion_psd/#{current_user.id}_#{@req.id}.png",
+              //   class:'size_large-rectangle fit_c'),
+              //   "img/conversion_psd/#{current_user.id}_#{@req.id}.png"
             - else
               = link_to image_tag(@req.work.img1.url,
                 class:'size_large-rectangle fit_c'),

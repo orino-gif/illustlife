@@ -14,11 +14,14 @@ class WorksController < ApplicationController
   def show
     # リクエスト詳細ボタンが押された場合の処理
     if params[:request_id].nil?
+      @req = Request.find(params[:id])
       @work = Work.find_by(request_id: params[:id])
-    elsif params[:request_id]
-      @work = Work.find_by(request_id: params[:request_id])
+      
+    else
+      @req = Request.find(params[:request_id])
+      @work = Work.find_by(request_id: @req.id)
     end
-    users = User.find(@work.request.tx_id, @work.request.rx_id)
+    users = User.find(@req.tx_id, @req.rx_id)
     @tx = users[0]
     @rx = users[1]
     if params[:stts]
@@ -49,9 +52,10 @@ class WorksController < ApplicationController
   end
   
   def update
-    @work =  Work.find_by(request_id: params[:id])
+    @work =  Work.find_by(request_id: params[:work][:request_id])
+    p @work
     if @work.update(works_params)
-      redirect_to request_path(params[:id]), notice: '更新しました。'
+      redirect_to work_path(params[:id]), notice: '更新しました。'
     end
   end
   

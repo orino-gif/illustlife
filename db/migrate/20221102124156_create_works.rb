@@ -18,7 +18,7 @@ class CreateWorks < ActiveRecord::Migration[5.2]
     rename_column :requests, :is_autographed, :is_auto
 
     create_table :works, id: false  do |t|
-      t.references :request, foreign_key: true
+      t.column :request_id, 'INTEGER PRIMARY KEY NOT NULL'
       t.datetime :del_time
       t.boolean :is_in_time, default:false
       t.boolean :is_rework, default:false

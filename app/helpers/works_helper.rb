@@ -18,7 +18,6 @@ module WorksHelper
     else
       work.request.stts = 'キャンセル'
       alt('購入者側の問題でキャンセルされました')
-      work.request.save
     end
   end
   

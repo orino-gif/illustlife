@@ -114,8 +114,7 @@ ActiveRecord::Schema.define(version: 2022_11_16_133013) do
     t.index ["nick"], name: "index_users_on_nick"
   end
 
-  create_table "works", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "request_id"
+  create_table "works", primary_key: "request_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "d_time"
     t.boolean "in_time", default: false
     t.boolean "rework", default: false
@@ -126,8 +125,6 @@ ActiveRecord::Schema.define(version: 2022_11_16_133013) do
     t.string "img4"
     t.string "img5"
     t.string "img6"
-    t.index ["request_id"], name: "index_works_on_request_id"
   end
 
-  add_foreign_key "works", "requests"
 end

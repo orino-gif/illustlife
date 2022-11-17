@@ -9,10 +9,10 @@
       .m_line
         - if user_signed_in? && @rx.id == current_user.id
           // 進行状態に応じて表示を変更
-          - case @work.request.stts
+          - case @req.stts
           - when '承認待ち'
             = render 'works/parts/approval'
           - when '製作中'
-            = render 'works/parts/mfr'
+            = render 'works/parts/mfr', {works:@work}
             
             

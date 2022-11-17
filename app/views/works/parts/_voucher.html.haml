@@ -7,13 +7,13 @@
     %td= icon(@rx.creator,'s_square rounded-circle fit_c') + auth
   %tr
     %td.m_line= 'リクエスト内容：'
-    %br= @work.request.msg
+    %br= @req.msg
   %tr
-    %td= "ファイル形式：#{@work.request.fmt}"
-    - if @work.request.anon?
+    %td= "ファイル形式：#{@req.fmt}"
+    - if @req.anon?
       %tr
         %td= '非公開:有'
-    - if @work.request.auto?
+    - if @req.auto?
       %tr
         %td= '宛名入りサイン:有'
   - if user_signed_in?
@@ -21,11 +21,11 @@
       - relation = true
     - if relation || Rails.env.development?
       %tr
-        %td= "金額：#{@work.request.money}円"
+        %td= "金額：#{@req.money}円"
       %tr
         - num_days = @rx.creator.setting.work_d * 60 * 60 * 24
-        - dl = @work.request.created_at + num_days
+        - dl = @req.created_at + num_days
         %td.m_line
           = "締め切り日：#{dl.strftime('%Y/%m/%d %H:%M')}"
       %tr
-        %td= "状態：#{@work.request.stts}"
+        %td= "状態：#{@req.stts}"

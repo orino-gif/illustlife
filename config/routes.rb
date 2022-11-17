@@ -51,5 +51,5 @@ Rails.application.routes.draw do
     end
   end
   resources :settings, only: [:update]
-  resources :works, only: [:new, :show, :create, :update]
+  resources :works, only: [:new, :create, :show, :update]
 end
