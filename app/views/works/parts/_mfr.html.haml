@@ -2,8 +2,8 @@
   = f.hidden_field :request_id, :value => @work.request_id
   - if @work.img1.blank?
     = '1枚目'
-    = f.file_field :img1
+    = f.file_field :images, multiple: true
     = f.submit '登録'
-  - else
-    = f.hidden_field :cancel, :value => 'キャンセル'
-    = f.submit '取り消し'
+  // - if @work.img1?
+  //   = link_to image_tag(@work.img1.url, class:'l_rect fit_c'),@work.img1.url
+  //   %p.on_card SAMPLE

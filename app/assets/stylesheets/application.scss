@@ -73,7 +73,7 @@ p.on_card { position: absolute; top: auto; left: auto;
 }
 // 長方形の図のサイズを設定する関数
 @mixin size_rectangle($large, $medium, $small, $Xsmall) {
-  .size_large-rectangle { width: 100%; height: $large; }
+  .l_rect { width: 100%; height: $large; }
   .size_medium-rectangle { width: 100%; height: $medium; }
   .size_small-rectangle { width: 100%; height: $small; }
   .size_Xsmall-rectangle { width: 100%; height: $Xsmall; }

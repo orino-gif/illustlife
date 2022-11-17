@@ -61,6 +61,6 @@ class WorksController < ApplicationController
   
   private
   def works_params
-    params.require(:work).permit(:rework,:img1,:img2,:img3,:img4,:img5,:img6)
+    params.require(:work).permit(:rework,{ images: [] },:img1,:img2,:img3,:img4,:img5,:img6)
   end
 end

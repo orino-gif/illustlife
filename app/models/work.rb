@@ -1,6 +1,6 @@
 class Work < ApplicationRecord
   belongs_to :request, optional: true #optional:trueは外部キーを許可する設定
-
+  mount_uploaders :images, CreatorUploader
   mount_uploader :img1, CreatorUploader
   mount_uploader :img2, CreatorUploader
   mount_uploader :img3, CreatorUploader
