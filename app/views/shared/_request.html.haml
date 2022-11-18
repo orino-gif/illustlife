@@ -68,17 +68,17 @@
                 = button_to '拒否', {controller:'requests', action:'show'},
                 {method: :get, params:{status:'拒否', request_id:@req.id}}
         - if '承認待ち' != @req.stts
-          - if @req.work.img1?
-            - if @req.work.img1.to_s.include?('.psd')
-              // - pdf = Magick::ImageList.new(@req.work.img1.to_s)
+          - if @req.work.images?
+            - if @req.work.images.to_s.include?('.psd')
+              // - pdf = Magick::ImageList.new(@req.work.images.to_s)
               // - pdf[0].write("public/img/conversion_psd/#{current_user.id}_#{@req.id}.png")
               // = link_to image_tag("/img/conversion_psd/#{current_user.id}_#{@req.id}.png",
               //   class:'l_rect fit_c'),
               //   "img/conversion_psd/#{current_user.id}_#{@req.id}.png"
             - else
-              = link_to image_tag(@req.work.img1.url,
+              = link_to image_tag(@req.work.images.url,
                 class:'l_rect fit_c'),
-                @req.work.img1.url
+                @req.work.images.url
               %p.on_card SAMPLE
           - if user_signed_in?
             - if rx.nick == current_user.nick
@@ -90,101 +90,15 @@
                       = 'リクエストは拒否されました'
                     - elsif '製作中断' == @req.stts
                       = '製作が中断されました'
-                    - elsif @req.work.img1.blank?
+                    - elsif @req.work.images.blank?
                       = '1枚目'
                       = f.file_field :img1
                       = f.submit '登録'
                     - else
                       = f.hidden_field :cancel, :value => 'キャンセル'
-                      = f.submit '取り消し'
-          - if @req.work.img2?
-            %br
-              %br= '2枚目'
-              = link_to image_tag(@req.work.img2.url,
-                class:'l_rect fit_c'),
-                @req.work.img2.url
-              %p.on_card SAMPLE
-          - if (not @req.work.img1.blank?) || @req.work.img2?
-            - if user_signed_in?
-              - if rx.id == current_user.id
-                - if '納品完了' != @req.stts
-                  = form_with(model: @work, local: true) do |f|
-                    = f.hidden_field :request_id, :value => @req.work.request_id
-                    - if @req.work.img2.blank?
-                      %br= '2枚目'
-                      = f.file_field :img2
-                      = f.submit '登録'
-                    - else
-                      = f.hidden_field :cancel, :value => 'キャンセル2'
-                      = f.submit '取り消し'
-          - if @req.work.img3?
-            %br= '3枚目'
-            = link_to image_tag(@req.work.img3.url,
-              class:'l_rect fit_c'), @req.work.img3.url
-            %p.on_card SAMPLE
-          - if (not @req.work.img2.blank?) || (@req.work.img3?)          
-            - if (user_signed_in?) && (rx.nick == current_user.nick) && ('納品完了' != @req.stts)
-              = form_with(model: @work, local: true) do |f|
-                = f.hidden_field :request_id, :value => @req.work.request_id
-                - if @req.work.img3.blank?
-                  %br= '3枚目'
-                  = f.file_field :img3
-                  = f.submit '登録'
-                - else
-                  = f.hidden_field :cancel, :value => 'キャンセル3'
-                  = f.submit '取り消し'
-          - if @req.work.img4?
-            %br= '4枚目'
-            = link_to image_tag(@req.work.img4.url,
-              class:'l_rect fit_c'), @req.work.img4.url
-            %p.on_card SAMPLE
-          - if (not @req.work.img3.blank?) || (@req.work.img4?)           
-            - if (user_signed_in?) && (rx.nick == current_user.nick) && ('納品完了' != @req.stts)
-              = form_with(model: @work, local: true) do |f|
-                = f.hidden_field :request_id, :value => @req.work.request_id
-                - if @req.work.img4.blank?
-                  %br= '4枚目'
-                  = f.file_field :img4
-                  = f.submit '登録'
-                - else
-                  = f.hidden_field :cancel, :value => 'キャンセル4'
-                  = f.submit '取り消し'
-          - if @req.work.img5?
-            %br= '5枚目'
-            = link_to image_tag(@req.work.img5.url,
-              class:'l_rect fit_c'), @req.work.img5.url
-            %p.on_card SAMPLE
-          - if (not @req.work.img4.blank?) || @req.work.img5?
-            - if user_signed_in? && rx.nick == current_user.nick
-              - if '納品完了' != @req.stts
-                = form_with(model: @work, local: true) do |f|
-                  = f.hidden_field :request_id, :value => @req.work.request_id
-                  - if @req.work.img5.blank?
-                    %br= '5枚目'
-                    = f.file_field :img5
-                    = f.submit '登録'
-                  - else
-                    = f.hidden_field :cancel, :value => 'キャンセル5'
-                    = f.submit '取り消し'
-          - if @req.work.img6?
-            %br= '6枚目'
-            = link_to image_tag(@req.work.img6.url,
-              class:'l_rect fit_c'), @req.work.img6.url
-            %p.on_card SAMPLE
-          - if (not @req.work.img5.blank?) || (@req.work.img6?) 
-            - if (user_signed_in?) && (rx.nick == current_user.nick) && ('納品完了' != @req.stts)
-              = form_with(model: @work, local: true) do |f|
-                = f.hidden_field :request_id, :value => @req.work.request_id
-                - if @req.work.img6.blank?
-                  %br= '6枚目'
-                  = f.file_field :img6
-                  = f.submit '登録'
-                - else
-                  = f.hidden_field :cancel, :value => 'キャンセル6'
-                  = f.submit '取り消し'
-      .col-sm-auto
+                      = f.submit '取り消し'      .col-sm-auto
         - if (user_signed_in?) && (rx.nick == current_user.nick) && ('製作中' == @req.stts || '手戻し' == @req.stts)
-          - if (@req.work.img1?)
+          - if (@req.work.images?)
             = button_to '納品', {controller:'requests', action:'show'},
               {method: :get, params:{status:'納品完了', request_id:@req.id}}
           %br= button_to '製作中断', {controller:'requests', action:'show'},

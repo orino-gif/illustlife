@@ -1,12 +1,12 @@
 class CreatorsController < ApplicationController
   
-  # @creator = Creator.find(params[:id]) が記載されている関数
+  # @cre = Creator.find(params[:id]) が記載されている関数
   before_action :set_creator, only: [:show, :update, :edit, :earning]
   
   
   def show
     # 納品済みの作品を表示する為に利用
-    @reqs = Request.where(rx_id: @creator.user.id, status: '納品完了')
+    @reqs = Request.where(rx_id: @cre.user.id, status: '納品完了')
     # @works = Work.find_by(request_id:66)
     # @works = Work.find(66,67,68)#プライマリーを設定している場合
     # @works = Work.find_by(request_id:66)
@@ -39,7 +39,7 @@ class CreatorsController < ApplicationController
     end
       
     if '引き落とし内容確認' == params[:wdl_status]
-      if @creator.performance.wdl > 0
+      if @cre.performance.wdl > 0
         @wdl_status = '引き落とし内容確認'
       else
         flash.now[:alert] = '引き落とし対象額が0円です'
@@ -48,15 +48,15 @@ class CreatorsController < ApplicationController
       
     elsif '引き落とし実行' == params[:wdl_status]
       @wdl_status = '引き落とし実行'
-      UserMailer.wdl(@creator).deliver_later
+      UserMailer.wdl(@cre).deliver_later
       sleep(5)
-      @creator.performance.wdl = 0
-      @creator.save
+      @cre.performance.wdl = 0
+      @cre.save
     end
   end
   
   def update
-    if @creator.update(creators_params)
+    if @cre.update(creators_params)
       
       # リクエスト受付開始ボタンが押された場合
       if params[:accepting_requests]
@@ -80,12 +80,12 @@ class CreatorsController < ApplicationController
       redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
       
     else # ユーザー編集後の値の保存に失敗した場合
-      p @creator.errors.full_messages[0]
-      if @creator.errors.full_messages[0].include?("amount")
+      p @cre.errors.full_messages[0]
+      if @cre.errors.full_messages[0].include?("amount")
         flash.now[:alert] = "金額入力の数値が範囲外です" 
         render :edit
           
-      elsif @creator.errors.full_messages[0].include?("whitelist_error")
+      elsif @cre.errors.full_messages[0].include?("whitelist_error")
         flash.now[:alert] = "非対応のファイル形式です(対応:png,jpg,jpeg,gif)" 
         render :edit
       end
@@ -100,6 +100,6 @@ class CreatorsController < ApplicationController
   end
 
   def set_creator
-    @creator = Creator.joins(:performance).find(params[:id])
+    @cre = Creator.joins(:performance).find(params[:id])
   end
 end

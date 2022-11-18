@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_17_153748) do
+ActiveRecord::Schema.define(version: 2022_11_18_003259) do
 
   create_table "cards", primary_key: "user_id", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
@@ -119,12 +119,6 @@ ActiveRecord::Schema.define(version: 2022_11_17_153748) do
     t.boolean "in_time", default: false
     t.boolean "rework", default: false
     t.timestamp "updated_at"
-    t.string "img1"
-    t.string "img2"
-    t.string "img3"
-    t.string "img4"
-    t.string "img5"
-    t.string "img6"
     t.json "images"
   end
 

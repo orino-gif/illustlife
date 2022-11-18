@@ -84,7 +84,7 @@
 
           / サービス名を表示
           .col-auto
-            %span.font-Xlarge
+            %span.ll_font
               %strong イラストライフ
           
           / キャッチコピーを表示    
@@ -161,7 +161,7 @@
     = yield
 
     / 管理者用アカウントでログインした場合にフッダーの色を変更
-    - color='background_color-whitesmoke'
+    - color='ws_bgc'
     - if nil != current_user
       - if ENV['ADMIN'] == current_user.email
         - color='background_color-crimson'

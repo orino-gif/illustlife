@@ -1,5 +1,5 @@
 - content_for(:html_title) { t('.forgot_your_password') }
-%h1.font-Xlarge.background_color-whitesmoke= t('パスワード再送')
+%h1.ll_font.ws_bgc= t('パスワード再送')
 
 .container
   .col-md-8
@@ -9,7 +9,7 @@
       
       .form-group.mt-5
         = f.label :'送信先メールアドレス',
-          class: 'font-large background font-large'
+          class: 'l_font background l_font'
           
         = f.email_field :email, autofocus: true, autocomplete: 'email',
           class: 'form-control'

@@ -15,22 +15,19 @@ class WorksController < ApplicationController
     # リクエスト詳細ボタンが押された場合の処理
     if params[:request_id].nil?
       @req = Request.find(params[:id])
-      @work = Work.find_by(request_id: params[:id])
-      
     else
       @req = Request.find(params[:request_id])
-      @work = Work.find_by(request_id: @req.id)
     end
+    @work = Work.find_by(request_id: @req.id)
     users = User.find(@req.tx_id, @req.rx_id)
     @tx = users[0]
     @rx = users[1]
     if params[:stts]
       case params[:stts]
       when '拒否'
-        UserMailer.refusal(@tx, @rx).deliver_later
-        noti('リクエストを拒否しました')
+        refusal(@tx, @rx, 'refusal')
       when '製作中'
-        card_settlement(@tx, @rx, @work)
+        payment(@tx, @rx, @work)
       when '製作中断'
         @rx.creator.performance.eval -= 20
         UserMailer.quit(@tx, @rx).deliver_later
@@ -61,6 +58,6 @@ class WorksController < ApplicationController
   
   private
   def works_params
-    params.require(:work).permit(:rework,{ images: [] },:img1,:img2,:img3,:img4,:img5,:img6)
+    params.require(:work).permit(:rework,{ images: [] })
   end
 end

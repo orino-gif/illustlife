@@ -2,12 +2,12 @@
 
 .row
   / ヘッダー表示
-  = display_hdr(@creator, 'size_medium-rectangle fit_c')
+  = display_hdr(@cre, 'size_medium-rectangle fit_c')
 
 .row
   .col-2
     / ユーザーアイコン表示
-    = icon(@creator,
+    = icon(@cre,
       'size_large-square rounded-circle fit_c position_large-top')
   
   .col-4
@@ -15,7 +15,7 @@
     - if 'requests' != controller.controller_name
     
       / リクエストを受付ていない場合は、STOP画像を表示
-      - if true == @creator.setting.start
+      - if true == @cre.setting.start
       
         / リクエスト先が自分自身の場合、リンクを付与しない
         - if (user_signed_in?) && (params[:id].to_i == current_user.id.to_i)
@@ -25,7 +25,7 @@
         - else
           = link_to image_tag('/img/request.png',
             class:'size_medium-square position_medium-top'),
-            "/requests/#{@creator.user_id}/new"
+            "/requests/#{@cre.user_id}/new"
             
       - else
         = image_tag '/img/request_stop.png',
@@ -40,31 +40,31 @@
           / 再開通知リストに登録していない場合
           - if resumes.find_by(resume_user: params[:id]).nil?
           
-            .font-Xsmall.position_Xshort-top.position_midium-left
-              = link_to "再開を通知", "/resumes/#{@creator.user_id}/new",
+            .ss_font.position_Xshort-top.position_midium-left
+              = link_to "再開を通知", "/resumes/#{@cre.user_id}/new",
                 class:'button-notice'
   
   / SNSリンク先のアイコンを表示
   .col-1
-    = display_sns(@creator, 'twtr')
+    = display_sns(@cre, 'twtr')
   .col-1
-    = display_sns(@creator, 'pixiv')
+    = display_sns(@cre, 'pixiv')
   .col-1
-    = display_sns(@creator, 'insta')
+    = display_sns(@cre, 'insta')
   .col-1
-    = display_sns(@creator, 'yt')
+    = display_sns(@cre, 'yt')
   .col-1
-    = display_sns(@creator, 'link')
+    = display_sns(@cre, 'link')
 
 / 実績表示
 .row.my-5.mx-5
-  = "ニックネーム：#{@creator.user.nick}"
-  = "、推奨金額：#{@creator.setting.recom}円"
-  = "、作業予定日数：#{@creator.setting.work_d}日"
+  = "ニックネーム：#{@cre.user.nick}"
+  = "、推奨金額：#{@cre.setting.recom}円"
+  = "、作業予定日数：#{@cre.setting.work_d}日"
   
-  - if 0 != @creator.performance.pic
-    = "、締切厳守率：#{@creator.performance.dl}%"
-    = "、返信率:#{@creator.performance.reply}%"
+  - if 0 != @cre.performance.pic
+    = "、締切厳守率：#{@cre.performance.dl}%"
+    = "、返信率:#{@cre.performance.reply}%"
   - else
     - if 'new' != controller.action_name
       %br

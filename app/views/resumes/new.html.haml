@@ -1,10 +1,10 @@
 - content_for(:html_title) { '再開通知' }
-%h1.font-Xlarge.background_color-whitesmoke 再開通知
+%h1.ll_font.ws_bgc 再開通知
 
 / 希望者の再開通知者リストに、再開者のIDを登録する
 .container
   .row.my-3.margin_side-small
-    = @creator.user.nick + "さんのリクエスト受付"
+    = @cre.user.nick + "さんのリクエスト受付"
     
   .row.margin_side-small
     = form_with(model: @resume, local: true) do |f|

@@ -1,6 +1,5 @@
 - content_for(:html_title) { '新規リクエスト' }
-%h1.font-Xlarge.background_color-whitesmoke 新規リクエスト
-
+%h1.ll_font.ws_bgc 新規リクエスト
 .container
   // クリエーターの情報を表示
   = render 'shared/user_hdr'
@@ -10,31 +9,26 @@
       = form_with(model: @req, local: true) do |f|
         .form-group.mt-4
           = f.label :money, '推奨金額(円)'
-          = f.text_field :money, class:'form-control font-large size_large-form',
-            value: @creator.setting.recom.to_s
-          - input_range = @creator.setting.min.to_s(:delimited) + '～￥99,999'
-          = f.label :money, 
-            '入力範囲:￥' + input_range, class:'font-Xsmall'
+          - csm = @cre.setting.recom.to_s
+          = f.text_field :money,class:'form-control l_font l_f-from',value: csm
+          - i_range = @cre.setting.min.to_s(:delimited) + '～￥99,999'
+          = f.label :money, '入力範囲:￥' + i_range, class:'ss_font'
         .form-group.mt-4
           = f.label :msg, '本文(700文字以内)'
-          = f.text_area :msg, autofocus: true,
-            class:'form-control', size:'10x6'
+          = f.text_area :msg, autofocus: true, class:'form-control', size:'10x6'
         .form-group
           = f.label :fmt, 'ファイル形式:'
           = f.select :fmt, ['png', 'jpg', 'jpeg', 'gif']
           %br
-          = f.check_box :anon ,{},checked_value = "true",
-            unchecked_value = "false"
+          = f.check_box :anon ,{},checked_value="true", unchecked_value="false"
           = f.label :anon, '非公開'
           %br
-          = f.check_box :auto ,{},checked_value = "true",
-            unchecked_value = "false"
+          = f.check_box :auto ,{},checked_value="true", unchecked_value="false"
           = f.label :auto, '宛名入りサイン'
         %br
-          = f.submit 'リクエスト送信',
-            class:'btn btn-light size_Xsmall-rectangle font-large'
+          = f.submit 'リクエスト送信', class:'btn btn-light ss_rect l_font'
         %br/
-        = hidden_field_tag :authorizer_id, params[:id]
+        = hidden_field_tag :tx_id, params[:id]
       %div
         \-注意事項-<br>&nbsp
         以下の内容に同意される方のみリクエストを行ってください。<br>

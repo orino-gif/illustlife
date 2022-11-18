@@ -1,5 +1,5 @@
 - content_for(:html_title) { 'イラスト晒し' }
-%h1.font-Xlarge.background_color-whitesmoke イラスト晒し
+%h1.ll_font.ws_bgc イラスト晒し
 
 .container
 .row.my-2
@@ -8,6 +8,6 @@
       = f.label :exposed_img , '晒すイラスト：'
       = f.file_field :exposed_img, class:"preview-uploader"
       
-      .preview.background_color-whitesmoke.size_medium-rectangle
+      .preview.ws_bgc.size_medium-rectangle
       = f.hidden_field :contributor_id, value:params[:id]
       = f.submit '晒す'

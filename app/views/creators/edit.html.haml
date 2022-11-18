@@ -1,33 +1,33 @@
 / クリエーター情報の編集を行う
 - content_for(:html_title) { 'ユーザー編集' }
-%h1.font-Xlarge.background_color-whitesmoke ユーザー編集
+%h1.ll_font.ws_bgc ユーザー編集
 
 .container
   / ヘッダー表示の設定
   .row.my-5
-    = form_with(model: @creator, local:true) do |f|
+    = form_with(model: @cre, local:true) do |f|
       = f.label :hdr , '私の代表作：'
       = f.file_field :hdr
       = f.submit '登録'
     .col
-      = display_hdr(@creator, 'size_medium-rectangle fit_c')
+      = display_hdr(@cre, 'size_medium-rectangle fit_c')
   
   / アイコン表示の設定
   .row.my-5
-    = form_with(model: @creator, local:true) do |f|
+    = form_with(model: @cre, local:true) do |f|
       = f.label :icon, 'アイコン：'
       = f.file_field :icon
       = f.submit '登録'
       
-    = icon(@creator, 'size_medium-square fit_c rounded-circle')
+    = icon(@cre, 'size_medium-square fit_c rounded-circle')
 
   .row.my-5
     = 'アカウント情報：'
     %table.table
       %tr
-        %td="Eメール：#{@creator.user.email}"
+        %td="Eメール：#{@cre.user.email}"
       %tr
-        %td="ニックネーム：#{@creator.user.nick}"
+        %td="ニックネーム：#{@cre.user.nick}"
       %tr
         %td='在籍 or 退会：在籍'
       %td
@@ -38,31 +38,31 @@
     %table.table
       %tr
         %td
-          = form_with(model: @creator, local:true) do |f|
+          = form_with(model: @cre, local:true) do |f|
             = f.label :twtr, 'twitter:'
             = f.text_field :twtr, class:'size_variable-form'
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @creator, local:true) do |f|
+          = form_with(model: @cre, local:true) do |f|
             = f.label :pixiv, 'pixiv:'
             = f.text_field :pixiv, class:'size_variable-form'
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @creator, local:true) do |f|
+          = form_with(model: @cre, local:true) do |f|
             = f.label :insta, 'instagram:'
             = f.text_field :insta, class:'size_variable-form'
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @creator, local:true) do |f|
+          = form_with(model: @cre, local:true) do |f|
             = f.label :yt, 'youtube:'
             = f.text_field :yt, class:'size_variable-form'
             = f.submit '登録'
       %tr
         %td
-          = form_with(model: @creator, local:true) do |f|
+          = form_with(model: @cre, local:true) do |f|
             = f.label :link, '他リンク先:'
             = f.text_field :link, class:'size_variable-form'
             = f.submit '登録'

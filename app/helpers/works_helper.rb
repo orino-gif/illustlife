@@ -1,6 +1,14 @@
 module WorksHelper
-  # カード決済
-  def card_settlement(tx, rx, work)
+  # 拒否
+  def refusal(tx, rx, method)
+    @tx = tx
+    @rx = rx
+    UserMailer.send(method,@tx,@rx).deliver_later
+    noti('リクエストを拒否しました')
+  end
+  
+  # 製作中
+  def payment(tx, rx, work)
     if @card = Card.find_by(user_id: tx.id)
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       begin

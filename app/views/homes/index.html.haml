@@ -1,11 +1,11 @@
 - content_for(:html_title) { 'イラストでコミュニケーション' }
-%h1.font-Xlarge.background_color-whitesmoke トップページ
+%h1.ll_font.ws_bgc トップページ
 
 .container
   - if Rails.env.development?
     / 開発中の漫画ビュワー
     .row
-      %h2.font-large プチ個展
+      %h2.l_font プチ個展
       
     .row
       = link_to image_tag('/img/mobu.png',
@@ -14,11 +14,11 @@
     
   - if @works
     .row
-      %h2.font-large クリエイター
+      %h2.l_font クリエイター
       
     / クリエーターのヘッダー画像を評価が高い順に30点表示
     .row.margin_side-Xsmall
-      - @creators.each.with_index(1) do |creator,index| 
+      - @cres.each.with_index(1) do |creator,index| 
       
         - if not creator.user.soft_destroyed?
           .padding_side-small.text-center.py-1
@@ -32,16 +32,16 @@
          
     
     // .row
-    //   %h2.font-large リクエスト作品
+    //   %h2.l_font リクエスト作品
     
     / 納品された作品を作成日時が新しい順に30点表示 
     .row.margin_side-Xsmall
       - @works.each.with_index(1) do |work,index|
       
-        - if work.img1
+        - if work.images
           .padding_side-small.text-center.py-2
           
-            // = link_to image_tag(work.img1.url,
+            // = link_to image_tag(work.images.url,
             //   class: 'size_Xlarge-square fit_c border_solid-medium'),
             //   "/requests/#{work.id}"
         - break if 30 === index

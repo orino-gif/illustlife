@@ -1,5 +1,5 @@
 - content_for(:html_title) { t('.change_your_password') }
-%h1.font-Xlarge.background_color-whitesmoke= t('.change_your_password')
+%h1.ll_font.ws_bgc= t('.change_your_password')
 
 .container
   .col-md-8
@@ -10,7 +10,7 @@
       = f.hidden_field :reset_password_token
       
       .form-group.mt-5
-        = f.label :password, t('.new_password'), class: 'font-large '
+        = f.label :password, t('.new_password'), class: 'l_font '
         = f.password_field :password, autofocus: true,
           class: 'form-control'
         - if @minimum_password_length
@@ -19,10 +19,10 @@
             
       .form-group
         = f.label :password_confirmation, t('.confirm_new_password'),
-          class: 'font-large'
+          class: 'l_font'
         = f.password_field :password_confirmation, autocomplete: 'off',
           class: 'form-control'
         
       .form-group
-        = f.submit t('.change_my_password'), class: 'btn btn-light font-large'
+        = f.submit t('.change_my_password'), class: 'btn btn-light l_font'
   // = render 'devise/shared/links'

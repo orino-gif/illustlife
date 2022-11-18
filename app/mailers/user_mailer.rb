@@ -42,9 +42,9 @@ class UserMailer < ApplicationMailer
     @resume_user.nick + 'さんがリクエスト受付を開始しました')
   end
   def wdl(creator)
-    @creator = creator
-    mail(to: "#{@creator.user.email},#{ENV['ADMIN']}",
-    subject: "[#{ENV['APP_NAME']}]" + @creator.user.nick + \
+    @cre = creator
+    mail(to: "#{@cre.user.email},#{ENV['ADMIN']}",
+    subject: "[#{ENV['APP_NAME']}]" + @cre.user.nick + \
     'さんからの引き落とし申請を受付ました')
   end
   def declined(tx, rx, requests)

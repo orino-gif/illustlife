@@ -6,8 +6,7 @@
     - auth = '承認者：' + @rx.nick
     %td= icon(@rx.creator,'s_square rounded-circle fit_c') + auth
   %tr
-    %td.m_line= 'リクエスト内容：'
-    %br= @req.msg
+    %td.m_line= 'リクエスト内容：' + @req.msg
   %tr
     %td= "ファイル形式：#{@req.fmt}"
     - if @req.anon?

@@ -3,8 +3,8 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
-    %br="#{@creator.user.nick}さんからの引き落とし申請を受付ました。"
+    %br="#{@cre.user.nick}さんからの引き落とし申請を受付ました。"
     %br="引き落とし額："
-    %br="#{(@creator.performance.wdl*0.85).to_i}円 - 振込手数料"
+    %br="#{(@cre.performance.wdl*0.85).to_i}円 - 振込手数料"
     %br="※金融機関の営業日により２～３日遅れる事があります。"
     %br="予めご了承ください。"

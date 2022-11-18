@@ -5,7 +5,7 @@ class ResumesController < ApplicationController
     @resume = Resume.new
     
     # クリエーター情報のidから再開する者のレコードを取得
-    @creator = Creator.find(params[:id])
+    @cre = Creator.find(params[:id])
   end
   
   def create

@@ -12,7 +12,7 @@ class RequestsController < ApplicationController
   def new
     # リクエストのレコード作成と、クリエーター情報を表示する
     @req = Request.new
-    @creator = Creator.find_by(user_id: params[:id])
+    @cre = Creator.find_by(user_id: params[:id])
   end
 
   def create
@@ -21,7 +21,7 @@ class RequestsController < ApplicationController
       if Card.find_by(user_id: current_user.id) || \
         ('development' == ENV['RAILS_ENV'])
         @tx = current_user
-        @rx = User.find(params[:authorizer_id])
+        @rx = User.find(params[:tx_id])
         @req = Request.new(requests_params)
         @req.tx_id = @tx.id
         @req.rx_id = @rx.id
@@ -130,8 +130,8 @@ class RequestsController < ApplicationController
   
   def download
     @work = Work.find_by(request_id: params[:request_id])
-    if @req.work.img1?
-      image = @req.work.img1 # imageはUploaderオブジェクト
+    if @req.work.images?
+      image = @req.work.images # imageはUploaderオブジェクト
       # extnameは「.」以降の拡張子にあたる文字列を返す
       # send_data(送るデータ, オプション={failname:保存するときのファイル名})
       send_data(image.read, filename: "download#{File.extname(image.path)}")
@@ -142,26 +142,6 @@ class RequestsController < ApplicationController
   end
   
   def update
-    @work = Work.find_by(params[:request][:request_id])
-    if 'キャンセル' == params[:request][:cancel]
-      @req.work.img1 = 'NULL'
-      
-    elsif 'キャンセル2' == params[:request][:cancel]
-      @req.work.img2 = 'NULL'
-      
-    elsif 'キャンセル3' == params[:request][:cancel]
-      @req.work.img3 = 'NULL'
-      
-    elsif 'キャンセル4' == params[:request][:cancel]
-      @req.work.img4 = 'NULL'
-      
-    elsif 'キャンセル5' == params[:request][:cancel]
-      @req.work.img5 = 'NULL'
-      
-    elsif 'キャンセル6' == params[:request][:cancel]
-      @req.work.img6 = 'NULL'
-    end
-    
     if @req.update(requests_params)
       redirect_to request_path(@req.id)
     else
@@ -184,10 +164,6 @@ class RequestsController < ApplicationController
   private
 
   def requests_params
-    params.require(:request).permit(:money,:stts,:fmt,:nsfw,:anon,:auto)
-  end
-  
-  def creator_params
-    params.require(:creator).permit(:number_of_request,:temp_img)
+    params.require(:request).permit(:money,:stts,:msg,:fmt,:nsfw,:anon,:auto)
   end
 end
