@@ -37,7 +37,7 @@ strong, label, th { font-weight: normal; }
 .fixed_column { table-layout: fixed; width: 100%; }
 
 // 文字が表のセルをはみ出した場合に、はみ出した文字を隠す
-.hidden_over { overflow: hidden; }
+.hdn_over { overflow: hidden; }
 
  // コンテンツの横のマージンの調整
 .margin_side-Xsmall { margin : 0 -10px; }
@@ -51,16 +51,14 @@ strong, label, th { font-weight: normal; }
 .slick-arrow:before { font-size: 50px!important;  color: whitesmoke!important; }
 
 // 画像の上にSAMPLE文字を表示
-p.on_card { position: absolute; top: auto; left: auto;
-  transform: translate(40%,-290%);  font-size: 40px; color: white; padding: 0;
-  margin:0; opacity: 0.5;
-}
+p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
+  transform: translate(40%,-290%); font-size: 40px; margin:0; opacity: 0.5; }
 
 // 文字の大きさを設定する関数 
 @mixin size_font($Xlarge, $large, $medium, $small, $Xsmall) {
   .ll_font { font-size: $Xlarge; }
   .l_font { font-size: $large; }
-  .font-medium { font-size: $medium; }
+  .m-font { font-size: $medium; }
   .font-small { font-size: $small; }
   .ss_font { font-size: $Xsmall; }
 }

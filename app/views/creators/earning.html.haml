@@ -9,7 +9,7 @@
     - userge_fee = amount_wdl*0.15
     
     - if '引き落とし申請前' == @wdl_status
-      .row.my-5.font-medium.margin_side-small
+      .row.my-5.m-font.margin_side-small
         = "総売上:#{@cre.performance.sales}円"
         %br
           = "引き落とし対象額:#{amount_wdl}円"
@@ -18,11 +18,11 @@
         %br
           = button_to "指定口座に引き落し申請",
             {controller: 'creators', action: 'earning'},
-            {method: :get, class: "btn btn-light font-medium",
+            {method: :get, class: "btn btn-light m-font",
             params:{wdl_status: '引き落とし内容確認'}}
 
     - elsif '引き落とし内容確認' == @wdl_status
-      .row.font-medium.margin_side-small.border.border-secondary
+      .row.m-font.margin_side-small.border.border-secondary
         %br
           = "\ 引き落とし対象額 : #{amount_wdl}円"
         %br
@@ -41,10 +41,10 @@
           = "名義：林範夫(イラストライフ運営局財務担当)"
         %br
           
-      .row.my-5.font-medium.margin_side-small
+      .row.my-5.m-font.margin_side-small
         = "指定先の口座に引き落としますか？"
         
-      .row.my-3.font-medium.margin_side-small
+      .row.my-3.m-font.margin_side-small
         .col-1
           = button_to 'はい', {controller: 'creators', action: 'earning'},
             {method: :get, params:{wdl_status: '引き落とし実行'}}

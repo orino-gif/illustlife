@@ -1,37 +1,31 @@
 module WorksHelper
-  # 拒否
-  def refusal(tx, rx, method)
-    @tx = tx
-    @rx = rx
-    UserMailer.send(method,@tx,@rx).deliver_later
-    noti('リクエストを拒否しました')
+  def set_works()
+    if params[:request_id].nil?
+      @req = Request.find(params[:id])
+    else
+      @req = Request.find(params[:request_id])
+    end
+    users = User.find(@req.tx_id, @req.rx_id);
+    @tx = users[0]; @rx = users[1]; 
+    @work = Work.find_by(request_id: @req.id)
   end
   
-  # 製作中
-  def payment(tx, rx, work)
+  def payment(tx)
     if @card = Card.find_by(user_id: tx.id)
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+      cpl = false
       begin
         Payjp::Charge.create(:amount => params[:amount],
         :customer => @card.cus_id, :currency => 'jpy')
-        UserMailer.consent(tx, rx).deliver_later
-        noti('リクエストを承諾しました')
+        cpl = true
       rescue Payjp::PayjpError => e
         p "例外エラー:" + e.to_s
-        work.request.stts = 'キャンセル'
-        # 承認者へ決済不備によるキャンセルを知らせる
-        UserMailer.declined(tx, rx, work.request).deliver_later
-        alt('購入者側の問題でキャンセルされました')
       end
-    else
-      work.request.stts = 'キャンセル'
-      alt('購入者側の問題でキャンセルされました')
     end
+    return cpl
   end
   
-  def perf_update(perf, req, tx, rx)
-    @tx = tx
-    @rx = rx
+  def perf_upd(perf, req)
     if false == req.work.rework
       perf.pic += 1
       perf.eval += 10
@@ -39,7 +33,19 @@ module WorksHelper
       perf.wdl += req.money
       req.work.d_time = Time.now
     end
-    UserMailer.del(@tx, @rx).deliver_later
-    noti('依頼者への納品完了のメールを送信しました')
+  end
+  
+  def butn(name,req)
+    button_to(name, work_path(req.id), {method: :get, params:{stts: name,
+    request_id: req.id}})
+  end
+  
+  def down(req_id)
+    work = Work.find_by(request_id: req_id)
+    if work.images?
+      work.images.each do |image|
+        send_data(image.read, filename: "download#{File.extname(image.path)}")
+      end
+    end
   end
 end

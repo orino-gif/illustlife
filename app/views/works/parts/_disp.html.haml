@@ -1,0 +1,4 @@
+- if @work.images?
+  - @work.images.each do |image|
+    = link_to image_tag(image.url, class:'l_rect fit_c'), image.url
+    %p.on_pic SAMPLE

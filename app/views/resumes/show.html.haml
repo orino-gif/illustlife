@@ -13,7 +13,7 @@
       - @resumes.each do |resume|
         / ニックネームを表示。セルをはみ出した場合は隠す
         %tr
-          %td.hidden_over= User.find(resume.resume_user).nick
+          %td.hdn_over= User.find(resume.resume_user).nick
           / 各resume.idのレコードの削除ボタンを表示
           %td= button_to '削除', {controller:'resumes', action:'show'},
             {method: :get, params:{class:"text-center", record_delete: resume.id}}

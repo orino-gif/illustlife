@@ -5,12 +5,29 @@
     .col-md-auto
       // リクエストの伝票
       = render 'works/parts/voucher'
-    .col-sm-auto
-      .m_line
-        - if user_signed_in? && @rx.id == current_user.id
+    - if user_signed_in?
+      .col-sm-auto
+        .m_line
           // 進行状態に応じて表示を変更
           - case @req.stts
           - when '承認待ち'
-            = render 'works/parts/approval'
-          - when '製作中'
-            = render 'works/parts/mfr'
+            - if @rx.id == current_user.id
+              = render 'works/parts/approval'
+          - when '製作中','手戻し'
+            - if @rx.id == current_user.id
+              = render 'works/parts/mfr'
+              = render 'works/parts/disp'
+          - when '納品'
+            = render 'works/parts/disp'
+            = render 'works/parts/cpl'
+      .col-sm-auto
+        - if @rx.id == current_user.id
+          - case @req.stts
+          - when '製作中','手戻し'
+            = butn('納品', @req)
+            = butn('製作中断', @req)
+          - when '納品'
+            = butn('手戻し', @req)
+        - elsif @tx.id == current_user.id
+          = button_to('ダウンロード',download_requests_path,
+          {method: :get, params:{request_id: params[:id]}})

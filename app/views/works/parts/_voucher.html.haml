@@ -1,12 +1,12 @@
 %table.table
   %tr
     - client = '依頼者：' + @tx.nick
-    %td= icon(@tx.creator,'s_square rounded-circle fit_c') + client
+    %td= icon(@tx.creator,'s_square') + client
   %tr
     - auth = '承認者：' + @rx.nick
-    %td= icon(@rx.creator,'s_square rounded-circle fit_c') + auth
+    %td= icon(@rx.creator,'s_square') + auth
   %tr
-    %td.m_line= 'リクエスト内容：' + @req.msg
+    %td.m_line= 'リクエスト内容：' + @req.msg.to_s
   %tr
     %td= "ファイル形式：#{@req.fmt}"
     - if @req.anon?

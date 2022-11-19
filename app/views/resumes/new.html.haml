@@ -9,4 +9,4 @@
   .row.margin_side-small
     = form_with(model: @resume, local: true) do |f|
       = f.hidden_field :resume_user, :value => params[:id]
-      = f.submit '再開時に通知メールを送る', class:'btn btn-light font-medium'
+      = f.submit '再開時に通知メールを送る', class:'btn btn-light m-font'

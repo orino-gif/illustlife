@@ -1,23 +1,23 @@
 module CreatorsHelper
   # ヘッダーを表示。homeコントローラーの場合は、画像にリンク先を付与
-  def display_hdr(creator, appearance)
+  def display_hdr(creator, scss)
     if 'homes' == controller.controller_name
       
       # creator.hdrの値がNULLなら代替の画像を表示
       if creator.hdr?
-        link_to image_tag(creator.hdr.url, class: appearance),
+        link_to image_tag(creator.hdr.url, class: scss),
           creator_path(creator.user_id)
           
       else
-        link_to image_tag('/img/nothing.png', class: appearance),
+        link_to image_tag('/img/nothing.png', class: scss),
           creator_path(creator.user_id)
       end
       
     else
       if creator.hdr?
-        image_tag creator.hdr.url, class: appearance
+        image_tag creator.hdr.url, class: scss
       else
-        image_tag '/img/nothing.png', class: appearance
+        image_tag '/img/nothing.png', class: scss
       end
     end
   end

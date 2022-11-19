@@ -8,17 +8,13 @@
       / 表体のセルの幅の長さを「table全幅/セル数」にする
       %table.fixed_column
         %tr
-          %td.hidden_over="#{@req.created_at.strftime("%Y/%m/%d %H:%M")}"
           / 文字が一覧の表のセルをはみ出した場合に、はみ出した文字を隠す
-          %td.hidden_over= @req.id
-          %td.hidden_over= icon(tx.creator,
-            's_square rounded-circle fit_c') + tx.nick
-          %td.hidden_over= icon(rx.creator,
-            's_square rounded-circle fit_c') + rx.nick
+          %td.hdn_over="#{@req.created_at.strftime("%Y/%m/%d %H:%M")}"
+          %td.hdn_over= icon(tx.creator,'s_square') + tx.nick
+          %td.hdn_over= icon(rx.creator,'s_square') + rx.nick
           %td= "#{@req.stts}"
           %td
-            %button.btn.btn-light.font-medium
-              = link_to '詳細', work_path(@req.id)
+            %button.btn.btn-light.m-font= link_to '詳細', work_path(@req.id)
     - else 
       .col-md-auto
         %table.table
