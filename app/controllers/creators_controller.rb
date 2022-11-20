@@ -3,25 +3,19 @@ class CreatorsController < ApplicationController
   before_action :set_creator, only: [:show, :update, :edit, :earning]
   
   def show
-    # 納品済みの作品を表示する為に利用
     @reqs = Request.where(rx_id: params[:id], stts: '納品')
   end
   
   def edit
     @setting =  Setting.find_by(creator_id: params[:id])
-    p @setting
-    # カード登録情報の有無を確認する為に利用
-    # Card.find(params[:id])だと、NothingErrになる為、find_byを使用
     @card =  Card.find_by(user_id: params[:id])
-    # 口座登録情報の有無を確認する為に利用
     credit = Credit.find_by(user_id:params[:id])
     if credit["bank"] && credit["branch"] && credit["a_type"] \
       && credit["number"] && credit["holder"]
       @is_credit_all = true
     end
   end
-  
-  # 総売上と引き落とし可能額を表示し、引き落とし申請を行う。
+
   def earning 
     if @wdl_status.nil?
       @wdl_status = '引き落とし申請前'
@@ -44,21 +38,18 @@ class CreatorsController < ApplicationController
   
   def update
     if @cre.update(creators_params)
-      # リクエスト受付開始ボタンが押された場合
       if params[:accepting_requests]
-        # 通知リストに登録されている者をリストアップ
-        notification_users = Resume.where(resume_user: current_user.id)
-        # 再開通知リストに登録されている者へ再開のメールを送る
-        if notification_users
-          notification_users.each do |user|
-            @notification_user = User.find(user.notification_user)
-            @resume_user = User.find(user.resume_user)
-            UserMailer.resume(@notification_user,@resume_user).deliver_later
+        noti_ids = Resume.where(re_id: current_user.id)
+        if noti_ids
+          noti_ids.each do |user|
+            @noti_id = User.find(user.noti_id)
+            @re_id = User.find(user.re_id)
+            UserMailer.resume(@noti_id,@re_id).deliver_later
           end
         end
       end
       redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
-    else # ユーザー編集後の値の保存に失敗した場合
+    else
       p @cre.errors.full_messages[0]
       if @cre.errors.full_messages[0].include?("amount")
         flash.now[:alert] = "金額入力の数値が範囲外です" 
@@ -71,12 +62,9 @@ class CreatorsController < ApplicationController
   end
   
   private
-
   def creators_params
-    params.require(:creator).permit(:hdr, :icon, :twtr, :pixiv, :insta,
-    :yt, :link)
+    params.require(:creator).permit(:hdr,:icon,:twtr,:pixiv,:insta,:yt,:link)
   end
-
   def set_creator
     @cre = Creator.find(params[:id])
   end

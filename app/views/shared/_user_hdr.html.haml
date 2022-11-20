@@ -35,10 +35,10 @@
         - if user_signed_in?
         
           / 再開者のリストアップ
-          - resumes = Resume.where(notification_user:current_user.id)
+          - resumes = Resume.where(noti_id:current_user.id)
           
           / 再開通知リストに登録していない場合
-          - if resumes.find_by(resume_user: params[:id]).nil?
+          - if resumes.find_by(re_id: params[:id]).nil?
           
             .ss_font.position_Xshort-top.position_midium-left
               = link_to "再開を通知", "/resumes/#{@cre.user_id}/new",
@@ -46,15 +46,15 @@
   
   / SNSリンク先のアイコンを表示
   .col-1
-    = display_sns(@cre, 'twtr')
+    = disp_sns(@cre, 'twtr')
   .col-1
-    = display_sns(@cre, 'pixiv')
+    = disp_sns(@cre, 'pixiv')
   .col-1
-    = display_sns(@cre, 'insta')
+    = disp_sns(@cre, 'insta')
   .col-1
-    = display_sns(@cre, 'yt')
+    = disp_sns(@cre, 'yt')
   .col-1
-    = display_sns(@cre, 'link')
+    = disp_sns(@cre, 'link')
 
 / 実績表示
 .row.my-5.mx-5

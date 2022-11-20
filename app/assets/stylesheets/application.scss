@@ -41,7 +41,7 @@ strong, label, th { font-weight: normal; }
 
  // コンテンツの横のマージンの調整
 .ss_m-side { margin : 0 -10px; }
-.margin_side-small { margin : 0 10px; }
+.s_m-side { margin : 0 10px; }
 
 /*-----------矢印表示----------*/
 .slick-next{ right: 0!important; }
@@ -80,7 +80,7 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 @mixin position_top($large, $medium, $short, $Xshort) {
   .position_large-top { position: absolute; top: $large; }
   .position_medium-top { position: absolute; top: $medium; }
-  .position_short-top { position: absolute; top: $short; }
+  .s_top-pos { position: absolute; top: $short; }
   .position_Xshort-top { position: absolute; top: $Xshort; }
 }
 // 配置の左の空白の長さを設定する関数

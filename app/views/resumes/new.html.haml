@@ -1,12 +1,10 @@
 - content_for(:html_title) { '再開通知' }
 %h1.ll_font.ws_bgc 再開通知
-
 / 希望者の再開通知者リストに、再開者のIDを登録する
 .container
-  .row.my-3.margin_side-small
+  .row.my-3.s_m-side
     = @cre.user.nick + "さんのリクエスト受付"
-    
-  .row.margin_side-small
+  .row.s_m-side
     = form_with(model: @resume, local: true) do |f|
-      = f.hidden_field :resume_user, :value => params[:id]
+      = f.hidden_field :re_id, :value => params[:id]
       = f.submit '再開時に通知メールを送る', class:'btn btn-light m-font'

@@ -35,11 +35,11 @@ class UserMailer < ApplicationMailer
     mail(to: "#{@tx.email},#{ENV['ADMIN']}", subject: "[#{ENV['APP_NAME']}]"+ \
     @tx.nick + 'さんへの納品の手戻りがありました')
   end
-  def resume(notification_user, resume_user)
-    @notification_user = notification_user
-    @resume_user = resume_user
-    mail(to: @notification_user.email, subject: "[#{ENV['APP_NAME']}]"+ \
-    @resume_user.nick + 'さんがリクエスト受付を開始しました')
+  def resume(noti_id, re_id)
+    @noti_id = noti_id
+    @re_id = re_id
+    mail(to: @noti_id.email, subject: "[#{ENV['APP_NAME']}]"+ \
+    @re_id.nick + 'さんがリクエスト受付を開始しました')
   end
   def wdl(creator)
     @cre = creator
