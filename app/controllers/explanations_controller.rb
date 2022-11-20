@@ -12,7 +12,7 @@ class ExplanationsController < ApplicationController
   
   def create
     @explanations = Explanation.new(explanations_params)
-    @explanations.adviser_id = current_user.id
+    @explanations.adv_id = current_user.id
 
     if @explanations.save
       redirect_to explanations_url, notice: '運営へご意見を送信しました。'
@@ -24,6 +24,6 @@ class ExplanationsController < ApplicationController
   private
   
   def explanations_params
-    params.require(:explanation).permit(:adviser_id, :letter_body)
+    params.require(:explanation).permit(:adv_id, :a_msg)
   end 
 end

@@ -4,7 +4,7 @@
 .container
   
   - @explanations.each do |explanation|
-    - adviser = User.find_by(id: explanation.adviser_id)
+    - adviser = User.find_by(id: explanation.adv_id)
     
     / 投稿された意見達を表示
     .row.my-4
@@ -15,7 +15,7 @@
       .col-lg-auto.border.string_indention-large.s_s-pdg
         = explanation.created_at.strftime('%Y/%m/%d %H:%M')
         %br
-          = explanation.letter_body
+          = explanation.a_msg
   
   / ボタンが押されたら、投稿フォームへ移動  
   .row.my-5

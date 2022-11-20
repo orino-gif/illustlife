@@ -6,5 +6,5 @@
     %h2 内容:
   .row
     = form_with(model: @explanations, local: true) do |f|
-      = f.text_area :letter_body, size: "80x20"
+      = f.text_area :a_msg, size: "80x20"
       = f.submit '送信', :name => 'accepting_requests'
