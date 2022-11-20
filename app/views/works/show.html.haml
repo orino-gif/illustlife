@@ -28,6 +28,6 @@
             = butn('製作中断', @req)
           - when '納品'
             = butn('手戻し', @req)
-        - elsif @tx.id == current_user.id
+        - elsif @tx.id == current_user.id && @req == '納品'
           = button_to('ダウンロード',download_works_path,
           {method: :get, params:{request_id: params[:id]}})

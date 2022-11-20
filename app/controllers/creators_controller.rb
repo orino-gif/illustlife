@@ -1,32 +1,21 @@
 class CreatorsController < ApplicationController
-  
   # @cre = Creator.find(params[:id]) が記載されている関数
   before_action :set_creator, only: [:show, :update, :edit, :earning]
   
-  
   def show
     # 納品済みの作品を表示する為に利用
-    @reqs = Request.where(rx_id: @cre.user.id, status: '納品完了')
-    # @works = Work.find_by(request_id:66)
-    # @works = Work.find(66,67,68)#プライマリーを設定している場合
-    # @works = Work.find_by(request_id:66)
-    # @works = Work.all
-    # @works = Request.joins(:work)
-
+    @reqs = Request.where(rx_id: params[:id], stts: '納品')
   end
   
   def edit
     @setting =  Setting.find_by(creator_id: params[:id])
     p @setting
-    
     # カード登録情報の有無を確認する為に利用
     # Card.find(params[:id])だと、NothingErrになる為、find_byを使用
     @card =  Card.find_by(user_id: params[:id])
-    
     # 口座登録情報の有無を確認する為に利用
     credit = Credit.find_by(user_id:params[:id])
-    
-    if credit["bank"] && credit["branch"] && credit["account_type"] \
+    if credit["bank"] && credit["branch"] && credit["a_type"] \
       && credit["number"] && credit["holder"]
       @is_credit_all = true
     end
@@ -37,15 +26,13 @@ class CreatorsController < ApplicationController
     if @wdl_status.nil?
       @wdl_status = '引き落とし申請前'
     end
-      
     if '引き落とし内容確認' == params[:wdl_status]
       if @cre.performance.wdl > 0
         @wdl_status = '引き落とし内容確認'
       else
         flash.now[:alert] = '引き落とし対象額が0円です'
-          render :earning
+        render :earning
       end
-      
     elsif '引き落とし実行' == params[:wdl_status]
       @wdl_status = '引き落とし実行'
       UserMailer.wdl(@cre).deliver_later
@@ -57,34 +44,25 @@ class CreatorsController < ApplicationController
   
   def update
     if @cre.update(creators_params)
-      
       # リクエスト受付開始ボタンが押された場合
       if params[:accepting_requests]
-        
         # 通知リストに登録されている者をリストアップ
         notification_users = Resume.where(resume_user: current_user.id)
-        
         # 再開通知リストに登録されている者へ再開のメールを送る
         if notification_users
           notification_users.each do |user|
             @notification_user = User.find(user.notification_user)
             @resume_user = User.find(user.resume_user)
-            
-            UserMailer.resume(@notification_user,
-              @resume_user).deliver_later
+            UserMailer.resume(@notification_user,@resume_user).deliver_later
           end
         end
-        
       end
-      
       redirect_to creator_path(params[:id]), notice: '登録情報を更新しました。'
-      
     else # ユーザー編集後の値の保存に失敗した場合
       p @cre.errors.full_messages[0]
       if @cre.errors.full_messages[0].include?("amount")
         flash.now[:alert] = "金額入力の数値が範囲外です" 
         render :edit
-          
       elsif @cre.errors.full_messages[0].include?("whitelist_error")
         flash.now[:alert] = "非対応のファイル形式です(対応:png,jpg,jpeg,gif)" 
         render :edit
@@ -100,6 +78,6 @@ class CreatorsController < ApplicationController
   end
 
   def set_creator
-    @cre = Creator.joins(:performance).find(params[:id])
+    @cre = Creator.find(params[:id])
   end
 end

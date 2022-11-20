@@ -1,30 +1,22 @@
-/ クリエーターの情報と実績を表示する
 - content_for(:html_title) { 'ユーザー情報' }
 %h1.ll_font.ws_bgc ユーザー情報
-
 .container
-  / ユーザーヘッダーの表示
   = render 'shared/user_hdr'
   - if 'production' != ENV['RAILS_ENV']
     .row
       %h2.l_font イラスト晒し
     .row
-      = button_to '晒す', "/exposures/#{params[:id]}/new", class:"l_font", method: :get
-  
-  - if @works
+      = button_to '晒す', "/exposures/#{params[:id]}/new", class:"l_font",
+      method: :get
+  - if not @reqs.blank?
     .row
       %h2.l_font リクエスト作品
-      
-    / 納品したリクエストのリンク付き画像を表示
     .row
-      // - @works.reverse_each do |work|
-      - @works.each do |work|
+      - @reqs.reverse_each do |req|
         .col3.m-2
-          - if not work.images.blank?
-            = link_to image_tag(work.images.url,
-              class: 'll_square fit_c m_s-border'),
-              "/requests/#{work.request_id}"
-              
+          - if not req.work.images[0].blank?
+            = link_to image_tag(req.work.images[0].url,
+            class:'ll_square fit_c m_s-border'),"/works/#{req.work.request_id}"
           - else
             .alert.alert-dismissable.alert-danger
               %button.close{"data-dismiss" => "alert", :type => "button"} ×

@@ -42,7 +42,6 @@ Rails.application.routes.draw do
   resources :requests, only: [:index, :create, :show, :update] do
     collection do
       get '/:id/new', to: 'requests#new'
-      get 'download'
     end
   end  
   resources :resumes, only: [:create, :show] do
@@ -51,5 +50,9 @@ Rails.application.routes.draw do
     end
   end
   resources :settings, only: [:update]
-  resources :works, only: [:new, :create, :show, :update]
+  resources :works, only: [:new, :create, :show, :update] do
+    collection do
+      get 'download'
+    end
+  end
 end
