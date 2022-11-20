@@ -5,9 +5,9 @@
 .row.my-2
   .col-md-8.border.border-secondary.position-center
     = form_with(model: @exposure, local:true) do |f|
-      = f.label :exposed_img , '晒すイラスト：'
-      = f.file_field :exposed_img, class:"preview-uploader"
+      = f.label :expo_img , '晒すイラスト：'
+      = f.file_field :expo_img, class:"preview-uploader"
       
       .preview.ws_bgc.size_medium-rectangle
-      = f.hidden_field :contributor_id, value:params[:id]
+      = f.hidden_field :cntri_id, value:params[:id]
       = f.submit '晒す'

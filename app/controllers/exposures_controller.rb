@@ -20,6 +20,6 @@ class ExposuresController < ApplicationController
   private
 
   def exposures_params
-    params.require(:exposure).permit(:contributor_id, :exposed_img)
+    params.require(:exposure).permit(:cntri_id, :expo_img)
   end
 end

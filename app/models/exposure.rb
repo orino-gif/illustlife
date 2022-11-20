@@ -1,3 +1,3 @@
 class Exposure < ApplicationRecord
-  mount_uploader :exposed_img, CreatorUploader
+  mount_uploader :expo_img, CreatorUploader
 end
