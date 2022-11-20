@@ -22,7 +22,7 @@
         .col3.m-2
           - if not work.images.blank?
             = link_to image_tag(work.images.url,
-              class: 'size_Xlarge-square fit_c border_solid-medium'),
+              class: 'll_square fit_c m_s-border'),
               "/requests/#{work.request_id}"
               
           - else

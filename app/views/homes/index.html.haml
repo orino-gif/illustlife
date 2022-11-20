@@ -1,47 +1,20 @@
 - content_for(:html_title) { 'イラストでコミュニケーション' }
 %h1.ll_font.ws_bgc トップページ
-
 .container
   - if Rails.env.development?
-    / 開発中の漫画ビュワー
     .row
-      %h2.l_font プチ個展
-      
+      %h2.l_font イラスト晒し
     .row
-      = link_to image_tag('/img/mobu.png',
-        class: 'size_Xlarge-square fit_c border_solid-medium'),
+      = link_to image_tag('/img/mobu.png', class: 'll_square fit_c m_s-border'),
         '/mangas/1/illustlifes'
-    
-  - if @works
-    .row
-      %h2.l_font クリエイター
-      
-    / クリエーターのヘッダー画像を評価が高い順に30点表示
-    .row.margin_side-Xsmall
-      - @cres.each.with_index(1) do |creator,index| 
-      
-        - if not creator.user.soft_destroyed?
-          .padding_side-small.text-center.py-1
-          
-            - if creator.user.confirmed_at?
-              = display_hdr(creator,
-                'size_Xlarge-square border_solid-medium fit_c')
-                
-              .font-small.string_indention-small= creator.user.nick
-        - break if 30 == index
-         
-    
-    // .row
-    //   %h2.l_font リクエスト作品
-    
-    / 納品された作品を作成日時が新しい順に30点表示 
-    .row.margin_side-Xsmall
-      - @works.each.with_index(1) do |work,index|
-      
-        - if work.images
-          .padding_side-small.text-center.py-2
-          
-            // = link_to image_tag(work.images.url,
-            //   class: 'size_Xlarge-square fit_c border_solid-medium'),
-            //   "/requests/#{work.id}"
-        - break if 30 === index
+  / クリエーターのヘッダー画像を評価が高い順に30点表示
+  .row
+    %h2.l_font クリエイター
+  .row.ss_m-side
+    - @cres.each.with_index(1) do |cre,index| 
+      - if not cre.user.soft_destroyed?
+        .s_s-pdg.text-center.py-1
+          - if cre.user.confirmed_at?
+            = disp_hdr(cre,'ll_square m_s-border fit_c')
+            .s_font.s_ind= cre.user.nick
+      - break if 30 == index

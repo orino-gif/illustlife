@@ -29,5 +29,5 @@
           - when '納品'
             = butn('手戻し', @req)
         - elsif @tx.id == current_user.id
-          = button_to('ダウンロード',download_requests_path,
+          = button_to('ダウンロード',download_works_path,
           {method: :get, params:{request_id: params[:id]}})
