@@ -13,12 +13,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     begin
       super
-      resource.build_creator
-      resource.build_credit
+      resource.build_cre
+      resource.build_cr
       resource.save
       
-      Performance.create(creator_id:resource.id)
-      Performance.create(id:resource.id)
+      Sttg.create(id:resource.id)
+      Pfm.create(id:resource.id)
       
     rescue => e
       p e
@@ -91,12 +91,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
   #ログイン後のリダイレクト先
   def after_sign_in_path_for(resource)
-    redirect_to(creator_path(@user))
+    redirect_to(cre_path(@user))
   end
   
   #ユーザー情報変更後のリダイレクト先
   def after_update_path_for(resource)
-      creator_path(@user)
+      cre_path(@user)
   end
   
   # パスワード入力無しで更新

@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_20_163004) do
+ActiveRecord::Schema.define(version: 2022_11_16_133013) do
 
-  create_table "cards", primary_key: "user_id", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
     t.string "car_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "creators", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "cres", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "icon"
     t.string "hdr"
     t.string "twtr"
@@ -27,45 +27,39 @@ ActiveRecord::Schema.define(version: 2022_11_20_163004) do
     t.string "insta"
     t.string "yt"
     t.string "link"
-    t.datetime "updated_at"
-    t.datetime "created_at"
   end
 
-  create_table "credits", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "crs", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "bank"
     t.string "branch"
     t.string "a_type"
     t.integer "number"
     t.string "holder"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
-  create_table "explanations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "expls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "adv_id"
     t.text "a_msg"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.timestamp "created_at"
   end
 
-  create_table "exposures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "expsrs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "cntri_id"
     t.string "expo_img"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.timestamp "created_at"
   end
 
-  create_table "performances", primary_key: "creator_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "pfms", primary_key: "cre_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "pic", default: 0
-    t.float "dl", default: 100.0
-    t.float "reply", default: 100.0
+    t.integer "dl", default: 100
+    t.integer "reply", default: 100
     t.integer "point", default: 100
     t.integer "eval", default: 50
     t.integer "sales", default: 0
     t.integer "wdl", default: 0
   end
 
-  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "reqs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "money"
     t.integer "tx_id"
     t.integer "rx_id"
@@ -74,18 +68,16 @@ ActiveRecord::Schema.define(version: 2022_11_20_163004) do
     t.boolean "nsfw", default: false
     t.boolean "anon", default: false
     t.boolean "auto", default: false
-    t.datetime "created_at", null: false
     t.text "msg"
+    t.timestamp "created_at"
   end
 
-  create_table "resumes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "resms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "re_id"
     t.integer "noti_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
-  create_table "settings", primary_key: "creator_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "sttgs", primary_key: "cre_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "recom", default: 5000
     t.integer "min", default: 1000
     t.integer "work_d", default: 14
@@ -96,7 +88,7 @@ ActiveRecord::Schema.define(version: 2022_11_20_163004) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.boolean "agree", default: true, null: false
+    t.boolean "agree", default: false, null: false
     t.string "nick", default: "", null: false
     t.string "provider", default: "", null: false
     t.string "uid", default: "", null: false
@@ -114,12 +106,12 @@ ActiveRecord::Schema.define(version: 2022_11_20_163004) do
     t.index ["nick"], name: "index_users_on_nick"
   end
 
-  create_table "works", primary_key: "request_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "works", primary_key: "req_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "d_time"
-    t.boolean "in_time", default: false
+    t.datetime "in_time"
     t.boolean "rework", default: false
     t.timestamp "updated_at"
-    t.json "images"
+    t.string "images"
   end
 
 end

@@ -1,0 +1,108 @@
+- if @req
+  - tx = User.find(@req.tx_id)
+  - rx = User.find(@req.rx_id)
+  / 表体を表示
+  .row.my-5
+    / 一覧表示の場合
+    - if 'index' == controller.action_name
+      / 表体のセルの幅の長さを「table全幅/セル数」にする
+      %table.fixed_column
+        %tr
+          / 文字が一覧の表のセルをはみ出した場合に、はみ出した文字を隠す
+          %td.hdn_over="#{@req.created_at.strftime("%Y/%m/%d %H:%M")}"
+          %td.hdn_over= icon(tx.cre,'s_square') + tx.nick
+          %td.hdn_over= icon(rx.cre,'s_square') + rx.nick
+          %td= "#{@req.stts}"
+          %td
+            %button.btn.btn-light.m-font= link_to '詳細', work_path(@req.id)
+    - else 
+      .col-md-auto
+        %table.table
+          %tr
+            - client_name = '依頼者：' + tx.nick
+            %td= icon(tx.cre,
+              's_square rounded-circle fit_c') + client_name
+          %tr
+            - authorizer_name = '承認者：' + rx.nick
+            %td= icon(rx.cre,
+              's_square rounded-circle fit_c') + authorizer_name
+          %tr
+            %td.m_line リクエスト内容：<br> #{@req.msg}
+          %tr
+            %td= "ファイル形式：#{@req.fmt}"
+          - if @req.anon?
+            %tr
+              %td= '非公開:有'
+          - if @req.auto?
+            %tr
+              %td= '宛名入りサイン:有'
+          - if user_signed_in?
+            /　このリクエストの関係者のみ以下を表示
+            - party_to_the_req = false
+            - if tx.id == current_user.id || rx.id == current_user.id
+              - relation = true
+            - if relation || Rails.env.development?
+              %tr
+                %td= "金額：#{@req.money}円"
+              %tr
+                - num_days = rx.cre.sttg.work_d * 60 * 60 * 24
+                - dl = @req.created_at + num_days
+                %td.m_line
+                  = "締め切り日：#{dl.strftime('%Y/%m/%d %H:%M')}"
+              %tr
+                %td= "状態：#{@req.stts}"
+      .col-sm-auto
+        .m_line
+          - if user_signed_in? && rx.id == current_user.id
+            - if '承認待ち' == @req.stts
+              = "#{tx.nick}さんから"
+              = "#{rx.nick}さんへのリクエストを承認しますか？"
+              = button_to '承認', {controller:'reqs', action:'show'},
+                {method: :get, params:{status:'製作中', req_id:@req.id,
+                amount:@req.money}}
+              %br
+                = button_to '拒否', {controller:'reqs', action:'show'},
+                {method: :get, params:{status:'拒否', req_id:@req.id}}
+        - if '承認待ち' != @req.stts
+          - if @req.work.images?
+            - if @req.work.images.to_s.include?('.psd')
+              // - pdf = Magick::ImageList.new(@req.work.images.to_s)
+              // - pdf[0].write("public/img/conversion_psd/#{current_user.id}_#{@req.id}.png")
+              // = link_to image_tag("/img/conversion_psd/#{current_user.id}_#{@req.id}.png",
+              //   class:'l_rect fit_c'),
+              //   "img/conversion_psd/#{current_user.id}_#{@req.id}.png"
+            - else
+              = link_to image_tag(@req.work.images.url,
+                class:'l_rect fit_c'),
+                @req.work.images.url
+              %p.on_card SAMPLE
+          - if user_signed_in?
+            - if rx.nick == current_user.nick
+              - if '購入者の決済設定不備によるキャンセル' != @req.stts
+                - if '納品完了' != @req.stts
+                  = form_with(model: @work, local: true) do |f|
+                    = f.hidden_field :req_id, :value => @req.work.req_id
+                    - if '拒否' == @req.stts
+                      = 'リクエストは拒否されました'
+                    - elsif '製作中断' == @req.stts
+                      = '製作が中断されました'
+                    - elsif @req.work.images.blank?
+                      = '1枚目'
+                      = f.file_field :img1
+                      = f.submit '登録'
+                    - else
+                      = f.hidden_field :cancel, :value => 'キャンセル'
+                      = f.submit '取り消し'      .col-sm-auto
+        - if (user_signed_in?) && (rx.nick == current_user.nick) && ('製作中' == @req.stts || '手戻し' == @req.stts)
+          - if (@req.work.images?)
+            = button_to '納品', {controller:'reqs', action:'show'},
+              {method: :get, params:{status:'納品完了', req_id:@req.id}}
+          %br= button_to '製作中断', {controller:'reqs', action:'show'},
+            {method: :get, params:{status:'製作中断', req_id:@req.id}}
+        - if (user_signed_in?) && ('納品完了' == @req.stts)
+          - if tx.nick == current_user.nick
+            = button_to('ダウンロード',
+              download_reqs_path, {method: :get,params:{req_id: params[:id]}})
+          - elsif (user_signed_in?) && (rx.nick == current_user.nick)
+            = button_to '手戻し', {controller:'reqs', action:'show'}, 
+              {method: :get, params:{status:'手戻し', req_id:@req.id}}

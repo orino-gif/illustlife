@@ -3,19 +3,18 @@ class ExplanationsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
   
   def index
-    @explanations = Explanation.all
+    @expls = Expl.all
   end
   
   def new
-    @explanations = Explanation.new
+    @expl = Expl.new
   end
   
   def create
-    @explanations = Explanation.new(explanations_params)
-    @explanations.adv_id = current_user.id
-
-    if @explanations.save
-      redirect_to explanations_url, notice: '運営へご意見を送信しました。'
+    @expl = Expl.new(expls_params)
+    @expl.adv_id = current_user.id
+    if @expl.save
+      redirect_to expls_url, notice: '運営へご意見を送信しました。'
     else
       render :new
     end
@@ -23,7 +22,7 @@ class ExplanationsController < ApplicationController
 
   private
   
-  def explanations_params
-    params.require(:explanation).permit(:adv_id, :a_msg)
+  def expls_params
+    params.require(:expl).permit(:adv_id, :a_msg)
   end 
 end

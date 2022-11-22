@@ -35,22 +35,22 @@ class UserMailer < ApplicationMailer
     mail(to: "#{@tx.email},#{ENV['ADMIN']}", subject: "[#{ENV['APP_NAME']}]"+ \
     @tx.nick + 'さんへの納品の手戻りがありました')
   end
-  def resume(noti_id, re_id)
+  def resm(noti_id, re_id)
     @noti_id = noti_id
     @re_id = re_id
     mail(to: @noti_id.email, subject: "[#{ENV['APP_NAME']}]"+ \
     @re_id.nick + 'さんがリクエスト受付を開始しました')
   end
-  def wdl(creator)
-    @cre = creator
+  def wdl(cre)
+    @cre = cre
     mail(to: "#{@cre.user.email},#{ENV['ADMIN']}",
     subject: "[#{ENV['APP_NAME']}]" + @cre.user.nick + \
     'さんからの引き落とし申請を受付ました')
   end
-  def declined(tx, rx, requests)
+  def declined(tx, rx, reqs)
     @tx = tx
     @rx = rx
-    @req = requests
+    @req = reqs
     mail(to: "#{@rx.email},#{@tx.email},#{ENV['ADMIN']}",
     subject: "[#{ENV['APP_NAME']}]" + @tx.nick + \
     'さんのクレジットカード決済不備によるキャンセルの件')

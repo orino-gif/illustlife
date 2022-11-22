@@ -74,11 +74,11 @@
           .col.text-right
             - if user_signed_in?
               / ポイント表示
-              - if 'creators' == controller.controller_name
+              - if 'cres' == controller.controller_name
                 - if 'show' == controller.action_name
-                  ="#{current_user.creator.performance.point}ポイント"
+                  ="#{current_user.cre.pfm.point}ポイント"
               / ログインユーザーアイコン表示    
-              = icon(current_user.creator, 's_square')
+              = icon(current_user.cre, 's_square')
             - else
               -# ='キャンペーン!! 9/1～9/16迄'
               -#  %br= '新規登録者様に、1000ポイントプレゼント!!'
@@ -86,21 +86,21 @@
         .row
           .col.text-right
             - if user_signed_in?
-              - if 'creators' == controller.controller_name
+              - if 'cres' == controller.controller_name
                 - page_path = request.path.split('/')
                 - if (current_user.id == page_path[2].to_i)
                   %button.btn.btn-light.m-font= link_to 'リクエスト状態',
-                    requests_path
+                    reqs_path
                   - if 'earning' != controller.action_name
                     %button.btn.btn-light.m-font
-                      = link_to '売上', "/creators/#{current_user.id}/earning"
+                      = link_to '売上', "/cres/#{current_user.id}/earning"
                   - if ENV['ADMIN'] == current_user.email
                     %button.btn.btn-light
-                      = link_to 'アカウント編集', edit_creator_path(params[:id])
+                      = link_to 'アカウント編集', edit_cre_path(params[:id])
                   - elsif 'edit' != controller.action_name
                     %button.btn.btn-light.m-font
                       = link_to '設定',
-                      edit_creator_path(current_user.id)
+                      edit_cre_path(current_user.id)
                   %button.btn.btn-light.m-font
                     = link_to 'ログアウト',
                     destroy_user_session_path, method: "delete"
@@ -156,8 +156,7 @@
             = link_to '特定商取引法に基づく表記',
               transaction_law_agreement_path
           .mx-3
-            = link_to 'ご意見',
-              explanations_path
+            = link_to 'ご意見',expls_path
         
         / 著作権表示
         .row.m-3

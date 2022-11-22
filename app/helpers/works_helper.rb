@@ -1,13 +1,13 @@
 module WorksHelper
   def set_works()
-    if params[:request_id].nil?
-      @req = Request.find(params[:id])
+    if params[:req_id].nil?
+      @req = Req.find(params[:id])
     else
-      @req = Request.find(params[:request_id])
+      @req = Req.find(params[:req_id])
     end
     users = User.find(@req.tx_id, @req.rx_id);
     @tx = users[0]; @rx = users[1]; 
-    @work = Work.find_by(request_id: @req.id)
+    @work = Work.find_by(req_id: @req.id)
   end
   
   def payment(tx)
@@ -25,23 +25,23 @@ module WorksHelper
     return cpl
   end
   
-  def perf_upd(perf, req)
+  def pfm_upd(pfm, req)
     if false == req.work.rework
-      perf.pic += 1
-      perf.eval += 10
-      perf.sales += req.money
-      perf.wdl += req.money
+      pfm.pic += 1
+      pfm.eval += 10
+      pfm.sales += req.money
+      pfm.wdl += req.money
       req.work.d_time = Time.now
     end
   end
   
   def butn(name,req)
     button_to(name, work_path(req.id), {method: :get, params:{stts: name,
-    request_id: req.id}})
+    req_id: req.id}})
   end
   
   def down(req_id)
-    work = Work.find_by(request_id: req_id)
+    work = Work.find_by(req_id: req_id)
     if work.images?
       work.images.each do |image|
         send_data(image.read, filename: "download#{File.extname(image.path)}")

@@ -1,4 +1,4 @@
-/ creators/show/:idとrequests/:id/newで利用
+/ cres/show/:idとreqs/:id/newで利用
 
 .row
   / ヘッダー表示
@@ -11,37 +11,37 @@
       'size_large-square rounded-circle fit_c position_large-top')
   
   .col-4
-    / requestコントローラーの領域以外の場合、リクエストアイコンを表示
-    - if 'requests' != controller.controller_name
+    / reqコントローラーの領域以外の場合、リクエストアイコンを表示
+    - if 'reqs' != controller.controller_name
     
       / リクエストを受付ていない場合は、STOP画像を表示
-      - if true == @cre.setting.start
+      - if true == @cre.sttg.start
       
         / リクエスト先が自分自身の場合、リンクを付与しない
         - if (user_signed_in?) && (params[:id].to_i == current_user.id.to_i)
-          = image_tag '/img/request.png',
+          = image_tag '/img/req.png',
             class:'size_medium-square position_medium-top'
         
         - else
-          = link_to image_tag('/img/request.png',
+          = link_to image_tag('/img/req.png',
             class:'size_medium-square position_medium-top'),
-            "/requests/#{@cre.user_id}/new"
+            "/reqs/#{@cre.user_id}/new"
             
       - else
-        = image_tag '/img/request_stop.png',
+        = image_tag '/img/req_stop.png',
           class:'size_medium-square position_medium-top'
       
         / ログイン中のユーザーに再開通知ボタンを表示
         - if user_signed_in?
         
           / 再開者のリストアップ
-          - resumes = Resume.where(noti_id:current_user.id)
+          - resms = Resm.where(noti_id:current_user.id)
           
           / 再開通知リストに登録していない場合
-          - if resumes.find_by(re_id: params[:id]).nil?
+          - if resms.find_by(re_id: params[:id]).nil?
           
             .ss_font.position_Xshort-top.position_midium-left
-              = link_to "再開を通知", "/resumes/#{@cre.user_id}/new",
+              = link_to "再開を通知", "/resms/#{@cre.user_id}/new",
                 class:'button-notice'
   
   / SNSリンク先のアイコンを表示
@@ -59,12 +59,12 @@
 / 実績表示
 .row.my-5.mx-5
   = "ニックネーム：#{@cre.user.nick}"
-  = "、推奨金額：#{@cre.setting.recom}円"
-  = "、作業予定日数：#{@cre.setting.work_d}日"
+  = "、推奨金額：#{@cre.sttg.recom}円"
+  = "、作業予定日数：#{@cre.sttg.work_d}日"
   
-  - if 0 != @cre.performance.pic
-    = "、締切厳守率：#{@cre.performance.dl}%"
-    = "、返信率:#{@cre.performance.reply}%"
+  - if 0 != @cre.pfm.pic
+    = "、締切厳守率：#{@cre.pfm.dl}%"
+    = "、返信率:#{@cre.pfm.reply}%"
   - else
     - if 'new' != controller.action_name
       %br

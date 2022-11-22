@@ -16,18 +16,18 @@ Rails.application.routes.draw do
       post 'delete', to: 'cards#delete'
     end
   end
-  resources :creators, only: [:show, :edit, :update] do
+  resources :cres, only: [:show, :edit, :update] do
     collection do
       get '/:id/earning', to: 'creators#earning'
     end
   end
-  resources :credits, only: [:show, :update] do
+  resources :crs, only: [:show, :update] do
     collection do
       get '/:id/new', to: 'credits#new'
     end
   end
-  resources :explanations, only: [:index, :new, :create]
-  resources :exposures, only: [:index, :create, :show] do
+  resources :expls, only: [:index, :new, :create]
+  resources :expsrs, only: [:index, :create, :show] do
     collection do
       get '/:id/new', to: 'exposures#new'
     end
@@ -39,17 +39,17 @@ Rails.application.routes.draw do
   resources :mangas, only: [:index, :show]  do
     resources :illustlifes, only: [:index, :show]
   end
-  resources :requests, only: [:index, :create, :show, :update] do
+  resources :reqs, only: [:index, :create, :show, :update] do
     collection do
       get '/:id/new', to: 'requests#new'
     end
   end  
-  resources :resumes, only: [:create, :show] do
+  resources :resms, only: [:create, :show] do
     collection do
       get '/:id/new', to: 'resumes#new'
     end
   end
-  resources :settings, only: [:update]
+  resources :sttgs, only: [:update]
   resources :works, only: [:new, :create, :show, :update] do
     collection do
       get 'download'

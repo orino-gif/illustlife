@@ -2,14 +2,14 @@ class RequestsController < ApplicationController
   require 'payjp'
   def index
     # ログインユーザーに関係するレコード達を@reqsに格納
-    @reqs = Request.where(rx_id: current_user.id)
-    .or(Request.where(tx_id: current_user.id))
+    @reqs = Req.where(rx_id: current_user.id)
+    .or(Req.where(tx_id: current_user.id))
   end
   
   def new
     # リクエストのレコード作成と、クリエーター情報を表示する
-    @req = Request.new
-    @cre = Creator.find_by(user_id: params[:id])
+    @req = Req.new
+    @cre = Cre.find_by(user_id: params[:id])
   end
 
   def create
@@ -19,12 +19,12 @@ class RequestsController < ApplicationController
         ('development' == ENV['RAILS_ENV'])
         @tx = current_user
         @rx = User.find(params[:tx_id])
-        @req = Request.new(requests_params)
+        @req = Req.new(reqs_params)
         @req.tx_id = @tx.id; @req.rx_id = @rx.id; @req.stts = '承認待ち'
         if @req.save
-          Work.create(request_id:@req.id)
+          Work.create(req_id:@req.id)
           UserMailer.req(@tx, @rx).deliver_later
-          redirect_to requests_url, notice: 'リクエストを送信しました。'
+          redirect_to reqs_url, notice: 'リクエストを送信しました。'
         elsif @req.errors.full_messages[0].include?('too_long')
           flash.now[:alert] = '文字が許容範囲外(700文字より大きい)です'
           render :new
@@ -42,8 +42,8 @@ class RequestsController < ApplicationController
   end
   
   def update
-    if @req.update(requests_params)
-      redirect_to request_path(@req.id)
+    if @req.update(reqs_params)
+      redirect_to req_path(@req.id)
     else
       p @req.errors.full_messages[0]
       if @req.errors.full_messages[0].include?("extension_whitelist_error")
@@ -60,7 +60,7 @@ class RequestsController < ApplicationController
   end
   
   private
-  def requests_params
-    params.require(:request).permit(:money,:stts,:msg,:fmt,:nsfw,:anon,:auto)
+  def reqs_params
+    params.require(:req).permit(:money,:stts,:msg,:fmt,:nsfw,:anon,:auto)
   end
 end

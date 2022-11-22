@@ -23,31 +23,31 @@ class WorksController < ApplicationController
         else
           UserMailer.declined(@tx, @rx, @work).deliver_later
           alt('購入者側の問題でキャンセルされました')
-          @work.request.stts = 'キャンセル'
+          @work.req.stts = 'キャンセル'
         end
       when '製作中断'
-        @rx.creator.performance.eval -= 20
+        @rx.cre.pfm.eval -= 20
         send_msg('quit', @tx, @rx, '作業を中断しました')
       when '納品'
-        perf_upd(@rx.creator.performance, @req)
+        pfm_upd(@rx.cre.pfm, @req)
         send_msg('del', @tx, @rx, '納品完了のメールを送信しました')
       when '手戻し'
         @work.rework = true; @work.in_time = false
         send_msg('rework', @tx, @rx, '手戻りのメールを送信しました')
       end
-      if 'キャンセル' != @work.request.stts
-        @work.request.stts = params[:stts]
+      if 'キャンセル' != @work.req.stts
+        @work.req.stts = params[:stts]
       end
-      @work.save; @work.request.save; @rx.creator.performance.save
+      @work.save; @work.req.save; @rx.cre.pfm.save
     end
   end
   
   def download
-    down(params[:request_id])
+    down(params[:req_id])
   end
   
   def update
-    @work =  Work.find_by(request_id: params[:work][:request_id])
+    @work =  Work.find_by(req_id: params[:work][:req_id])
     if @work.update(works_params)
       redirect_to work_path(params[:id]), notice: '更新しました。'
     end

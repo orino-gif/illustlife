@@ -1,0 +1,2 @@
+class Expl < ApplicationRecord
+end

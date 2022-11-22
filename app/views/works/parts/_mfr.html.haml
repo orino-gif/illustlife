@@ -1,5 +1,5 @@
 = form_with(model:@work, local: true) do |f|
-  = f.hidden_field :request_id, :value => @work.request_id
+  = f.hidden_field :req_id, :value => @work.req_id
   = '複数選択可'
   = f.file_field :images, multiple: true
   = f.submit '登録'

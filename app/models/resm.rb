@@ -1,0 +1,2 @@
+class Resm < ApplicationRecord
+end

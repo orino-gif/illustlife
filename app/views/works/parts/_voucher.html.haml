@@ -1,10 +1,10 @@
 %table.table
   %tr
     - client = '依頼者：' + @tx.nick
-    %td= icon(@tx.creator,'s_square') + client
+    %td= icon(@tx.cre,'s_square') + client
   %tr
     - auth = '承認者：' + @rx.nick
-    %td= icon(@rx.creator,'s_square') + auth
+    %td= icon(@rx.cre,'s_square') + auth
   %tr
     %td.m_line= 'リクエスト内容：' + @req.msg.to_s
   %tr
@@ -22,7 +22,7 @@
       %tr
         %td= "金額：#{@req.money}円"
       %tr
-        - num_days = @rx.creator.setting.work_d * 60 * 60 * 24
+        - num_days = @rx.cre.sttg.work_d * 60 * 60 * 24
         - dl = @req.created_at + num_days
         %td.m_line
           = "締め切り日：#{dl.strftime('%Y/%m/%d %H:%M')}"

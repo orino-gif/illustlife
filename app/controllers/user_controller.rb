@@ -37,7 +37,7 @@ class UserController < ApplicationController
   #     @url = request.url
       
   #     NotificationMailer.user_update(@user, @url).deliver
-  #     redirect_to(creator_path(@user))
+  #     redirect_to(cre_path(@user))
   #   else
   #     render :new
   #   end

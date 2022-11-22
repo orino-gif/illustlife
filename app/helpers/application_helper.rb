@@ -1,12 +1,12 @@
 module ApplicationHelper
   # アイコンを表示。
-  def icon(creator, scss)
-    if creator.icon?
-      link_to image_tag(creator.icon.url,class: "#{scss} rounded-circle fit_c"),
-      creator_path(creator.user_id)
+  def icon(cre, scss)
+    if cre.icon?
+      link_to image_tag(cre.icon.url,class: "#{scss} rounded-circle fit_c"),
+      cre_path(cre.user_id)
     else
       link_to image_tag('/img/mobu.png',class: "#{scss} rounded-circle fit_c"),
-      creator_path(creator.user_id)
+      cre_path(cre.user_id)
     end
   end
   

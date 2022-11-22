@@ -1,7 +1,7 @@
 = "#{@tx.nick}さんから"
 = "#{@rx.nick}さんへのリクエストを承認しますか？"
 = button_to '承認', work_path,{method: :get, params:{stts:'製作中', 
-request_id: @work.request.id, amount: @work.request.money}}
+req_id: @work.req.id, amount: @work.req.money}}
 %br
 = button_to '拒否', work_path,{method: :get, params:{stts:'拒否',
-request_id: @work.request.id}}
+req_id: @work.req.id}}

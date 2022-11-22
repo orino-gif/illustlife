@@ -1,14 +1,14 @@
 class CreditsController < ApplicationController
   before_action :authenticate_user!
   
-  # @credits = Credit.find(params[:id])をセット
-  before_action :set_credits, only: [:new, :show, :update]
+  # @crs = Cr.find(params[:id])をセット
+  before_action :set_crs, only: [:new, :show, :update]
 
   def update
-    @credits = Credit.find(params[:id])
+    @crs = Cr.find(params[:id])
     
-    if @credits.update(credits_params)
-      redirect_to credit_url(@credits), notice: '登録を変更しました。'
+    if @crs.update(crs_params)
+      redirect_to cr_url(@crs), notice: '登録を変更しました。'
     else
       redirect_to request.referer, alert: '口座番号に誤りがあります'
     end
@@ -16,11 +16,11 @@ class CreditsController < ApplicationController
   
   private
 
-  def credits_params
-    params.require(:credit).permit(:bank, :branch, :account_type, :number, :holder)
+  def crs_params
+    params.require(:cr).permit(:bank, :branch, :account_type, :number, :holder)
   end
   
-  def set_credits
-    @credits = Credit.find(params[:id])
+  def set_crs
+    @crs = Cr.find(params[:id])
   end
 end

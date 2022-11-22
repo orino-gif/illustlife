@@ -3,23 +3,22 @@ class ExposuresController < ApplicationController
   end
   
   def new
-    @exposure = Exposure.new
+    @expsr = Expsr.new
   end
   
   def create
-    @exposure = Exposure.new(exposures_params)
-    if @exposure.save
-      redirect_to exposure_contributors_url(1,1)
+    @expsr = Expsr.new(expsrs_params)
+    if @expsr.save
+      redirect_to expsr_contributors_url(1,1)
     end
   end
 
   def show
-    
   end
   
   private
 
-  def exposures_params
-    params.require(:exposure).permit(:cntri_id, :expo_img)
+  def expsrs_params
+    params.require(:expsr).permit(:cntri_id, :expo_img)
   end
 end

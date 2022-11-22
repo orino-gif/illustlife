@@ -26,12 +26,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   # 連携の為のコールバック関数
   def callback_for(provider)
-   
     new_record = [false]
     @user = User.from_omniauth(request.env["omniauth.auth"],new_record)
     if true == new_record[0]
-      resource.build_creator
-      resource.build_credit
+      resource.build_cre
+      resource.build_cr
       resource.save
     end
     
