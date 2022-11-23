@@ -18,18 +18,18 @@ Rails.application.routes.draw do
   end
   resources :cres, only: [:show, :edit, :update] do
     collection do
-      get '/:id/earning', to: 'creators#earning'
+      get '/:id/earning', to: 'cres#earning'
     end
   end
   resources :crs, only: [:show, :update] do
     collection do
-      get '/:id/new', to: 'credits#new'
+      get '/:id/new', to: 'crs#new'
     end
   end
   resources :expls, only: [:index, :new, :create]
-  resources :exprs, only: [:index, :create, :show] do
+  resources :expors, only: [:index, :create, :show] do
     collection do
-      get '/:id/new', to: 'expsrs#new'
+      get '/:id/new', to: 'expors#new'
     end
     resources :contributors, only: [:index, :show]
   end
@@ -41,12 +41,12 @@ Rails.application.routes.draw do
   end
   resources :reqs, only: [:index, :create, :show, :update] do
     collection do
-      get '/:id/new', to: 'requests#new'
+      get '/:id/new', to: 'reqs#new'
     end
   end  
   resources :resms, only: [:create, :show] do
     collection do
-      get '/:id/new', to: 'resumes#new'
+      get '/:id/new', to: 'resms#new'
     end
   end
   resources :sttgs, only: [:update]
