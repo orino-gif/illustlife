@@ -6,7 +6,7 @@
     .row
       %h2.l_font イラスト晒し
     .row
-      = button_to '晒す', "/expsrs/#{params[:id]}/new", class:"l_font",
+      = button_to '晒す', "/expors/#{params[:id]}/new", class:"l_font",
       method: :get
   - if not @reqs.blank?
     .row

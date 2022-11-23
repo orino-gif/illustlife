@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2022_11_16_133013) do
     t.timestamp "created_at"
   end
 
-  create_table "expsrs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "expors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "cntri_id"
     t.string "expo_img"
     t.timestamp "created_at"

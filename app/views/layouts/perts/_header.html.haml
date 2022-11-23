@@ -12,32 +12,31 @@
       
       / ポイントとアイコン表示
       .col.text-right
-        - if user_signed_in? && 'cres' == controller.controller_name
-          - if 'show' == controller.action_name
-            ="#{current_user.cre.pfm.point}ポイント"
+        - if user_signed_in?
+          ="#{current_user.cre.pfm.point}ポイント"
           = icon(current_user.cre, 's_square')
         - else
           -# ='キャンペーン!! 9/1～9/16迄'
           -#  %br= '新規登録者様に、1000ポイントプレゼント!!'
-          
-    / メニューボタンを表示
     .row
+      / メニューボタンを表示
       .col.text-right
-        - if user_signed_in? && 'cres' == controller.controller_name
-          - page_path = request.path.split('/')
-          - if (current_user.id == page_path[2].to_i)
-            %button.btn.btn-light.m-font= link_to 'リクエスト状態', reqs_path
-            - if 'earning' != controller.action_name
-              %button.btn.btn-light.m-font= link_to '売上',
-              "/cres/#{current_user.id}/earning"
-            - if ENV['ADMIN'] == current_user.email
-              %button.btn.btn-light= link_to 'アカウント編集',
-              edit_cre_path(params[:id])
-            - elsif 'edit' != controller.action_name
-              %button.btn.btn-light.m-font= link_to '設定',
-              edit_cre_path(current_user.id)
-            %button.btn.btn-light.m-font= link_to 'ログアウト',
-            destroy_user_session_path, method: "delete"
+        - if user_signed_in?
+          -if 'cres' == controller.controller_name
+            - page_path = request.path.split('/')
+            - if (current_user.id == page_path[2].to_i)
+              %button.btn.btn-light.m-font= link_to 'リクエスト状態', reqs_path
+              - if 'earning' != controller.action_name
+                %button.btn.btn-light.m-font= link_to '売上',
+                "/cres/#{current_user.id}/earning"
+              - if ENV['ADMIN'] == current_user.email
+                %button.btn.btn-light= link_to 'アカウント編集',
+                edit_cre_path(params[:id])
+              - elsif 'edit' != controller.action_name
+                %button.btn.btn-light.m-font= link_to '設定',
+                edit_cre_path(current_user.id)
+              %button.btn.btn-light.m-font= link_to 'ログアウト',
+              destroy_user_session_path, method: "delete"
         - else
           %button.btn.btn-light.m-font= link_to '新規登録',
           new_user_registration_path

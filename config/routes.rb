@@ -27,9 +27,9 @@ Rails.application.routes.draw do
     end
   end
   resources :expls, only: [:index, :new, :create]
-  resources :expsrs, only: [:index, :create, :show] do
+  resources :exprs, only: [:index, :create, :show] do
     collection do
-      get '/:id/new', to: 'exposures#new'
+      get '/:id/new', to: 'expsrs#new'
     end
     resources :contributors, only: [:index, :show]
   end
