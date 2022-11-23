@@ -1,16 +1,13 @@
-/ クリエーター情報の編集を行う
 - content_for(:html_title) { 'ユーザー編集' }
 %h1.ll_font.ws_bgc ユーザー編集
 .container
-  / ヘッダー表示の設定
   .row.my-5
     = form_with(model: @cre, local:true) do |f|
-      = f.label :hdr , '私の代表作：'
+      = f.label :hdr, 'ヘッダー：'
       = f.file_field :hdr
       = f.submit '登録'
     .col
       = disp_hdr(@cre, 'm_rect fit_c')
-  / アイコン表示の設定
   .row.my-5
     = form_with(model: @cre, local:true) do |f|
       = f.label :icon, 'アイコン：'

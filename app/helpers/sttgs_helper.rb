@@ -1,0 +1,2 @@
+module SttgsHelper
+end
