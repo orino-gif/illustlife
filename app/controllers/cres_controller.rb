@@ -30,7 +30,7 @@ class CresController < ApplicationController
   end
   def update
     if @cre.update(cres_params)
-      if params[:accepting_reqs]
+      if params[:acept_req]
         if noti_ids = Resm.where(re_id: current_user.id)
           noti_ids.each do |user|
             @noti_id = User.find(user.noti_id); @re_id = User.find(user.re_id)

@@ -4,15 +4,15 @@ class ExporsController < ApplicationController
   end
   
   def create
-    @expor = Expor.new(exposures_params)
+    @expor = Expor.new(expors_params)
     if @expor.save
-      redirect_to expor_contributors_url(1,1)
+      
     end
   end
   
   private
 
-  def exposures_params
-    params.require(:expor).permit(:cntri_id, :exp_img)
+  def expors_params
+    params.require(:expor).permit(:cntri_id,:expo_img)
   end
 end

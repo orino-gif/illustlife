@@ -65,14 +65,14 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 // 正方形の図のサイズを設定する関数
 @mixin size_square($Xlarge, $large, $medium, $small) {
   .ll_square { width: $Xlarge; height: $Xlarge; }
-  .size_large-square { width: $large; height: $large; }
-  .size_medium-square { width: $medium; height: $medium; }
+  .l_square { width: $large; height: $large; }
+  .m_square { width: $medium; height: $medium; }
   .s_square { width: $small; height: $small; }
 }
 // 長方形の図のサイズを設定する関数
 @mixin size_rectangle($large, $medium, $small, $Xsmall) {
   .l_rect { width: 100%; height: $large; }
-  .size_medium-rectangle { width: 100%; height: $medium; }
+  .m_rect { width: 100%; height: $medium; }
   .size_small-rectangle { width: 100%; height: $small; }
   .ss_rect { width: 100%; height: $Xsmall; }
 }

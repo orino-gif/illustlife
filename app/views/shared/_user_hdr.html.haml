@@ -1,12 +1,12 @@
 .row
   / ヘッダー表示
-  = disp_hdr(@cre, 'size_medium-rectangle fit_c')
+  = disp_hdr(@cre, 'm_rect fit_c')
 
 .row
   .col-2
     / ユーザーアイコン表示
     = icon(@cre,
-      'size_large-square rounded-circle fit_c position_large-top')
+      'l_square rounded-circle fit_c position_large-top')
   
   .col-4
     / reqコントローラーの領域以外の場合、リクエストアイコンを表示
@@ -18,16 +18,16 @@
         / リクエスト先が自分自身の場合、リンクを付与しない
         - if (user_signed_in?) && (params[:id].to_i == current_user.id.to_i)
           = image_tag '/img/req.png',
-            class:'size_medium-square position_medium-top'
+            class:'m_square position_medium-top'
         
         - else
           = link_to image_tag('/img/req.png',
-            class:'size_medium-square position_medium-top'),
+            class:'m_square position_medium-top'),
             "/reqs/#{@cre.user_id}/new"
             
       - else
         = image_tag '/img/req_stop.png',
-          class:'size_medium-square position_medium-top'
+          class:'m_square position_medium-top'
       
         / ログイン中のユーザーに再開通知ボタンを表示
         - if user_signed_in?

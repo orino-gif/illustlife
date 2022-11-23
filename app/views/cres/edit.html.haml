@@ -1,7 +1,6 @@
 / クリエーター情報の編集を行う
 - content_for(:html_title) { 'ユーザー編集' }
 %h1.ll_font.ws_bgc ユーザー編集
-
 .container
   / ヘッダー表示の設定
   .row.my-5
@@ -10,16 +9,14 @@
       = f.file_field :hdr
       = f.submit '登録'
     .col
-      = disp_hdr(@cre, 'size_medium-rectangle fit_c')
-  
+      = disp_hdr(@cre, 'm_rect fit_c')
   / アイコン表示の設定
   .row.my-5
     = form_with(model: @cre, local:true) do |f|
       = f.label :icon, 'アイコン：'
       = f.file_field :icon
       = f.submit '登録'
-    = icon(@cre, 'size_medium-square')
-
+    = icon(@cre, 'm_square')
   .row.my-5
     = 'アカウント情報：'
     %table.table
@@ -31,7 +28,6 @@
         %td='在籍 or 退会：在籍'
       %td
         = button_to '変更', edit_user_registration_path
-        
   .row.my-5
     = 'リンク先：'
     %table.table
@@ -65,7 +61,6 @@
             = f.label :link, '他リンク先:'
             = f.text_field :link, class:'size_variable-form'
             = f.submit '登録'
-            
   .row.my-5
     = 'リクエスト受付内容：'
     %table.table
@@ -86,14 +81,13 @@
             
               - if true != @sttg.start
                 = f.hidden_field :start, value:true
-                = f.submit '開始', :name => 'accepting_reqs'
+                = f.submit '開始', :name => 'acept_req'
               - else
                 = f.hidden_field :start, value:false
                 = f.submit '停止'
             - else
               %button{:disabled => "disabled", :type => "submit"}='開始'
               = '※報酬受取先の口座登録が事前に必要です'
-              
   .row.my-5
     = '作業予定日数：'
     %table.table
@@ -103,7 +97,6 @@
             = f.label :work_d, '作業予定日数(日)：'
             = f.text_field :work_d, :size => '5'
             = f.submit '変更'
-            
   .row.my-5
     = '口座情報：'
     %table.table
@@ -114,7 +107,6 @@
           %td='登録口座なし'
       %td
         = button_to '登録', cr_path, method: :get
-        
   .row.my-5
     = 'クレジットカード：'
     %table.table
@@ -126,7 +118,6 @@
       %td
         = button_to '登録', new_card_path, method: :get,
           data: {"turbolinks" => false}
-          
   .row.my-5
     = '再開通知リスト：'
     %table.table
