@@ -3,11 +3,9 @@ module CresHelper
   def disp_hdr(cre, scss)
     if 'homes' == controller.controller_name
       if cre.hdr?
-        link_to image_tag(cre.hdr.url, class: scss),
-        cre_path(cre.user_id)
+        link_to image_tag(cre.hdr.url, class: scss), cre_path(cre.user_id)
       else
-        link_to image_tag('/img/nothing.png', class: scss),
-        cre_path(cre.user_id)
+        link_to image_tag('/img/nothing.png', class: scss),cre_path(cre.user_id)
       end
     else
       if cre.hdr?

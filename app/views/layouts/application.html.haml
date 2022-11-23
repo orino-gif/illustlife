@@ -1,115 +1,13 @@
 !!!
 %html
   %head
-    / Googleアナリティクス　解析コード
-    %script{:async => "", 
-      :src => "https://www.googletagmanager.com/gtag/js?id=G-QJ06SMJ2Y5"}
-    :javascript
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-QJ06SMJ2Y5');
-    / 文字コード設定
-    %meta{:charset => "UTF-8"}/
-    / 画面をレスポンシブ対応
-    %meta{:content => "width=device-width",:name => "viewport"}/
-    / タイトル
-    %title
-      = content_for?(:html_title) ? yield(:html_title) : ""
-      ｜イラストライフ
-    / サイト説明
-    %meta{:content => "イラストのみを使ってコミュニケーション。
-      好きなクリエーターに作品をリクエスト。", :name => "description"}/
-    / integrity:html検証,crossorigin:ユーザー認証情報anonymous(不要)
-    %link{:crossorigin => "anonymous",
-      :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css",
-      :integrity => "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk",
-      :rel => "stylesheet"}/
-    / payjpスクリプト利用
-    %script{src: "https://js.pay.jp/v2/pay.js"}
-    / googleフォント設定
-    %link{:href => "https://fonts.googleapis.com", :rel => "preconnect",
-      :crossorigin => "",
-      :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
-    %link{:href => "https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500&family=Kosugi+Maru&family=Potta+One&family=Yomogi&display=swap",
-      :rel => "stylesheet"}/
-    / JavaScript環境変数設定
-    = include_gon
-    / Railsの組み込み関数stylesheet_link_tag を使って読み込んでいる
-    = stylesheet_link_tag 'application', media: 'all',
-      'data-turbolinks-track': 'reload'
-    / jQuery設定
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    / slickライブラリ利用
-    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css",
-      :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css",
-      :rel => "stylesheet", :type => "text/css"}/
-    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js",
-      :type => "text/javascript"}
-    / クロスサイトリクエストフォージェリー対策
-    = csrf_meta_tags
-    / コンテンツセキュリティポリシーの適用
-    = csp_meta_tag
-    / homesとmanualsのページ以外は、google検索に表示しない
-    - if 'homes' != controller.controller_name
-      - if 'manuals' != controller.controller_name
-        %meta{:content => "noindex", :name => "robots"}/
+    / ページの設定
+    = render 'layouts/perts/head'
   %body
     / ヘッダーの内容を表示
-    %header
-      .container-fluid
-        / ヘッダー部を表示
-        .row
-          / シンボルマークを表示
-          .col-auto.d-flex.align-items-center
-            = link_to image_tag('/img/symbol.png', class: 's_square'), root_path
-          / サービス名を表示
-          .col-auto
-            %span.ll_font
-              %strong イラストライフ
-          / キャッチコピーを表示    
-          .col-xs.d-flex.align-items-center
-            // %strong ～ イラスト制作をサポート ～
-          .col.text-right
-            - if user_signed_in?
-              / ポイント表示
-              - if 'cres' == controller.controller_name
-                - if 'show' == controller.action_name
-                  ="#{current_user.cre.pfm.point}ポイント"
-              / ログインユーザーアイコン表示    
-              = icon(current_user.cre, 's_square')
-            - else
-              -# ='キャンペーン!! 9/1～9/16迄'
-              -#  %br= '新規登録者様に、1000ポイントプレゼント!!'
-        / メニューボタンを表示
-        .row
-          .col.text-right
-            - if user_signed_in?
-              - if 'cres' == controller.controller_name
-                - page_path = request.path.split('/')
-                - if (current_user.id == page_path[2].to_i)
-                  %button.btn.btn-light.m-font= link_to 'リクエスト状態',
-                    reqs_path
-                  - if 'earning' != controller.action_name
-                    %button.btn.btn-light.m-font
-                      = link_to '売上', "/cres/#{current_user.id}/earning"
-                  - if ENV['ADMIN'] == current_user.email
-                    %button.btn.btn-light
-                      = link_to 'アカウント編集', edit_cre_path(params[:id])
-                  - elsif 'edit' != controller.action_name
-                    %button.btn.btn-light.m-font
-                      = link_to '設定',
-                      edit_cre_path(current_user.id)
-                  %button.btn.btn-light.m-font
-                    = link_to 'ログアウト',
-                    destroy_user_session_path, method: "delete"
-            - else
-              %button.btn.btn-light.m-font
-                = link_to '新規登録', new_user_registration_path
-              %button.btn.btn-light.m-font
-                = link_to 'ログイン', new_user_session_path
-                
+    = render 'layouts/perts/header'
+    
+    
     / アクセス解析          
     - if Rails.env.production?
       %script{:async => "", :src => '//accaii.com/orino/script.js'}
@@ -121,44 +19,13 @@
       .alert.alert-dismissable.alert-success
         %button.close{"data-dismiss" => "alert", :type => "button"} ×
         = notice
-        
-    / エラー表示    
     - if alert.present?
       .alert.alert-dismissable.alert-danger
         %button.close{"data-dismiss" => "alert", :type => "button"} ×
         = alert
-    
-    / 各ページの内容を表示
+        
+    / ボディの内容を表示
     = yield
-
-    / 管理者用アカウントでログインした場合にフッダーの色を変更
-    - color='ws_bgc'
-    - if nil != current_user
-      - if ENV['ADMIN'] == current_user.email
-        - color='background_color-crimson'
-        ='管理者用のページ'
     
     / フッダーの内容を表示
-    %footer{class:"#{color} mt-5 size_small-rectangle m-font"}
-      .container
-        / マニュアルページへのリンクテキストを表示
-        .row.m-4
-          .mx-3
-            = link_to 'イラスト付き利用説明', home_manuals_path(1)
-        
-        / 各規約ページへのリンクテキストを表示
-        .row.m-4
-          .mx-3
-            = link_to '利用規約', terms_agreement_path
-          .mx-3
-            = link_to 'プライバシーポリシー', policy_agreement_path
-          .mx-3
-            = link_to '特定商取引法に基づく表記',
-              transaction_law_agreement_path
-          .mx-3
-            = link_to 'ご意見',expls_path
-        
-        / 著作権表示
-        .row.m-3
-          .col.text-right
-            © 2021-2022 イラストライフ運営局
+    = render 'layouts/perts/footer'

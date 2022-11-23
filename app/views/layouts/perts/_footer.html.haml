@@ -1,0 +1,26 @@
+- color='ws_bgc'
+- if nil != current_user
+  - if ENV['ADMIN'] == current_user.email
+    - color='background_color-crimson'
+    ='管理者用のページ'
+%footer{class:"#{color} mt-5 size_small-rectangle m-font"}
+  .container
+    / マニュアルページへのリンクテキストを表示
+    .row.m-4
+      .mx-3
+        = link_to 'イラスト付き利用説明', home_manuals_path(1)
+    / 各規約ページへのリンクテキストを表示
+    .row.m-4
+      .mx-3
+        = link_to '利用規約', terms_agreement_path
+      .mx-3
+        = link_to 'プライバシーポリシー', policy_agreement_path
+      .mx-3
+        = link_to '特定商取引法に基づく表記',
+          transaction_law_agreement_path
+      .mx-3
+        = link_to 'ご意見',expls_path
+    / 著作権表示
+    .row.m-3
+      .col.text-right
+        © 2021-2022 イラストライフ運営局

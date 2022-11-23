@@ -5,17 +5,16 @@
     .row
       %h2.l_font イラスト晒し
     .row
-      = link_to image_tag('/img/mobu.png', class: 'll_square fit_c m_s-border'),
-      '/mangas/1/illustlifes'
-  / クリエーターのヘッダー画像を評価が高い順に30点表示
+      - exte = 'll_square fit_c m_s-border'
+      = link_to image_tag('/img/mobu.png', class: exte), '/mangas/1/illustlifes'
   .row
     %h2.l_font クリエイター
   .row.ss_m-side
     - if @users
-      - @users.each.with_index(1) do |user,index| 
+      - @users.each.with_index(1) do |user, index| 
         - if not user.soft_destroyed?
           .s_s-pdg.text-center.py-1
             - if user.confirmed_at?
-              = disp_hdr(user,'ll_square m_s-border fit_c')
+              = disp_hdr(user.cre,'ll_square m_s-border fit_c')
               .s_font.s_ind= user.nick
         - break if 30 == index
