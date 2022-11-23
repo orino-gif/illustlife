@@ -6,6 +6,8 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-QJ06SMJ2Y5');
+  
+/ メタ情報
 %meta{:charset => "UTF-8"}/
 %meta{:content => "width=device-width",:name => "viewport"}/
 %title
@@ -13,26 +15,24 @@
   ｜イラストライフ
 %meta{:content => "イラストのみを使ってコミュニケーション。
   好きなクリエーターに作品をリクエスト。", :name => "description"}/
-/ integrity:html検証,crossorigin:ユーザー認証情報anonymous(不要)
+  
+/ 外部システム利用
 %link{:crossorigin => "anonymous",
   :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css",
   :integrity => "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk",
   :rel => "stylesheet"}/
-/ payjpスクリプト利用
 %script{src: "https://js.pay.jp/v2/pay.js"}
-/ googleフォント設定
 %link{:href => "https://fonts.googleapis.com", :rel => "preconnect",
   :crossorigin => "",
   :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
 %link{:href => "https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500&family=Kosugi+Maru&family=Potta+One&family=Yomogi&display=swap",
   :rel => "stylesheet"}/
-/ JavaScript環境変数設定
+  
+/ JavaScript環境設定
 = include_gon
-/ Railsの組み込み関数stylesheet_link_tag を使って読み込んでいる
-= stylesheet_link_tag 'application', media: 'all',
-  'data-turbolinks-track': 'reload'
-/ jQuery設定
+= stylesheet_link_tag 'application',media:'all','data-turbolinks-track':'reload'
 = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
 / slickライブラリ利用
 %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css",
   :rel => "stylesheet", :type => "text/css"}/
@@ -40,10 +40,11 @@
   :rel => "stylesheet", :type => "text/css"}/
 %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js",
   :type => "text/javascript"}
-/ クロスサイトリクエストフォージェリー対策
+  
+/ CSRFとコンテンツセキュリティポリシー対策
 = csrf_meta_tags
-/ コンテンツセキュリティポリシーの適用
 = csp_meta_tag
+
 / homesとmanualsのページ以外は、google検索に表示しない
 - if 'homes' != controller.controller_name
   - if 'manuals' != controller.controller_name

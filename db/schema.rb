@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2022_11_16_133013) do
 
-  create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "cards", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
     t.string "car_id", null: false
     t.datetime "created_at", null: false
