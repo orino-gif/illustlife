@@ -5,8 +5,7 @@
 .row
   .col-2
     / ユーザーアイコン表示
-    = icon(@cre,
-      'l_square rounded-circle fit_c position_large-top')
+    = icon(@cre, 'l_square rounded-circle fit_c l_ta-pos')
   
   .col-4
     / reqコントローラーの領域以外の場合、リクエストアイコンを表示
@@ -18,16 +17,16 @@
         / リクエスト先が自分自身の場合、リンクを付与しない
         - if (user_signed_in?) && (params[:id].to_i == current_user.id.to_i)
           = image_tag '/img/req.png',
-            class:'m_square position_medium-top'
+            class:'m_square m_ta-pos'
         
         - else
           = link_to image_tag('/img/req.png',
-            class:'m_square position_medium-top'),
+            class:'m_square m_ta-pos'),
             "/reqs/#{@cre.user_id}/new"
             
       - else
         = image_tag '/img/req_stop.png',
-          class:'m_square position_medium-top'
+          class:'m_square m_ta-pos'
       
         / ログイン中のユーザーに再開通知ボタンを表示
         - if user_signed_in?
@@ -38,9 +37,9 @@
           / 再開通知リストに登録していない場合
           - if resms.find_by(re_id: params[:id]).nil?
           
-            .ss_font.position_Xshort-top.position_midium-left
+            .ss_font.ss_ta-pos.m_lr-pos
               = link_to "再開を通知", "/resms/#{@cre.user_id}/new",
-                class:'button-notice'
+                class:'ws_bgc s_pad'
   
   / SNSリンク先のアイコンを表示
   .col-1

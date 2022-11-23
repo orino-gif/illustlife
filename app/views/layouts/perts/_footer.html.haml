@@ -1,9 +1,9 @@
 - color='ws_bgc'
 - if nil != current_user
   - if ENV['ADMIN'] == current_user.email
-    - color='background_color-crimson'
+    - color='cri_bgc'
     ='管理者用のページ'
-%footer{class:"#{color} mt-5 size_small-rectangle m-font"}
+%footer{class:"#{color} mt-5 s_rect m_font"}
   .container
     / マニュアルページへのリンクテキストを表示
     .row.m-4

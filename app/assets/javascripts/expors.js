@@ -12,7 +12,7 @@ $(document).on("change",".preview-uploader",function(){
     fileReader.onload = (function () {
       //img要素を生成
       let imgTag = 
-      `<img class="fit_contain m_rect"
+      `<img class="fit_con m_rect"
       $Xlarge; src='${fileReader.result}'>`
       //画像をプレビュー
       $(elem).next(".preview").html(imgTag)

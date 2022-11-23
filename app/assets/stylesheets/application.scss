@@ -7,111 +7,82 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-// 見出しのデザイン
-h1 {padding: 0.4em 0.8em; }
-h2 {border-bottom: 3px dotted black;}
-
+h1 { padding: 0.4em 0.8em; }
+h2 { border-bottom: 3px dotted black;}
 // 色変更、下線装飾無し(!importantで優先順位を上げる)
 a { color: steelblue; text-decoration: none !important; }
-
-// body全体のフォント指定
 body { font-family: 'Kaisei Decol', serif, "メイリオ" ; }
-
 // ストロングとラベルタグの太字を無効化
 strong, label, th { font-weight: normal; }
-
-// 背景色設定
 .ws_bgc { background-color: whitesmoke; } 
-.background_color-crimson { background-color: crimson; } 
-
+.cri_bgc { background-color: crimson; }
  // アスペクト比を維持して表示
 .fit_c { object-fit: cover; }
-
  // 画面の中に画像を表示
-.fit_contain { object-fit: contain; }
-
+.fit_con { object-fit: contain; }
 // ユーザーヘッダーの小さい通知ボタンのデザイン
-.button-notice { background-color: whitesmoke; padding: 3px; }
-
+.s_pad { padding: 3px; }
 // 表体のセルの幅の長さを「table全幅/セル数」にする
-.fixed_column { table-layout: fixed; width: 100%; }
-
+.fixed_col { table-layout: fixed; width: 100%; }
 // 文字が表のセルをはみ出した場合に、はみ出した文字を隠す
 .hdn_over { overflow: hidden; }
-
  // コンテンツの横のマージンの調整
 .ss_m-side { margin : 0 -10px; }
 .s_m-side { margin : 0 10px; }
-
 /*-----------矢印表示----------*/
 .slick-next{ right: 0!important; }
 .slick-prev{ left: 0!important;}
 .slick-arrow { width: initial!important; height: initial!important;
   z-index:2!important;}
-.slick-arrow:before { font-size: 50px!important;  color: whitesmoke!important; }
-
+.slick-arrow:before { font-size: 50px!important; color: whitesmoke!important; }
 // 画像の上にSAMPLE文字を表示
 p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   transform: translate(40%,-290%); font-size: 40px; margin:0; opacity: 0.5; }
 
 // 文字の大きさを設定する関数 
-@mixin size_font($Xlarge, $large, $medium, $small, $Xsmall) {
-  .ll_font { font-size: $Xlarge; }
-  .l_font { font-size: $large; }
-  .m-font { font-size: $medium; }
-  .s_font { font-size: $small; }
-  .ss_font { font-size: $Xsmall; }
+@mixin size_f($ll, $l, $m, $s, $ss) {
+  .ll_font { font-size: $ll; } .l_font { font-size: $l; }
+  .m_font { font-size: $m; } .s_font { font-size: $s; }
+  .ss_font { font-size: $ss; }
 }
 // 正方形の図のサイズを設定する関数
-@mixin size_square($Xlarge, $large, $medium, $small) {
-  .ll_square { width: $Xlarge; height: $Xlarge; }
-  .l_square { width: $large; height: $large; }
-  .m_square { width: $medium; height: $medium; }
-  .s_square { width: $small; height: $small; }
+@mixin size_square($ll, $l, $m, $s) {
+  .ll_square { width: $ll; height: $ll; } .l_square { width: $l; height: $l; }
+  .m_square { width: $m; height: $m; } .s_square { width: $s; height: $s; }
 }
 // 長方形の図のサイズを設定する関数
-@mixin size_rectangle($large, $medium, $small, $Xsmall) {
-  .l_rect { width: 100%; height: $large; }
-  .m_rect { width: 100%; height: $medium; }
-  .size_small-rectangle { width: 100%; height: $small; }
-  .ss_rect { width: 100%; height: $Xsmall; }
+@mixin size_rect($l, $m, $s, $ss) {
+  .l_rect { width: 100%; height: $l; } .m_rect { width: 100%; height: $m; }
+  .s_rect { width: 100%; height: $s; } .ss_rect { width: 100%; height: $ss; }
 }
 // 配置の縦の空白の長さを設定する関数
-@mixin position_top($large, $medium, $short, $Xshort) {
-  .position_large-top { position: absolute; top: $large; }
-  .position_medium-top { position: absolute; top: $medium; }
-  .s_top-pos { position: absolute; top: $short; }
-  .position_Xshort-top { position: absolute; top: $Xshort; }
+@mixin position_top($l, $m, $short, $Xshort) {
+  .l_ta-pos { position: absolute; top: $l; }
+  .m_ta-pos { position: absolute; top: $m; }
+  .s_ta-pos { position: absolute; top: $short; }
+  .ss_ta-pos { position: absolute; top: $Xshort; }
 }
 // 配置の左の空白の長さを設定する関数
-@mixin position_left($medium) {
-  .position_midium-left { position: relative; left: $medium; }
-}
+@mixin position_left($m){.m_lr-pos { position: relative; left: $m; }}
 // 配置の右の空白の長さを設定する関数
-@mixin position_right($medium) {
-  .position_midium-right { position: relative; right: $medium; }
-}
+@mixin position_right($m) {.m_rr-pos { position: relative; right: $m; }}
 // 文字がコンテンツからあふれた場合に改行させる関数
-@mixin string_indention($small, $medium, $large) {
-  .s_ind { word-wrap: break-word; width: $small; }
-  .m_line { word-wrap: break-word; max-width: $medium; }
-  .string_indention-large { word-wrap: break-word; max-width: $large; }
+@mixin string_indention($s, $m, $l) {
+  .s_ind { word-wrap: break-word; width: $s; }
+  .m_line { word-wrap: break-word; max-width: $m; }
+  .l_line { word-wrap: break-word; max-width: $l; }
 }
 // 全体の横幅によりpaddingの調整をする関数
-@mixin padding_side($small) {
-  .s_s-pdg { padding: 0 $small; }
-}
+@mixin padding_side($s) {.s_s-pdg { padding: 0 $s; }}
 // 全体の横幅によりpaddingの調整をする関数
-@mixin border_solid($medium) {
-  .m_s-border { border-style: solid; border-width: $medium; }
-}
+@mixin border_solid($m) {.m_s-border { border-style: solid; border-width: $m; }}
 
 // メディアクエリ　bootstrapのブレークポイント値に合わせる//
 // Extra large
 @media screen and (min-width: 1200px){
-  @include size_font(2.0em, 1.5em, 1.1em, 0.9em, 0.8em);
+  @include size_f(2.0em, 1.5em, 1.1em, 0.9em, 0.8em);
   @include size_square(150px, 120px, 80px, 50px);
-  @include size_rectangle(300px, 180px, 130px, 50px);
+  @include size_rect(300px, 180px, 130px, 50px);
   @include position_top(-100px, -68px, -38px, -13px);
   @include position_left(120px);
   @include position_right(120px);
@@ -121,9 +92,9 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 }
 // Large
 @media screen and (max-width: 1199px){
-  @include size_font(1.9em, 1.4em, 1.1em, 0.8em, 0.7em);
+  @include size_f(1.9em, 1.4em, 1.1em, 0.8em, 0.7em);
   @include size_square(150px, 110px, 70px, 40px);
-  @include size_rectangle(250px, 170px, 125px, 50px);
+  @include size_rect(250px, 170px, 125px, 50px);
   @include position_top(-95px, -62px, -28px, -12px);
   @include position_left(100px);
   @include position_right(100px);
@@ -133,9 +104,9 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 }
 // Medium
 @media screen and (max-width: 991px){
-  @include size_font(1.8em, 1.3em, 1.0em, 0.7em, 0.6em);
+  @include size_f(1.8em, 1.3em, 1.0em, 0.7em, 0.6em);
   @include size_square(150px, 100px, 60px, 35px);
-  @include size_rectangle(200px, 160px, 110px, 50px);
+  @include size_rect(200px, 160px, 110px, 50px);
   @include position_top(-90px, -54px, -24px, -11px);
   @include position_left(100px);
   @include position_right(60px);
@@ -145,9 +116,9 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 }
 // Small
 @media screen and (max-width: 767px){
-  @include size_font(1.7em, 1.2em, 0.9em, 0.6em, 0.5em);
+  @include size_f(1.7em, 1.2em, 0.9em, 0.6em, 0.5em);
   @include size_square(150px, 90px, 50px, 32px);
-  @include size_rectangle(100%, 150px, 105px, 50px);
+  @include size_rect(100%, 150px, 105px, 50px);
   @include position_top(-85px, -42px, -22px, -10px);
   @include position_left(100px);
   @include position_right(20px);
@@ -157,9 +128,9 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 }
 // Extra small
 @media screen and (max-width: 575px){
-  @include size_font(1.6em, 1.1em, 0.8em, 0.5em, 0.4em);
+  @include size_f(1.6em, 1.1em, 0.8em, 0.5em, 0.4em);
   @include size_square(110px, 70px, 40px, 28px);
-  @include size_rectangle(100%, 120px, 100px, 50px);
+  @include size_rect(100%, 120px, 100px, 50px);
   @include position_top(-65px, -35px, -18px, -10px);
   @include position_left(75px);
   @include position_right(10px);
@@ -167,4 +138,3 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   @include padding_side(3px);
   @include border_solid(3px);
 }
-
