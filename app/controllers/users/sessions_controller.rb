@@ -27,6 +27,6 @@ class Users::SessionsController < Devise::SessionsController
   
   # ログイン後のリダイレクト先
   def after_sign_in_path_for(resource)
-    cre_url(@user)
+    cre_path(resource.id)
   end 
 end
