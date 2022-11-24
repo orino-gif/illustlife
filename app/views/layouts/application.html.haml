@@ -1,30 +1,38 @@
 !!!
 %html
   %head
-    / ページの設定
-    = render 'layouts/perts/head'
-  %body
-    / ヘッダーの内容を表示
-    = render 'layouts/perts/header'
+    / Googleアナリティクス
+    = render 'layouts/parts/google'
     
-    / アクセス解析          
-    - if Rails.env.production?
-      %script{:async => "", :src => '//accaii.com/orino/script.js'}
-      %noscript
-        %img{:src => '//accaii.com/orino/script?guid=on'}/
+    / メタ情報
+    = render 'layouts/parts/meta'
+    
+    / bootstrap
+    = render 'layouts/parts/bs'
+
+    / 外部システム利用
+    = render 'layouts/parts/ext'
+    
+    / js環境設定
+    = render 'layouts/parts/js_conf'
+    
+    / js
+    = render 'layouts/parts/js'
+    
+    /  CSRF対策とgoogle検索除外設定
+    = render 'layouts/parts/head'
+  %body
+    / ヘッダー
+    = render 'layouts/parts/header'
+    
+    / accaiiアクセス解析
+    = render 'layouts/parts/accaii'
         
     / 通知表示
-    - if notice.present?
-      .alert.alert-dismissable.alert-success
-        %button.close{"data-dismiss" => "alert", :type => "button"} ×
-        = notice
-    - if alert.present?
-      .alert.alert-dismissable.alert-danger
-        %button.close{"data-dismiss" => "alert", :type => "button"} ×
-        = alert
+    = render 'layouts/parts/noti'
         
-    / ボディの内容を表示
-    = yield
+    / ボディ
+    = render 'layouts/parts/body'
     
-    / フッダーの内容を表示
-    = render 'layouts/perts/footer'
+    / フッダー
+    = render 'layouts/parts/footer'

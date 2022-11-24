@@ -1,0 +1,8 @@
+/ CSRFとコンテンツセキュリティポリシー対策
+= csrf_meta_tags
+= csp_meta_tag
+
+/ homesとmanualsのページ以外は、google検索に表示しない
+- if 'homes' != controller.controller_name
+  - if 'manuals' != controller.controller_name
+    %meta{:content => "noindex", :name => "robots"}/

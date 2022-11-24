@@ -24,8 +24,7 @@ class CresController < ApplicationController
       end
     elsif '引き落とし実行' == params[:wdl_status]
       @wdl_status = '引き落とし実行'
-      UserMailer.wdl(@cre).deliver_later; sleep(5)
-      @cre.pfm.wdl = 0; @cre.save
+      UserMailer.wdl(@cre).deliver_later; sleep(5); @cre.pfm.wdl = 0; @cre.save
     end
   end
   def update
