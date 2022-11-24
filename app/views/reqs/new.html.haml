@@ -20,15 +20,16 @@
         .form-group
           = f.label :fmt, 'ファイル形式:'
           = f.select :fmt, ['png', 'jpg', 'jpeg', 'gif']
-          %br
-          = f.check_box :auto ,{},checked_value="true", unchecked_value="false"
-          = f.label :nsfw, 'NSFW'
+          
           %br
           = f.check_box :anon ,{},checked_value="true", unchecked_value="false"
           = f.label :anon, '非公開'
           %br
           = f.check_box :auto ,{},checked_value="true", unchecked_value="false"
           = f.label :auto, '宛名入りサイン'
+          %br
+          = f.check_box :nsfw ,{},checked_value="true", unchecked_value="false"
+          = f.label :nsfw, 'NSFW'
         %br
           = f.submit 'リクエスト送信', class:'btn btn-light ss_rect l_font'
         %br/
