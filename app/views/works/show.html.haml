@@ -1,14 +1,15 @@
-- content_for(:html_title) { 'リクエストの詳細' }
-%h1.ll_font.ws_bgc リクエストの詳細
+- content_for(:html_title) { 'リクエスト詳細' }
+%h1.ll_font.ws_bgc リクエスト詳細
 .container
   .row.my-5
+    // 伝票
     .col-md-auto
-      // リクエストの伝票
       = render 'works/parts/voucher'
-    - if user_signed_in?
-      .col-sm-auto
+      
+    // 進行状態表示
+    .col-sm-auto
+      - if user_signed_in?
         .m_line
-          // 進行状態に応じて表示を変更
           - case @req.stts
           - when '承認待ち'
             - if @rx.id == current_user.id
@@ -20,14 +21,16 @@
           - when '納品'
             = render 'works/parts/disp'
             = render 'works/parts/cpl'
-      .col-sm-auto
-        - if @rx.id == current_user.id
-          - case @req.stts
-          - when '製作中','手戻し'
-            = butn('納品', @req)
-            = butn('製作中断', @req)
-          - when '納品'
-            = butn('手戻し', @req)
-        - elsif @tx.id == current_user.id && @req == '納品'
-          = button_to('ダウンロード',download_works_path,
-          {method: :get, params:{req_id: params[:id]}})
+    
+    // 納品操作
+    .col-sm-auto
+      - if user_signed_in? && @rx.id == current_user.id
+        - case @req.stts
+        - when '製作中','手戻し'
+          = butn('納品', @req)
+          = butn('製作中断', @req)
+        - when '納品'
+          = butn('手戻し', @req)
+      - elsif @tx.id == current_user.id && @req == '納品'
+        = button_to('ダウンロード',download_works_path,
+        {method: :get, params:{req_id: params[:id]}})

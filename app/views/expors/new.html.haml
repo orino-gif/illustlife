@@ -2,7 +2,7 @@
 %h1.ll_font.ws_bgc イラスト晒し
 .container
   .row.my-2
-    .col-md-8.border.border-secondary.position-center
+    .col-md-8.border.border-secondary.c_pos
       = form_with(model: @expor, local:true) do |f|
         = f.hidden_field :cntri_id, value:params[:id]
         = f.file_field :expo_img, class:'preview-uploader'

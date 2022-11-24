@@ -1,46 +1,26 @@
 .row
-  / ヘッダー表示
   = disp_hdr(@cre, 'm_rect fit_c')
-
 .row
   .col-2
-    / ユーザーアイコン表示
     = icon(@cre, 'l_square rounded-circle fit_c l_ta-pos')
-  
   .col-4
-    / reqコントローラーの領域以外の場合、リクエストアイコンを表示
-    - if 'reqs' != controller.controller_name
-    
-      / リクエストを受付ていない場合は、STOP画像を表示
-      - if true == @cre.sttg.start
-      
-        / リクエスト先が自分自身の場合、リンクを付与しない
-        - if (user_signed_in?) && (params[:id].to_i == current_user.id.to_i)
-          = image_tag '/img/req.png',
-            class:'m_square m_ta-pos'
-        
-        - else
-          = link_to image_tag('/img/req.png',
-            class:'m_square m_ta-pos'),
-            "/reqs/#{@cre.user_id}/new"
-            
+    / リクエストを受付ていない場合は、STOP画像を表示
+    - if 'reqs' != controller.controller_name && true == @cre.sttg.start
+      - if (user_signed_in?) && (params[:id].to_i == current_user.id.to_i)
+        = image_tag '/img/req.png', class:'m_square m_ta-pos'
       - else
-        = image_tag '/img/req_stop.png',
-          class:'m_square m_ta-pos'
-      
-        / ログイン中のユーザーに再開通知ボタンを表示
-        - if user_signed_in?
-        
-          / 再開者のリストアップ
-          - resms = Resm.where(noti_id:current_user.id)
-          
-          / 再開通知リストに登録していない場合
-          - if resms.find_by(re_id: params[:id]).nil?
-          
-            .ss_font.ss_ta-pos.m_lr-pos
-              = link_to "再開を通知", "/resms/#{@cre.user_id}/new",
-                class:'ws_bgc s_pad'
-  
+        = link_to image_tag('/img/req.png', class:'m_square m_ta-pos'),
+          "/reqs/#{@cre.user_id}/new"
+    - else
+      = image_tag '/img/req_stop.png',class:'m_square m_ta-pos'
+    
+      / ログイン中のユーザーに再開通知ボタンを表示
+      - if user_signed_in?
+        - if Resm.where(noti_id:current_user.id).find_by(re_id:params[:id]).nil?
+          .ss_font.ss_ta-pos.m_lr-pos
+            =link_to "再開通知","/resms/#{@cre.user_id}/new",
+            class:'ws_bgc s_pad'
+            
   / SNSリンク先のアイコンを表示
   .col-1
     = disp_sns(@cre, 'twtr')
@@ -58,7 +38,6 @@
   = "ニックネーム：#{@cre.user.nick}"
   = "、推奨金額：#{@cre.sttg.recom}円"
   = "、作業予定日数：#{@cre.sttg.work_d}日"
-  
   - if 0 != @cre.pfm.pic
     = "、締切厳守率：#{@cre.pfm.dl}%"
     = "、返信率:#{@cre.pfm.reply}%"

@@ -35,9 +35,7 @@ class WorksController < ApplicationController
         @work.rework = true; @work.in_time = false
         send_msg('rework', @tx, @rx, '手戻りのメールを送信しました')
       end
-      if 'キャンセル' != @work.req.stts
-        @work.req.stts = params[:stts]
-      end
+      if 'キャンセル' != @work.req.stts; @work.req.stts = params[:stts]; end
       @work.save; @work.req.save; @rx.cre.pfm.save
     end
   end
@@ -50,11 +48,13 @@ class WorksController < ApplicationController
     @work =  Work.find_by(req_id: params[:work][:req_id])
     if @work.update(works_params)
       redirect_to work_path(params[:id]), notice: '更新しました。'
+    else
+      redirect_to work_path(params[:id]), alert: '失敗しました。'
     end
   end
   
   private
   def works_params
-    params.require(:work).permit(:rework,{ images: [] })
+    params.require(:work).permit(:req_id,:rework,{ images: [] })
   end
 end

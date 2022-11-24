@@ -1,12 +1,9 @@
 module WorksHelper
   def set_works()
-    if params[:req_id].nil?
-      @req = Req.find(params[:id])
-    else
-      @req = Req.find(params[:req_id])
-    end
+    if params[:req_id].nil?; @req = Req.find(params[:id])
+    else; @req = Req.find(params[:req_id]);end
     users = User.find(@req.tx_id, @req.rx_id);
-    @tx = users[0]; @rx = users[1]; 
+    @tx=users[0]; @rx=users[1]; 
     @work = Work.find_by(req_id: @req.id)
   end
   

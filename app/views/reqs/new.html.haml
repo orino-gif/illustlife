@@ -3,14 +3,15 @@
 .container
   // クリエーターの情報を表示
   = render 'shared/user_hdr'
+  
   // リクエスト票を表示
   .row.my-2
-    .col-md-8.border.border-secondary.position-center
+    .col-md-8.border.border-secondary.c_pos
       = form_with(model: @req, local: true) do |f|
         .form-group.mt-4
           = f.label :money, '推奨金額(円)'
           - csm = @cre.sttg.recom.to_s
-          = f.text_field :money,class:'form-control l_font l_f-from',value: csm
+          = f.text_field :money, class:'form-control l_font l_f-from',value: csm
           - i_range = @cre.sttg.min.to_s(:delimited) + '～￥99,999'
           = f.label :money, '入力範囲:￥' + i_range, class:'ss_font'
         .form-group.mt-4
@@ -19,6 +20,9 @@
         .form-group
           = f.label :fmt, 'ファイル形式:'
           = f.select :fmt, ['png', 'jpg', 'jpeg', 'gif']
+          %br
+          = f.check_box :auto ,{},checked_value="true", unchecked_value="false"
+          = f.label :nsfw, 'NSFW'
           %br
           = f.check_box :anon ,{},checked_value="true", unchecked_value="false"
           = f.label :anon, '非公開'

@@ -1,3 +1,8 @@
 // Place all the styles related to the reqs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// リクエスト票を中央に寄せる
+.c_pos { width: 80%; margin: 0 auto; max-width: 600px; }
+// リクエスト受付額の入力フォームの大きさ
+.l_f-from { max-width: 150px; height: 50px; }
