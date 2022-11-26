@@ -1,6 +1,8 @@
 // 伝票詳細
 %table.table
   %tr
+    %td= "リクエストID：#{@req.id}"
+  %tr
     %td= icon(@tx.cre,'s_square') + '依頼者：' + @tx.nick
   %tr
     %td= icon(@rx.cre,'s_square') + '承認者：' + @rx.nick

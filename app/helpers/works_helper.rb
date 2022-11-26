@@ -40,8 +40,10 @@ module WorksHelper
   def down(req_id)
     work = Work.find_by(req_id: req_id)
     if work.images?
-      work.images.each do |image|
-        send_data(image.read, filename: "download#{File.extname(image.path)}")
+      work.images.each_with_index do |image, index|
+        if 0 == index
+          send_data(image.read, filename: "download#{File.extname(image.path)}")
+        end
       end
     end
   end

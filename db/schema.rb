@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 2022_11_16_133013) do
     t.datetime "in_time"
     t.boolean "rework", default: false
     t.timestamp "updated_at"
-    t.string "images"
+    t.json "images"
   end
 
 end

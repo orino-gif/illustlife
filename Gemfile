@@ -30,6 +30,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'mini_magick', '~> 4.8'
 gem 'rmagick'
+gem 'rubyzip'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'whenever', require: false
 gem 'kakurenbo-puti'

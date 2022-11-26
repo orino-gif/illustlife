@@ -2,10 +2,10 @@
 - tx = User.find(@req.tx_id)
 - rx = User.find(@req.rx_id)
 .row.my-5
-  / 表体のセルの幅の長さを「table全幅/セル数」にする
+  / セル幅を「table全幅/セル数」に
   %table.fixed_col
     %tr
-      / 文字が一覧の表のセルをはみ出した場合に、はみ出した文字を隠す
+      / セルからはみ出した文字を隠す
       %td.hdn_over="#{@req.created_at.strftime("%Y/%m/%d %H:%M")}"
       %td.hdn_over= icon(tx.cre,'s_square') + tx.nick
       %td.hdn_over= icon(rx.cre,'s_square') + rx.nick

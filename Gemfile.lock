@@ -444,6 +444,7 @@ DEPENDENCIES
   rails (~> 5.2.6)
   rmagick
   rspec-rails
+  rubyzip
   sass-rails (~> 5.0)
   selenium-webdriver
   turbolinks (~> 5)

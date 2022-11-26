@@ -52,8 +52,10 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 }
 // 長方形の図のサイズを設定する関数
 @mixin size_rect($l, $m, $s, $ss) {
-  .l_rect { width: 100%; height: $l; } .m_rect { width: 100%; height: $m; }
-  .s_rect { width: 100%; height: $s; } .ss_rect { width: 100%; height: $ss; }
+  .l_rect { width: 100%; height: $l; }
+  .m_rect { width: 100%; height: $m; }
+  .s_rect { width: 100%; height: $s; }
+  .ss_rect { width: 100%; height: $ss; }
 }
 // 配置の縦の空白の長さを設定する関数
 @mixin position_top($l, $m, $short, $Xshort) {

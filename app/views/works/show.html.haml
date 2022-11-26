@@ -8,29 +8,28 @@
       
     // 進行状態表示
     .col-sm-auto
-      - if user_signed_in?
-        .m_line
-          - case @req.stts
-          - when '承認待ち'
-            - if @rx.id == current_user.id
-              = render 'works/parts/approval'
-          - when '製作中','手戻し'
-            - if @rx.id == current_user.id
-              = render 'works/parts/mfr'
-              = render 'works/parts/disp'
-          - when '納品'
+      .m_line
+        - case @req.stts
+        - when '承認待ち'
+          - if user_signed_in? && @rx.id == current_user.id
+            = render 'works/parts/approval'
+        - when '製作中','手戻し'
+          - if user_signed_in? && @rx.id == current_user.id
+            = render 'works/parts/mfr'
             = render 'works/parts/disp'
-            = render 'works/parts/cpl'
-    
+        - when '納品'
+          = render 'works/parts/disp'
+
     // 納品操作
     .col-sm-auto
-      - if user_signed_in? && @rx.id == current_user.id
-        - case @req.stts
-        - when '製作中','手戻し'
-          = butn('納品', @req)
-          = butn('製作中断', @req)
-        - when '納品'
-          = butn('手戻し', @req)
-      - elsif @tx.id == current_user.id && @req == '納品'
-        = button_to('ダウンロード',download_works_path,
-        {method: :get, params:{req_id: params[:id]}})
+      - if user_signed_in?
+        - if @rx.id == current_user.id
+          - case @req.stts
+          - when '製作中','手戻し'
+            = butn('納品', @req)
+            = butn('製作中断', @req)
+          - when '納品'
+            = butn('手戻し', @req)
+        - if @tx.id == current_user.id && @req.stts == '納品'
+          = button_to('ダウンロード',download_works_path,
+          {method: :get, params:{req_id: params[:id]}})

@@ -19,7 +19,7 @@ class CreateReqs < ActiveRecord::Migration[5.2]
       t.datetime :in_time
       t.boolean :rework, default:false
       t.timestamp :updated_at
-      t.string :images
+      t.json :images
     end
   end
 end

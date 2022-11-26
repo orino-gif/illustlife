@@ -1,25 +1,27 @@
+/ ユーザーヘッダー表示
 .row
   = disp_hdr(@cre, 'm_rect fit_c')
 .row
   .col-2
     = icon(@cre, 'l_square rounded-circle fit_c l_ta-pos')
   .col-4
-    / リクエストを受付ていない場合は、STOP画像を表示
-    - if 'reqs' != controller.controller_name && true == @cre.sttg.start
-      - if (user_signed_in?) && (params[:id].to_i == current_user.id.to_i)
-        = image_tag '/img/req.png', class:'m_square m_ta-pos'
-      - else
-        = link_to image_tag('/img/req.png', class:'m_square m_ta-pos'),
+    / リクエスト入力画面時はメール画像非表示
+    - if 'reqs' != controller.controller_name && 'new' != controller.action_name
+      / リクエスト受付状態時はSTOP画像非表示
+      - if true == @cre.sttg.start
+        - if (user_signed_in?) && (params[:id].to_i == current_user.id.to_i)
+          = image_tag '/img/req.png', class:'m_square m_ta-pos'
+        - else
+          = link_to image_tag('/img/req.png', class:'m_square m_ta-pos'),
           "/reqs/#{@cre.user_id}/new"
-    - else
-      = image_tag '/img/req_stop.png',class:'m_square m_ta-pos'
-    
-      / ログイン中のユーザーに再開通知ボタンを表示
-      - if user_signed_in?
-        - if Resm.where(noti_id:current_user.id).find_by(re_id:params[:id]).nil?
-          .ss_font.ss_ta-pos.m_lr-pos
-            =link_to "再開通知","/resms/#{@cre.user_id}/new",
-            class:'ws_bgc s_pad'
+      - else
+        = image_tag '/img/req_stop.png', class:'m_square m_ta-pos'
+        / ログイン中のユーザーに再開通知ボタンを表示
+        - if user_signed_in?
+          - if Resm.where(noti_id:current_user.id, re_id:params[:id]).nil?
+            .ss_font.ss_ta-pos.m_lr-pos
+              =link_to "再開通知","/resms/#{@cre.user_id}/new",
+              class:'ws_bgc s_pad'
             
   / SNSリンク先のアイコンを表示
   .col-1
