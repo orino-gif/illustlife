@@ -1,4 +1,5 @@
 class ReqsController < ApplicationController
+  include ApplicationHelper
   require 'payjp'
   def index
     # ログインユーザー関係レコードを@reqsに格納
@@ -14,8 +15,7 @@ class ReqsController < ApplicationController
   def create
     # カード登録済みの場合にリクエスト処理を実行
     if user_signed_in?
-      card = Card.find_by(user_id: current_user.id)
-      if card || ('development' == ENV['RAILS_ENV'])
+      if Card.find_by(user_id: current_user.id)
         @tx=current_user; @rx=User.find(params[:tx_id])
         @req = Req.new(reqs_params)
         @req.tx_id=@tx.id; @req.rx_id=@rx.id; @req.stts='承認待ち'
@@ -24,12 +24,12 @@ class ReqsController < ApplicationController
           UserMailer.req(@tx, @rx).deliver_later
           redirect_to reqs_url, notice: 'リクエストを送信しました。'
         elsif @req.errors.full_messages[0].include?('too_long')
-          flash.now[:alert] = '文字範囲外(700文字より大きい)です'; render :new
+          alt('文字範囲外(700文字より大きい)です')
         else
-          flash.now[:alert] = 'リクエスト送信に失敗しました'; render :new
+          alt('リクエスト送信に失敗しました')
         end
       else
-        flash.now[:alert] = "クレジットカード登録が必要です。"; render :new
+        alt('クレジットカード登録が必要です')
       end
     else
       redirect_to  '/users/sign_in', alert: 'ログインが必要です。'
