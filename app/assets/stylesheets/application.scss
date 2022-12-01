@@ -82,7 +82,9 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 // 全体の横幅によりpaddingの調整をする関数
 @mixin padding_side($s) {.s_s-pdg { padding: 0 $s; }}
 // 全体の横幅によりpaddingの調整をする関数
-@mixin border_solid($m) {.m_s-border { border-style: solid; border-width: $m; }}
+@mixin border_solid($m) {
+  .m_s-border { border-style: solid; border-width: $m; }
+}
 
 // メディアクエリ　bootstrapのブレークポイント値に合わせる//
 // Extra large
