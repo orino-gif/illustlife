@@ -7,8 +7,8 @@
     %tr
       / セルからはみ出した文字を隠す
       %td.hdn_over="#{@req.created_at.strftime("%Y/%m/%d %H:%M")}"
-      %td.hdn_over= icon(tx.cre,'s_square') + tx.nick
-      %td.hdn_over= icon(rx.cre,'s_square') + rx.nick
+      %td.hdn_over= icon(tx.cre,'ss_square') + tx.nick
+      %td.hdn_over= icon(rx.cre,'ss_square') + rx.nick
       %td= "#{@req.stts}"
       %td
         %button.btn.btn-light.m_font= link_to '詳細', work_path(@req.id)

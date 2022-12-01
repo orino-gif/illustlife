@@ -1,4 +1,4 @@
 - if devise_mapping.omniauthable?
   - resource_class.omniauth_providers.each do |provider|
-    = link_to image_tag('/img/twtr.png', class:"s_square"),
+    = link_to image_tag('/img/twtr.png', class:"ss_square"),
     omniauth_authorize_path(resource_name, provider), method: :post

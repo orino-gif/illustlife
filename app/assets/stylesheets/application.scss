@@ -38,6 +38,8 @@ strong, label, th { font-weight: normal; }
 // 画像の上にSAMPLE文字を表示
 p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   transform: translate(40%,-290%); font-size: 40px; margin:0; opacity: 0.5; }
+// 画像の上にアイコンを表示
+.on_hdr { position: relative; top: -34%; left: -31%; }
 
 // 文字の大きさを設定する関数 
 @mixin size_f($ll, $l, $m, $s, $ss) {
@@ -46,9 +48,12 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   .ss_font { font-size: $ss; }
 }
 // 正方形の図のサイズを設定する関数
-@mixin size_square($ll, $l, $m, $s) {
-  .ll_square { width: $ll; height: $ll; } .l_square { width: $l; height: $l; }
-  .m_square { width: $m; height: $m; } .s_square { width: $s; height: $s; }
+@mixin size_square($ll, $l, $m, $s, $ss) {
+  .ll_square { width: $ll; height: $ll; }
+  .l_square { width: $l; height: $l; }
+  .m_square { width: $m; height: $m; }
+  .s_square { width: $s; height: $s; }
+  .ss_square { width: $ss; height: $ss; }
 }
 // 長方形の図のサイズを設定する関数
 @mixin size_rect($l, $m, $s, $ss) {
@@ -83,7 +88,7 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 // Extra large
 @media screen and (min-width: 1200px){
   @include size_f(2.0em, 1.5em, 1.1em, 0.9em, 0.8em);
-  @include size_square(150px, 120px, 80px, 50px);
+  @include size_square(150px, 120px, 80px, 55px, 50px);
   @include size_rect(300px, 180px, 130px, 50px);
   @include position_top(-100px, -68px, -38px, -13px);
   @include position_left(120px);
@@ -95,7 +100,7 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 // Large
 @media screen and (max-width: 1199px){
   @include size_f(1.9em, 1.4em, 1.1em, 0.8em, 0.7em);
-  @include size_square(150px, 110px, 70px, 40px);
+  @include size_square(150px, 110px, 70px, 50px, 40px);
   @include size_rect(250px, 170px, 125px, 50px);
   @include position_top(-95px, -62px, -28px, -12px);
   @include position_left(100px);
@@ -107,7 +112,7 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 // Medium
 @media screen and (max-width: 991px){
   @include size_f(1.8em, 1.3em, 1.0em, 0.7em, 0.6em);
-  @include size_square(150px, 100px, 60px, 35px);
+  @include size_square(150px, 100px, 60px, 45px, 35px);
   @include size_rect(200px, 160px, 110px, 50px);
   @include position_top(-90px, -54px, -24px, -11px);
   @include position_left(100px);
@@ -119,7 +124,7 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 // Small
 @media screen and (max-width: 767px){
   @include size_f(1.7em, 1.2em, 0.9em, 0.6em, 0.5em);
-  @include size_square(150px, 90px, 50px, 32px);
+  @include size_square(150px, 90px, 50px, 42px, 32px);
   @include size_rect(100%, 150px, 105px, 50px);
   @include position_top(-85px, -42px, -22px, -10px);
   @include position_left(100px);
@@ -131,7 +136,7 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
 // Extra small
 @media screen and (max-width: 575px){
   @include size_f(1.6em, 1.1em, 0.8em, 0.5em, 0.4em);
-  @include size_square(110px, 70px, 40px, 28px);
+  @include size_square(110px, 70px, 40px, 32px, 28px);
   @include size_rect(100%, 120px, 100px, 50px);
   @include position_top(-65px, -35px, -18px, -10px);
   @include position_left(75px);

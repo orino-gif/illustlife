@@ -3,7 +3,7 @@
     .row
       / シンボルマークとサービス名を表示
       .col-auto.d-flex.align-items-center
-        = link_to image_tag('/img/symbol.png', class: 's_square'), root_path
+        = link_to image_tag('/img/symbol.png', class: 'ss_square'), root_path
       .col-auto
         %span.ll_font
           %strong イラストライフ
@@ -14,7 +14,7 @@
       .col.text-right
         - if user_signed_in?
           ="#{current_user.cre.pfm.point}ポイント"
-          = icon(current_user.cre, 's_square')
+          = icon(current_user.cre, 'ss_square')
         - else
           -# ='キャンペーン!! 9/1～9/16迄'
           -#  %br= '新規登録者様に、1000ポイントプレゼント!!'
