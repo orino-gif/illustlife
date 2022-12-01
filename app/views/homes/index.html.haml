@@ -12,9 +12,8 @@
   .row.ss_m-side
     - if @cres
       - @cres.each.with_index(1) do |cre, index| 
-        - if not cre.user.soft_destroyed?
+        - if (not cre.user.soft_destroyed?) && cre.user.confirmed_at?
           .s_s-pdg.text-center.py-1
-            - if cre.user.confirmed_at?
-              = disp_hdr(cre,'ll_square m_s-border fit_c')
-              .s_font.s_ind= cre.user.nick
+            = disp_hdr(cre,'ll_square m_s-border fit_c')
+            .s_font.s_ind= cre.user.nick
         - break if 30 == index
