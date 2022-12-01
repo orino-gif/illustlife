@@ -25,7 +25,7 @@ module WorksHelper
   def pfm_upd(pfm, req)
     if false == req.work.rework
       pfm.pic += 1
-      pfm.eval += 10
+      pfm.evl += 10
       pfm.sales += req.money
       pfm.wdl += req.money
       req.work.d_time = Time.now

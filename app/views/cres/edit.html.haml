@@ -3,7 +3,7 @@
 .container
   .row.my-5
     = form_with(model: @cre, local:true) do |f|
-      = f.label :hdr, 'ヘッダー：'
+      = f.label :hdr, '私の代表作（※クリエーターは必須）：'
       = f.file_field :hdr
       = f.submit '登録'
     .col

@@ -1,5 +1,6 @@
 class HomesController < ApplicationController
   def index
-    @users = User.order(created_at: 'DESC')
+    @cres = Cre.joins(:pfm).order(evl: 'DESC')
+    p @cres
   end
 end

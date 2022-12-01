@@ -26,7 +26,7 @@ class WorksController < ApplicationController
           @work.req.stts = 'キャンセル'
         end
       when '製作中断'
-        @rx.cre.pfm.eval -= 20
+        @rx.cre.pfm.evl -= 20
         send_msg('quit', @tx, @rx, '作業を中断しました')
       when '納品'
         pfm_upd(@rx.cre.pfm, @req)
