@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_16_133013) do
+ActiveRecord::Schema.define(version: 2022_12_01_031444) do
 
   create_table "cards", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2022_11_16_133013) do
 
   create_table "works", primary_key: "req_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "d_time"
-    t.datetime "in_time"
+    t.boolean "in_time"
     t.boolean "rework", default: false
     t.timestamp "updated_at"
     t.json "images"
