@@ -1,3 +1,3 @@
 class Expor < ApplicationRecord
-  mount_uploader :expo_img, CreUploader
+  mount_uploader :e_img, CreUploader
 end

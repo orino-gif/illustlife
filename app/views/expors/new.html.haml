@@ -1,10 +1,12 @@
-- content_for(:html_title) { 'イラスト晒し' }
-%h1.ll_font.ws_bgc イラスト晒し
+- content_for(:html_title) { '晒し' }
+%h1.ll_font.ws_bgc 晒す
 .container
+  .row
+    %h2.l_font.c_pos 過去絵
   .row.my-2
     .col-md-8.border.border-secondary.c_pos
       = form_with(model: @expor, local:true) do |f|
-        = f.hidden_field :cntri_id, value:params[:id]
-        = f.file_field :expo_img, class:'preview-uploader'
+        = f.hidden_field :user_id, value:params[:id]
+        = f.file_field :e_img, class:'preview-uploader'
         .preview.ws_bgc.m_rect
         = f.submit '晒す'

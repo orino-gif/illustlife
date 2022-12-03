@@ -44,9 +44,10 @@ ActiveRecord::Schema.define(version: 2022_12_01_074409) do
   end
 
   create_table "expors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "cntri_id"
-    t.string "expo_img"
+    t.bigint "user_id"
+    t.string "e_img"
     t.timestamp "created_at"
+    t.index ["user_id"], name: "index_expors_on_user_id"
   end
 
   create_table "pfms", primary_key: "cre_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

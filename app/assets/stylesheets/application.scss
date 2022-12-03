@@ -7,19 +7,22 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-h1 { padding: 0.4em 0.8em; }
-h2 { border-bottom: 3px dotted black;}
+
 // 色変更、下線装飾無し(!importantで優先順位を上げる)
 a { color: steelblue; text-decoration: none !important; }
 body { font-family: 'Kaisei Decol', serif, "メイリオ" ; }
+
+.fit_c { object-fit: cover; }
+ // 画面の中に画像を表示
+.fit_con { object-fit: contain; }
+h1 { padding: 0.4em 0.8em; }
+h2 { border-bottom: 3px dotted black;}
 // ストロングとラベルタグの太字を無効化
 strong, label, th { font-weight: normal; }
 .ws_bgc { background-color: whitesmoke; } 
 .cri_bgc { background-color: crimson; }
  // アスペクト比を維持して表示
-.fit_c { object-fit: cover; }
- // 画面の中に画像を表示
-.fit_con { object-fit: contain; }
+
 // ユーザーヘッダーの小さい通知ボタンのデザイン
 .s_pad { padding: 3px; }
 // 表体のセルの幅の長さを「table全幅/セル数」にする
