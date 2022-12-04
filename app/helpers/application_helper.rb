@@ -1,19 +1,11 @@
 module ApplicationHelper
   def icon(cre, scss)
-    if 'homes'==controller.controller_name or 'req'==controller.controller_name 
-      if cre.icon?
-        link_to image_tag(cre.icon.url,class: "#{scss} rounded-circle fit_c"),
-        cre_path(cre.user_id)
-      else
-        link_to image_tag('/img/mobu.png',class: "#{scss} rounded-circle fit_c"),
-        cre_path(cre.user_id)
-      end
+    if cre.icon?
+      link_to image_tag(cre.icon.url,class: "#{scss} rounded-circle fit_c"),
+      cre_path(cre.user_id)
     else
-      if cre.icon?
-        image_tag(cre.icon.url,class: "#{scss} rounded-circle fit_c")
-      else
-        image_tag('/img/mobu.png',class: "#{scss} rounded-circle fit_c")
-      end
+      link_to image_tag('/img/mobu.png',class: "#{scss} rounded-circle fit_c"),
+      cre_path(cre.user_id)
     end
   end
   
