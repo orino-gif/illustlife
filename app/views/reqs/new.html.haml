@@ -31,7 +31,11 @@
           = f.check_box :nsfw ,{},checked_value="true", unchecked_value="false"
           = f.label :nsfw, 'NSFW'
         %br
-          = f.submit 'リクエスト送信', class:'btn btn-light ss_rect l_font'
+          - if params[:id].to_i == current_user.id.to_i
+            - dis = 'btn btn-light ss_rect l_font disabled'
+          - else
+            - dis = 'btn btn-light ss_rect l_font'
+          = f.submit 'リクエスト送信', class: dis
         %br/
         = hidden_field_tag :tx_id, params[:id]
       %div

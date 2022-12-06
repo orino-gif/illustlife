@@ -23,8 +23,9 @@
       .col.text-right
         - if user_signed_in?
           -if 'homes' != controller.controller_name
-            %button.btn.btn-light.m_font= link_to 'リクエスト', reqs_path
-            %button.btn.btn-light.m_font= link_to '売上',
+            - if 0 < current_user.cre.pfm.pic
+              %button.btn.btn-light.m_font= link_to '実績', reqs_path
+            %button.btn.btn-light.m_font= link_to '晒す',
             "/cres/#{current_user.id}/earning"
             - if ENV['ADMIN'] == current_user.email
               %button.btn.btn-light= link_to 'アカウント編集',
@@ -35,7 +36,10 @@
             %button.btn.btn-light.m_font= link_to 'ログアウト',
             destroy_user_session_path, method: "delete"
         - else
+          - if not devise_controller?
+            %button.btn.btn-lightl.m_font= link_to '晒す',
+            new_user_session_path
+            %button.btn.btn-light.m_font= link_to 'ログイン',
+            new_user_session_path
           %button.btn.btn-light.m_font= link_to '新規登録',
           new_user_registration_path
-          %button.btn.btn-light.m_font= link_to 'ログイン',
-          new_user_session_path
