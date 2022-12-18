@@ -1,4 +1,8 @@
 class ExporsController < ApplicationController
+  def index
+    @expors = Expor.find_by(user_id: current_user.id)
+  end
+  
   def new
     @expor = Expor.new
   end
@@ -6,8 +10,12 @@ class ExporsController < ApplicationController
   def create
     @expor = Expor.new(expors_params)
     if @expor.save
-      redirect_to root_path, notice: '晒しました'
+      redirect_to cre_path(@expor.user_id), notice: '晒しました'
     end
+  end
+  
+  def show
+    @expor = Expor.find_by(id: params[:id])
   end
   
   private

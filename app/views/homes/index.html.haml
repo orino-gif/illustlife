@@ -4,21 +4,19 @@
   - if Rails.env.development?
     .row
       %h2.l_font イラスト晒し
-    .row
+    .row.ss_m-side
       - exte = 'll_square fit_c m_s-border'
       = link_to image_tag('/img/mobu.png', class: exte), '/mangas/1/illustlifes'
-      
     .row
       %h2.l_font 晒された作品
     .row.ss_m-side
-    - if @expors
-      - @expors.each.with_index(1) do |expor, index| 
-        .s_s-pdg.py-1
-          = link_to image_tag(expor.e_img.url, class: exte),
-          expor_path(expor.user_id)
-          .s_font.s_ind.text-center= User.find(expor.user_id).nick
-        - break if 30 == index
-      
+      - if @expors
+        - @expors.each.with_index(1) do |expor, index|
+          .s_pdg.text-center.py-1
+            = link_to image_tag(expor.e_img.url, class: exte),
+            expor_path(expor.id)
+            .s_font.s_ind.text-center= User.find(expor.user_id).nick
+          - break if 30 == index
   .row
     %h2.l_font クリエイター
   .row.ss_m-side
@@ -26,8 +24,8 @@
       - @cres.each.with_index(1) do |cre, index| 
         - if (not cre.user.soft_destroyed?) && cre.user.confirmed_at?
           - if cre.hdr?
-            .s_s-pdg.text-center.py-1
-              = disp_hdr(cre,'ll_square m_s-border fit_c')
+            .s_pdg.text-center.py-1
+              = disp_hdr(cre, exte)
               .s_font.s_ind= cre.user.nick
               = icon(cre, 's_square on_hdr')
         - break if 30 == index
@@ -38,8 +36,8 @@
       - @cres.each.with_index(1) do |cre, index| 
         - if (not cre.user.soft_destroyed?) && cre.user.confirmed_at?
           - if not cre.hdr?
-            .s_s-pdg.text-center.py-1
-              = disp_hdr(cre,'ll_square m_s-border fit_c')
+            .s_pdg.text-center.py-1
+              = disp_hdr(cre, exte)
               .s_font.s_ind= cre.user.nick
               = icon(cre, 's_square on_hdr')
         - break if 30 == index

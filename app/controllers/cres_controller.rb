@@ -2,6 +2,7 @@ class CresController < ApplicationController
   before_action :set_cre, only: [:show, :edit, :earning, :update]
   def show
     @reqs = Req.where(rx_id: params[:id], stts: '納品')
+    @expors = Expor.where(user_id: params[:id])
   end
   def edit
     @sttg = Sttg.find_by(cre_id: params[:id])
@@ -13,9 +14,7 @@ class CresController < ApplicationController
     end
   end
   def earning 
-    if @wdl_status.nil?
-      @wdl_status = '引き落とし申請前'
-    end
+    if @wdl_status.nil?; @wdl_status = '引き落とし申請前';end
     if '引き落とし内容確認' == params[:wdl_status]
       if @cre.pfm.wdl > 0
         @wdl_status = '引き落とし内容確認'
@@ -27,6 +26,7 @@ class CresController < ApplicationController
       UserMailer.wdl(@cre).deliver_later; sleep(5); @cre.pfm.wdl=0; @cre.save
     end
   end
+  
   def update
     if @cre.update(cres_params)
       if params[:acept_req]
@@ -43,7 +43,7 @@ class CresController < ApplicationController
       if @cre.errors.full_messages[0].include?("amount")
         flash.now[:alert] = "金額入力の数値が範囲外です" 
       elsif @cre.errors.full_messages[0].include?("whitelist_error")
-        flash.now[:alert] = "非対応のファイル形式です(対応:png,jpg,jpeg,gif)"
+        flash.now[:alert] = "非対応のファイル形式です(対応:png,jpg,jpeg,gif)" 
       end
       render :edit
     end

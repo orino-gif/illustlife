@@ -26,7 +26,7 @@
             - if 0 < current_user.cre.pfm.pic
               %button.btn.btn-light.m_font= link_to '実績', reqs_path
             %button.btn.btn-light.m_font= link_to '晒す',
-            "/cres/#{current_user.id}/earning"
+            "/expors/#{current_user.id}/new"
             - if ENV['ADMIN'] == current_user.email
               %button.btn.btn-light= link_to 'アカウント編集',
               edit_cre_path(params[:id])
@@ -35,6 +35,7 @@
               edit_cre_path(current_user.id)
             %button.btn.btn-light.m_font= link_to 'ログアウト',
             destroy_user_session_path, method: "delete"
+            
         - else
           - if not devise_controller?
             %button.btn.btn-lightl.m_font= link_to '晒す',

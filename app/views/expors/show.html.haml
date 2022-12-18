@@ -1,2 +1,6 @@
-%h1 Exposures#show
-%p Find me in app/views/exposures/show.html.haml
+- content_for(:html_title) { '晒した絵' }
+%h1.ll_font.ws_bgc 晒した絵
+.container
+  .row
+    - if @expor
+      = image_tag(@expor.e_img.url, class:'fit_c')

@@ -1,0 +1,10 @@
+= 'アカウント情報：'
+%table.table
+  %tr
+    %td="Eメール：#{@cre.user.email}"
+  %tr
+    %td="ニックネーム：#{@cre.user.nick}"
+  %tr
+    %td='在籍 or 退会：在籍'
+  %td
+    = button_to '変更', edit_user_registration_path, method: :get
