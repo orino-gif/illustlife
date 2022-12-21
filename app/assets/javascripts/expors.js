@@ -18,3 +18,33 @@ $(document).on("change",".preview-uploader",function(){
       $(elem).next(".preview").html(imgTag)
     });
 })
+
+$(function () {
+  $('.g_text').hide();
+  $('.preview-uploader, .preview').hide();
+    // ラジオボタンを選択変更したら実行
+    $('input[name="expor[kind]"]').change(function () {
+        var val = $(this).val();
+        if (val == 'キャラデザ(文字)'){
+          console.log(val);
+          $('.g_text').show();
+          $('.preview-uploader, .preview').hide();
+        } else if (val == 'キャラデザ(ラフ)'){
+          $('.g_text').hide();
+          $('.preview-uploader, .preview').show();
+          console.log(val);
+        }else if (val == 'ラフ'){
+          $('.g_text').hide();
+          $('.preview-uploader, .preview').show();
+          console.log(val);
+        } else if (val == 'プロット'){
+          $('.g_text').show();
+          $('.preview-uploader, .preview').hide();
+          console.log(val);
+        } else if (val == 'ネーム'){
+          $('.g_text').hide();
+          $('.preview-uploader, .preview').show();
+          console.log(val);
+        }
+    });
+});

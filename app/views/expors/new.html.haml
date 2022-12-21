@@ -1,12 +1,45 @@
 - content_for(:html_title) { '晒し' }
-%h1.ll_font.ws_bgc 晒す
+
+%h1.ll_font.ws_bgc 晒す作品
+
 .container
   .row
-    %h2.l_font.c_pos 過去絵
+    %h2.l_font 内容
   .row.my-2
-    .col-md-8.border.border-secondary.c_pos
+    .col-md-8.border.border-secondary
       = form_with(model: @expor, local:true) do |f|
         = f.hidden_field :user_id, value:params[:id]
+        = '工程:'
+        %br
+        = f.radio_button :kind, :'キャラデザ(文字)'
+        = f.label :kind, 'キャラデザ(文字)', {value: :'キャラデザ(文字)'}
+        = f.radio_button :kind, :'キャラデザ(ラフ)'
+        = f.label :kind, 'キャラデザ(ラフ)', {value: :'キャラデザ(ラフ)'}
+        = f.radio_button :kind, :'ラフ'
+        = f.label :kind, 'ラフ', {value: :'ラフ'}
+        %br
+        = f.radio_button :kind, :'プロット'
+        = f.label :kind, 'プロット', {value: :'プロット'}
+        = f.radio_button :kind, :'ネーム'
+        = f.label :kind, 'ネーム', {value: :'ネーム'}
+        %br
+        = f.label '<テキスト>', class:'g_text'
+        = f.text_field :gist, class:'g_text m_rect'
+        %br
+        = f.label '<画像>', class:'preview'
         = f.file_field :e_img, class:'preview-uploader'
         .preview.ws_bgc.m_rect
+        
+        %br
+        = '希望:'
+        %br
+        = f.radio_button :hope, :'添削', class:'corr'
+        = f.label '添削', class:'corr'
+        = f.radio_button :hope, :'コラボ', class:'collab'
+        = f.label 'コラボ'
+        = f.radio_button :hope, :'線画', class:'line'
+        = f.label :hope, '線画', {value: :'線画'}
+        = f.radio_button :hope, :'着彩', class:'coloring'
+        = f.label :hope, '着彩', {value: :'着彩'}
+        %br
         = f.submit '晒す'

@@ -8,8 +8,9 @@
     .row
       - if @expors
         - @expors.reverse_each do |expor|
-          = link_to image_tag(expor.e_img.url,
-          class:'ll_square fit_c m_s-border'),"/expors/#{expor.id}"
+          .s_pdg.text-center.py-1
+            = link_to image_tag(expor.e_img.url,
+            class:'ll_square fit_c m_s-border'),"/expors/#{expor.id}"
       - else
         = 'なし'
   - if not @reqs.blank?

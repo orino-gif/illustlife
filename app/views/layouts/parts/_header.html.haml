@@ -25,7 +25,8 @@
           -if 'homes' != controller.controller_name
             - if 0 < current_user.cre.pfm.pic
               %button.btn.btn-light.m_font= link_to '実績', reqs_path
-            %button.btn.btn-light.m_font= link_to '晒す',
+            - d_turbo = "data-turbolinks"
+            %button.btn.btn-light.m_font{d_turbo => "false"}= link_to '晒す',
             "/expors/#{current_user.id}/new"
             - if ENV['ADMIN'] == current_user.email
               %button.btn.btn-light= link_to 'アカウント編集',
@@ -38,7 +39,7 @@
             
         - else
           - if not devise_controller?
-            %button.btn.btn-lightl.m_font= link_to '晒す',
+            %button.btn.btn-light.m_font= link_to '晒す',
             new_user_session_path
             %button.btn.btn-light.m_font= link_to 'ログイン',
             new_user_session_path

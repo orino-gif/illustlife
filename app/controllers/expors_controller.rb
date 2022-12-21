@@ -21,6 +21,6 @@ class ExporsController < ApplicationController
   private
 
   def expors_params
-    params.require(:expor).permit(:user_id, :e_img)
+    params.require(:expor).permit(:user_id, :e_img, :kind, :hope, :fee)
   end
 end

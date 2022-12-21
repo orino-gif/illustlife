@@ -40,14 +40,16 @@ strong, label, th { font-weight: normal; }
 .slick-arrow:before { font-size: 50px!important; color: whitesmoke!important; }
 // 画像の上にSAMPLE文字を表示
 p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
-  transform: translate(40%,-290%); font-size: 40px; margin:0; opacity: 0.5; }
+  transform: translate(40%,-290%); font-size: 40px; margin: 0; opacity: 0.5; }
 // 画像の上にアイコンを表示
 .on_hdr { position: relative; top: -34%; left: -31%; }
 
 // 文字の大きさを設定する関数 
 @mixin size_f($ll, $l, $m, $s, $ss) {
-  .ll_font { font-size: $ll; } .l_font { font-size: $l; }
-  .m_font { font-size: $m; } .s_font { font-size: $s; }
+  .ll_font { font-size: $ll; }
+  .l_font { font-size: $l; }
+  .m_font { font-size: $m; }
+  .s_font { font-size: $s; }
   .ss_font { font-size: $ss; }
 }
 // 正方形の図のサイズを設定する関数
@@ -66,16 +68,20 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   .ss_rect { width: 100%; height: $ss; }
 }
 // 配置の縦の空白の長さを設定する関数
-@mixin position_top($l, $m, $short, $Xshort) {
+@mixin position_top($l, $m, $s, $ss) {
   .l_ta-pos { position: absolute; top: $l; }
   .m_ta-pos { position: absolute; top: $m; }
-  .s_ta-pos { position: absolute; top: $short; }
-  .ss_ta-pos { position: absolute; top: $Xshort; }
+  .s_ta-pos { position: absolute; top: $s; }
+  .ss_ta-pos { position: absolute; top: $ss; }
 }
 // 配置の左の空白の長さを設定する関数
-@mixin position_left($m){.m_lr-pos { position: relative; left: $m; }}
+@mixin position_left($m){
+  .m_lr-pos { position: relative; left: $m; }
+}
 // 配置の右の空白の長さを設定する関数
-@mixin position_right($m) {.m_rr-pos { position: relative; right: $m; }}
+@mixin position_right($m) {
+  .m_rr-pos { position: relative; right: $m; }
+}
 // 文字がコンテンツからあふれた場合に改行させる関数
 @mixin string_indention($s, $m, $l) {
   .s_ind { word-wrap: break-word; width: $s; }
