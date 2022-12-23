@@ -10,7 +10,7 @@ class ExporsController < ApplicationController
   def create
     @expor = Expor.new(expors_params)
     if @expor.save
-      redirect_to cre_path(@expor.user_id), notice: '晒しました'
+      redirect_to expors_path(@expor.user_id), notice: '晒しました'
     end
   end
   
@@ -21,6 +21,6 @@ class ExporsController < ApplicationController
   private
 
   def expors_params
-    params.require(:expor).permit(:user_id, :e_img, :kind, :hope, :fee)
+    params.require(:expor).permit(:user_id, :e_img, :kind, :hope, :fee, :gist)
   end
 end

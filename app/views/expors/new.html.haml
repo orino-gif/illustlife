@@ -1,7 +1,5 @@
 - content_for(:html_title) { '晒し' }
-
 %h1.ll_font.ws_bgc 晒す作品
-
 .container
   .row
     %h2.l_font 内容
@@ -9,37 +7,74 @@
     .col-md-8.border.border-secondary
       = form_with(model: @expor, local:true) do |f|
         = f.hidden_field :user_id, value:params[:id]
-        = '工程:'
+        = '現在の工程:'
         %br
-        = f.radio_button :kind, :'キャラデザ(文字)'
-        = f.label :kind, 'キャラデザ(文字)', {value: :'キャラデザ(文字)'}
-        = f.radio_button :kind, :'キャラデザ(ラフ)'
-        = f.label :kind, 'キャラデザ(ラフ)', {value: :'キャラデザ(ラフ)'}
+        = '<イラスト>'
+        = f.radio_button :kind, :'キャラデザ'
+        = f.label :kind, 'キャラデザ・背景(文字)'
+        = f.radio_button :kind, :'構図'
+        = f.label :kind, '構図'
         = f.radio_button :kind, :'ラフ'
-        = f.label :kind, 'ラフ', {value: :'ラフ'}
+        = f.label :kind, 'ラフ'
+        = f.radio_button :kind, :'線画'
+        = f.label :kind, '線画'
+        = f.radio_button :kind, :'塗り(色分け)'
+        = f.label :kind, '塗り(色分け)'
         %br
+        = '<漫画>'
         = f.radio_button :kind, :'プロット'
-        = f.label :kind, 'プロット', {value: :'プロット'}
+        = f.label :kind, 'プロット'
         = f.radio_button :kind, :'ネーム'
-        = f.label :kind, 'ネーム', {value: :'ネーム'}
+        = f.label :kind, 'ネーム'
+        = f.radio_button :kind, :'下書き'
+        = f.label :kind, '下書き'
+        = f.radio_button :kind, :'ペン入れ'
+        = f.label :kind, 'ペン入れ'
         %br
         = f.label '<テキスト>', class:'g_text'
         = f.text_field :gist, class:'g_text m_rect'
         %br
-        = f.label '<画像>', class:'preview'
-        = f.file_field :e_img, class:'preview-uploader'
-        .preview.ws_bgc.m_rect
-        
+        = f.label '画像:', class:'p_img'
+        = f.file_field :e_img, class:'p_img preview-uploader'
+        .p_img.ws_bgc.m_rect
         %br
         = '希望:'
         %br
+        = f.radio_button :hope, :'自分で次工程', class:'myself'
+        = f.label '自分で次の工程へ(+5pt)', class:'myself'
+        %br
+        = f.radio_button :hope, :'構図', class:'comp'
+        = f.label '構図', class:'comp'
+        = f.radio_button :hope, :'ラフ', class:'rough'
+        = f.label 'ラフ', class:'rough'
+        = f.radio_button :hope, :'線画', class:'line'
+        = f.label '線画', class:'line'
+        = f.radio_button :hope, :'塗り(色分け)', class:'coding'
+        = f.label '塗り(色分け)', class:'coding'
+        = f.radio_button :hope, :'塗り(着色)', class:'coloring'
+        = f.label '塗り(着色)', class:'coloring'
+        = f.radio_button :hope, :'ネーム', class:'d_name'
+        = f.label 'ネーム', class:'d_name'
+        = f.radio_button :hope, :'下書き', class:'draft'
+        = f.label '下書き', class:'draft'
+        = f.radio_button :hope, :'ペン入れ', class:'p_draw'
+        = f.label 'ペン入れ', class:'p_draw'
+        = f.radio_button :hope, :'ベタ塗り', class:'s_paint'
+        = f.label 'ベタ塗り、トーン貼り、仕上げ', class:'s_paint'
         = f.radio_button :hope, :'添削', class:'corr'
         = f.label '添削', class:'corr'
         = f.radio_button :hope, :'コラボ', class:'collab'
-        = f.label 'コラボ'
-        = f.radio_button :hope, :'線画', class:'line'
-        = f.label :hope, '線画', {value: :'線画'}
-        = f.radio_button :hope, :'着彩', class:'coloring'
-        = f.label :hope, '着彩', {value: :'着彩'}
+        = f.label 'コラボ', class:'collab'
         %br
-        = f.submit '晒す'
+        = '謝礼:'
+        %br
+        = f.number_field :fee, min:0, step:10
+        = 'pt'
+        %br
+        = f.submit '晒す', class:"btn btn-light l_font my-5 ss_rect"
+        = "以下の文に同意できる方のみ実行してください"
+        %br
+          = '・「自分で次の工程へ」以外は、他者が上書きする事を承認します。'
+        = '・著作権は、現在の工程の発信者にあります。'
+        %br
+        .my-5
