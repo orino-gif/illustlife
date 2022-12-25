@@ -15,7 +15,7 @@ $(document).on("change",".preview-uploader",function(){
       `<img class="fit_con m_rect"
       $Xlarge; src='${fileReader.result}'>`
       //画像をプレビュー
-      $(elem).next(".preview").html(imgTag)
+      $(elem).next(".p_img").html(imgTag)
     });
 })
 

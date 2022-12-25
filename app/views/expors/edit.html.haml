@@ -20,9 +20,19 @@
               = f.label :fee,  "謝礼:"
               = f.text_field :fee, :size => '10'
               = 'pt'
-          %tr
-            %td= image_tag(@expor.e_img.url, class:'fit_c')
-            = f.file_field :e_img, class:'p_img preview-uploader'
-            .p_img.ws_bgc.m_rect
-            
+          - if @expor.e_img?
+            %tr
+              %td
+                = image_tag(@expor.e_img.url, class:'fit_c')
+            %tr
+              %td
+                = f.label '変更する画像:', class:'p_img'
+                = f.file_field :e_img, class:'p_img preview-uploader'
+                .p_img.ws_bgc.m_rect
+          - else
+            %tr
+              %td
+                = f.label :gist,  "テキスト内容:"
+                = f.text_area :gist, :size => '40X80'
+              
         = f.submit '更新', class:"btn btn-light"

@@ -1,6 +1,8 @@
 - content_for(:html_title) { '晒した絵' }
-%h1.ll_font.ws_bgc 晒した絵
+%h1.ll_font.ws_bgc 晒した作品
 .container
   .row
-    - if @expor
+    - if @expor.e_img?
       = image_tag(@expor.e_img.url, class:'fit_c')
+    - else
+      = @expor.gist
