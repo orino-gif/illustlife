@@ -1,6 +1,6 @@
 class ExporsController < ApplicationController
   def index
-    @expors = Expor.find_by(user_id: current_user.id)
+    @expors = Expor.where(user_id: current_user.id)
   end
   
   def new
@@ -16,6 +16,17 @@ class ExporsController < ApplicationController
   
   def show
     @expor = Expor.find_by(id: params[:id])
+  end
+  
+  def edit
+    @expor = Expor.find_by(id: params[:id])
+  end
+  
+  def update
+    @expor = Expor.find_by(id:params[:id])
+    if @expor.update(expors_params)
+      redirect_to expors_path, notice: '更新しました。'
+    end
   end
   
   private

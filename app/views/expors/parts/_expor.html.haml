@@ -1,0 +1,15 @@
+/ 表体を表示
+.row.my-5
+  / セル幅を「table全幅/セル数」に
+  %table.fixed_col
+    %tr
+      / セルからはみ出した文字を隠す
+      %td.hdn_over="#{@expor.kind}"
+      - if @expor.e_img
+        %td.hdn_over= image_tag @expor.e_img.url, class:'ss_rect'
+      - else
+        %td.hdn_over="#{@expor.gist}"
+      %td.hdn_over= "#{@expor.hope}"
+      %td.hdn_over= "#{@expor.fee}"
+      %td
+        %button.btn.btn-light.m_font= link_to '編集', edit_expor_path(@expor.id)

@@ -1,3 +1,20 @@
-- content_for(:html_title) { '晒す' }
-%h1.ll_font.ws_bgc 晒す
+- content_for(:html_title) { '晒した作品' }
+%h1.ll_font.ws_bgc 晒した作品
 .container
+  .row
+    %button.btn.btn-light.m_font{"data-turbolinks" => "false"}= link_to '追加',
+    "/expors/#{current_user.id}/new"
+  / 表題
+  .row
+    - if @expors
+      %table.table.fixed_col
+        %tr
+          %th="現在の工程"
+          %th="内容"
+          %th="希望"
+          %th="謝礼(pt)"
+          %th=""
+      / 表体
+      - @expors.reverse_each.with_index(1) do |expor|
+        - @expor = expor
+        = render 'expors/parts/expor.html'

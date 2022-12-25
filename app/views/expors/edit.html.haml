@@ -1,0 +1,28 @@
+- content_for(:html_title) { '編集' }
+%h1.ll_font.ws_bgc 編集
+.container
+  .row
+    - if @expor
+      = form_with(model: @expor, local:true) do |f|
+        %table.table
+          %tr
+            %td
+              = f.label :kind,  "工程:"
+              = f.select :kind,
+              [["キャラデザ・背景(文字)"], ["構図"]], include_blank: @expor.kind
+          %tr
+            %td
+              = f.label :hope,  "希望:"
+              = f.select :hope,
+              [["線画"], ["構図"]], include_blank: @expor.hope
+          %tr
+            %td
+              = f.label :fee,  "謝礼:"
+              = f.text_field :fee, :size => '10'
+              = 'pt'
+          %tr
+            %td= image_tag(@expor.e_img.url, class:'fit_c')
+            = f.file_field :e_img, class:'p_img preview-uploader'
+            .p_img.ws_bgc.m_rect
+            
+        = f.submit '更新', class:"btn btn-light"
