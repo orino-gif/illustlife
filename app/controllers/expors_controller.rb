@@ -1,4 +1,5 @@
 class ExporsController < ApplicationController
+  include ApplicationHelper
   def index
     @expors = Expor.where(user_id: current_user.id)
   end
@@ -26,6 +27,13 @@ class ExporsController < ApplicationController
     @expor = Expor.find_by(id:params[:id])
     if @expor.update(expors_params)
       redirect_to expors_path, notice: '更新しました。'
+    end
+  end
+  
+  def destroy
+    @expor = Expor.find_by(id: params[:id])
+    if @expor.delete
+      noti('削除しました')
     end
   end
   

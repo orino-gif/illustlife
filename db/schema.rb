@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_19_082520) do
+ActiveRecord::Schema.define(version: 2022_12_25_232338) do
 
   create_table "cards", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
@@ -51,7 +51,16 @@ ActiveRecord::Schema.define(version: 2022_12_19_082520) do
     t.string "hope"
     t.integer "fee"
     t.text "gist"
+    t.timestamp "updated_at"
     t.index ["user_id"], name: "index_expors_on_user_id"
+  end
+
+  create_table "ovrs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "expor_id"
+    t.string "o_img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expor_id"], name: "index_ovrs_on_expor_id"
   end
 
   create_table "pfms", primary_key: "cre_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

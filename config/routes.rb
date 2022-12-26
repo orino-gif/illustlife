@@ -23,7 +23,10 @@ Rails.application.routes.draw do
     collection do; get '/:id/new', to: 'crs#new'; end
   end
   resources :expls, only: [:index, :new, :create]
-  resources :expors, only: [:index, :create, :show, :edit, :update] do
+  resources :expors, only: [:index, :create, :show, :edit, :update, :destroy] do
+    resources :ovrs, only: [:index, :create, :show, :edit] do 
+      collection do; get '/:id/new', to: 'ovrs#new'; end
+    end
     collection do; get '/:id/new', to: 'expors#new'; end
   end
   resources :homes, only: [:index] do

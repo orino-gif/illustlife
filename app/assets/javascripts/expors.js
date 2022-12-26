@@ -2,21 +2,21 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on("change",".preview-uploader",function(){
-    //操作された要素を取得
-    let elem = this
-    //ファイルを読み取るオブジェクトを生成
-    let fileReader = new FileReader();
-    //ファイルを読み取る
-    fileReader.readAsDataURL(elem.files[0]);
-    //ファイル読み取りが完了したら
-    fileReader.onload = (function () {
-      //img要素を生成
-      let imgTag = 
-      `<img class="fit_con m_rect"
-      $Xlarge; src='${fileReader.result}'>`
-      //画像をプレビュー
-      $(elem).next(".p_img").html(imgTag)
-    });
+  //操作された要素を取得
+  let elem = this
+  //ファイルを読み取るオブジェクトを生成
+  let fileReader = new FileReader();
+  //ファイルを読み取る
+  fileReader.readAsDataURL(elem.files[0]);
+  //ファイル読み取りが完了したら
+  fileReader.onload = (function () {
+    //img要素を生成
+    let imgTag = 
+    `<img class="fit_con m_rect"
+    $Xlarge; src='${fileReader.result}'>`
+    //画像をプレビュー
+    $(elem).next(".p_img").html(imgTag)
+  });
 })
 
 $(function () {
@@ -32,7 +32,7 @@ $(function () {
     else if ('プロット' == pro){ showHope('d_name');}
     else if ('ネーム' == pro){ showHope('draft');}
     else if ('下書き' == pro){ showHope('p_draw');}
-    else if ('ペン入れ' == pro){ showHope('s_paint');} 
+    else if ('ペン入れ' == pro){ showHope('s_paint');}
   });
   $('input[name="expor[hope]"]').change(function () {
     var hope = $(this).val();

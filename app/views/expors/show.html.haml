@@ -1,8 +1,12 @@
-- content_for(:html_title) { '晒した絵' }
+- content_for(:html_title) { '晒した作品' }
 %h1.ll_font.ws_bgc 晒した作品
 .container
   .row
-    - if @expor.e_img?
-      = image_tag(@expor.e_img.url, class:'fit_c')
-    - else
-      = @expor.gist
+    .col5
+      - if @expor.e_img?
+        = image_tag(@expor.e_img.url, class:'l_rect fit_c')
+      - else
+        = @expor.gist
+  .row
+    %button.btn.btn-light.m_font= link_to @expor.hope,
+    "/expors/#{@expor.id}/ovrs/#{@expor.id}/new"

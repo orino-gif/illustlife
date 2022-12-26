@@ -15,3 +15,5 @@
       %td
         %button.btn.btn-light.m_font{d_turbo => "false"}= link_to '編集',
         edit_expor_path(@expor.id)
+      %td
+        %button.btn.btn-light.m_font= link_to '削除', expor_path(@expor.id), method: :delete

@@ -1,0 +1,18 @@
+- content_for(:html_title) { '上書き' }
+%h1.ll_font.ws_bgc 上書きする作品
+.container
+  .row
+    .col5
+      - if @expor.e_img?
+        = image_tag(@expor.e_img.url, class:'l_rect fit_c')
+      - else
+        = @expor.gist
+  .row
+    = form_with(model: @ovr,url: expor_ovrs_path, local:true) do |f|
+      = f.label '上書きする画像:', class:'o_img'
+      = f.file_field :o_img, class:'o_img preview-uploader'
+      .o_img.ws_bgc.m_rect
+      = f.hidden_field :expor_id, :value => @expor.id
+      = hidden_field_tag :expor_id, @expor.id
+      = f.submit '上書き', class:"btn btn-light"
+    

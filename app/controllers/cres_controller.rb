@@ -43,7 +43,7 @@ class CresController < ApplicationController
       if @cre.errors.full_messages[0].include?("amount")
         flash.now[:alert] = "金額入力の数値が範囲外です" 
       elsif @cre.errors.full_messages[0].include?("whitelist_error")
-        flash.now[:alert] = "非対応のファイル形式です(対応:png,jpg,jpeg,gif)" 
+        flash.now[:alert] = "非対応のファイル形式です(対応:png,jpg,jpeg,gif)"
       end
       render :edit
     end

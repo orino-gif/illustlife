@@ -1,0 +1,17 @@
+- content_for(:html_title) { '工程の流れ' }
+%h1.ll_font.ws_bgc 工程の流れ
+.container
+  .row
+    .col5
+      - if @expor.e_img?
+        = image_tag(@expor.e_img.url, class:'l_rect fit_c')
+      - else
+        = @expor.gist
+      = @expor.kind
+  
+  .row
+    = '↓'
+  .row
+    .col5
+      - if @ovr.o_img?
+        = image_tag(@ovr.o_img.url, class:'l_rect fit_c')
