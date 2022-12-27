@@ -6,7 +6,7 @@
     .row
       %h2.l_font 晒した作品
     .row
-      - if @expors
+      - if not @expors.blank?
         - @expors.reverse_each do |expor|
           - if expor.e_img?
             .s_pdg.text-center.py-1

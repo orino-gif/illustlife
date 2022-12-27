@@ -19,7 +19,7 @@ class ExporsController < ApplicationController
       end
       pfm.save
       if @expor.save
-        redirect_to expors_path(@expor.user_id), notice: '晒しました'
+        redirect_to root_path notice: '晒しました'
       end
     elsif pfm.point < @expor.fee
       alt('ポイントが足りません')

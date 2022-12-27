@@ -35,9 +35,6 @@ class OvrsController < ApplicationController
       redirect_to ovrs_path, notice: '更新しました。'
     end
   end
-  
-  
-  
   private
 
   def ovrs_params
