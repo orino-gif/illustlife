@@ -34,10 +34,12 @@ $(function () {
     else if ('下書き' == pro){ showHope('p_draw');}
     else if ('ペン入れ' == pro){ showHope('s_paint');}
   });
+  $('input[value="次工程"]', $(this)).prop('checked', true);
+  $("#expor_fee").prop("disabled", true);
   $('input[name="expor[hope]"]').change(function () {
     var hope = $(this).val();
     console.log(hope);
-    if ('自分で次工程' == hope){$("#expor_fee").prop("disabled", true);}
+    if ('次工程' == hope){$("#expor_fee").prop("disabled", true);}
     else{$("#expor_fee").prop("disabled", false);}
   });
 });

@@ -8,6 +8,9 @@
       - else
         = @expor.gist
   .row
+    = button_to('ダウンロード',download_expor_ovrs_path(@expor.id),
+    {method: :get, params:{expor_id: params[:id]}})
+  .row
     = form_with(model: @ovr,url: expor_ovrs_path, local:true) do |f|
       = f.label '上書きする画像:', class:'o_img'
       = f.file_field :o_img, class:'o_img preview-uploader'

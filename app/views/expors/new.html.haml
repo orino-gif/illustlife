@@ -11,7 +11,7 @@
         %br
         = '<イラスト>'
         = f.radio_button :kind, :'キャラデザ'
-        = f.label :kind, 'キャラデザ・背景(文字)'
+        = f.label :kind, 'キャラデザと背景(文字)'
         = f.radio_button :kind, :'構図'
         = f.label :kind, '構図'
         = f.radio_button :kind, :'ラフ'
@@ -20,6 +20,10 @@
         = f.label :kind, '線画'
         = f.radio_button :kind, :'塗り(色分け)'
         = f.label :kind, '塗り(色分け)'
+        = f.radio_button :kind, :'塗り(着色)'
+        = f.label :kind, '塗り(着色)'
+        = f.radio_button :kind, :'納品'
+        = f.label :kind, '納品'
         %br
         = '<漫画>'
         = f.radio_button :kind, :'プロット'
@@ -30,6 +34,10 @@
         = f.label :kind, '下書き'
         = f.radio_button :kind, :'ペン入れ'
         = f.label :kind, 'ペン入れ'
+        = f.radio_button :kind, :'ベタ塗り、トーン貼り'
+        = f.label :kind, 'ベタ塗り、トーン貼り'
+        = f.radio_button :kind, :'仕上げ(完成)'
+        = f.label :kind, '仕上げ(完成)'
         %br
         = f.label '<テキスト>', class:'g_text'
         = f.text_field :gist, class:'g_text m_rect'
@@ -40,9 +48,11 @@
         %br
         = '希望:'
         %br
-        = f.radio_button :hope, :'自分で次工程', class:'myself'
-        = f.label '自分で次の工程へ(+5pt)', class:'myself'
+        ='<自分で>'
+        = f.radio_button :hope, :'次工程', class:'myself'
+        = f.label '次の工程へ(+5pt)', class:'myself'
         %br
+        ='<他者へ>'
         = f.radio_button :hope, :'構図', class:'comp'
         = f.label '構図', class:'comp'
         = f.radio_button :hope, :'ラフ', class:'rough'
@@ -68,7 +78,7 @@
         %br
         = '謝礼:'
         %br
-        = f.number_field :fee, min:0, step:10
+        = f.number_field :fee, value:0, min:0, step:1, class:'text-right'
         = 'pt'
         %br
         = f.submit '晒す', class:"btn btn-light l_font my-5 ss_rect"

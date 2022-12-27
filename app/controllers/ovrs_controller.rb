@@ -1,5 +1,6 @@
 class OvrsController < ApplicationController
   include ApplicationHelper
+  include OvrsHelper
   def index
   end
   
@@ -24,12 +25,18 @@ class OvrsController < ApplicationController
     @ovr = Ovr.find_by(id: params[:id])
   end
   
+  def download
+    expor(params[:expor_id])
+  end
+  
   def update
     @ovr = Ovr.find_by(id:params[:id])
     if @ovr.update(ovrs_params)
       redirect_to ovrs_path, notice: '更新しました。'
     end
   end
+  
+  
   
   private
 

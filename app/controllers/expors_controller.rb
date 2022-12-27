@@ -10,8 +10,19 @@ class ExporsController < ApplicationController
   
   def create
     @expor = Expor.new(expors_params)
-    if @expor.save
-      redirect_to expors_path(@expor.user_id), notice: '晒しました'
+    pfm = Pfm.find_by(cre_id: current_user.id)
+    if '自分で次工程' == @expor.hope || pfm.point >= @expor.fee
+      if '自分で次工程' == @expor.hope
+        pfm.point += 5
+      elsif 0 < @expor.fee || pfm.point <= @expor.fee
+        pfm.point -= @expor.fee
+      end
+      pfm.save
+      if @expor.save
+        redirect_to expors_path(@expor.user_id), notice: '晒しました'
+      end
+    elsif pfm.point < @expor.fee
+      alt('ポイントが足りません')
     end
   end
   

@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     end
   end
   resources :cres, only: [:show, :edit, :update] do
-    collection do; get '/:id/earning', to: 'cres#earning'; end
+    collection do;
+      get '/:id/earning', to: 'cres#earning';
+    end
   end
   resources :crs, only: [:show, :update] do
     collection do; get '/:id/new', to: 'crs#new'; end
@@ -26,14 +28,12 @@ Rails.application.routes.draw do
   resources :expors, only: [:index, :create, :show, :edit, :update, :destroy] do
     resources :ovrs, only: [:index, :create, :show, :edit] do 
       collection do; get '/:id/new', to: 'ovrs#new'; end
+      collection do; get 'download'; end
     end
     collection do; get '/:id/new', to: 'expors#new'; end
   end
   resources :homes, only: [:index] do
     resources :manuals, only: [:index, :show]
-  end
-  resources :mangas, only: [:index, :show]  do
-    resources :illustlifes, only: [:index, :show]
   end
   resources :reqs, only: [:index, :create, :show, :update] do
     collection do; get '/:id/new', to: 'reqs#new'; end
