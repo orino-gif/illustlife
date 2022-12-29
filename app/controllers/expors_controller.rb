@@ -18,8 +18,13 @@ class ExporsController < ApplicationController
         pfm.point -= @expor.fee
       end
       pfm.save
+      @msg = Msg.new
+      @msg.s_msg = @expor.gist
+      @msg.save
+      @expor.msg_id = @msg.id
+      @expor.gist = ''
       if @expor.save
-        redirect_to root_path notice: '晒しました'
+        redirect_to root_path, notice: '晒しました'
       end
     elsif pfm.point < @expor.fee
       alt('ポイントが足りません')
@@ -43,6 +48,9 @@ class ExporsController < ApplicationController
   
   def destroy
     @expor = Expor.find_by(id: params[:id])
+    pfm = Pfm.find_by(cre_id: @expor.user_id)
+    pfm.point += @expor.fee
+    pfm.save
     if @expor.delete
       noti('削除しました')
     end

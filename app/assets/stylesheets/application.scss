@@ -22,7 +22,8 @@ strong, label, th { font-weight: normal; }
 .ws_bgc { background-color: whitesmoke; } 
 .cri_bgc { background-color: crimson; }
  // アスペクト比を維持して表示
-
+.over {overflow: scroll;}
+.non_img {display:none;}
 // ユーザーヘッダーの小さい通知ボタンのデザイン
 .s_pad { padding: 3px; }
 // 表体のセルの幅の長さを「table全幅/セル数」にする
@@ -97,7 +98,8 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   .s_pdg { padding: 0 $s; }
 }
 // 全体の横幅によりpaddingの調整をする関数
-@mixin border_solid($m) {
+@mixin border_solid($s, $m) {
+  .s_s-border { border-style: solid; border-width: $s; }
   .m_s-border { border-style: solid; border-width: $m; }
 }
 
@@ -113,7 +115,7 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   @include position_right(120px);
   @include string_indention(150px, 320px, 575px);
   @include padding_side(15px);
-  @include border_solid(4px);
+  @include border_solid(1px,4px);
 }
 // Large
 @media screen and (max-width: 1199px){
@@ -126,7 +128,7 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   @include position_right(100px);
   @include string_indention(150px, 320px, 575px);
   @include padding_side(10px);
-  @include border_solid(4px);
+  @include border_solid(1px,4px);
 }
 // Medium
 @media screen and (max-width: 991px){
@@ -139,7 +141,7 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   @include position_right(60px);
   @include string_indention(150px, 320px, 575px);
   @include padding_side(10px);
-  @include border_solid(4px);
+  @include border_solid(1px,4px);
 }
 // Small
 @media screen and (max-width: 767px){
@@ -152,7 +154,7 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   @include position_right(20px);
   @include string_indention(150px, 320px, 575px);
   @include padding_side(7px);
-  @include border_solid(3px);
+  @include border_solid(1px,3px);
 }
 // Extra small
 @media screen and (max-width: 575px){
@@ -165,5 +167,5 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   @include position_right(10px);
   @include string_indention(110px, 320px, 575px);
   @include padding_side(3px);
-  @include border_solid(3px);
+  @include border_solid(1px,3px);
 }

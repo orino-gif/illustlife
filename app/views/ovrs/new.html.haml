@@ -1,21 +1,36 @@
-- content_for(:html_title) { '上書き' }
-%h1.ll_font.ws_bgc 上書きする作品
+- content_for(:html_title) { '次の工程' }
+%h1.ll_font.ws_bgc="#{@expor.kind}　⇒　#{@expor.hope}"
+- up_cre = Cre.find_by(user_id:@expor.user_id)
 .container
   .row
-    .col5
-      - if @expor.e_img?
+    =icon(up_cre,'ss_square')
+    =up_cre.user.nick
+  .row.my-2
+    %h2.l_font= "現在の工程:" + @expor.kind
+  .row.my-5
+    - if @expor.e_img?
+      .col5
         = image_tag(@expor.e_img.url, class:'l_rect fit_c')
-      - else
-        = @expor.gist
-  .row
+    - else
+      .m_rect.border.over
+        = Msg.find_by(id: @expor.msg_id).s_msg
+  .row.mt-5
     = button_to('ダウンロード',download_expor_ovrs_path(@expor.id),
-    {method: :get, params:{expor_id: params[:id]}})
+    {method: :get, class:"btn btn-light",params:{expor_id: params[:id]}})
+  .row.my-2
+    = '※著作権はダウンロードファイル提供者に帰属します。'
+    
+  .row.mt-4
+    %h2.l_font= "次の工程:" + @expor.hope
   .row
     = form_with(model: @ovr,url: expor_ovrs_path, local:true) do |f|
-      = f.label '上書きする画像:', class:'o_img'
-      = f.file_field :o_img, class:'o_img preview-uploader'
-      .o_img.ws_bgc.m_rect
+      = f.label :o_img, @expor.hope + 'したファイルを選択:',
+      class:'o_img btn btn-light my-5'
+      = f.file_field :o_img,class:'o_img preview-uploader',style:"display:none;"
+      .o_img.ws_bgc.l_rect
       = f.hidden_field :expor_id, :value => @expor.id
       = hidden_field_tag :expor_id, @expor.id
-      = f.submit '上書き', class:"btn btn-light"
+      = f.submit 'アップロード', class:"btn btn-light mt-5"
+  .row.my-2
+    = '※私的利用(SNSに上げる等)は許可するものとします。'
     

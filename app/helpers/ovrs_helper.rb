@@ -1,5 +1,5 @@
 module OvrsHelper
-  def expor(expor_id)
+  def ex_img(expor_id)
     expor = Expor.find_by(id: expor_id)
     if expor.e_img?
       send_data(expor.e_img.read, 

@@ -11,8 +11,7 @@ $(document).on("change",".preview-uploader",function(){
     //ファイル読み取りが完了したら
     fileReader.onload = (function () {
       //img要素を生成
-      let imgTag = 
-      `<img class="fit_con m_rect"
+      let imgTag = `<img class="fit_con m_rect"
       $Xlarge; src='${fileReader.result}'>`
       //画像をプレビュー
       $(elem).next(".o_img").html(imgTag)

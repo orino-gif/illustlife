@@ -12,7 +12,11 @@ class OvrsController < ApplicationController
   def create
     @ovr = Ovr.new(ovrs_params)
     if @ovr.save
-      redirect_to expor_ovr_path(params[:expor_id],@ovr.id), notice: '上書きしました'
+      redirect_to root_path, notice: '対応しました'
+    elsif @ovr.errors.full_messages[0].include?("blank")
+      redirect_to request.referer, alert: 'アップロードファイルが存在しません'
+    else
+      redirect_to request.referer
     end
   end
   
@@ -26,7 +30,7 @@ class OvrsController < ApplicationController
   end
   
   def download
-    expor(params[:expor_id])
+    ex_img(params[:expor_id])
   end
   
   def update

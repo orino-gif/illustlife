@@ -7,11 +7,11 @@
     .col-md-8.border.border-secondary
       = form_with(model: @expor, local:true) do |f|
         = f.hidden_field :user_id, value:params[:id]
-        = '現在の工程:'
+        = '今の工程:'
         %br
         = '<イラスト>'
-        = f.radio_button :kind, :'キャラデザ'
-        = f.label :kind, 'キャラデザと背景(文字)'
+        = f.radio_button :kind, :'キャラ・背景デザ(文字)'
+        = f.label :kind, 'キャラ・背景デザ(文字)'
         = f.radio_button :kind, :'構図'
         = f.label :kind, '構図'
         = f.radio_button :kind, :'ラフ'
@@ -39,20 +39,17 @@
         = f.radio_button :kind, :'仕上げ(完成)'
         = f.label :kind, '仕上げ(完成)'
         %br
-        = f.label '<テキスト>', class:'g_text'
-        = f.text_field :gist, class:'g_text m_rect'
         %br
-        = f.label '画像:', class:'p_img'
-        = f.file_field :e_img, class:'p_img preview-uploader'
-        .p_img.ws_bgc.m_rect
+        = f.label '<テキスト>(1000文字以内)', class:'g_text'
+        = f.text_area :gist, class:'g_text m_rect'
         %br
-        = '希望:'
+        = f.label '画像:', class:'e_img'
         %br
-        ='<自分で>'
-        = f.radio_button :hope, :'自分で次工程', class:'myself'
-        = f.label '次の工程へ(+5pt)', class:'myself'
+        = f.file_field :e_img, class:'e_img preview-uploader'
+        .e_img.ws_bgc.m_rect
         %br
-        ='<他者へ>'
+        = '次:'
+        %br
         = f.radio_button :hope, :'構図', class:'comp'
         = f.label '構図', class:'comp'
         = f.radio_button :hope, :'ラフ', class:'rough'
@@ -63,6 +60,8 @@
         = f.label '塗り(色分け)', class:'coding'
         = f.radio_button :hope, :'塗り(着色)', class:'coloring'
         = f.label '塗り(着色)', class:'coloring'
+        = f.radio_button :hope, :'納品', class:'del'
+        = f.label '納品', class:'del'
         = f.radio_button :hope, :'ネーム', class:'d_name'
         = f.label 'ネーム', class:'d_name'
         = f.radio_button :hope, :'下書き', class:'draft'
@@ -75,6 +74,15 @@
         = f.label '添削', class:'corr'
         = f.radio_button :hope, :'コラボ', class:'collab'
         = f.label 'コラボ', class:'collab'
+        %br
+        ='誰が:'
+        %br
+        = f.radio_button :who_id, :'0', checked: true
+        = f.label '自分で(+5pt)'
+        = f.radio_button :who_id, :'1'
+        = f.label '不特定多数'
+        = f.radio_button :who_id, :'2', disabled: true
+        = f.label '指名(-2000pt以上)'
         %br
         = '謝礼:'
         %br

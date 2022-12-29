@@ -1,8 +1,8 @@
 / 表体を表示
-.row.my-5
+.row
   / セル幅を「table全幅/セル数」に
   - d_turbo = "data-turbolinks"
-  %table.fixed_col
+  %table.table.fixed_col
     %tr
       / セルからはみ出した文字を隠す
       %td.hdn_over="#{@expor.kind}"
@@ -15,5 +15,5 @@
       %td
         %button.btn.btn-light.m_font{d_turbo => "false"}= link_to '編集',
         edit_expor_path(@expor.id)
-      %td
-        %button.btn.btn-light.m_font= link_to '削除', expor_path(@expor.id), method: :delete
+        %button.btn.btn-light.m_font= link_to '削除', expor_path(@expor.id),
+        method: :delete

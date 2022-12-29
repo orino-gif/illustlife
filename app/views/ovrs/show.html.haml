@@ -1,17 +1,27 @@
-- content_for(:html_title) { '工程の流れ' }
-%h1.ll_font.ws_bgc 工程の流れ
+- content_for(:html_title) { '工程' }
+%h1.ll_font.ws_bgc 工程
+- up_cre = Cre.find_by(user_id:@expor.user_id)
+- down_cre = Cre.find_by(user_id:@ovr.expor.user_id)
 .container
+  .row.my-2
+    %h2.l_font= @expor.kind
   .row
+    =icon(up_cre,'ss_square')
+    =up_cre.user.nick
+  .row.my-5
     .col5
       - if @expor.e_img?
         = image_tag(@expor.e_img.url, class:'l_rect fit_c')
       - else
         = @expor.gist
-      = @expor.kind
-  
+  .row.my-5
+    .l_font= '↓'
+  .row.my-2
+    %h2.l_font= @expor.hope
   .row
-    = '↓'
-  .row
+    =icon(down_cre,'ss_square')
+    =down_cre.user.nick
+  .row.my-5
     .col5
       - if @ovr.o_img?
         = image_tag(@ovr.o_img.url, class:'l_rect fit_c')

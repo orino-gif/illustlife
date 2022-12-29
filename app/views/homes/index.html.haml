@@ -2,21 +2,30 @@
 %h1.ll_font.ws_bgc トップページ
 .container
   - exte = 'll_square fit_c m_s-border'
+  .row.images.ws_bgc.no_wrap
+    - if @ovrs
+      - @ovrs.reverse_each.with_index(1) do |ovr, index|
+        = link_to(expor_ovr_path(ovr.expor.id, ovr.id)) do
+          .s_font.s_ind
+            - if ovr.o_img?
+              = image_tag(ovr.o_img.url,class:'m_f_rect fit_con')
+              ='↓' + ovr.expor.hope.to_s + 'する'
+              = image_tag(ovr.expor.e_img.url,class:'m_f_rect fit_con')
   .row
     %h2.l_font 晒された
   .row.images.ws_bgc
     - if @expors
       - @expors.reverse_each.with_index(1) do |expor, index|
-        - if expor.e_img?
-          .s_font.s_ind.text-center
+        .s_font.s_ind.text-center
+          - if expor.e_img?
             = link_to image_tag(expor.e_img.url,class:'m_f_rect fit_con'),
             expor_path(expor.id)
-            =expor.hope.to_s + 'する'
-        - else
-          = link_to(expor_path(expor.id)) do
-            .ll_square.m_s-border= expor.gist
+          - else
+            = link_to(expor_path(expor.id)) do
+              .m_f_rect.s_s-border.fixed_col= Msg.find_by(id:expor.msg_id).s_msg.slice(0,5) + '...'
+          =expor.hope.to_s + 'する'
   .row
-    %h2.l_font 対応した
+    %h2.l_font 対応済
   .row.ss_m-side
     - if @ovrs
       - @ovrs.reverse_each.with_index(1) do |ovr, index|
