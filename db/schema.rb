@@ -49,11 +49,12 @@ ActiveRecord::Schema.define(version: 2022_12_29_012329) do
     t.timestamp "created_at"
     t.string "kind"
     t.string "hope"
-    t.integer "fee"
+    t.integer "fee", default: 0
     t.timestamp "updated_at"
     t.text "gist"
     t.bigint "msg_id"
-    t.integer "who_id"
+    t.string "who"
+    t.date "e_dl"
     t.index ["msg_id"], name: "index_expors_on_msg_id"
     t.index ["user_id"], name: "index_expors_on_user_id"
   end
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(version: 2022_12_29_012329) do
   create_table "ovrs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "expor_id"
     t.string "o_img"
+    t.integer "up_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["expor_id"], name: "index_ovrs_on_expor_id"

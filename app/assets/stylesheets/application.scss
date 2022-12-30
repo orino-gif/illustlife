@@ -26,6 +26,7 @@ strong, label, th { font-weight: normal; }
 .non_img {display:none;}
 // ユーザーヘッダーの小さい通知ボタンのデザイン
 .s_pad { padding: 3px; }
+.no_wrap {white-space: nowrap;}
 // 表体のセルの幅の長さを「table全幅/セル数」にする
 .fixed_col { table-layout: fixed; width: 100%; }
 // 文字が表のセルをはみ出した場合に、はみ出した文字を隠す

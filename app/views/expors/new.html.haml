@@ -7,12 +7,12 @@
     .col-md-8.border.border-secondary
       = form_with(model: @expor, local:true) do |f|
         = f.hidden_field :user_id, value:params[:id]
-        = '今の工程:'
+        = '今:'
         %br
         = '<イラスト>'
         = f.radio_button :kind, :'キャラ・背景デザ(文字)'
         = f.label :kind, 'キャラ・背景デザ(文字)'
-        = f.radio_button :kind, :'構図'
+        = f.radio_button :kind, :'構図', checked: true
         = f.label :kind, '構図'
         = f.radio_button :kind, :'ラフ'
         = f.label :kind, 'ラフ'
@@ -52,7 +52,7 @@
         %br
         = f.radio_button :hope, :'構図', class:'comp'
         = f.label '構図', class:'comp'
-        = f.radio_button :hope, :'ラフ', class:'rough'
+        = f.radio_button :hope, :'ラフ', class:'rough', checked: true
         = f.label 'ラフ', class:'rough'
         = f.radio_button :hope, :'線画', class:'line'
         = f.label '線画', class:'line'
@@ -68,8 +68,10 @@
         = f.label '下書き', class:'draft'
         = f.radio_button :hope, :'ペン入れ', class:'p_draw'
         = f.label 'ペン入れ', class:'p_draw'
-        = f.radio_button :hope, :'ベタ塗り', class:'s_paint'
-        = f.label 'ベタ塗り、トーン貼り、仕上げ', class:'s_paint'
+        = f.radio_button :hope, :'ベタ塗り、トーン貼り', class:'s_paint'
+        = f.label 'ベタ塗り、トーン貼り', class:'s_paint'
+        = f.radio_button :hope, :'仕上げ(完成)', class:'finish'
+        = f.label '仕上げ(完成)', class:'finish'
         = f.radio_button :hope, :'添削', class:'corr'
         = f.label '添削', class:'corr'
         = f.radio_button :hope, :'コラボ', class:'collab'
@@ -77,11 +79,11 @@
         %br
         ='誰が:'
         %br
-        = f.radio_button :who_id, :'0', checked: true
+        = f.radio_button :who, :'自分で(+5pt)', checked: true
         = f.label '自分で(+5pt)'
-        = f.radio_button :who_id, :'1'
+        = f.radio_button :who, :'不特定多数'
         = f.label '不特定多数'
-        = f.radio_button :who_id, :'2', disabled: true
+        = f.radio_button :who, :'指名(-2000pt以上)', disabled: true
         = f.label '指名(-2000pt以上)'
         %br
         = '謝礼:'
@@ -89,10 +91,14 @@
         = f.number_field :fee, value:0, min:0, step:1, class:'text-right'
         = 'pt'
         %br
+        %br
+        = '期限:(1か月以内)'
+        %br
+        = f.date_field :e_dl
         = f.submit '晒す', class:"btn btn-light l_font my-5 ss_rect"
         = "以下の文に同意できる方のみ実行してください"
         %br
-          = '・「自分で次の工程へ」以外は、他者が上書きする事を承認します。'
+          = '・「自分で」以外は、他者が上書きする事を承認します。'
         = '・著作権は、晒した側にあります。'
         %br
         .my-5

@@ -8,9 +8,12 @@
         = link_to(expor_ovr_path(ovr.expor.id, ovr.id)) do
           .s_font.s_ind
             - if ovr.o_img?
-              = image_tag(ovr.o_img.url,class:'m_f_rect fit_con')
+              - if ovr.expor.e_img?
+                = image_tag(ovr.expor.e_img.url,class:'m_f_rect fit_con')
+              - else
+                .m_f_rect.s_s-border.fixed_col= Msg.find_by(id:ovr.expor.msg_id).s_msg
               ='↓' + ovr.expor.hope.to_s + 'する'
-              = image_tag(ovr.expor.e_img.url,class:'m_f_rect fit_con')
+              = image_tag(ovr.o_img.url,class:'m_f_rect fit_con')
   .row
     %h2.l_font 晒された
   .row.images.ws_bgc

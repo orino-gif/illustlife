@@ -5,12 +5,24 @@
   %table.table.fixed_col
     %tr
       / セルからはみ出した文字を隠す
-      %td.hdn_over="#{@expor.kind}"
+      %td.hdn_over= "#{@expor.kind}"
       - if @expor.e_img?
-        %td.hdn_over= image_tag(@expor.e_img.url, class:'ss_rect')
+        %td.hdn_over= image_tag(@expor.e_img.url, class:'ss_rect fit_con')
       - else
-        %td.hdn_over="#{@expor.gist}"
+        - msg = Msg.find_by(id: @expor.msg_id).s_msg.slice(0,5) + '...'
+        %td= msg
       %td.hdn_over= "#{@expor.hope}"
+      %td.hdn_over= "#{@expor.who}"
+      - if '自分で(+5pt)' == @expor.who
+        - worker = User.find_by(id: @expor.user_id).nick
+        %td.hdn_over= worker
+      - else
+        - ovr = Ovr.find_by(expor_id:@expor.id)
+        - if ovr
+          %td.hdn_over= User.find_by(id: ovr.expor.user_id).nick
+        - else
+          %td.hdn_over= '募集中'
+      %td.hdn_over= "#{@expor.e_dl}"
       %td.hdn_over= "#{@expor.fee}"
       %td
         %button.btn.btn-light.m_font{d_turbo => "false"}= link_to '編集',

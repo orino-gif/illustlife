@@ -1,5 +1,7 @@
 class ExporsController < ApplicationController
   include ApplicationHelper
+  before_action :authenticate_user!, only: [:create]
+  
   def index
     @expors = Expor.where(user_id: current_user.id)
   end
@@ -11,8 +13,9 @@ class ExporsController < ApplicationController
   def create
     @expor = Expor.new(expors_params)
     pfm = Pfm.find_by(cre_id: current_user.id)
-    if '自分で次工程' == @expor.hope || pfm.point >= @expor.fee
-      if '自分で次工程' == @expor.hope
+    p @expor.who
+    if '自分で(+5pt)' == @expor.who || pfm.point >= @expor.fee
+      if '自分で(+5pt)' == @expor.who
         pfm.point += 5
       elsif 0 < @expor.fee || pfm.point <= @expor.fee
         pfm.point -= @expor.fee
@@ -40,7 +43,7 @@ class ExporsController < ApplicationController
   end
   
   def update
-    @expor = Expor.find_by(id:params[:id])
+    @expor = Expor.find_by(id: params[:id])
     if @expor.update(expors_params)
       redirect_to expors_path, notice: '更新しました。'
     end
@@ -50,6 +53,9 @@ class ExporsController < ApplicationController
     @expor = Expor.find_by(id: params[:id])
     pfm = Pfm.find_by(cre_id: @expor.user_id)
     pfm.point += @expor.fee
+    if '自分で(+5pt)' == @expor.who 
+      pfm.point -= 5
+    end
     pfm.save
     if @expor.delete
       noti('削除しました')
@@ -59,6 +65,7 @@ class ExporsController < ApplicationController
   private
 
   def expors_params
-    params.require(:expor).permit(:user_id, :e_img, :kind, :hope, :fee, :gist)
+    params.require(:expor).permit(:user_id, :e_img, :kind, :hope, :fee,
+    :gist, :who, :e_dl)
   end
 end

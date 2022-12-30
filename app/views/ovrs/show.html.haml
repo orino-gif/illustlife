@@ -1,6 +1,7 @@
 - content_for(:html_title) { '工程' }
 %h1.ll_font.ws_bgc 工程
 - up_cre = Cre.find_by(user_id:@expor.user_id)
+%br
 - down_cre = Cre.find_by(user_id:@ovr.expor.user_id)
 .container
   .row.my-2
@@ -13,7 +14,7 @@
       - if @expor.e_img?
         = image_tag(@expor.e_img.url, class:'l_rect fit_c')
       - else
-        = @expor.gist
+        = Msg.find_by(id: @expor.msg_id).s_msg
   .row.my-5
     .l_font= '↓'
   .row.my-2
