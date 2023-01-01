@@ -1,43 +1,65 @@
 - content_for(:html_title) { 'イラストでコミュニケーション' }
 %h1.ll_font.ws_bgc トップページ
-.container
-  - exte = 'll_square fit_c m_s-border'
-  .row.images.ws_bgc.no_wrap
+.container-fluid
+  .row#images.ws_bgc
     - if @ovrs
       - @ovrs.reverse_each.with_index(1) do |ovr, index|
         = link_to(expor_ovr_path(ovr.expor.id, ovr.id)) do
-          .s_font.s_ind
+          .s_font.s_line
             - if ovr.o_img?
               - if ovr.expor.e_img?
                 = image_tag(ovr.expor.e_img.url,class:'m_f_rect fit_con')
               - else
                 .m_f_rect.s_s-border.fixed_col= Msg.find_by(id:ovr.expor.msg_id).s_msg
-              ='↓' + ovr.expor.hope.to_s + 'する'
+              .text-center
+                ='↓' + ovr.expor.hope.to_s
               = image_tag(ovr.o_img.url,class:'m_f_rect fit_con')
+.container
+  - exte = 'll_square fit_c m_s-border'
   .row
     %h2.l_font 晒された
-  .row.images.ws_bgc
+  .row
+    %h3.m_font 誰かに託す
+  .row
     - if @expors
       - @expors.reverse_each.with_index(1) do |expor, index|
-        .s_font.s_ind.text-center
-          - if expor.e_img?
-            = link_to image_tag(expor.e_img.url,class:'m_f_rect fit_con'),
-            expor_path(expor.id)
-          - else
-            = link_to(expor_path(expor.id)) do
-              .m_f_rect.s_s-border.fixed_col= Msg.find_by(id:expor.msg_id).s_msg.slice(0,5) + '...'
-          =expor.hope.to_s + 'する'
+        - if '誰かに' == expor.who
+          .m_f_rect.m_font.ws_bgc.text-center.border.mx-1
+            - if expor.e_img?
+              = link_to image_tag(expor.e_img.url, class:'full_rect fit_con'),
+              expor_path(expor.id)
+            - else
+              = link_to(expor_path(expor.id)) do
+                .m_f_rect.s_s-border.fixed_col= Msg.find_by(id:expor.msg_id).s_msg.slice(0,5) + '...'
+            = '→ ' + expor.hope.to_s + '(+' + expor.fee.to_s + 'pt)'
+          - break if 3 == index
+  .row.mt-5
+    %h3.m_font 自分で進める(+5pt)
   .row
+    - if @expors
+      - @expors.reverse_each.with_index(1) do |expor, index|
+        - if '自分で' == expor.who
+          .m_f_rect.m_font.ws_bgc.text-center.border.mx-1
+            - if expor.e_img?
+              = link_to image_tag(expor.e_img.url, class:'full_rect fit_con'),
+              expor_path(expor.id)
+            - else
+              = link_to(expor_path(expor.id)) do
+                .m_f_rect.s_s-border.fixed_col= Msg.find_by(id:expor.msg_id).s_msg.slice(0,5) + '...'
+            ='→ ' + expor.hope
+        - break if 3 == index
+  .row.mt-5
     %h2.l_font 対応済
   .row.ss_m-side
     - if @ovrs
       - @ovrs.reverse_each.with_index(1) do |ovr, index|
-        .s_pdg.text-center.py-1
-          - if ovr.o_img?
-            = link_to image_tag(ovr.o_img.url, class: exte),
-            expor_ovr_path(ovr.expor_id, ovr.id)
-            .s_font.s_ind.text-center=icon(Cre.find_by(user_id: ovr.expor.user_id), 's_square')
-            = ovr.expor.hope.to_s + 'した'
+        = link_to(expor_ovr_path(ovr.expor_id, ovr.id)) do
+          .m_f_rect.m_font.ws_bgc.text-center.border.mx-1
+            - if ovr.o_img?
+              = image_tag(ovr.o_img.url, class: 'full_rect fit_con')
+              .s_font.s_line.text-center.on_hdr.l_pos
+                = image_tag(Cre.find_by(user_id: ovr.expor.user_id).icon.url,
+                class: "s_square rounded-circle fit_c")
         - break if 30 == index
   .row
     %h2.l_font クリエイター
@@ -48,7 +70,7 @@
           - if cre.hdr?
             .s_pdg.text-center.py-1
               = disp_hdr(cre, exte)
-              .s_font.s_ind= cre.user.nick
+              .s_font.s_line= cre.user.nick
               = icon(cre, 's_square on_hdr')
         - break if 30 == index
   .row
@@ -60,6 +82,6 @@
           - if not cre.hdr?
             .s_pdg.text-center.py-1
               = disp_hdr(cre, exte)
-              .s_font.s_ind= cre.user.nick
+              .s_font.s_line= cre.user.nick
               = icon(cre, 's_square on_hdr')
         - break if 30 == index

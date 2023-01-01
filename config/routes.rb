@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   end
   resources :expls, only: [:index, :new, :create]
   resources :expors, only: [:index, :create, :show, :edit, :update, :destroy] do
-    resources :ovrs, only: [:index, :create, :show, :edit] do 
+    resources :ovrs, only: [:create, :show] do 
       collection do; get '/:id/new', to: 'ovrs#new'; end
       collection do; get 'download'; end
     end

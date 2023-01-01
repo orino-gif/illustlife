@@ -1,6 +1,7 @@
 class OvrsController < ApplicationController
   include ApplicationHelper
   include OvrsHelper
+  before_action :authenticate_user!, only: [:create]
   def index
   end
   
@@ -24,11 +25,7 @@ class OvrsController < ApplicationController
     @expor = Expor.find_by(id: params[:expor_id])
     @ovr = Ovr.find_by(id: params[:id])
   end
-  
-  def edit
-    @ovr = Ovr.find_by(id: params[:id])
-  end
-  
+
   def download
     ex_img(params[:expor_id])
   end
@@ -42,6 +39,6 @@ class OvrsController < ApplicationController
   private
 
   def ovrs_params
-    params.require(:ovr).permit(:expor_id, :o_img)
+    params.require(:ovr).permit(:expor_id, :o_img, :up_id)
   end
 end

@@ -45,6 +45,8 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   transform: translate(40%,-290%); font-size: 40px; margin: 0; opacity: 0.5; }
 // 画像の上にアイコンを表示
 .on_hdr { position: relative; top: -34%; left: -31%; }
+// 100%
+.full_rect { width: 100%; height: 100%; }
 
 // 文字の大きさを設定する関数 
 @mixin size_f($ll, $l, $m, $s, $ss) {
@@ -53,6 +55,10 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   .m_font { font-size: $m; }
   .s_font { font-size: $s; }
   .ss_font { font-size: $ss; }
+}
+// 位置を設定する関数 
+@mixin pos_f($tl,$ll) {
+  .l_pos { position: relative; top: $tl; left: $ll; }
 }
 // 正方形の図のサイズを設定する関数
 @mixin size_square($ll, $l, $m, $s, $ss) {
@@ -70,7 +76,8 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   .ss_rect { width: 100%; height: $ss; }
 }
 // 長方形の固定サイズを設定する関数
-@mixin size_f_rect($mw,$mh) {
+@mixin size_f_rect($lw, $lh, $mw, $mh) {
+  .l_f_rect { width: $lw; height: $lh; }
   .m_f_rect { width: $mw; height: $mh; }
 }
 // 配置の縦の空白の長さを設定する関数
@@ -89,8 +96,8 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   .m_rr-pos { position: relative; right: $m; }
 }
 // 文字がコンテンツからあふれた場合に改行させる関数
-@mixin string_indention($s, $m, $l) {
-  .s_ind { word-wrap: break-word; width: $s; }
+@mixin str_ind($l, $m, $s) {
+  .s_line { word-wrap: break-word; max-width: $s; }
   .m_line { word-wrap: break-word; max-width: $m; }
   .l_line { word-wrap: break-word; max-width: $l; }
 }
@@ -110,63 +117,68 @@ p.on_pic { position: absolute; top: auto; left: auto; color: white; padding: 0;
   @include size_f(2.0em, 1.5em, 1.1em, 0.9em, 0.8em);
   @include size_square(150px, 120px, 80px, 55px, 50px);
   @include size_rect(300px, 180px, 130px, 50px);
-  @include size_f_rect(200px, 200px);
+  @include size_f_rect(400px, 350px, 230px, 230px);
   @include position_top(-100px, -68px, -38px, -13px);
   @include position_left(120px);
   @include position_right(120px);
-  @include string_indention(150px, 320px, 575px);
+  @include str_ind(575px, 320px,150px);
   @include padding_side(15px);
   @include border_solid(1px,4px);
+  @include pos_f(-30%,-20%)
 }
 // Large
 @media screen and (max-width: 1199px){
   @include size_f(1.9em, 1.4em, 1.1em, 0.8em, 0.7em);
   @include size_square(150px, 110px, 70px, 50px, 40px);
   @include size_rect(250px, 170px, 125px, 50px);
-  @include size_f_rect(200px, 200px);
+  @include size_f_rect(400px, 350px, 230px, 230px);
   @include position_top(-95px, -62px, -28px, -12px);
   @include position_left(100px);
   @include position_right(100px);
-  @include string_indention(150px, 320px, 575px);
+  @include str_ind(575px, 320px,150px);
   @include padding_side(10px);
   @include border_solid(1px,4px);
+  @include pos_f(-30%,-20%)
 }
 // Medium
 @media screen and (max-width: 991px){
   @include size_f(1.8em, 1.3em, 1.0em, 0.7em, 0.6em);
   @include size_square(150px, 100px, 60px, 45px, 35px);
   @include size_rect(200px, 160px, 110px, 50px);
-  @include size_f_rect(200px, 200px);
+  @include size_f_rect(400px, 350px, 230px, 230px);
   @include position_top(-90px, -54px, -24px, -11px);
   @include position_left(100px);
   @include position_right(60px);
-  @include string_indention(150px, 320px, 575px);
+  @include str_ind(575px, 320px,150px);
   @include padding_side(10px);
   @include border_solid(1px,4px);
+  @include pos_f(-30%,-20%)
 }
 // Small
 @media screen and (max-width: 767px){
   @include size_f(1.7em, 1.2em, 0.9em, 0.6em, 0.5em);
   @include size_square(150px, 90px, 50px, 42px, 32px);
   @include size_rect(100%, 150px, 105px, 50px);
-  @include size_f_rect(200px, 200px);
+  @include size_f_rect(400px, 350px, 200px, 200px);
   @include position_top(-85px, -42px, -22px, -10px);
   @include position_left(100px);
   @include position_right(20px);
-  @include string_indention(150px, 320px, 575px);
+  @include str_ind(575px, 320px,150px);
   @include padding_side(7px);
   @include border_solid(1px,3px);
+  @include pos_f(-30%,-20%)
 }
 // Extra small
 @media screen and (max-width: 575px){
   @include size_f(1.6em, 1.1em, 0.8em, 0.5em, 0.4em);
   @include size_square(110px, 70px, 40px, 32px, 28px);
   @include size_rect(100%, 120px, 100px, 50px);
-  @include size_f_rect(100px, 100px);
+  @include size_f_rect(400px, 350px, 200px, 200px);
   @include position_top(-65px, -35px, -18px, -10px);
   @include position_left(75px);
   @include position_right(10px);
-  @include string_indention(110px, 320px, 575px);
+  @include str_ind(575px, 320px,110px);
   @include padding_side(3px);
   @include border_solid(1px,3px);
+  @include pos_f(-30%,-20%)
 }

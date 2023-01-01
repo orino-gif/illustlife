@@ -12,10 +12,14 @@ $(document).on("change",".preview-uploader",function(){
   fileReader.onload = (function () {
     //img要素を生成
     let imgTag = 
-    `<img class="fit_con m_rect"
+    `<img class="l_f_rect fit_con"
+    $Xlarge; src='${fileReader.result}'>`
+    let imgTag2 = 
+    `<img class="m_f_rect fit_con"
     $Xlarge; src='${fileReader.result}'>`
     //画像をプレビュー
-    $(elem).next(".e_img").html(imgTag)
+    $(elem).next(".e_img,.edit_img,.p_img").html(imgTag)
+    $(elem).next(".e_img,.edit_img,.p_img").html(imgTag2)
   });
 })
 
@@ -26,6 +30,16 @@ $(function () {
   $('.coloring').show(); $('.del').show();$('.d_name').hide();
   $('.draft').hide(); $('.p_draw').hide(); $('.s_paint').hide();
   $('.finish').hide();
+  $('.c_text').hide();
+  
+  if ('キャラ・背景デザ(文字)' == $("#expor_kind").val()){
+    $('.edit_img').hide();
+    $('.edit_text').show();
+    $('.c_text').hide();
+  }else{
+    $('.edit_img').show();
+    $('.edit_text').hide();
+  }
   
   // ラジオボタンを選択変更したら実行
   $('input[name="expor[kind]"]').change(function () {
@@ -44,13 +58,38 @@ $(function () {
     else if ('ベタ塗り、トーン貼り' == pro){ showHope('s_paint');}
     else if ('仕上げ(完成)' == pro){ showHope('finish');}
   });
-  
   $("#expor_fee").prop("disabled", true);
+  $("#expor_kind").change(function() {
+    var val = $(this).val();
+    console.log(val);
+    if ('キャラ・背景デザ(文字)' == val || 'プロット' == val){
+      $('.edit_img').hide();
+      $('.edit_text').show();
+      $('.c_text').hide();
+      
+    }
+    else{
+      $('.edit_img').show();
+      $('.edit_text').hide();
+    }
+  });
   $('input[name="expor[who]"]').change(function () {
     var who = $(this).val();
-    console.log(who);
-    if ('自分で(+5pt)' == who){$("#expor_fee").prop("disabled", true);}
-    else{$("#expor_fee").prop("disabled", false);}
+    // console.log(who);
+    if ('自分で' == who){
+      $("#expor_fee").prop("disabled", true);
+      $(".edit_fee").prop("disabled", true);
+      $('.c_text').hide();
+    }
+    else{
+      $("#expor_fee").prop("disabled", false);
+      $(".edit_fee").prop("disabled", false);
+      var aaa = $("input[name='expor[kind]']:checked").val();
+      console.log(aaa);
+      if ('キャラ・背景デザ(文字)' != aaa && 'プロット' != aaa ){
+        $('.c_text').show();
+      }
+      }
   });
 });
 
@@ -65,48 +104,52 @@ function showHope(process){
       $('.g_text').show(); $('.e_img').hide(); 
       $('.comp').show(); $('.rough').show(); $('.line').show();
       $('.coding').show();$('.coloring').show(); $('.del').show();
+      $('input[name=hope]').val(['comp']);$('.c_text').hide();
       break;
     case 'comp':
       $('.rough').show(); $('.line').show(); $('.coding').show();
-      $('.coloring').show(); $('.del').show();
+      $('.coloring').show(); $('.del').show();$('.c_text').show();
       break;
     case 'rough':
       $('.line').show();$('.coding').show();
       $('.coding').show(); $('.coloring').show(); $('.del').show();
+      $('input[name=hope]').val(['line']);$('.c_text').show();
       break;
     case 'line':
       $('.coding').show(); $('.coloring').show(); $('.del').show();
+      $('.c_text').show();
       break;
     case 'coding':
-      $('.coloring').show(); $('.del').show();
+      $('.coloring').show(); $('.del').show();$('.c_text').show();
       break;
     case 'coloring':
-      $('.del').show();
+      $('.del').show();$('.c_text').show();
       break;
     case 'plot':
       $('.g_text').show(); $('.e_img').hide();
       $('.d_name').show(); $('.draft').show(); $('.p_draw').show();
-      $('.s_paint').show();$('.finish').show();
+      $('.s_paint').show();$('.finish').show();$('.c_text').hide();
       break;
     case 'd_name':
       $('.g_text').hide(); $('.e_img').show();
       $('.draft').show(); $('.p_draw').show(); $('.s_paint').show();
-      $('.finish').show();
+      $('.finish').show();$('.c_text').show();
       break;
     case 'draft':
       $('.g_text').hide(); $('.e_img').show();
       $('.p_draw').show(); $('.s_paint').show(); $('.finish').show();
+      $('.c_text').show();
       break;
     case 'p_draw':
       $('.g_text').hide(); $('.e_img').show();
-      $('.s_paint').show();$('.finish').show();
+      $('.s_paint').show(); $('.finish').show();$('.c_text').show();
       break;
     case 's_paint':
       $('.g_text').hide(); $('.e_img').show();
-      $('.finish').show();
+      $('.finish').show(); $('.c_text').show();
       break;
     case 'finish':
-      $('.g_text').hide(); $('.e_img').show();
+      $('.g_text').hide(); $('.e_img').show(); $('.c_text').show();
       break;
   }
 }

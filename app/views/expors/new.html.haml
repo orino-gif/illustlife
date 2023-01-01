@@ -1,5 +1,5 @@
-- content_for(:html_title) { '晒し' }
-%h1.ll_font.ws_bgc 晒す作品
+- content_for(:html_title) { '自分で晒す作品' }
+%h1.ll_font.ws_bgc 自分で晒す作品
 .container
   .row
     %h2.l_font 内容
@@ -46,13 +46,13 @@
         = f.label '画像:', class:'e_img'
         %br
         = f.file_field :e_img, class:'e_img preview-uploader'
-        .e_img.ws_bgc.m_rect
+        .e_img.ws_bgc.m_f_rect
         %br
         = '次:'
         %br
         = f.radio_button :hope, :'構図', class:'comp'
         = f.label '構図', class:'comp'
-        = f.radio_button :hope, :'ラフ', class:'rough', checked: true
+        = f.radio_button :hope, :'ラフ', class:'rough'
         = f.label 'ラフ', class:'rough'
         = f.radio_button :hope, :'線画', class:'line'
         = f.label '線画', class:'line'
@@ -72,33 +72,37 @@
         = f.label 'ベタ塗り、トーン貼り', class:'s_paint'
         = f.radio_button :hope, :'仕上げ(完成)', class:'finish'
         = f.label '仕上げ(完成)', class:'finish'
-        = f.radio_button :hope, :'添削', class:'corr'
+        = f.radio_button :hope, :'添削', class:'corr', checked: true
         = f.label '添削', class:'corr'
         = f.radio_button :hope, :'コラボ', class:'collab'
         = f.label 'コラボ', class:'collab'
         %br
         ='誰が:'
         %br
-        = f.radio_button :who, :'自分で(+5pt)', checked: true
+        = f.radio_button :who, :'自分で', checked: true
         = f.label '自分で(+5pt)'
-        = f.radio_button :who, :'不特定多数'
-        = f.label '不特定多数'
+        = f.radio_button :who, :'誰かに'
+        = f.label '誰かに'
         = f.radio_button :who, :'指名(-2000pt以上)', disabled: true
         = f.label '指名(-2000pt以上)'
+        %br
         %br
         = '謝礼:'
         %br
         = f.number_field :fee, value:0, min:0, step:1, class:'text-right'
         = 'pt'
         %br
+        = f.label '一言(13文字以内):', class:'c_text'
+        = f.text_area :gist, class:'c_text ss_rect'
         %br
-        = '期限:(1か月以内)'
+        = '期限(1か月以内):'
         %br
         = f.date_field :e_dl
         = f.submit '晒す', class:"btn btn-light l_font my-5 ss_rect"
         = "以下の文に同意できる方のみ実行してください"
         %br
-          = '・「自分で」以外は、他者が上書きする事を承認します。'
-        = '・著作権は、晒した側にあります。'
-        %br
-        .my-5
+          = '・著作権は、晒した側にあります。'
+          %br
+            = '・「自分で」以外を選択した場合、他者が上書きする事を承認します。'
+            %br
+              = '・私的利用(SNSに上げる等)は許可するものとします。'

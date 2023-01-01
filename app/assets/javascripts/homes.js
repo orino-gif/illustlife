@@ -7,7 +7,7 @@ $(document).on('turbolinks:load', function() {
 });
 
 $(document).ready(function(){
-    $('.images').slick({
+    $('#images').slick({
         slidesToShow: 4, //表示するスライドの数
         slidesToScroll: 1, //スクロールで切り替わるスライドの数
         dots: true, //スライドの下にドットのナビゲーションを表示

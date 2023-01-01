@@ -14,20 +14,31 @@ class ExporsController < ApplicationController
     @expor = Expor.new(expors_params)
     pfm = Pfm.find_by(cre_id: current_user.id)
     p @expor.who
-    if '自分で(+5pt)' == @expor.who || pfm.point >= @expor.fee
-      if '自分で(+5pt)' == @expor.who
+    if '自分で' == @expor.who || pfm.point >= @expor.fee
+      if '自分で' == @expor.who
         pfm.point += 5
       elsif 0 < @expor.fee || pfm.point <= @expor.fee
         pfm.point -= @expor.fee
       end
       pfm.save
-      @msg = Msg.new
-      @msg.s_msg = @expor.gist
-      @msg.save
-      @expor.msg_id = @msg.id
-      @expor.gist = ''
-      if @expor.save
-        redirect_to root_path, notice: '晒しました'
+      if '' != @expor.gist.to_s
+        @msg = Msg.new
+        @msg.s_msg = @expor.gist
+        @msg.save
+        @expor.msg_id = @msg.id
+        @expor.gist = ''
+      end
+      if @expor.msg_id.nil? && @expor.e_img.nil?
+        alt('作品が入力されていません')
+      else
+        if @expor.save
+          redirect_to root_path, notice: '晒しました'
+        elsif @expor.errors.full_messages[0].include?("e_dl.blank")
+          alt('期限が入力されてません')
+        else
+          p @expor.errors.full_messages[0]
+          alt('失敗しました')
+        end
       end
     elsif pfm.point < @expor.fee
       alt('ポイントが足りません')
@@ -44,7 +55,28 @@ class ExporsController < ApplicationController
   
   def update
     @expor = Expor.find_by(id: params[:id])
+    p 'test1' + @expor.who.to_s
+    who = @expor.who
     if @expor.update(expors_params)
+      pfm = Pfm.find_by(cre_id: current_user.id)
+      if '自分で' == who && '誰かに' == @expor.who
+        pfm.point -= 5
+        pfm.point -= @expor.fee
+      elsif '誰かに' == who && '自分で' == @expor.who
+        pfm.point += 5
+        pfm.point += @expor.fee
+      end
+      if '' != @expor.gist
+        Msg.find_by(id: @expor.msg_id).delete
+        @msg = Msg.new
+        @msg.s_msg = @expor.gist
+        @msg.save
+        @expor.msg_id = @msg.id
+        @expor.gist = ''
+      end
+      pfm.save
+      @expor.save
+      p 'test2' + @expor.who.to_s
       redirect_to expors_path, notice: '更新しました。'
     end
   end
@@ -53,7 +85,7 @@ class ExporsController < ApplicationController
     @expor = Expor.find_by(id: params[:id])
     pfm = Pfm.find_by(cre_id: @expor.user_id)
     pfm.point += @expor.fee
-    if '自分で(+5pt)' == @expor.who 
+    if '自分で' == @expor.who 
       pfm.point -= 5
     end
     pfm.save

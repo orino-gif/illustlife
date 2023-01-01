@@ -6,20 +6,23 @@
     %tr
       / セルからはみ出した文字を隠す
       %td.hdn_over= "#{@expor.kind}"
-      - if @expor.e_img?
-        %td.hdn_over= image_tag(@expor.e_img.url, class:'ss_rect fit_con')
-      - else
+      - if 'キャラ・背景デザ(文字)' == @expor.kind
         - msg = Msg.find_by(id: @expor.msg_id).s_msg.slice(0,5) + '...'
         %td= msg
+      - else
+        %td.hdn_over= image_tag(@expor.e_img.url, class:'ss_rect fit_con')
+        
       %td.hdn_over= "#{@expor.hope}"
       %td.hdn_over= "#{@expor.who}"
-      - if '自分で(+5pt)' == @expor.who
+      - if '自分で' == @expor.who
         - worker = User.find_by(id: @expor.user_id).nick
         %td.hdn_over= worker
       - else
         - ovr = Ovr.find_by(expor_id:@expor.id)
         - if ovr
-          %td.hdn_over= User.find_by(id: ovr.expor.user_id).nick
+          %td.hdn_over
+            - collab = User.find_by(id: ovr.up_id)
+            = link_to collab.nick, cre_path(collab.cre.user_id)
         - else
           %td.hdn_over= '募集中'
       %td.hdn_over= "#{@expor.e_dl}"
