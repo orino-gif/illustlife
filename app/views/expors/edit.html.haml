@@ -18,7 +18,6 @@
               = f.label :who, "誰が:"
               = f.select :who,
               [["自分で"],["誰かに"]], include_blank: @expor.who
-              
           %tr
             %td
               = f.label :hope, "希望:"
@@ -33,29 +32,27 @@
               = f.text_field :fee, :size => '10', class:"edit_fee"
               = 'pt'
           = @expor.kind
-          - if @expor.msg_id?
-            %tr
-              %td
-                = f.label '現在:'
-                %br
-                  .l_f_rect.border= Msg.find_by(id: @expor.msg_id).s_msg
-          - else
-            %tr
-              %td
-                = f.label '現在:'
-                %br
-                  = image_tag(@expor.e_img.url, class:'l_f_rect fit_con ws_bgc')
-                  
-          - if @expor.e_img?         
-            %tr
-              %td
-                = f.label '変更画像:', class:'edit_img'
-                = f.file_field :e_img, class:'edit_img preview-uploader'
-                .edit_img.ws_bgc.fit_con.l_f_rect
           %tr
             %td
               = f.label :gist,  "変更テキスト:", class:"edit_text"
               %br
               = f.text_area :gist, class:"l_f_rect edit_text"
-              
+          %tr
+            %td
+              = f.label '現在:'
+              %br
+                - if 'キャラ・背景デザ(文字)' == @expor.kind || 'プロット' == @expor.kind
+                  .l_f_rect.border= Msg.find_by(id: @expor.msg_id).s_msg
+                - else
+                  = image_tag(@expor.e_img.url, class:'l_f_rect fit_con ws_bgc')
+                  %tr
+                    %td
+                      = f.label :cmt, '一言(13文字以内)：', class:"edit_cmt"
+                      %br
+                      = f.text_area :cmt, :value => Msg.find_by(id: @expor.msg_id).s_msg, class:"edit_cmt"
+          %tr
+            %td
+              = f.label '変更画像:', class:'edit_img'
+              = f.file_field :e_img, class:'edit_img preview-uploader'
+              .edit_img.ws_bgc.fit_con.l_f_rect
         = f.submit '更新', class:"btn btn-light"

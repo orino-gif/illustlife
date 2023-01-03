@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2022_12_29_012329) do
     t.bigint "msg_id"
     t.string "who"
     t.date "e_dl"
+    t.string "cmt"
     t.index ["msg_id"], name: "index_expors_on_msg_id"
     t.index ["user_id"], name: "index_expors_on_user_id"
   end

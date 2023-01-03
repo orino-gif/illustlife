@@ -6,11 +6,14 @@
     %tr
       / セルからはみ出した文字を隠す
       %td.hdn_over= "#{@expor.kind}"
-      - if 'キャラ・背景デザ(文字)' == @expor.kind
+      - if 'キャラ・背景デザ(文字)' == @expor.kind || 'プロット' == @expor.kind
         - msg = Msg.find_by(id: @expor.msg_id).s_msg.slice(0,5) + '...'
-        %td= msg
+        %td.hdn_over= msg
       - else
-        %td.hdn_over= image_tag(@expor.e_img.url, class:'ss_rect fit_con')
+        - if @expor.e_img?
+          %td.hdn_over= image_tag(@expor.e_img.url, class:'ss_rect fit_con')
+        - else
+          = ''
         
       %td.hdn_over= "#{@expor.hope}"
       %td.hdn_over= "#{@expor.who}"

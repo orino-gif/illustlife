@@ -10,8 +10,8 @@
 	padding: 1em;
 	margin-bottom: 1em;
 	position: relative;
-	background-color: #f2f2f2;
-	border: 2px solid #222;
+	background-color: white;
+	border: 1px solid #222;
 	border-radius: 0.5em;
 }
 .block-baloon:before, .block-baloon:after, .block-baloon-top:before,
@@ -36,8 +36,8 @@
 	border-bottom: 10px solid transparent;
 }
 .block-baloon-left:after	{
-	left: calc( 4px - 1.5em );
-	border-right: solid 1.5em #f2f2f2;
+	left: calc( 1px - 1.5em );
+	border-right: solid 1.5em white;
 }
 
 /* ---------- 吹き出し：右 ---------- */
@@ -54,8 +54,8 @@
 	border-left: 1.5em solid #222;
 }
 .block-baloon-right:after	{
-	right: calc( 4px - 1.5em );
-	border-left: solid 1.5em #f2f2f2;
+	right: calc( 1px - 1.5em );
+	border-left: solid 1.5em white;
 }
 
 /* ---------- 吹き出し：上 ---------- */

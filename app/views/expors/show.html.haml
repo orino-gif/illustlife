@@ -2,19 +2,30 @@
 - up_cre = Cre.find_by(user_id:@expor.user_id)
 %h1.ll_font.ws_bgc="希望：#{@expor.kind} ⇒ #{@expor.hope}、#{@expor.who}"
 .container
-  .row.my-2
+  .row.my-1
     %h2.l_font= @expor.kind
-  .row
-    =icon(up_cre,'ss_square')
-    =up_cre.user.nick
   .row.my-5
     - if @expor
-      - if @expor.e_img?
-        = image_tag(@expor.e_img.url, class:'ws_bgc l_f_rect fit_con')
-      - else
+      - if 'キャラ・背景デザ(文字)' == @expor.kind || 'プロット' == @expor.kind
         .col-5
-          .l_line.m_rect.border.over= Msg.find_by(id: @expor.msg_id).s_msg
-  .row
+          .mb-5
+            =icon(up_cre,'ss_square')
+            =up_cre.user.nick
+          .l_line.m_rect.border.over.pre_wrap.p-3
+            =Msg.find_by(id: @expor.msg_id).s_msg.gsub(/[\n]/,"\n")
+      - else
+        = image_tag(@expor.e_img.url, class:'ws_bgc l_f_rect fit_con')
+  - if 'キャラ・背景デザ(文字)' != @expor.kind && 'プロット' != @expor.kind
+    .row
+      = '一言(13文字以内)：'
+    .row.mt-3
+      .col-1.text-center
+        =icon(up_cre,'ss_square')
+        =up_cre.user.nick
+      .col-2
+        .block-baloon-left
+          =Msg.find_by(id: @expor.msg_id).s_msg
+  .row.mt-5
     .col5
       %button.btn.btn-light.m_font.ss_rect=link_to @expor.hope.to_s + 'に進める',
       "/expors/#{@expor.id}/ovrs/#{@expor.id}/new"

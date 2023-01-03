@@ -21,12 +21,21 @@ class ExporsController < ApplicationController
         pfm.point -= @expor.fee
       end
       pfm.save
-      if '' != @expor.gist.to_s
+      if '' != @expor.gist.to_s || 'NULL' != @expor.cmt
         @msg = Msg.new
-        @msg.s_msg = @expor.gist
-        @msg.save
-        @expor.msg_id = @msg.id
-        @expor.gist = ''
+        if '' != @expor.gist.to_s 
+          @msg.s_msg = @expor.gist
+          @msg.save
+          @expor.msg_id = @msg.id
+          @expor.gist = ''
+        elsif 'NULL' != @expor.cmt
+          @msg.s_msg = @expor.cmt
+          @msg.save
+          @expor.msg_id = @msg.id
+          @expor.cmt = 'NULL'
+        else
+          p 'gist or s_msg error'
+        end
       end
       if @expor.msg_id.nil? && @expor.e_img.nil?
         alt('作品が入力されていません')
@@ -66,6 +75,7 @@ class ExporsController < ApplicationController
         pfm.point += 5
         pfm.point += @expor.fee
       end
+      p 'test3' + @expor.gist.to_s
       if '' != @expor.gist
         Msg.find_by(id: @expor.msg_id).delete
         @msg = Msg.new

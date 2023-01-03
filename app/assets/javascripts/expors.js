@@ -66,11 +66,12 @@ $(function () {
       $('.edit_img').hide();
       $('.edit_text').show();
       $('.c_text').hide();
-      
+      $('.edit_cmt').hide();
     }
     else{
       $('.edit_img').show();
       $('.edit_text').hide();
+      $('.edit_cmt').show();
     }
   });
   $('input[name="expor[who]"]').change(function () {

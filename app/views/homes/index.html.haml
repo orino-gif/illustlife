@@ -17,36 +17,37 @@
 .container
   - exte = 'll_square fit_c m_s-border'
   .row
-    %h2.l_font 晒された
+    %h2.l_font 晒した後の対応
   .row
-    %h3.m_font 誰かに託す
+    %h3.m_font 他の人に
   .row
     - if @expors
       - @expors.reverse_each.with_index(1) do |expor, index|
         - if '誰かに' == expor.who
-          .m_f_rect.m_font.ws_bgc.text-center.border.mx-1
-            - if expor.e_img?
+          .m_f_rect.m_font.ws_bgc.text-center.border.m-1
+            - if 'キャラ・背景デザ(文字)' == expor.kind || 'プロット' == expor.kind
+              = link_to(expor_path(expor.id)) do
+                .m_f_rect.border.fixed_col= Msg.find_by(id:expor.msg_id).s_msg
+            - else
               = link_to image_tag(expor.e_img.url, class:'full_rect fit_con'),
               expor_path(expor.id)
-            - else
-              = link_to(expor_path(expor.id)) do
-                .m_f_rect.s_s-border.fixed_col= Msg.find_by(id:expor.msg_id).s_msg.slice(0,5) + '...'
-            = '→ ' + expor.hope.to_s + '(+' + expor.fee.to_s + 'pt)'
+            = expor.kind + '→ ' + expor.hope.to_s + '(+' + expor.fee.to_s + 'pt)'
           - break if 3 == index
   .row.mt-5
-    %h3.m_font 自分で進める(+5pt)
+    %h3.m_font 自分で(+5pt)
   .row
     - if @expors
       - @expors.reverse_each.with_index(1) do |expor, index|
         - if '自分で' == expor.who
-          .m_f_rect.m_font.ws_bgc.text-center.border.mx-1
-            - if expor.e_img?
+          .m_f_rect.m_font.ws_bgc.text-left.border.m-1
+            - if 'キャラ・背景デザ(文字)' == expor.kind || 'プロット' == expor.kind
+              = link_to(expor_path(expor.id)) do
+                .m_f_rect.border.fixed_co.p-3.pre_wrap.blk_col
+                  = Msg.find_by(id:expor.msg_id).s_msg.gsub(/[\n]/,"\n").slice(0..80) + '...'
+            - else
               = link_to image_tag(expor.e_img.url, class:'full_rect fit_con'),
               expor_path(expor.id)
-            - else
-              = link_to(expor_path(expor.id)) do
-                .m_f_rect.s_s-border.fixed_col= Msg.find_by(id:expor.msg_id).s_msg.slice(0,5) + '...'
-            ='→ ' + expor.hope
+            =expor.kind + '→ ' + expor.hope
         - break if 3 == index
   .row.mt-5
     %h2.l_font 対応済
@@ -54,7 +55,7 @@
     - if @ovrs
       - @ovrs.reverse_each.with_index(1) do |ovr, index|
         = link_to(expor_ovr_path(ovr.expor_id, ovr.id)) do
-          .m_f_rect.m_font.ws_bgc.text-center.border.mx-1
+          .ll_square.m_font.ws_bgc.text-center.border.m-1
             - if ovr.o_img?
               = image_tag(ovr.o_img.url, class: 'full_rect fit_con')
               .s_font.s_line.text-center.on_hdr.l_pos
