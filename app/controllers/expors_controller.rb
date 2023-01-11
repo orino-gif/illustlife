@@ -108,9 +108,12 @@ class ExporsController < ApplicationController
   def destroy
     @expor = Expor.find_by(id: params[:id])
     ovr = Ovr.find_by(expor_id: @expor.id)
+    if ovr
+      ovr.delete
+    end
     pfm = Pfm.find_by(cre_id: @expor.user_id)
     pfm.point += @expor.fee
-    ovr.delete
+    
     if '自分で' == @expor.who 
       pfm.point -= 5
     end
