@@ -37,11 +37,8 @@ $(document).on("change",".preview",function(){
       //img要素を生成
       let lll_img = `<img class="lll_square fit_con"
       $Xlarge; src='${fileReader.result}'>`
-      let ll_img = `<img class="ll_square fit_con"
-      $Xlarge; src='${fileReader.result}'>`
 
       //画像をプレビュー
       $(elem).next(".lll_img,.edit_img").html(lll_img)
-      $(elem).next(".ll_img").html(ll_img)
     });
 })
