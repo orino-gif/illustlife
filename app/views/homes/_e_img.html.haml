@@ -6,8 +6,8 @@
         expor_path(expor.id)
       - else
         = link_to(expor_path(expor.id)) do
-          .ll_square.fixed_co.p-3.pre_wrap.blk_col.text-left.m_line
+          .ll_square.fixed_co.p-3.pre_wrap.blk_col.text-left.m_line.hdn_over
             - msg = Msg.find_by(id: expor.msg_id)
-            = msg.s_msg.gsub(/[\n]/,"\n").slice(0..150) + '...'
+            = msg.s_msg.gsub(/[\n]/,"\n").slice(0..100) + '...'
       = expor.kind + '→ ' + expor.hope.to_s + '(+' + expor.fee.to_s + 'pt)'
     - break if 8 == index

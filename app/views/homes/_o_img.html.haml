@@ -33,9 +33,9 @@
             = image_tag(ovr.expor.e_img.url, class: 'full_rect fit_con')
           - else
             - msg_id = Expor.find_by(id:ovr.expor_id).msg_id
-            .ll_square.border.fixed_co.p-3.pre_wrap.blk_col.text-left
+            .ll_square.border.fixed_co.p-3.pre_wrap.blk_col.text-left.hdn_over
               = Msg.find_by(id: msg_id).s_msg.gsub(/[\n]/,
-                "\n").slice(0..150) + '...'
+                "\n").slice(0..100) + '...'
           .blk_col
             = '→ ' + ovr.expor.hope.to_s
           - cre = Cre.find_by(user_id: ovr.expor.user_id)
