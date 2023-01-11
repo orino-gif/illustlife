@@ -1,6 +1,7 @@
 class ReqsController < ApplicationController
   include ApplicationHelper
   require 'payjp'
+  before_action :authenticate_user!, only: [:create]
   def index
     # ログインユーザー関係レコードを@reqsに格納
     @reqs = Req.where(rx_id: current_user.id)
@@ -14,25 +15,21 @@ class ReqsController < ApplicationController
 
   def create
     # カード登録済みの場合にリクエスト処理を実行
-    if user_signed_in?
-      if Card.find_by(user_id: current_user.id)
-        @tx=current_user; @rx=User.find(params[:tx_id])
-        @req = Req.new(reqs_params)
-        @req.tx_id=@tx.id; @req.rx_id=@rx.id; @req.stts='承認待ち'
-        if @req.save
-          Work.create(req_id:@req.id)
-          UserMailer.req(@tx, @rx).deliver_later
-          redirect_to reqs_url, notice: 'リクエストを送信しました。'
-        elsif @req.errors.full_messages[0].include?('too_long')
-          alt('文字範囲外(700文字より大きい)です')
-        else
-          alt('リクエスト送信に失敗しました')
-        end
+    if Card.find_by(user_id: current_user.id)
+      @tx=current_user; @rx=User.find(params[:tx_id])
+      @req = Req.new(reqs_params)
+      @req.tx_id=@tx.id; @req.rx_id=@rx.id; @req.stts='承認待ち'
+      if @req.save
+        Work.create(req_id:@req.id)
+        UserMailer.req(@tx, @rx).deliver_later
+        redirect_to reqs_url, notice: 'リクエストを送信しました。'
+      elsif @req.errors.full_messages[0].include?('too_long')
+        alt('文字範囲外(700文字より大きい)です')
       else
-        alt('クレジットカード登録が必要です')
+        alt('リクエスト送信に失敗しました')
       end
     else
-      redirect_to  '/users/sign_in', alert: 'ログインが必要です。'
+      alt('クレジットカード登録が必要です')
     end
   end
   
