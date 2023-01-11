@@ -2,7 +2,6 @@
 = csrf_meta_tags
 = csp_meta_tag
 
-/ homesとmanualsのページ以外は、google検索に表示しない
-- if 'homes' != controller.controller_name
-  - if 'manuals' != controller.controller_name
-    %meta{:content => "noindex", :name => "robots"}/
+/ google検索に表示しない
+- if 'agreements' == controller.controller_name || 'index' == controller.action_name || 'new' == controller.action_name || 'edit' == controller.action_name 
+  %meta{:content => "noindex", :name => "robots"}/

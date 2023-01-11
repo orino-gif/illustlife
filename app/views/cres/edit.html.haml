@@ -3,30 +3,39 @@
 .container
   .row.my-5
     - item = '私の代表作（※クリエーターは必須）：'
-    - ri_path = 'cres/parts/reg_img.html'
-    = render ri_path, {label:item, rec:'hdr'}
+    = render 'reg_img', {label:item, rec:'hdr'}
     .col
       = disp_hdr(@cre, 'm_rect fit_c')
   .row.my-5
-    = render ri_path, {label:'アイコン：', rec:'icon'}
+    = render 'reg_img', {label:'アイコン：', rec:'icon'}
     = icon(@cre, 'm_square')
   .row.my-5
     = render 'cres/parts/acct.html'
   .row.my-5
     = 'リンク先：'
     %table.table
-      - r_path = 'cres/parts/reg_sns.html'
-      = render r_path, {label:'twitter:', rec:'twtr'}
-      = render r_path, {label:'pixiv:', rec:'pixiv'}
-      = render r_path, {label:'instagram:', rec:'insta'}
-      = render r_path, {label:'youtube:', rec:'yt'}
-      = render r_path, {label:'link:', rec:'link'}
+      = render 'reg_sns', {label:'twitter:', rec:'twtr'}
+      = render 'reg_sns', {label:'pixiv:', rec:'pixiv'}
+      = render 'reg_sns', {label:'instagram:', rec:'insta'}
+      = render 'reg_sns', {label:'youtube:', rec:'yt'}
+      = render 'reg_sns', {label:'link:', rec:'link'}
   .row.my-5
-    = 'リクエスト受付内容：'
-    = render 'cres/parts/recep.html'
+    = 'リクエスト受付：'
+    = render 'recep'
   .row.my-5
-    = '作業予定日数：'
-    = render 'cres/parts/reg_days.html'
+    = '作業内容：'
+    = render 'reg_days'
+  .row.my-5
+    = '稼業：'
+    %table.table
+      %tr
+        %td
+          = form_with(model: @sttg, local:true) do |f|
+            = f.radio_button :job, :絵師
+            = f.label :job, '絵師　'
+            = f.radio_button :job, :漫画家
+            = f.label :job, '漫画家　'
+            = f.submit '変更'
   .row.my-5
     = '口座情報：'
     %table.table

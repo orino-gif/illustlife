@@ -1,2 +1,0 @@
-class AgreementsController < ApplicationController
-end

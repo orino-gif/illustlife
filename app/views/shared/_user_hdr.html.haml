@@ -1,4 +1,3 @@
-/ ユーザーヘッダー表示
 .row
   = disp_hdr(@cre, 'm_rect fit_c')
 .row
@@ -33,9 +32,8 @@
     = disp_sns(@cre, 'link')
 
 / 実績表示
-.row.my-5.mx-5
-  = "ニックネーム：#{@cre.user.nick}"
-  = "、推奨金額：#{@cre.sttg.recom}円"
+.row.my-5.mx-5.m_font
+  = "推奨金額：#{@cre.sttg.recom}円"
   = "、作業予定日数：#{@cre.sttg.work_d}日"
   - if 0 != @cre.pfm.pic
     = "、締切厳守率：#{@cre.pfm.dl}%"

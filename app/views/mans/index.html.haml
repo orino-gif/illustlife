@@ -1,0 +1,19 @@
+- content_for(:html_title) { 'イラスト付き利用説明' }
+%h1.ll_font.ws_bgc='イラスト付き利用説明 - 目次'
+
+.container
+  .row.my-5
+    .col-3
+      = image_tag('/img/character/ディフォ姫前面_ここはどこ.gif',
+        class:'ll_square')
+    .col-6.block-baloon-left.m_rr-pos.m_font
+      ここはどこですか？
+  .row
+    .col-1
+    .col-6.block-baloon-right.m_font
+      ・・目次です
+    .col-3
+      = image_tag('/img/character/リオ前面_説明.gif',
+        class:'ll_square')
+        
+  = render 'mans/parts/index'

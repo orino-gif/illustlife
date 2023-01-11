@@ -5,5 +5,6 @@ class ChangeExpors2 < ActiveRecord::Migration[5.2]
     change_column_default :expors, :fee, from: nil, to: 0
     add_column :expors, :e_dl, :date
     add_column :expors, :cmt, :string
+    add_column :expors, :w_st, :string
   end
 end

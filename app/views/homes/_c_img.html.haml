@@ -1,0 +1,12 @@
+- cres.each.with_index(1) do |cre, index| 
+  - if (not cre.user.soft_destroyed?) && cre.user.confirmed_at?
+    - if is_hdr
+      - ans = cre.hdr?
+    - else
+      - ans = (not cre.hdr?)
+    - if ans
+      .s_pdg.text-center.py-1
+        = disp_hdr(cre, 'll_square fit_c border')
+        .m_font.m_line= cre.user.nick
+        = icon(cre, 's_square m_on_pos border')
+  - break if 30 == index

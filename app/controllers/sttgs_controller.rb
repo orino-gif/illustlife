@@ -8,6 +8,6 @@ class SttgsController < ApplicationController
   
   private
   def sttgs_params
-    params.require(:sttg).permit(:recom,:min,:work_d,:start,:nsfw)
+    params.require(:sttg).permit(:recom,:min,:work_d,:start,:nsfw,:job)
   end
 end

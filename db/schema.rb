@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_29_012329) do
+ActiveRecord::Schema.define(version: 2023_01_08_151358) do
 
   create_table "cards", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2022_12_29_012329) do
     t.string "who"
     t.date "e_dl"
     t.string "cmt"
+    t.string "w_st"
     t.index ["msg_id"], name: "index_expors_on_msg_id"
     t.index ["user_id"], name: "index_expors_on_user_id"
   end
@@ -108,6 +109,7 @@ ActiveRecord::Schema.define(version: 2022_12_29_012329) do
     t.integer "work_d", default: 14
     t.boolean "start", default: false
     t.boolean "nsfw", default: false
+    t.string "job", default: "絵師"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

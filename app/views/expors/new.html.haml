@@ -1,17 +1,16 @@
-- content_for(:html_title) { '自分で晒す作品' }
-%h1.ll_font.ws_bgc 自分で晒す作品
+- content_for(:html_title) { '晒す作品' }
+%h1.ll_font.ws_bgc 晒す作品
 .container
-  .row
-    %h2.l_font 内容
-  .row.my-2
+  .row.my-5
     .col-md-8.border.border-secondary
       = form_with(model: @expor, local:true) do |f|
-        = f.hidden_field :user_id, value:params[:id]
         = '今:'
         %br
         = '<イラスト>'
-        = f.radio_button :kind, :'キャラ・背景デザ(文字)'
-        = f.label :kind, 'キャラ・背景デザ(文字)'
+        = f.radio_button :kind, :'キャラデザ'
+        = f.label :kind, 'キャラデザ'
+        = f.radio_button :kind, :'背景デザ'
+        = f.label :kind, '背景デザ'
         = f.radio_button :kind, :'構図', checked: true
         = f.label :kind, '構図'
         = f.radio_button :kind, :'ラフ'
@@ -34,8 +33,8 @@
         = f.label :kind, '下書き'
         = f.radio_button :kind, :'ペン入れ'
         = f.label :kind, 'ペン入れ'
-        = f.radio_button :kind, :'ベタ塗り、トーン貼り'
-        = f.label :kind, 'ベタ塗り、トーン貼り'
+        = f.radio_button :kind, :'ベタ、トーン'
+        = f.label :kind, 'ベタ、トーン'
         = f.radio_button :kind, :'仕上げ(完成)'
         = f.label :kind, '仕上げ(完成)'
         %br
@@ -43,10 +42,10 @@
         = f.label '<テキスト>(1000文字以内)', class:'g_text'
         = f.text_area :gist, class:'g_text m_rect'
         %br
-        = f.label '画像:', class:'e_img'
+        = f.label '画像(png, jpeg, jpg):', class:'ll_img'
         %br
-        = f.file_field :e_img, class:'e_img preview-uploader'
-        .e_img.ws_bgc.m_f_rect
+        = f.file_field :e_img, class:'ll_img preview'
+        .ll_img.ws_bgc.ll_square
         %br
         = '次:'
         %br
@@ -68,8 +67,8 @@
         = f.label '下書き', class:'draft'
         = f.radio_button :hope, :'ペン入れ', class:'p_draw'
         = f.label 'ペン入れ', class:'p_draw'
-        = f.radio_button :hope, :'ベタ塗り、トーン貼り', class:'s_paint'
-        = f.label 'ベタ塗り、トーン貼り', class:'s_paint'
+        = f.radio_button :hope, :'ベタ、トーン', class:'s_paint'
+        = f.label 'ベタ、トーン', class:'s_paint'
         = f.radio_button :hope, :'仕上げ(完成)', class:'finish'
         = f.label '仕上げ(完成)', class:'finish'
         = f.radio_button :hope, :'添削', class:'corr', checked: true
@@ -82,27 +81,29 @@
         = f.radio_button :who, :'自分で', checked: true
         = f.label '自分で(+5pt)'
         = f.radio_button :who, :'誰かに'
-        = f.label '誰かに'
-        = f.radio_button :who, :'指名(-2000pt以上)', disabled: true
+        = f.label '誰かに(-謝礼pt)'
+        = f.radio_button :who, :'指名', disabled: true
         = f.label '指名(-2000pt以上)'
         %br
+        = f.label '謝礼:', class:'reward'
         %br
-        = '謝礼:'
+        = f.number_field :fee, value:0, min:0, step:1, class:'text-right reward'
+        = f.label 'pt', class:'reward'
         %br
-        = f.number_field :fee, value:0, min:0, step:1, class:'text-right'
-        = 'pt'
         %br
-          = f.label '一言(13文字以内):', class:'c_text'
-          = f.text_area :cmt, class:'c_text ss_rect'
+          = f.label '一言(17文字以内):', class:'c_text'
+          %br
+          = f.text_field :cmt, class:'c_text', size:'40'
         %br
         = '期限(1か月以内):'
         %br
         = f.date_field :e_dl
+        = f.hidden_field :user_id, value:params[:id]
         = f.submit '晒す', class:"btn btn-light l_font my-5 ss_rect"
+        
         = "以下の文に同意できる方のみ実行してください"
         %br
           = '・著作権は、晒した側にあります。'
           %br
-            = '・「自分で」以外を選択した場合、他者が上書きする事を承認します。'
-            %br
-              = '・私的利用(SNSに上げる等)は許可するものとします。'
+            = '・「自分で作業する」以外を選択した場合、他者が上書きする事と、'
+            = '私的利用(SNSに上げる等)は許可するものとします'

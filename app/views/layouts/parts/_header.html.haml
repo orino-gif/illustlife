@@ -8,17 +8,11 @@
       .col-auto
         %span.ll_font
           %strong イラストライフ
-      .col-xs.d-flex.align-items-center
-        // %strong ～ 好きな事で楽しくスキルアップ ～
-      
       / ポイントとアイコン表示
       .col.text-right
         - if user_signed_in?
           ="#{current_user.cre.pfm.point}ポイント"
           = icon(current_user.cre, 'ss_square')
-        - else
-          -# ='キャンペーン!! 9/1～9/16迄'
-          -#  %br= '新規登録者様に、1000ポイントプレゼント!!'
     .row
       / メニューボタンを表示
       .col.text-right

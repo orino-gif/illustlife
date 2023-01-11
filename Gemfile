@@ -35,6 +35,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'whenever', require: false
 gem 'kakurenbo-puti'
 gem 'jquery-rails'
+gem 'date_validator'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

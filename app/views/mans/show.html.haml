@@ -1,0 +1,14 @@
+- content_for(:html_title) { 'イラスト付き利用説明' }
+%h1.ll_font.ws_bgc='イラスト付き利用説明'
+.container
+  / 目次
+  = render 'mans/parts/index'
+  - case params[:id]
+    - when '1'
+      = render 'mans/parts/site'
+    - when '2'
+      = render 'mans/parts/expose'
+    - when '3'
+      = render 'mans/parts/test'
+    - when '4'
+      = render 'mans/parts/cmt'

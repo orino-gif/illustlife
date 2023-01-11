@@ -2,10 +2,6 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on('turbolinks:load', function() {
-  // turbolinksを無効化したい処理
-});
-
 $(document).ready(function(){
     $('#images').slick({
         slidesToShow: 4, //表示するスライドの数

@@ -3,6 +3,7 @@ class CresController < ApplicationController
   def show
     @reqs = Req.where(rx_id: params[:id], stts: '納品')
     @expors = Expor.where(user_id: params[:id])
+    @ovrs = Ovr.joins(:expor).all
   end
   def edit
     @sttg = Sttg.find_by(cre_id: params[:id])
@@ -19,11 +20,14 @@ class CresController < ApplicationController
       if @cre.pfm.wdl > 0
         @wdl_status = '引き落とし内容確認'
       else
-        flash.now[:alert] = '引き落とし対象額が0円です'; render :earning
+        flash.now[:alert] = '引き落とし対象額が0円です'
+        render :earning
       end
     elsif '引き落とし実行' == params[:wdl_status]
       @wdl_status = '引き落とし実行'
-      UserMailer.wdl(@cre).deliver_later; sleep(5); @cre.pfm.wdl=0; @cre.save
+      UserMailer.wdl(@cre).deliver_later; sleep(5)
+      @cre.pfm.wdl=0
+      @cre.save
     end
   end
   
@@ -32,7 +36,8 @@ class CresController < ApplicationController
       if params[:acept_req]
         if noti_ids = Resm.where(re_id: current_user.id)
           noti_ids.each do |user|
-            @noti_id = User.find(user.noti_id); @re_id = User.find(user.re_id)
+            @noti_id = User.find(user.noti_id)
+            @re_id = User.find(user.re_id)
             UserMailer.resm(@noti_id ,@re_id).deliver_later
           end
         end

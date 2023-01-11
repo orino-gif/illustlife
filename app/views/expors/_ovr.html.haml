@@ -1,0 +1,30 @@
+/ 表体を表示
+.row
+  / セル幅を「table全幅/セル数」に
+  - d_turbo = "data-turbolinks"
+  - colab = User.find_by(id: ovr.expor.user_id)
+  - if colab.id != current_user.id
+    %table.table.fixed_col
+      %tr
+        %td.hdn_over= link_to colab.nick, cre_path(colab.id)
+        - if ovr.expor.e_img?
+          %td.hdn_over= image_tag(ovr.expor.e_img.url, class:'ss_rect fit_con')
+        - else
+          - msg = Msg.find_by(id: ovr.expor.msg_id).s_msg.slice(0,7) + '...'
+          %td.hdn_over= msg
+        %td.hdn_over= ovr.expor.w_st
+        %td
+          - if '完了' == ovr.expor.w_st
+            - btn = '削除'
+          - else
+            - btn = '中断'
+          - if '完了' == "#{ovr.expor.w_st}"
+            - dis_edit = true
+            
+          - else
+            - dis_edit = false
+          = dis_edit
+          = button_to('編集', edit_expor_ovr_path(ovr.expor.id, ovr.id),method: :get,
+          disabled: dis_edit, class:"btn btn-light m_font border")
+          = button_to(btn, expor_ovr_path(ovr.expor.id, ovr.id),
+          method: :delete, class:"btn btn-light m_font border")

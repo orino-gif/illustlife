@@ -1,31 +1,37 @@
-- content_for(:html_title) { "#{@expor.kind} ⇒ #{@expor.hope}"}
 - up_cre = Cre.find_by(user_id:@expor.user_id)
-%h1.ll_font.ws_bgc="希望：#{@expor.kind} ⇒ #{@expor.hope}、#{@expor.who}"
+- title="#{up_cre.user.nick}: #{@expor.kind}⇒ #{@expor.who}#{@expor.hope}"
+- content_for(:html_title) { title }
+%h1.ll_font.ws_bgc
+  = title
 .container
   .row.my-1
     %h2.l_font= @expor.kind
   .row.my-5
-    - if @expor
-      - if 'キャラ・背景デザ(文字)' == @expor.kind || 'プロット' == @expor.kind
-        .col-5
-          .mb-5
-            =icon(up_cre,'ss_square')
-            =up_cre.user.nick
-          .l_line.m_rect.border.over.pre_wrap.p-3
-            =Msg.find_by(id: @expor.msg_id).s_msg.gsub(/[\n]/,"\n")
-      - else
-        = image_tag(@expor.e_img.url, class:'ws_bgc l_f_rect fit_con')
-  - if 'キャラ・背景デザ(文字)' != @expor.kind && 'プロット' != @expor.kind
-    .row
-      = '一言(13文字以内)：'
-    .row.mt-3
-      .col-1.text-center
-        =icon(up_cre,'ss_square')
-        =up_cre.user.nick
-      .col-2
-        .block-baloon-left
-          =Msg.find_by(id: @expor.msg_id).s_msg
+    - if ("キャラデザ,背景デザ,プロット").include?(@expor.kind)
+      .l_line.lll_square.border.over.pre_wrap.p-3
+        = Msg.find_by(id: @expor.msg_id).s_msg.gsub(/[\n]/,"\n")
+    - else
+      = image_tag(@expor.e_img.url, class:'ws_bgc lll_square fit_con')
+  .row
+    = '一言(17文字以内)：'
+  .row.mt-3
+    .col-1.text-center
+      = icon(up_cre,'ss_square')
+      = up_cre.user.nick
+    .col-2.block-baloon-left
+      = @expor.cmt 
+  .row.mt-3
+    %h2.l_font= @expor.hope
+  .row
+    - if '自分で' == @expor.who
+      .l_font= '＋5pt'
+    - else
+      .l_font= '謝礼＋' + @expor.fee.to_s + 'pt'
   .row.mt-5
     .col5
-      %button.btn.btn-light.m_font.ss_rect=link_to @expor.hope.to_s + 'に進める',
-      "/expors/#{@expor.id}/ovrs/#{@expor.id}/new"
+      - if (not user_signed_in?) || @expor.user_id != current_user.id || '自分で' == @expor.who
+        %button.btn.btn-light.m_font.ss_rect
+          =link_to @expor.hope.to_s + 'に進める',
+          "/expors/#{@expor.id}/ovrs/#{@expor.id}/new"
+      - else
+        .l_font= '募集中'

@@ -4,6 +4,7 @@ class ExporsController < ApplicationController
   
   def index
     @expors = Expor.where(user_id: current_user.id)
+    @ovrs = Ovr.where(up_id: current_user.id)
   end
   
   def new
@@ -13,43 +14,47 @@ class ExporsController < ApplicationController
   def create
     @expor = Expor.new(expors_params)
     pfm = Pfm.find_by(cre_id: current_user.id)
-    p @expor.who
-    if '自分で' == @expor.who || pfm.point >= @expor.fee
-      if '自分で' == @expor.who
-        pfm.point += 5
-      elsif 0 < @expor.fee || pfm.point <= @expor.fee
-        pfm.point -= @expor.fee
-      end
-      pfm.save
-      if '' != @expor.gist.to_s || 'NULL' != @expor.cmt
-        @msg = Msg.new
-        if '' != @expor.gist.to_s 
-          @msg.s_msg = @expor.gist
-          @msg.save
-          @expor.msg_id = @msg.id
-          @expor.gist = ''
-        elsif 'NULL' != @expor.cmt
-          @msg.s_msg = @expor.cmt
-          @msg.save
-          @expor.msg_id = @msg.id
-          @expor.cmt = 'NULL'
+    if pfm.point >= @expor.fee
+      if '' != @expor.gist || @expor.e_img?
+        p @expor.gist.length
+        if 1000 > @expor.gist.length.to_i
+          if '' != @expor.gist
+            @msg = Msg.new
+            @msg.s_msg = @expor.gist
+            @msg.save
+            @expor.msg_id = @msg.id
+            @expor.gist = ''
+          end
+          if '自分で' == @expor.who
+            pfm.point += 5
+            @expor.w_st = '作業中'
+          else
+            pfm.point -= @expor.fee
+            @expor.w_st = '待機'
+          end
+          if @expor.save
+            pfm.save
+            redirect_to root_path, notice: '晒しました'
+          elsif @expor.errors.full_messages[0].include?("e_dl.blank")
+            alt('期限が入力されてません')
+          elsif @expor.errors.full_messages[0].include?("以前に")
+            err_msg = @expor.errors.full_messages[0].slice(6..30)
+            alt('日付は' + (Date.today+1).to_s + '以降～' + err_msg)
+          elsif @expor.errors.full_messages[0].include?("cmt.blank")
+            alt('一言が空白です')
+          elsif @expor.errors.full_messages[0].include?("cmt.too_long")
+            alt('一言が17文字を超えています')
+          else
+            p @expor.errors.full_messages[0]
+            alt('失敗しました')
+          end
         else
-          p 'gist or s_msg error'
+          alt('テキスト文字数が1000を超えています')
         end
-      end
-      if @expor.msg_id.nil? && @expor.e_img.nil?
-        alt('作品が入力されていません')
       else
-        if @expor.save
-          redirect_to root_path, notice: '晒しました'
-        elsif @expor.errors.full_messages[0].include?("e_dl.blank")
-          alt('期限が入力されてません')
-        else
-          p @expor.errors.full_messages[0]
-          alt('失敗しました')
-        end
+        alt('作品が入力されていません')
       end
-    elsif pfm.point < @expor.fee
+    else
       alt('ポイントが足りません')
     end
   end
@@ -60,6 +65,12 @@ class ExporsController < ApplicationController
   
   def edit
     @expor = Expor.find_by(id: params[:id])
+    illust = "キャラデザ,背景デザ,構図,ラフ,線画,塗り(色分け),塗り(着色),納品"
+    if illust.include?(@expor.kind)
+      @illust = true
+    else
+      @illust = false
+    end
   end
   
   def update
@@ -77,7 +88,10 @@ class ExporsController < ApplicationController
       end
       p 'test3' + @expor.gist.to_s
       if '' != @expor.gist
-        Msg.find_by(id: @expor.msg_id).delete
+        if @expor.msg_id?
+          Msg.find_by(id: @expor.msg_id).delete
+          @expor.msg_id = 'NULL'
+        end
         @msg = Msg.new
         @msg.s_msg = @expor.gist
         @msg.save
@@ -93,12 +107,15 @@ class ExporsController < ApplicationController
   
   def destroy
     @expor = Expor.find_by(id: params[:id])
+    ovr = Ovr.find_by(expor_id: @expor.id)
     pfm = Pfm.find_by(cre_id: @expor.user_id)
     pfm.point += @expor.fee
+    ovr.delete
     if '自分で' == @expor.who 
       pfm.point -= 5
     end
     pfm.save
+    
     if @expor.delete
       noti('削除しました')
     end
@@ -108,6 +125,6 @@ class ExporsController < ApplicationController
 
   def expors_params
     params.require(:expor).permit(:user_id, :e_img, :kind, :hope, :fee,
-    :gist, :who, :e_dl)
+    :gist, :who, :e_dl, :cmt, :w_st)
   end
 end

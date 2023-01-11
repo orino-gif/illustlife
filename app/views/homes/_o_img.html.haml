@@ -1,0 +1,43 @@
+- if 'トップ' == place
+  - ovrs.reverse_each.with_index(1) do |ovr, index|
+    = link_to(expor_ovr_path(ovr.expor.id, ovr.id)) do
+      .s_font.s_line.text-left.blk_col
+        - if ovr.o_img?
+          .m_font
+            = ovr.expor.kind
+          - if ovr.expor.e_img?
+            = image_tag(ovr.expor.e_img.url, class:'ll_square fit_con')
+          - else
+            .ll_square.s_s-border.fixed_col
+              = Msg.find_by(id:ovr.expor.msg_id).s_msg
+          .m_font
+            = '↓ ' + ovr.expor.hope.to_s
+          = image_tag(ovr.o_img.url, class:'ll_square fit_con')
+- if '対応済' == place
+  - ovrs.reverse_each.with_index(1) do |ovr, index|
+    - if ovr.o_img?
+      = link_to(expor_ovr_path(ovr.expor_id, ovr.id)) do
+        .ll_square.m_font.ws_bgc.text-center.border.m-1
+          = image_tag(ovr.o_img.url, class: 'full_rect fit_con')
+          .blk_col
+            = ovr.expor.kind + '→ ' + ovr.expor.hope.to_s
+          - cre = Cre.find_by(user_id: ovr.expor.user_id)
+          = icon(cre, 's_square m_on_pos border')
+    - break if 30 == index
+- if '作業中' == place
+  - ovrs.reverse_each.with_index(1) do |ovr, index|
+    - if not ovr.o_img?
+      = link_to("/expors/#{ovr.expor_id}/ovrs/#{ovr.id}") do
+        .ll_square.m_font.ws_bgc.text-center.border.m-1.blk_col
+          - if ovr.expor.e_img?
+            = image_tag(ovr.expor.e_img.url, class: 'full_rect fit_con')
+          - else
+            - msg_id = Expor.find_by(id:ovr.expor_id).msg_id
+            .ll_square.border.fixed_co.p-3.pre_wrap.blk_col.text-left
+              = Msg.find_by(id: msg_id).s_msg.gsub(/[\n]/,
+                "\n").slice(0..80) + '...'
+          .blk_col
+            = '→ ' + ovr.expor.hope.to_s
+          - cre = Cre.find_by(user_id: ovr.expor.user_id)
+          = icon(cre, 's_square m_on_pos border')
+    - break if 30 == index

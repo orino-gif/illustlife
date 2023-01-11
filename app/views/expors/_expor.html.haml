@@ -1,0 +1,55 @@
+- d_turbo = "data-turbolinks"
+- ovr = Ovr.find_by(expor_id: expor.id)
+- msg = Msg.find_by(id: expor.msg_id)
+.row
+  %table.table.fixed_col
+    %tr
+      / セルからはみ出した文字を隠す
+      %td.hdn_over= "#{expor.kind}"
+      - if ("キャラデザ,背景デザ,プロット").include?(expor.kind)
+        %td.hdn_over
+          - if not ovr
+            = link_to msg.s_msg.slice(0,5) + '...', expor_path(expor.id)
+          - else
+            = link_to msg.s_msg.slice(0,5) + '...',
+            expor_ovr_path(expor.id,ovr.id)
+      - else
+        %td.hdn_over
+          - if not ovr
+            = link_to image_tag(expor.e_img.url, class:'ss_rect fit_con'),
+            expor_path(expor.id)
+          - else
+            = link_to image_tag(expor.e_img.url, class:'ss_rect fit_con'),
+            expor_ovr_path(expor.id,ovr.id)
+      %td.hdn_over= "#{expor.hope}"
+      - if '自分で' == expor.who
+        %td.hdn_over= User.find_by(id: expor.user_id).nick
+      - else
+        - if ovr
+          %td.hdn_over
+            = link_to User.find_by(id: ovr.up_id).nick, cre_path(c_usr.cre.user_id)
+        - else
+          %td.hdn_over= '募集中'
+      %td.hdn_over= "#{expor.e_dl}"
+      %td.hdn_over= "#{expor.fee}"
+      %td.hdn_over= "#{expor.w_st}"
+      %td
+        // %button.btn.btn-light.m_font{d_turbo => "false",disabled: "disabled"}= link_to '編集',
+        // edit_expor_path(expor.id)
+        - if '協力中' == "#{expor.w_st}"
+          - dis_edit = true
+          - dis_del = true
+        - elsif '完了' == "#{expor.w_st}"
+          - dis_edit = true
+          - dis_del = false
+        - else
+          - dis_edit = false
+          - dis_del = false
+        - if not ovr
+          = button_to('編集', edit_expor_path(expor.id), method: :get, 
+            disabled: dis_edit,d_turbo: false, class:"btn btn-light m_font border")
+        - else
+          = button_to('作業', edit_expor_ovr_path(expor.id, ovr.id), method: :get, 
+            disabled: dis_edit,d_turbo: false, class:"btn btn-light m_font border")
+        = button_to('削除', expor_path(expor.id), method: :delete,
+          disabled: dis_del, class:"btn btn-light m_font border")

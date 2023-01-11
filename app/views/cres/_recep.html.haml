@@ -1,0 +1,24 @@
+%table.table
+  %tr
+    %td
+      = form_with(model: @sttg, local:true) do |f|
+        = f.label :recom, '推奨金額(円):'
+        = f.text_field :recom
+        = f.label :min, '最低金額(円):'
+        = f.text_field :min
+        = f.submit '登録'
+  %tr
+    %td
+      = form_with(model: @sttg, local:true) do |f|
+        = f.label :start, 'リクエスト受付:'
+        - if @is_cr_all || ('development' == ENV['RAILS_ENV'])
+          - if true != @sttg.start
+            = f.hidden_field :start, value:true
+            = f.submit '開始', :name => 'acept_req'
+          - else
+            = f.hidden_field :start, value:false
+            = f.submit '停止'
+        - else
+          %button{:disabled => "disabled", :type => "submit"}='開始'
+          = '※報酬受取先の口座登録が事前に必要です'
+  

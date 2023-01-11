@@ -1,0 +1,54 @@
+- up_cre = Cre.find_by(user_id:@expor.user_id)
+- content_for(:html_title){ "#{@expor.hope}工程" }
+%h1.ll_font.ws_bgc= "#{@expor.hope}工程"
+.container
+  .row.my-2
+    %h2.l_font= @expor.kind
+  .row.my-5
+    - if ("キャラデザ,背景デザ,プロット").include?(@expor.kind)
+      .l_line.lll_square.border.over.pre_wrap.p-3
+        = Msg.find_by(id: @expor.msg_id).s_msg.gsub(/[\n]/,"\n")
+    - else
+      = image_tag(@expor.e_img.url, class:'lll_square fit_con ws_bgc')
+  .row
+    = '一言(17文字以内)：'
+  .row.mt-3
+    .col-1.text-center
+      = icon(up_cre,'ss_square')
+      = up_cre.user.nick
+    .col-3
+      .block-baloon-left= @expor.cmt
+  - if @expor.user_id == current_user.id
+    .row.mt-5
+      = button_to('編集', edit_expor_path(@expor.id), {method: :get,
+      class:"btn btn-light"})
+  - elsif @expor.e_img?
+    .row.mt-5
+      = button_to('ダウンロード', download_expor_ovrs_path(@expor.id),
+      {method: :get, class:"btn btn-light",
+      params:{expor_id: params[:id], ovr_id: 'NULL'}})
+    .row
+      = '※著作権はダウンロードファイル提供者に帰属します。'
+  - if @ovr.up_id == current_user.id || '自分で' == @expor.kind
+    .row.mt-4
+      %h2.l_font= @expor.hope
+    - if '完了' != @ovr.expor.w_st
+      .row
+        = form_with(model: @ovr,url: expor_ovr_path, local:true) do |f|
+          = f.label :o_img, @expor.hope + 'のファイルを選択:',
+          class:'lll_img btn btn-light my-5'
+          = f.file_field :o_img, class:'lll_img lll_square preview',
+          style:"display:none;"
+          .lll_img.lll_square.ws_bgc.mb-5.fit_con
+          = f.hidden_field :w_st, :value => '完了'
+          = f.submit 'アップロード', class:"btn btn-light"
+      - if @expor.user_id == current_user.id
+        .row
+          = '※私的利用(SNSに上げる等)は許可するものとします。'
+    - else
+      = image_tag(@ovr.o_img.url, class:'lll_square fit_con')
+      .row.mt-5
+        = button_to('ダウンロード', download_expor_ovrs_path(@expor.id),
+        {method: :get, class:"btn btn-light", params:{expor_id: params[:id],
+        ovr_id: @ovr.id}})
+        

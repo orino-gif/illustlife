@@ -1,23 +1,31 @@
-- content_for(:html_title) { 'クリエーター情報' }
-%h1.ll_font.ws_bgc クリエーター情報
+- content_for(:html_title) { "#{@cre.sttg.job}:#{@cre.user.nick}" }
+%h1.ll_font.ws_bgc= "#{@cre.sttg.job} : #{@cre.user.nick}"
 .container
   = render 'shared/user_hdr'
-  .row
-    %h2.l_font 晒した作品
-  .row
-    - if @expors
+  - if not @expors.nil?
+    .row
+      %h2.l_font 晒した作品
+    .row
       - @expors.reverse_each do |expor|
         - if expor.e_img?
           .s_pdg.text-center.py-1
             = link_to image_tag(expor.e_img.url,
-            class:'m_f_rect fit_con ws_bgc border'),"/expors/#{expor.id}"
+            class:'ll_square fit_con ws_bgc border'),"/expors/#{expor.id}"
         - else
           = link_to("/expors/#{expor.id}") do
-            .ll_square.border
-              %br=expor.kind.to_s + ':'
-              = Msg.find_by(id: expor.msg_id).s_msg
-    - else
-      = 'なし'
+            .ll_square.border.fixed_co.p-3.pre_wrap.blk_col
+              = Msg.find_by(id:expor.msg_id).s_msg.gsub(/[\n]/,
+              "\n").slice(0..80) + '...'
+  - if not @ovrs.nil?
+    .row
+      %h2.l_font 協力した作品
+    .row
+      - @ovrs.reverse_each do |ovr|
+        - if ovr.o_img?
+          .s_pdg.text-center.py-1
+            = link_to image_tag(ovr.o_img.url,
+            class:'ll_square fit_con ws_bgc border'),
+            "/expors/#{ovr.expor_id}/ovrs/#{ovr.id}"
   - if not @reqs.blank?
     .row
       %h2.l_font リクエスト作品
