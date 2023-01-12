@@ -7,22 +7,35 @@
       %h2.l_font 晒した作品
     .row
       - @expors.reverse_each do |expor|
+        - e_ovr = Ovr.find_by(expor_id: expor.id)
         - if ("キャラデザ,背景デザ,プロット").include?(expor.kind)
-          = link_to("/expors/#{expor.id}") do
-            .ll_square.fixed_co.border.p-3.pre_wrap.blk_col.text-left.m_line
-              = Msg.find_by(id:expor.msg_id).s_msg.gsub(/[\n]/,
-              "\n").slice(0..80) + '...'
+          - if not e_ovr
+            = link_to("/expors/#{expor.id}") do
+              .ll_square.border.m-1.hdn_over
+                .p-3.m_line.pre_wrap.blk_col.m_font.text-left
+                  = Msg.find_by(id:expor.msg_id).s_msg.gsub(/[\n]/,
+                  "\n").slice(0..80) + '...'
+          - else
+            = link_to("/expors/#{expor.id}/ovrs/#{e_ovr.id}") do
+              .ll_square.border.m-1.hdn_over
+                .p-3.m_line.pre_wrap.blk_col.m_font.text-left
+                  = Msg.find_by(id:expor.msg_id).s_msg.gsub(/[\n]/,
+                  "\n").slice(0..80) + '...'
         - else
-          .s_pdg.text-center.py-1
+          - if not e_ovr
             = link_to image_tag(expor.e_img.url,
-            class:'ll_square fit_con ws_bgc border'),"/expors/#{expor.id}"
+            class:'ll_square fit_con ws_bgc border m-1'),"/expors/#{expor.id}"
+          - else
+            = link_to image_tag(expor.e_img.url,
+            class:'ll_square fit_con ws_bgc border m-1'),
+            "/expors/#{expor.id}/ovrs/#{e_ovr.id}"
   - if not @ovrs.nil?
     .row
       %h2.l_font 協力した作品
     .row
       - @ovrs.reverse_each do |ovr|
         - if ovr.o_img?
-          .s_pdg.text-center.py-1
+          .m-1
             = link_to image_tag(ovr.o_img.url,
             class:'ll_square fit_con ws_bgc border'),
             "/expors/#{ovr.expor_id}/ovrs/#{ovr.id}"

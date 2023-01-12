@@ -45,6 +45,7 @@ strong, label, th { font-weight: normal; }
 .over {overflow: scroll;}
 //改行コードを反映させる
 .pre_wrap {white-space: pre-wrap;}
+.left_pos { position: relative; left: 20px; }
 // ユーザーヘッダーの小さい通知ボタンのデザイン
 .s_pad { padding: 3px; }
 .red_bgc { background-color: red; }
@@ -52,6 +53,7 @@ strong, label, th { font-weight: normal; }
 .s_m-side { margin : 0 10px; }
 .ss_m-side { margin : 0 -10px; }
 .size_variable-form { width: 65%; }
+.wht_col {background-color: white;}
 
 /*-----------矢印表示----------*/
 .slick-next{ right: 0!important; }
@@ -141,8 +143,8 @@ strong, label, th { font-weight: normal; }
 }
 // Large
 @media screen and (max-width: 1199px){
-  @include size_f(1.6em, 1.4em, 1.1em, 0.8em, 0.7em);
-  @include size_square(400px, 220px, 110px, 70px, 50px, 40px);
+  @include size_f(1.6em, 1.4em, 1.0em, 0.8em, 0.7em);
+  @include size_square(380px, 220px, 110px, 70px, 50px, 40px);
   @include size_rect(250px, 170px, 125px, 50px);
   @include position_top(-95px, -62px, -28px, -12px);
   @include position_left(100px);
@@ -155,8 +157,8 @@ strong, label, th { font-weight: normal; }
 }
 // Medium
 @media screen and (max-width: 991px){
-  @include size_f(1.5em, 1.3em, 1.0em, 0.7em, 0.6em);
-  @include size_square(400px, 200px, 100px, 60px, 45px, 35px);
+  @include size_f(1.5em, 1.3em, 0.9em, 0.7em, 0.6em);
+  @include size_square(350px, 200px, 100px, 60px, 45px, 35px);
   @include size_rect(200px, 160px, 110px, 50px);
   @include position_top(-90px, -54px, -24px, -11px);
   @include position_left(100px);
@@ -169,8 +171,8 @@ strong, label, th { font-weight: normal; }
 }
 // Small
 @media screen and (max-width: 767px){
-  @include size_f(1.4em, 1.2em, 0.9em, 0.6em, 0.5em);
-  @include size_square(400px, 190px, 90px, 50px, 42px, 32px);
+  @include size_f(1.4em, 1.2em, 0.8em, 0.6em, 0.5em);
+  @include size_square(300px, 170px, 90px, 50px, 42px, 32px);
   @include size_rect(100%, 150px, 105px, 50px);
   @include position_top(-85px, -42px, -22px, -10px);
   @include position_left(100px);
@@ -179,12 +181,12 @@ strong, label, th { font-weight: normal; }
   @include padding_side(7px);
   @include border_solid(1px,3px);
   @include pos_f(-30%,-20%);
-  @include on_hdr(-80px,65px)
+  @include on_hdr(-70px,45px)
 }
 // Extra small
 @media screen and (max-width: 575px){
-  @include size_f(1.2em, 1.1em, 0.8em, 0.5em, 0.4em);
-  @include size_square(400px, 180px, 70px, 40px, 32px, 28px);
+  @include size_f(1.2em, 1.1em, 0.6em, 0.5em, 0.4em);
+  @include size_square(250px, 120px, 70px, 40px, 32px, 28px);
   @include size_rect(100%, 120px, 100px, 50px);
   @include position_top(-65px, -35px, -18px, -10px);
   @include position_left(75px);
@@ -193,7 +195,7 @@ strong, label, th { font-weight: normal; }
   @include padding_side(3px);
   @include border_solid(1px,3px);
   @include pos_f(-30%,-20%);
-  @include on_hdr(-75px,60px)
+  @include on_hdr(-50px,35px)
 }
 
 /* ---------- 吹き出し共通設定 ---------- */

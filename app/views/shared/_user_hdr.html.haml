@@ -15,7 +15,7 @@
         / ログイン中のユーザーに再開通知ボタンを表示
         - if user_signed_in?
           - if Resm.where(noti_id:current_user.id, re_id:params[:id]).nil?
-            .ss_font.ss_ta-pos.m_lr-pos
+            .ss_font.ss_ta-pos
               =link_to "再開通知","/resms/#{@cre.user_id}/new",
               class:'ws_bgc s_pad'
             

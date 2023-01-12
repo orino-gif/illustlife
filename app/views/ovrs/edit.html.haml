@@ -16,8 +16,7 @@
     .col-1.text-center
       = icon(up_cre,'ss_square')
       = up_cre.user.nick
-    .col-3
-      .block-baloon-left= @expor.cmt
+    .l_f-from.block-baloon-left.left_pos= @expor.cmt
   - if @expor.user_id == current_user.id
     .row.mt-5
       = button_to('編集', edit_expor_path(@expor.id), {method: :get,
@@ -29,7 +28,7 @@
       params:{expor_id: params[:id], ovr_id: 'NULL'}})
     .row
       = '※著作権はダウンロードファイル提供者に帰属します。'
-  - if @ovr.up_id == current_user.id || '自分で' == @expor.kind
+  - if @expor.user_id == current_user.id || '自分で' == @expor.kind
     .row.mt-4
       %h2.l_font= @expor.hope
     - if '完了' != @ovr.expor.w_st

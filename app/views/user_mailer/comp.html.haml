@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    To
+    = @rx.nick
+    さん
+    <br><br>
+    = @tx.nick
+    さんの
+    作業が終了しました<br>
+    納品場所は以下のリンク先になります。<br>
+    = link_to '詳細リンク先', ENV['HOME_ADDRESS'] + "/expors/#{@expor.id}/ovrs/#{@ovr.id}"
+    <br>

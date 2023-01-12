@@ -13,13 +13,16 @@ class OvrsController < ApplicationController
   
   def create
     @ovr = Ovr.new(ovrs_params)
-    expor = Expor.find_by(id: params[:expor_id])
+    @expor = Expor.find_by(id: params[:expor_id])
     if @ovr.save
-      if '誰かに' == expor.who
-        expor.w_st = '協力中'
+      if '誰かに' == @expor.who
+        @expor.w_st = '協力中'
       end
-      expor.save
-      redirect_to edit_expor_ovr_path(expor.id, @ovr.id), notice: '開始しました'
+      @expor.save
+      @tx = User.find_by(id: @ovr.up_id)
+      @rx = User.find_by(id: @expor.user_id)
+      UserMailer.col(@tx, @rx,@expor,@ovr).deliver_later
+      redirect_to edit_expor_ovr_path(@expor.id, @ovr.id), notice: '開始しました'
     elsif @ovr.errors.full_messages[0].include?("blank")
       redirect_to request.referer, alert: 'アップロードファイルが存在しません'
     else
@@ -43,10 +46,21 @@ class OvrsController < ApplicationController
   end
   
   def update
+    @expor = Expor.find_by(id: params[:expor_id])
     @ovr = Ovr.find_by(id:params[:id])
     if @ovr.update(ovrs_params)
       @ovr.expor.w_st = '完了'
       @ovr.expor.save
+      pfm = Pfm.find_by(cre_id: @ovr.up_id)
+      if '自分で' == @expor.who 
+        pfm.point -= 5
+      else
+        pfm.point += @expor.fee
+      end
+      pfm.save
+      @tx = User.find_by(id: @ovr.up_id)
+      @rx = User.find_by(id: @expor.user_id)
+      UserMailer.comp(@tx, @rx,@expor,@ovr).deliver_later
       redirect_to root_path, notice: '更新しました'
     end
   end

@@ -5,8 +5,13 @@
 .container
   .row.my-5
     .col.text-center
-      %button.btn.btn-light.m_font.border{"data-turbolinks" => "false"}= link_to '新規',
-      "/expors/#{current_user.id}/new"
+      - if 5 > @expors.count
+        %button.btn.btn-light.m_font.border{"data-turbolinks" => "false"}= link_to_if true,
+        '新規',"/expors/#{current_user.id}/new"
+      - else
+        %button.btn.btn-light.m_font.border{"data-turbolinks" => "false"}= link_to_if false,
+        '新規',"/expors/#{current_user.id}/new"
+      %br= @expors.count.to_s + '/5'
   - if not @expors.blank?
     .row.my-5
       %h2.l_font= '晒した'

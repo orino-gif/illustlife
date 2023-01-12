@@ -8,10 +8,11 @@
       %tr
         %td.hdn_over= link_to colab.nick, cre_path(colab.id)
         - if ovr.expor.e_img?
-          %td.hdn_over= image_tag(ovr.expor.e_img.url, class:'ss_rect fit_con')
+          %td.hdn_over= link_to image_tag(ovr.expor.e_img.url,
+          class:'ss_rect fit_con'), expor_ovr_path(ovr.expor.id,ovr.id)
         - else
           - msg = Msg.find_by(id: ovr.expor.msg_id).s_msg.slice(0,7) + '...'
-          %td.hdn_over= msg
+          %td.hdn_over= link_to msg, expor_ovr_path(ovr.expor.id,ovr.id)
         %td.hdn_over= ovr.expor.w_st
         %td
           - if '完了' == ovr.expor.w_st
@@ -23,7 +24,6 @@
             
           - else
             - dis_edit = false
-          = dis_edit
           = button_to('編集', edit_expor_ovr_path(ovr.expor.id, ovr.id),method: :get,
           disabled: dis_edit, class:"btn btn-light m_font border")
           = button_to(btn, expor_ovr_path(ovr.expor.id, ovr.id),
