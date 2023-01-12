@@ -20,7 +20,7 @@
           = image_tag(ovr.o_img.url, class: 'full_rect fit_con')
           .blk_col
             = '→ ' + ovr.expor.hope.to_s
-          - cre = Cre.find_by(user_id: ovr.expor.user_id)
+          - cre = Cre.find_by(user_id: ovr.up_id)
           = icon(cre, 's_square m_on_pos border')
     - break if 30 == index
 - if '作業中' == place
@@ -37,6 +37,6 @@
                 "\n").slice(0..100) + '...'
           .blk_col
             = '→ ' + ovr.expor.hope.to_s
-          - cre = Cre.find_by(user_id: ovr.expor.user_id)
+          - cre = Cre.find_by(user_id: ovr.up_id)
           = icon(cre, 's_square m_on_pos border')
     - break if 30 == index
