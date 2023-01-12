@@ -34,9 +34,9 @@
           .field.text-left
             = f.check_box :agree ,{},checked_value = "true",
               unchecked_value = "false"
-            = link_to '利用規約', terms_agreement_path
+            = link_to '利用規約', agree_path(1)
             = f.label 'と'
-            = link_to 'プライバシーポリシー', policy_agreement_path
+            = link_to 'プライバシーポリシー', agree_path(2)
             = 'に同意する。又、登録する利用者本人のみがIDとパスワードを利用し、'
             = '事業主ではない事を認める。'
           .form-group
