@@ -3,7 +3,7 @@ class CresController < ApplicationController
   def show
     @reqs = Req.where(rx_id: params[:id], stts: '納品')
     @expors = Expor.where(user_id: params[:id])
-    @ovrs = Ovr.joins(:expor).all
+    @ovrs = Ovr.where(up_id: params[:id])
   end
   def edit
     @sttg = Sttg.find_by(cre_id: params[:id])
