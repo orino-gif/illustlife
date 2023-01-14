@@ -2,7 +2,7 @@
 %h1.ll_font.ws_bgc= "#{@cre.sttg.job} : #{@cre.user.nick}"
 .container
   = render 'shared/user_hdr'
-  - if not @expors.nil?
+  - if not @expors.blank?
     .row
       %h2.l_font 晒した作品
     .row
@@ -30,7 +30,7 @@
               = link_to image_tag(expor.e_img.url,
               class:'ll_square fit_con'),
               "/expors/#{expor.id}/ovrs/#{e_ovr.id}"
-  - if not @ovrs.nil?
+  - if not @ovrs.blank?
     .row
       %h2.l_font 協力した作品
     .row

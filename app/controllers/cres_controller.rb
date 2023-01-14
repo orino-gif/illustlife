@@ -3,6 +3,9 @@ class CresController < ApplicationController
   def show
     @reqs = Req.where(rx_id: params[:id], stts: '納品')
     @expors = Expor.where(user_id: params[:id])
+    @expors.each do |i|
+      p i.id.to_s
+    end
     @ovrs = Ovr.where(up_id: params[:id])
   end
   def edit
