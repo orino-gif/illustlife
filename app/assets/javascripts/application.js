@@ -42,3 +42,14 @@ $(document).on("change",".preview",function(){
       $(elem).next(".lll_img,.edit_img").html(lll_img)
     });
 })
+$(function () {
+  $('.dbl').mouseover(function() {
+      // ここに処理を記述する
+      $(this).css('transform','scale(2)');
+  
+  })
+  $('.dbl').mouseout(function() {
+      // ここに処理を記述する
+      $(this).css('transform','scale(1)');
+  })
+});

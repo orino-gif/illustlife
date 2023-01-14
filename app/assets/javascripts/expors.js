@@ -34,33 +34,7 @@ $(function () {
       $('.reward').show();
     }
   });
-  
-  // expor_editのセレクタの処理
-  $('[name="expor[kind]"]').change(function () {
-    var kind = $(this).val();
-    console.log(kind);
-    if (
-      'キャラデザ' == kind || '背景デザ' == kind || 'プロット' == kind
-      ){
-      $('.edit_text').show();
-      $('.edit_img').hide();
-    }else{
-      $('.edit_text').hide();
-      $('.edit_img').show();
-    }
-  });
-  $('[name="expor[who]"]').change(function () {
-    var who = $(this).val();
-    console.log(who);
-    if ('自分で' == who){
-      $('.edit_fee').hide();
-    }else{
-      $('.edit_fee').show();
-    }
-  });
 });
-
-
 
 function init(){
   $('.g_text').hide();

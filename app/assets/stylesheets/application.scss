@@ -49,6 +49,9 @@ strong, label, th { font-weight: normal; }
 // ユーザーヘッダーの小さい通知ボタンのデザイン
 .s_pad { padding: 3px; }
 .red_bgc { background-color: red; }
+.scale {
+  transform: translateX(20px);
+}
  // コンテンツの横のマージンの調整
 .s_m-side { margin : 0 10px; }
 .ss_m-side { margin : 0 -10px; }
