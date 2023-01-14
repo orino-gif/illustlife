@@ -14,8 +14,6 @@
         = Msg.find_by(id: @expor.msg_id).s_msg.gsub(/[\n]/,"\n")
     - else
       = image_tag(@expor.e_img.url, class:'lll_square fit_con ws_bgc')
-  .row
-    = '一言(17文字以内)：'
   .row.mt-3
     .col-1.text-center
       = icon(up_usr.cre,'ss_square')
