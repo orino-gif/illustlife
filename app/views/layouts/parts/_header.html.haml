@@ -21,8 +21,9 @@
             %button.btn.btn-light.m_font= link_to '実績', reqs_path
           %button.btn.btn-light.m_font= link_to '晒す', expors_path
           - if ENV['ADMIN'] == current_user.email
-            %button.btn.btn-light= link_to 'アカウント編集',
-            edit_cre_path(params[:id])
+            - if 'cres' == controller_name && 'show' == action_name
+              %button.btn.btn-light= link_to 'アカウント編集',
+              edit_cre_path(params[:id])
           - else
             %button.btn.btn-light.m_font= link_to '設定',
             edit_cre_path(current_user.id)
