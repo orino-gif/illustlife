@@ -48,7 +48,7 @@
         .col3.m-2
           - if not req.work.images[0].blank?
             = link_to image_tag(req.work.images[0].url,
-            class:'ll_square fit_c m_s-border'),"/works/#{req.work.req_id}"
+            class:'ll_square fit_c border'),"/works/#{req.work.req_id}"
           - else
             .alert.alert-dismissable.alert-danger
               %button.close{"data-dismiss" => "alert", :type => "button"} ×
