@@ -9,7 +9,7 @@
   .row.my-2
     %h2.l_font= @expor.kind
   .row.my-5
-    - if ("キャラデザ,背景デザ,プロット").include?(@expor.kind)
+    - if ("キャラデザ,背景デザ,プロット").include?(@expor.kind)|| (not @expor.e_img?)
       .l_line.lll_square.border.over.pre_wrap.p-3
         = Msg.find_by(id: @expor.msg_id).s_msg.gsub(/[\n]/,"\n")
     - else
@@ -25,13 +25,13 @@
     .l_font= '↓'
   .row.my-2
     %h2.l_font= @expor.hope
-  .row.text-center
-    .col-1.text-center
-      = icon(down_usr.cre, 'ss_square')
-      = down_usr.nick
   .row.my-5
     .col5
       - if @ovr.o_img?
         = image_tag(@ovr.o_img.url, class:'lll_square fit_con ws_bgc')
       - else
         .l_font='　作業中'
+  .row.text-center
+    .col-1.text-center
+      = icon(down_usr.cre, 'ss_square')
+      = down_usr.nick

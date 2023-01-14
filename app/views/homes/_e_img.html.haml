@@ -1,8 +1,9 @@
 - expors.reverse_each.with_index(1) do |expor, index|
   - if who == expor.who
-    .ll_square.m_font.text-center.ws_bgc.border.mb-5.mx-2.my-2
+    .ll_square.m_font.text-center.border.mb-5.mx-2.my-2
       - if expor.e_img?
-        = link_to image_tag(expor.e_img.url, class:'full_rect fit_con'),
+        .ll_square.ws_bgc
+          = link_to image_tag(expor.e_img.url, class:'full_rect fit_con'),
         expor_path(expor.id)
       - else
         = link_to(expor_path(expor.id)) do
@@ -10,6 +11,5 @@
             - msg = Msg.find_by(id: expor.msg_id)
             = msg.s_msg.gsub(/[\n]/,"\n").slice(0..100) + '...'
       = expor.kind + '→ ' + expor.hope.to_s
-      - if '誰かに' == expor.who
-        %br= '+' + expor.fee.to_s + 'pt'
+      %br= '+' + expor.fee.abs.to_s + 'pt'
     - break if 8 == index

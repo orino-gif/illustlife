@@ -23,9 +23,9 @@
     %h2.l_font= @expor.hope
   .row
     - if '自分で' == @expor.who
-      .l_font= '＋5pt'
+      .l_font= '完了時＋5pt'
     - else
-      .l_font= '謝礼＋' + @expor.fee.to_s + 'pt'
+      .l_font= '謝礼＋' + @expor.fee.abs.to_s + 'pt'
   .row.mt-5
     .col5
       - if (not user_signed_in?) || @expor.user_id != current_user.id || '自分で' == @expor.who

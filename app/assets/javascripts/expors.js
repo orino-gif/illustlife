@@ -60,6 +60,8 @@ $(function () {
   });
 });
 
+
+
 function init(){
   $('.g_text').hide();
   $('.comp').hide();

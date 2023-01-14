@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :ovrs, only: [:create, :show, :edit, :destroy, :update] do 
       collection do
         get '/:id/new', to: 'ovrs#new'
-        get 'download'
+        get 'down'
       end
     end
     collection do; get '/:id/new', to: 'expors#new'; end

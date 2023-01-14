@@ -52,7 +52,7 @@ strong, label, th { font-weight: normal; }
  // コンテンツの横のマージンの調整
 .s_m-side { margin : 0 10px; }
 .ss_m-side { margin : 0 -10px; }
-.size_variable-form { width: 65%; }
+.size_variable-form { min-width: 300px; width: 40%; }
 .wht_col {background-color: white;}
 
 /*-----------矢印表示----------*/

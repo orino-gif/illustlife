@@ -98,7 +98,7 @@
         = '期限(1か月以内):'
         %br
         = f.date_field :e_dl
-        = f.hidden_field :user_id, value:params[:id]
+        = f.hidden_field :user_id, value: params[:id]
         = f.submit '晒す', class:"btn btn-light l_font my-5 ss_rect"
         
         = "以下の文に同意できる方のみ実行してください"

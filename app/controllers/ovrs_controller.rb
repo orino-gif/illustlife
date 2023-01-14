@@ -3,9 +3,6 @@ class OvrsController < ApplicationController
   include OvrsHelper
   before_action :authenticate_user!, only: [:new, :create]
   
-  def index
-  end
-  
   def new
     @expor = Expor.find_by(id: params[:expor_id])
     @ovr = Ovr.new
@@ -15,14 +12,16 @@ class OvrsController < ApplicationController
     @ovr = Ovr.new(ovrs_params)
     @expor = Expor.find_by(id: params[:expor_id])
     if @ovr.save
-      if '誰かに' == @expor.who
+      if '自分で' == @expor.who
+        @expor.w_st = '作業中'
+      elsif '誰かに' == @expor.who
         @expor.w_st = '協力中'
+        @tx = User.find_by(id: @ovr.up_id)
+        @rx = User.find_by(id: @expor.user_id)
+        UserMailer.col(@tx, @rx, @expor, @ovr).deliver_later
       end
       @expor.save
-      @tx = User.find_by(id: @ovr.up_id)
-      @rx = User.find_by(id: @expor.user_id)
-      UserMailer.col(@tx, @rx,@expor,@ovr).deliver_later
-      redirect_to edit_expor_ovr_path(@expor.id, @ovr.id), notice: '開始しました'
+      redirect_to edit_expor_ovr_path(@expor.id, @ovr.id),notice: '開始しました'
     elsif @ovr.errors.full_messages[0].include?("blank")
       redirect_to request.referer, alert: 'アップロードファイルが存在しません'
     else
@@ -37,38 +36,49 @@ class OvrsController < ApplicationController
   
   def edit
     @expor = Expor.find_by(id: params[:expor_id])
+    p params[:btn]
+    if '手戻し'== params[:btn]
+      @expor.w_st = params[:btn]
+      @expor.save
+    end
     @ovr = Ovr.find_by(id: params[:id])
+    @cre = Cre.find_by(user_id: @expor.user_id)
   end
 
-  def download
-    p params[:ovr_id]
+  def down
     eo_img(params[:expor_id], params[:ovr_id])
   end
   
   def update
     @expor = Expor.find_by(id: params[:expor_id])
+    w_st = @expor.w_st
     @ovr = Ovr.find_by(id:params[:id])
     if @ovr.update(ovrs_params)
-      @ovr.expor.w_st = '完了'
-      @ovr.expor.save
-      pfm = Pfm.find_by(cre_id: @ovr.up_id)
-      if '自分で' == @expor.who 
-        pfm.point -= 5
+      @expor.w_st = '完了'
+      @expor.save
+      if '手戻し' != w_st
+        pfm = Pfm.find_by(cre_id: @ovr.up_id)
+        pfm.point += @expor.fee.abs
+        pfm.save
+        if '誰かに' == @expor.who
+          @users = User.find(@ovr.up_id, @expor.user_id)
+          @rx = User.find_by(id: @expor.user_id)
+          UserMailer.comp(@users[0], @users[1],@expor,@ovr).deliver_later
+        end
+        redirect_to root_path, notice: @expor.fee.abs.to_s + 'pt獲得しました'
       else
-        pfm.point += @expor.fee
+        redirect_to expors_path, notice: '手戻ししました'
       end
-      pfm.save
-      @tx = User.find_by(id: @ovr.up_id)
-      @rx = User.find_by(id: @expor.user_id)
-      UserMailer.comp(@tx, @rx,@expor,@ovr).deliver_later
-      redirect_to root_path, notice: '更新しました'
     end
   end
   
   def destroy
     ovr = Ovr.find_by(id: params[:id])
+    tx = User.find_by(id: ovr.expor.user_id)
+    rx = User.find_by(id: ovr.up_id)
     if ovr.delete
-      redirect_to root_path, notice: '削除しました'
+      UserMailer.inter(tx, rx, ovr.expor).deliver_later
+      redirect_to root_path, notice: '中断しました'
     end
   end
   

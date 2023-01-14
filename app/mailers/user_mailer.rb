@@ -7,6 +7,13 @@ class UserMailer < ApplicationMailer
     mail(to: "#{@tx.email}, #{ENV['ADMIN']}", subject: "[#{ENV['APP_NAME']}]"+ \
     @tx.nick + 'さんから協力されました')
   end
+  def inter(tx, rx, expor)
+    @tx = tx
+    @rx = rx
+    @expor = expor
+    mail(to: "#{@tx.email}, #{ENV['ADMIN']}", subject: "[#{ENV['APP_NAME']}]"+ \
+    @tx.nick + 'さんが作業を中断しました')
+  end
   def comp(tx, rx, expor, ovr)
     @tx = tx
     @rx = rx

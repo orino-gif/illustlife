@@ -16,11 +16,14 @@ class ReqsController < ApplicationController
   def create
     # カード登録済みの場合にリクエスト処理を実行
     if Card.find_by(user_id: current_user.id)
-      @tx=current_user; @rx=User.find(params[:tx_id])
+      @tx = current_user
+      @rx = User.find(params[:tx_id])
       @req = Req.new(reqs_params)
-      @req.tx_id=@tx.id; @req.rx_id=@rx.id; @req.stts='承認待ち'
+      @req.tx_id = @tx.id
+      @req.rx_id = @rx.id
+      @req.stts = '承認待ち'
       if @req.save
-        Work.create(req_id:@req.id)
+        Work.create(req_id: @req.id)
         UserMailer.req(@tx, @rx).deliver_later
         redirect_to reqs_url, notice: 'リクエストを送信しました。'
       elsif @req.errors.full_messages[0].include?('too_long')

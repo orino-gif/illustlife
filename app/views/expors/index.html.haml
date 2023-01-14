@@ -5,13 +5,8 @@
 .container
   .row.my-5
     .col.text-center
-      - if 5 > @expors.count
-        %button.btn.btn-light.m_font.border{"data-turbolinks" => "false"}= link_to_if true,
-        '新規',"/expors/#{current_user.id}/new"
-      - else
-        %button.btn.btn-light.m_font.border{"data-turbolinks" => "false"}= link_to_if false,
-        '新規',"/expors/#{current_user.id}/new"
-      %br= @expors.count.to_s + '/5'
+      %button.btn.btn-light.m_font.border{"data-turbolinks" => "false"}
+        = link_to '新規',"/expors/#{current_user.id}/new"
   - if not @expors.blank?
     .row.my-5
       %h2.l_font= '晒した'
@@ -23,12 +18,11 @@
           %th="希望"
           %th="作業者"
           %th="期限"
-          %th="謝礼(pt)"
+          %th="pt"
           %th="状態"
           %th="操作"
     - @expors.reverse_each.with_index(1) do |expor|
       = render 'expor', {expor: expor}
-    
   - if not @ovrs.blank?
     .row.my-5
       %h2.l_font= '協力'
