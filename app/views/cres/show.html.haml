@@ -13,14 +13,14 @@
             = link_to("/expors/#{expor.id}") do
               .ll_square.border.mx-1.my-3
                 .p-3.m_line.pre_wrap.blk_col.m_font.text-left
-                  = expor.kind + '→ ' + expor.hope.to_s
+                  = expor.kind + '→ ' + expor.who
                   %br= Msg.find_by(id:expor.msg_id).s_msg.gsub(/[\n]/,
                   "\n").slice(0..80) + '...'
           - else
             = link_to("/expors/#{expor.id}/ovrs/#{e_ovr.id}") do
               .ll_square.border.mx-1.my-3.hdn_over
                 .p-3.m_line.pre_wrap.blk_col.m_font.text-left
-                  = expor.kind + '→ ' + expor.hope.to_s
+                  = expor.kind + '→ ' + expor.hope
                   %br= Msg.find_by(id:expor.msg_id).s_msg.gsub(/[\n]/,
                   "\n").slice(0..80) + '...'
         - else
@@ -28,11 +28,12 @@
             - if not e_ovr
               = link_to image_tag(expor.e_img.url,
               class:'ll_square fit_con'),"/expors/#{expor.id}"
+              = expor.kind + '→ ' + expor.who
             - else
               = link_to image_tag(expor.e_img.url,
               class:'ll_square fit_con'),
               "/expors/#{expor.id}/ovrs/#{e_ovr.id}"
-            = expor.kind + '→ ' + expor.hope.to_s
+              = expor.kind + '→ ' + expor.hope
   - if not @ovrs.blank?
     .row
       %h2.l_font 協力した作品
@@ -44,7 +45,7 @@
               = link_to image_tag(ovr.o_img.url,
               class:'ll_square fit_con ws_bgc border'),
               "/expors/#{ovr.expor_id}/ovrs/#{ovr.id}"
-              = ovr.expor.kind + '→ ' + ovr.expor.hope.to_s
+              = ovr.expor.kind + '→ ' + ovr.expor.hope
   - if not @reqs.blank?
     .row
       %h2.l_font リクエスト作品
