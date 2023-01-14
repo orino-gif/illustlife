@@ -29,6 +29,8 @@ class ExporsController < ApplicationController
             @expor.fee = 5
           else
             @expor.w_st = '募集中'
+            pfm.point -= @expor.fee
+            pfm.save
             @expor.fee = -@expor.fee
           end
           if @expor.save
@@ -65,7 +67,7 @@ class ExporsController < ApplicationController
     expor = Expor.find_by(id: params[:id])
     if '誰かに' == expor.who
       pfm = Pfm.find_by(cre_id: expor.user_id)
-      pfm.point += expor.fee
+      pfm.point += expor.fee.abs
       pfm.save
     end
     ovr = Ovr.find_by(expor_id: expor.id)

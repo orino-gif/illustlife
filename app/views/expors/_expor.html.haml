@@ -42,7 +42,7 @@
             - btn_name = '取得'
           = button_to(btn_name, edit_expor_ovr_path(ovr.expor.id, ovr.id),
             method: :get, d_turbo: false, class:"btn btn-light m_font border")
-        - if expor.e_dl > Date.today && '誰かに' == expor.who && ovr.nil?
+        - if expor.e_dl > Date.today && '誰かに' == expor.who && ovr
           = button_to('削除', expor_path(expor.id), method: :delete,
             disabled: true, class:"btn btn-light m_font border")
         - else
