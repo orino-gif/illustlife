@@ -12,7 +12,7 @@
   .row.mt-3
     .col-1.text-center
       = icon(@cre,'ss_square')
-      = @cre.user.nick
+      %br= @cre.user.nick
     .l_f-from.block-baloon-left.left_pos= @expor.cmt
   - if @expor.e_img? && @ovr.up_id != current_user.id
     .row.mt-5
@@ -37,7 +37,7 @@
       .row
         .col-1.text-center
           = icon(@cre,'ss_square')
-          = @cre.user.nick
+          %br= @cre.user.nick
       - if @ovr.up_id == current_user.id && '自分で' != @expor.who
         .row.mt-5
           = button_to('ダウンロード', down_expor_ovrs_path(@expor.id),
