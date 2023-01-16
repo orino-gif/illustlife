@@ -8,5 +8,5 @@ src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-p
 
 
 / google検索に表示しない
-- if 'agrees' == controller.controller_name || 'edit' == controller.action_name 
+- if 'agrees' == controller.controller_name || 'edit' == controller.action_name || ('expors' == controller.controller_name && 'index' == controller.action_name)
   %meta{:content => "noindex", :name => "robots"}/
