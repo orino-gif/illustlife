@@ -2,8 +2,10 @@
 = csrf_meta_tags
 = csp_meta_tag
 
+/ googleアドセンス
+%script{async: "", crossorigin: "anonymous", src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1975514113864953"}
+
+
 / google検索に表示しない
 - if 'agreements' == controller.controller_name || 'new' == controller.action_name || 'edit' == controller.action_name 
   %meta{:content => "noindex", :name => "robots"}/
-- else
-  %script{async: "", crossorigin: "anonymous", src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1975514113864953"}
