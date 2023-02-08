@@ -18,22 +18,22 @@
       .col.text-right
         - if user_signed_in?
           - if 0 < current_user.cre.pfm.pic
-            %button.btn.btn-light.m_font= link_to '実績', reqs_path
-          %button.btn.btn-light.m_font= link_to '晒す', expors_path
+            %button.btn.btn-light.m_font.border= link_to '実績', reqs_path
+          %button.btn.btn-light.m_font.border= link_to '晒す', expors_path
           - if ENV['ADMIN'] == current_user.email
             - if 'cres' == controller_name && 'show' == action_name
-              %button.btn.btn-light= link_to 'アカウント編集',
+              %button.btn.btn-light.border= link_to 'アカウント編集',
               edit_cre_path(params[:id])
           - else
-            %button.btn.btn-light.m_font= link_to '設定',
+            %button.btn.btn-light.m_font.border= link_to '設定',
             edit_cre_path(current_user.id)
-          %button.btn.btn-light.m_font= link_to 'ログアウト',
+          %button.btn.btn-light.m_font.border= link_to 'ログアウト',
           destroy_user_session_path, method: "delete"
         - else
           - if not devise_controller?
-            %button.btn.btn-light.m_font= link_to '晒す', "/expors/1/new",
+            %button.btn.btn-light.m_font.border= link_to '投稿',"/expors/1/new",
             data: {"turbolinks" => false}
-            %button.btn.btn-light.m_font= link_to 'ログイン',
+            %button.btn.btn-light.m_font.border= link_to 'ログイン',
             new_user_session_path
-          %button.btn.btn-light.m_font= link_to '新規登録',
+          %button.btn.btn-light.m_font.border= link_to '新規登録',
           new_user_registration_path

@@ -15,6 +15,6 @@
   - if @reqs
     - @reqs.reverse_each.with_index(1) do |req|
       - @req = req
-      = render 'reqs/parts/req.html'
+      = render 'req.html'
   - else
     = 'リクエストがまだ存在しません'

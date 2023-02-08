@@ -2,13 +2,13 @@
 %h1.ll_font.ws_bgc='イラスト付き利用説明'
 .container
   / 目次
-  = render 'mans/parts/index'
+  = render 'index'
   - case params[:id]
     - when '1'
-      = render 'mans/parts/site'
+      = render 'site'
     - when '2'
-      = render 'mans/parts/expose'
+      = render 'expose'
     - when '3'
-      = render 'mans/parts/test'
+      = render 'test'
     - when '4'
-      = render 'mans/parts/cmt'
+      = render 'cmt'

@@ -4,20 +4,20 @@
   .row.my-5
     // 伝票
     .col-md-auto
-      = render 'works/parts/voucher'
+      = render 'voucher'
     // 進行状態表示
     .col-sm-auto
       .m_line
         - case @req.stts
         - when '承認待ち'
           - if user_signed_in? && @rx.id == current_user.id
-            = render 'works/parts/approval'
+            = render 'approval'
         - when '製作中','手戻し'
           - if user_signed_in? && @rx.id == current_user.id
-            = render 'works/parts/mfr'
-            = render 'works/parts/disp'
+            = render 'mfr'
+            = render 'disp'
         - when '納品'
-          = render 'works/parts/disp'
+          = render 'disp'
 
     // 納品操作
     .col-sm-auto

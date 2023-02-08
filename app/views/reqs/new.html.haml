@@ -31,9 +31,9 @@
           = f.label :nsfw, 'NSFW'
         %br
           - if user_signed_in? && params[:id].to_i == current_user.id.to_i
-            - dis = 'btn btn-light ss_rect l_font disabled'
+            - dis = 'btn btn-light ss_rect l_font border disabled'
           - else
-            - dis = 'btn btn-light ss_rect l_font'
+            - dis = 'btn btn-light ss_rect l_font border'
           = f.submit 'リクエスト送信', class: dis
         %br/
         = hidden_field_tag :tx_id, params[:id]

@@ -75,7 +75,7 @@ class ExporsController < ApplicationController
       ovr.delete
     end
     if expor.delete
-      noti('削除しました')
+      noti('削除しました', request.referer)
     end
   end
   

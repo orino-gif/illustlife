@@ -7,4 +7,4 @@
     = form_with(model: @ovr,url: expor_ovrs_path, local:true) do |f|
       = f.hidden_field :up_id, :value => current_user.id
       = f.hidden_field :expor_id, :value => @expor.id
-      = f.submit 'する', class:"l_font btn btn-light"
+      = f.submit 'する', class:"l_font btn btn-light border"

@@ -5,7 +5,12 @@
     = render 'o_img', {ovrs: @ovrs, place: 'トップ'}
 .container
   .row
-    %h2.l_font 晒した後
+    %h2.l_font 人気キャラ
+  .row
+    = button_to('好きなキャラを追加', new_char_path, method: :get,
+    class:"btn btn-light m_font border")
+  .row
+    %h2.l_font 一次創作
   .row
     %h3.m_font 誰かに
   .row
@@ -15,15 +20,15 @@
   .row
     = render 'e_img', {expors: @expors, who: '自分で'}
   .row.mt-5
-    %h2.l_font 対応済
+    %h3.m_font 対応済
   .row.ss_m-side
     = render 'o_img', {ovrs: @ovrs, place: '対応済'}
   .row.mt-5
-    %h2.l_font 作業中
+    %h3.m_font 作業中
   .row.ss_m-side
     = render 'o_img', {ovrs: @ovrs, place: '作業中'}
   .row.mt-5
-    %h2.l_font 絵師、漫画家
+    %h2.l_font 絵師、漫画家、評論家
   .row.ss_m-side
     = render 'c_img', {cres: @cres, is_hdr: true}
   .row

@@ -1,5 +1,5 @@
-- content_for(:html_title) { '晒す作品' }
-%h1.ll_font.ws_bgc 晒す作品
+- content_for(:html_title) { '投稿' }
+%h1.ll_font.ws_bgc 投稿
 .container
   .row.my-5
     .col-md-8.border.border-secondary
@@ -37,7 +37,6 @@
         = f.label :kind, 'ベタ、トーン'
         = f.radio_button :kind, :'仕上げ(完成)'
         = f.label :kind, '仕上げ(完成)'
-        %br
         %br
         = f.label '<テキスト>(1000文字以内)', class:'g_text'
         = f.text_area :gist, class:'g_text m_rect'
@@ -99,11 +98,10 @@
         %br
         = f.date_field :e_dl
         = f.hidden_field :user_id, value: params[:id]
-        = f.submit '晒す', class:"btn btn-light l_font my-5 ss_rect"
+        = f.submit '投稿', class:"btn btn-light l_font border my-5 ss_rect"
         
         = "以下の文に同意できる方のみ実行してください"
         %br
-          = '・著作権は、晒した側にあります。'
+          = '・作品は一次創作のみ。R-18の表現を含めない。'
           %br
-            = '・「自分で作業する」以外を選択した場合、他者が上書きする事と、'
-            = '私的利用(SNSに上げる等)は許可するものとします'
+            = '・著作権法を遵守する。引用する場合は引用先リンクを貼る。'

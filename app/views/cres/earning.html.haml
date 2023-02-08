@@ -18,7 +18,7 @@
         %br
           = button_to "指定口座に引き落し申請",
             {controller: 'cres', action: 'earning'},
-            {method: :get, class: "btn btn-light m_font",
+            {method: :get, class: "btn btn-light m_font border",
             params:{wdl_status: '引き落とし内容確認'}}
 
     - elsif '引き落とし内容確認' == @wdl_status

@@ -27,8 +27,8 @@ module ApplicationHelper
     end
   end
   
-  def noti(info)
-    redirect_to request.referer, notice: info
+  def noti(info, path)
+    redirect_to path, notice: info
   end
   
   def alt(info)

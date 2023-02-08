@@ -22,6 +22,6 @@
           = f.check_box :remember_me, class: 'form-check-input'
           = f.label :remember_me, class: 'form-check-label' do
             = resource.class.human_attribute_name('remember_me')
-        = f.submit  t('.sign_in'), class: 'btn btn-light'
+        = f.submit  t('.sign_in'), class: 'btn btn-light border'
   .col-md-10
     = render 'devise/shared/links'

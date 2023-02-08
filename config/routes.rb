@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   root to: 'homes#index'
 
   resources :agrees, only: [:show]
-  resources :buys, only: [:index, :new, :create]
   resources :cards, only: [:new, :show] do
     collection do
       post 'show', to: 'cards#show'
@@ -13,6 +12,7 @@ Rails.application.routes.draw do
       post 'delete', to: 'cards#delete'
     end
   end
+  resources :chars, only: [:index, :new, :create, :show]
   resources :cres, only: [:show, :edit, :update] do
     collection do
       get '/:id/earning', to: 'cres#earning'
