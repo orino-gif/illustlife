@@ -1,36 +1,14 @@
-- up_cre = Cre.find_by(user_id:@expor.user_id)
-- title="#{up_cre.user.nick}: #{@expor.kind}⇒ #{@expor.who}#{@expor.hope}"
+- title="キャラデータ：#{@char.c_name} #{@char.ttl.t_name} 」"
 - content_for(:html_title) { title }
 %h1.ll_font.ws_bgc
   = title
 .container
+  .row
+    %h2.l_font= '好感度グラフ'
   .row.my-1
-    %h2.l_font= @expor.kind
-  .row.my-5
-    - if ("キャラデザ,背景デザ,プロット").include?(@expor.kind)
-      .l_line.lll_square.border.over.pre_wrap.p-3
-        = Msg.find_by(id: @expor.msg_id).s_msg.gsub(/[\n]/,"\n")
-    - else
-      = image_tag(@expor.e_img.url, class:'ws_bgc lll_square fit_con')
+    - if @path.img?
+      = image_tag(@path.img.url,
+      class: 'll_square full_rect fit_c border rounded-circle')
   .row
-    = '一言(17文字以内)：'
-  .row.mt-3
-    .col-1.text-center
-      = icon(up_cre,'ss_square')
-      %br= up_cre.user.nick
-    .l_f-from.block-baloon-left.left_pos= @expor.cmt 
-  .row.mt-3
-    %h2.l_font= @expor.hope
-  .row
-    - if '自分で' == @expor.who
-      .l_font= '完了時＋5pt'
-    - else
-      .l_font= '謝礼＋' + @expor.fee.abs.to_s + 'pt'
-  .row.mt-5
-    .col5
-      - if (not user_signed_in?) || @expor.user_id != current_user.id || '自分で' == @expor.who
-        %button.btn.btn-light.m_font.border.ss_rect
-          =link_to @expor.hope.to_s + 'に進める',
-          "/expors/#{@expor.id}/ovrs/#{@expor.id}/new"
-      - else
-        .l_font= '募集中'
+    %h2.l_font= '引用先'
+

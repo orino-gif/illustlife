@@ -7,8 +7,15 @@
   .row
     %h2.l_font 人気キャラ
   .row
-    = button_to('好きなキャラを追加', new_char_path, method: :get,
+    = render 'char_img', {chars: @chars}
+  .row.mt-5
+    = button_to('追加', ttls_path, method: :get,
     class:"btn btn-light m_font border")
+  .row
+    %h3.m_font 誰かに
+  .row
+    = render 'e_img', {expors: @expors, who: '誰かに'}
+    
   .row
     %h2.l_font 一次創作
   .row

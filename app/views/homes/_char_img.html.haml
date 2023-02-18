@@ -1,0 +1,9 @@
+
+- chars.reverse_each do |char|
+  .ll_square
+    - if char.path.img?
+      = link_to image_tag(char.path.img.url,
+      class: 'full_rect fit_c border rounded-circle'),
+      char_path(char.path.id)
+      .text-center
+        = char.c_name

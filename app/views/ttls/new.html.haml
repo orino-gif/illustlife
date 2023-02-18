@@ -1,0 +1,52 @@
+- content_for(:html_title) { '作品を追加' }
+%h1.ll_font.ws_bgc 作品タイトルを追加
+.container
+  .row.my-5
+    .col-md-8.border.border-secondary
+      = form_with(model: @ttl, local:true) do |f|
+        %br
+          = f.label '作品タイトル:'
+          %br
+          = f.text_field :t_name, class:'size_variable-form'
+        %br
+        = f.label '引用画像(png, jpeg, jpg):', class:'lll_img'
+        
+        %br
+        = f.file_field :img, class:'lll_img preview'
+        .lll_img.ws_bgc.lll_square.full_rect.fit_c
+        %br
+          = f.label '画像引用先URL:'
+          %br
+          = f.text_field :url, class:'size_variable-form'
+        
+        = '<ジャンル>'
+        %br
+        = f.radio_button :genre, :'漫画', checked: true
+        = f.label :genre, '漫画'
+        = f.radio_button :genre, :'イラスト'
+        = f.label :genre, 'イラスト'
+        %br
+        = '<業態>'
+        %br
+        = f.radio_button :com, :true, checked: true
+        = f.label :com, '商業'
+        = f.radio_button :com, :false
+        = f.label :com, '個人'
+        %br
+        = '<連載>'
+        %br
+        = f.radio_button :serial, :true, checked: true
+        = f.label :serial, '連載中'
+        = f.radio_button :serial, :false
+        = f.label :serial, '終了'
+        %br
+        %br
+          = f.label '出版社'
+          %br
+          = f.text_field :pub, class:'size_variable-form'
+        %br
+          = f.label '著者　(例:原作/作画)'
+          %br
+          = f.text_field :auth, class:'size_variable-form'
+        = f.submit '追加', class:"btn btn-light l_font border my-5 ss_rect"
+        %br

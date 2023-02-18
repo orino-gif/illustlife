@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_06_143637) do
+ActiveRecord::Schema.define(version: 2023_02_15_031011) do
 
   create_table "cards", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
@@ -20,21 +20,21 @@ ActiveRecord::Schema.define(version: 2023_02_06_143637) do
   end
 
   create_table "chars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "c_name"
-    t.string "genre"
-    t.string "ttl"
+    t.string "c_name", default: ""
     t.integer "looks", default: 0
     t.integer "chara", default: 0
-    t.integer "ablity", default: 0
+    t.integer "ablty", default: 0
+    t.integer "str", default: 0
     t.integer "cute", default: 0
     t.integer "ero", default: 0
     t.integer "funny", default: 0
     t.integer "cool", default: 0
+    t.bigint "path_id", default: 0
+    t.bigint "ttl_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "path_id"
-    t.index ["c_name"], name: "index_chars_on_c_name", unique: true
     t.index ["path_id"], name: "index_chars_on_path_id"
+    t.index ["ttl_id"], name: "index_chars_on_ttl_id"
   end
 
   create_table "cres", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -76,9 +76,9 @@ ActiveRecord::Schema.define(version: 2023_02_06_143637) do
     t.string "cmt"
     t.string "w_st"
     t.string "cont"
-    t.bigint "pass_id"
+    t.bigint "path_id"
     t.index ["msg_id"], name: "index_expors_on_msg_id"
-    t.index ["pass_id"], name: "index_expors_on_pass_id"
+    t.index ["path_id"], name: "index_expors_on_path_id"
     t.index ["user_id"], name: "index_expors_on_user_id"
   end
 
@@ -97,8 +97,8 @@ ActiveRecord::Schema.define(version: 2023_02_06_143637) do
   end
 
   create_table "paths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "url"
-    t.string "img"
+    t.string "url", default: ""
+    t.string "img", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -138,6 +138,18 @@ ActiveRecord::Schema.define(version: 2023_02_06_143637) do
     t.boolean "start", default: false
     t.boolean "nsfw", default: false
     t.string "job", default: "評論家"
+  end
+
+  create_table "ttls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "t_name", default: ""
+    t.string "genre", default: ""
+    t.string "pub", default: ""
+    t.boolean "com", default: true
+    t.boolean "serial", default: true
+    t.string "auth", default: ""
+    t.bigint "path_id", default: 0
+    t.timestamp "created_at"
+    t.index ["path_id"], name: "index_ttls_on_path_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

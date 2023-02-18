@@ -12,7 +12,11 @@ Rails.application.routes.draw do
       post 'delete', to: 'cards#delete'
     end
   end
-  resources :chars, only: [:index, :new, :create, :show]
+  resources :chars, only: [:index, :create, :show] do
+    collection do
+        get '/:id/new', to: 'chars#new'
+      end
+    end
   resources :cres, only: [:show, :edit, :update] do
     collection do
       get '/:id/earning', to: 'cres#earning'
@@ -23,7 +27,7 @@ Rails.application.routes.draw do
   end
   resources :expls, only: [:index, :new, :create]
   resources :expors do
-    resources :ovrs, only: [:create, :show, :edit, :destroy, :update] do 
+    resources :ovrs, only: [:create, :show, :edit, :destroy, :update] do
       collection do
         get '/:id/new', to: 'ovrs#new'
         get 'down'
@@ -34,6 +38,7 @@ Rails.application.routes.draw do
   resources :homes, only: [:index] do
     resources :mans, only: [:index, :show]
   end
+  resources :paths, only: [:show]
   resources :reqs, only: [:index, :create, :show, :update] do
     collection do
       get '/:id/new', to: 'reqs#new'
@@ -45,6 +50,7 @@ Rails.application.routes.draw do
     end
   end
   resources :sttgs, only: [:update]
+  resources :ttls, only: [:index, :new, :create, :edit, :show, :update]
   resources :works, only: [:new, :create, :show, :update] do
     collection do
       get 'download'

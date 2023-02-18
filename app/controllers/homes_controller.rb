@@ -4,5 +4,6 @@ class HomesController < ApplicationController
     @ovrs = Ovr.joins(:expor).all
     # selectメソッドでexpor_idの列を取得
     @expors = Expor.where.not(id: Ovr.all.select(:expor_id))
+    @chars = Char.joins(:path).all
   end
 end

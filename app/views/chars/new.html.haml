@@ -12,23 +12,12 @@
         = f.label '引用画像(png, jpeg, jpg):', class:'lll_img'
         %br
         = f.file_field :img, class:'lll_img preview'
-        .lll_img.ws_bgc.lll_square
+        .lll_img.ws_bgc.lll_square.full_rect.fit_c
         %br
           = f.label '画像引用先URL:'
           %br
           = f.text_field :url, class:'size_variable-form'
         %br
-        = '<ジャンル>'
         %br
-        = f.radio_button :genre, :'漫画'
-        = f.label :genre, '漫画'
-        = f.radio_button :genre, :'アニメ'
-        = f.label :genre, 'アニメ'
-        = f.radio_button :genre, :'イラスト'
-        = f.label :genre, 'イラスト'
-        %br
-        %br
-          = f.label '作品名:'
-          %br
-          = f.text_field :ttl, class:'size_variable-form'
+        = f.hidden_field :id, :value => params[:id]
         = f.submit '追加', class:"btn btn-light l_font border my-5 ss_rect"

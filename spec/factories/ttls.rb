@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :img do
+  factory :ttl do
     
   end
 end
