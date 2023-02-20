@@ -2,6 +2,7 @@ class CreateChars < ActiveRecord::Migration[5.2]
   def change
     create_table :chars do |t|
       t.string :c_name, default: ''
+      t.string :cause, default: ''
       t.integer :looks, default: 0
       t.integer :chara, default: 0
       t.integer :ablty, default: 0

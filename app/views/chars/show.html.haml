@@ -30,9 +30,33 @@
       
   .row
     %h2.l_font= '好感度グラフ'
-    - data = [['ルックス', 10],['性格', 20],['能力', 30],['強さ', 20],
-    ['かわいさ', 30],['性格', 20],['能力', 30],['強さ', 20],['エロさ', 20],['面白さ', 30],['かっこよさ', 20]]
+    - data = [['ルックス', @char.looks],['性格', @char.chara],
+    ['能力',@char.ablty],['強さ', @char.str],['可愛さ', @char.cute],
+    ['エロさ', @char.ero],['面白さ', @char.funny],['カッコ良さ', @char.cool]]
     = column_chart data
-  
-
-
+  .row
+    %h2.l_font= '好きな理由'
+  .row
+    = form_with(model: @char, local:true) do |f|
+      = f.radio_button :cause, :'ルックス'
+      = f.label :cause, 'ルックス'
+      = f.radio_button :cause, :'性格'
+      = f.label :cause, '性格'
+      = f.radio_button :cause, :'能力'
+      = f.label :cause, '能力'
+      = f.radio_button :cause, :'強さ'
+      = f.label :cause, '強さ'
+      = f.radio_button :cause, :'可愛さ'
+      = f.label :cause, '可愛さ'
+      = f.radio_button :cause, :'エロさ'
+      = f.label :cause, 'エロさ'
+      = f.radio_button :cause, :'面白さ'
+      = f.label :cause, '面白さ'
+      = f.radio_button :cause, :'カッコ良さ'
+      = f.label :cause, 'カッコ良さ'
+      
+      - if true == @is_vaild
+        = f.submit '送信', class:"btn btn-light l_font border my-5 ss_rect blu_col"
+      - else
+        = f.submit '送信済み',
+        class:"btn btn-light l_font border my-5 ss_rect blu_col disabled"

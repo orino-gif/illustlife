@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       post 'delete', to: 'cards#delete'
     end
   end
-  resources :chars, only: [:index, :create, :show] do
+  resources :chars, only: [:index, :create, :show, :update] do
     collection do
         get '/:id/new', to: 'chars#new'
       end

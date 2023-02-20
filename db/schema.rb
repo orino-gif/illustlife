@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_15_031011) do
+ActiveRecord::Schema.define(version: 2023_02_20_112254) do
 
   create_table "cards", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2023_02_15_031011) do
 
   create_table "chars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "c_name", default: ""
+    t.string "cause", default: ""
     t.integer "looks", default: 0
     t.integer "chara", default: 0
     t.integer "ablty", default: 0
@@ -80,6 +81,12 @@ ActiveRecord::Schema.define(version: 2023_02_15_031011) do
     t.index ["msg_id"], name: "index_expors_on_msg_id"
     t.index ["path_id"], name: "index_expors_on_path_id"
     t.index ["user_id"], name: "index_expors_on_user_id"
+  end
+
+  create_table "ips", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "addr", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "msgs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

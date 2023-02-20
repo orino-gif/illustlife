@@ -8,7 +8,7 @@
 @import "bootstrap";
 
 // 色変更、下線装飾無し(!importantで優先順位を上げる)
-a { color: cornflowerblue; text-decoration: none !important; }
+a { color: steelblue; text-decoration: none !important; }
 body { font-family: 'Kaisei Decol', serif, "メイリオ" ; }
 //見出し
 h1 { padding: 0.6em 1.2em; }
@@ -18,10 +18,11 @@ strong, label, th { font-weight: normal; }
 // 画像の上にSAMPLE文字を表示
 
 .blk_col {color: black;}
-.blu_col {color: cornflowerblue;}
+.blu_col {color: steelblue;}
 // リクエスト票を中央に寄せる
 .c_pos { width: 80%; margin: 0 auto; max-width: 600px; }
 .cri_bgc { background-color: crimson; }
+.disabled{pointer-events: none;}
 // 表体のセルの幅の長さを「table全幅/セル数」にする
 .fixed_col { table-layout: fixed; width: 100%; }
 // 100%
