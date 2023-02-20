@@ -149,7 +149,7 @@ strong, label, th { font-weight: normal; }
 // Large
 @media screen and (max-width: 1199px){
   @include size_f(1.6em, 1.4em, 1.0em, 0.8em, 0.7em);
-  @include size_square(380px, 220px, 110px, 70px, 50px, 40px);
+  @include size_square(380px, 220px, 100px, 70px, 50px, 40px);
   @include size_rect(250px, 170px, 125px, 50px);
   @include position_top(-95px, -62px, -28px, -12px);
   @include position_left(100px);
@@ -163,7 +163,7 @@ strong, label, th { font-weight: normal; }
 // Medium
 @media screen and (max-width: 991px){
   @include size_f(1.5em, 1.3em, 0.9em, 0.7em, 0.6em);
-  @include size_square(350px, 200px, 100px, 60px, 45px, 35px);
+  @include size_square(350px, 200px, 90px, 60px, 45px, 35px);
   @include size_rect(200px, 160px, 110px, 50px);
   @include position_top(-90px, -54px, -24px, -11px);
   @include position_left(100px);
@@ -177,7 +177,7 @@ strong, label, th { font-weight: normal; }
 // Small
 @media screen and (max-width: 767px){
   @include size_f(1.4em, 1.2em, 0.8em, 0.6em, 0.5em);
-  @include size_square(300px, 170px, 90px, 50px, 42px, 32px);
+  @include size_square(300px, 170px, 80px, 50px, 42px, 32px);
   @include size_rect(100%, 150px, 105px, 50px);
   @include position_top(-85px, -42px, -22px, -10px);
   @include position_left(100px);
@@ -191,7 +191,7 @@ strong, label, th { font-weight: normal; }
 // Extra small
 @media screen and (max-width: 575px){
   @include size_f(1.2em, 1.1em, 0.6em, 0.5em, 0.4em);
-  @include size_square(250px, 120px, 70px, 40px, 32px, 28px);
+  @include size_square(250px, 120px, 60px, 40px, 32px, 28px);
   @include size_rect(100%, 120px, 100px, 50px);
   @include position_top(-65px, -35px, -18px, -10px);
   @include position_left(75px);

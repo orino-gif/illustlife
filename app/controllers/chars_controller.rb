@@ -42,11 +42,13 @@ class CharsController < ApplicationController
     else
       p 'zzz' + (@ip.updated_at+86400).to_s
       p 'aaa' + DateTime.now.to_s
-      if @ip.updated_at + 86400 > DateTime.now
-        @is_vaild = false
-        @ip.updated_at = DateTime.now
-        @ip.save
-        p 'ccc'
+      if (not Rails.env.development?)
+        if (@ip.updated_at + 86400 > DateTime.now)
+          @is_vaild = false
+          @ip.updated_at = DateTime.now
+          @ip.save
+          p 'ccc'
+        end
       end
     end
   end

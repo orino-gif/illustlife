@@ -7,6 +7,7 @@
         .ll_square.text-center
           = link_to image_tag(ttl.path.img.url, class:'full_rect fit_con'),
           ttl_path(ttl.id)
+          = '['+ ttl.genre + ']'
           = ttl.t_name
           %br= ttl.pub
   .row.pt-5.mt-5
