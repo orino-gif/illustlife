@@ -30,7 +30,6 @@ class CharsController < ApplicationController
   def show
     @chars = Char.joins(:path).all
     @char = Char.joins(:ttl).all.find_by(path_id: params[:id])
-    p @char
     @path = Path.find_by(id: params[:id])
   end
   

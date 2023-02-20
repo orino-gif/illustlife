@@ -1,14 +1,38 @@
-- title="キャラデータ：#{@char.c_name} #{@char.ttl.t_name} 」"
+- title="キャラデータ：#{@char.c_name},　#{@char.ttl.genre}「#{@char.ttl.t_name} 」"
 - content_for(:html_title) { title }
 %h1.ll_font.ws_bgc
   = title
 .container
-  .row
-    %h2.l_font= '好感度グラフ'
   .row.my-1
+    .col1
     - if @path.img?
       = image_tag(@path.img.url,
       class: 'll_square full_rect fit_c border rounded-circle')
+    .col
+      .l_font='引用先'
+      %table.table
+        %thead
+          %tr
+            %td 
+            %td 
+        %tbody
+          %tr
+            %td 著者
+            %td= @char.ttl.auth
+          %tr
+            %td 発行元
+            %td= @char.ttl.pub
+          %tr
+            %td URL
+            %td= link_to @char.ttl.path.url.slice(0..25) + '...',
+              @char.ttl.path.url
+      
+      
   .row
-    %h2.l_font= '引用先'
+    %h2.l_font= '好感度グラフ'
+    - data = [['ルックス', 10],['性格', 20],['能力', 30],['強さ', 20],
+    ['かわいさ', 30],['性格', 20],['能力', 30],['強さ', 20],['エロさ', 20],['面白さ', 30],['かっこよさ', 20]]
+    = column_chart data
+  
+
 

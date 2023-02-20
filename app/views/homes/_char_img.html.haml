@@ -1,9 +1,11 @@
-
-- chars.reverse_each do |char|
-  .ll_square
+- chars.reverse_each.with_index(1) do |char, index|
+  .l_square.mx-3.my-5
     - if char.path.img?
       = link_to image_tag(char.path.img.url,
       class: 'full_rect fit_c border rounded-circle'),
       char_path(char.path.id)
-      .text-center
-        = char.c_name
+      .text-center.m_font
+        = index.to_s + '位 ' + char.c_name
+        %br
+        = char.ttl.genre
+        = '「' + char.ttl.t_name + '」'

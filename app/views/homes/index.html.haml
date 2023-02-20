@@ -1,23 +1,29 @@
-- content_for(:html_title) { '製作途中のイラストや漫画を晒す' }
-%h1.ll_font.ws_bgc トップページ
+- content_for(:html_title) { '人気キャラ トレンド' }
+%h1.ll_font.ws_bgc 人気キャラ トレンド
 .container-fluid
   .row#images.ws_bgc
     = render 'o_img', {ovrs: @ovrs, place: 'トップ'}
 .container
   .row
-    %h2.l_font 人気キャラ
+    %h2.l_font 人気キャラ 投票
   .row
-    = render 'char_img', {chars: @chars}
-  .row.mt-5
-    = button_to('追加', ttls_path, method: :get,
-    class:"btn btn-light m_font border")
+    %h3.l_font 2023年2月
   .row
-    %h3.m_font 誰かに
+    %h4.l_font 商業
   .row
-    = render 'e_img', {expors: @expors, who: '誰かに'}
+    %h5.mx-2.l_font ルックス
+  .row
+    = render 'char_img', {chars: @char_path_ttls,cha: @chars}
+    
+  .row.pt-5.mt-5
+    = button_to('別のキャラを追加', ttls_path, method: :get,
+    class:"btn btn-light m_font border blu_col")
+  .row
+    %h3.l_font 個人のオリジナルキャラ
+    
     
   .row
-    %h2.l_font 一次創作
+    %h2.l_font='晒す'
   .row
     %h3.m_font 誰かに
   .row
@@ -38,7 +44,3 @@
     %h2.l_font 絵師、漫画家、評論家
   .row.ss_m-side
     = render 'c_img', {cres: @cres, is_hdr: true}
-  .row
-    %h2.l_font 依頼人
-  .row.ss_m-side
-    = render 'c_img', {cres: @cres, is_hdr: false}
