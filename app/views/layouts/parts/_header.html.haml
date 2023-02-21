@@ -19,7 +19,7 @@
         - if user_signed_in?
           - if 0 < current_user.cre.pfm.pic
             %button.btn.btn-light.m_font.border= link_to '実績', reqs_path
-          %button.btn.btn-light.m_font.border= link_to '晒す', expors_path
+          %button.btn.btn-light.m_font.border= link_to '投稿', expors_path
           - if ENV['ADMIN'] == current_user.email
             - if 'cres' == controller_name && 'show' == action_name
               %button.btn.btn-light.border= link_to 'アカウント編集',

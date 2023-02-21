@@ -2,6 +2,17 @@ class CreUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
   include CarrierWave::MiniMagick
+  
+  # 画像の上限を640x480にする
+  process :resize_to_limit => [640, 640]
+  
+  # サムネイル保存する
+  version :thumb do
+    process :resize_to_limit => [320, 320]
+  end
+  
+  # 保存形式をpngにする
+  process :convert => 'png'
 
   # Choose what kind of storage to use for this uploader:
   if Rails.env.development?

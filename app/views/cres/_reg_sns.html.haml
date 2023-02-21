@@ -4,3 +4,5 @@
       = f.label :"#{rec}", label
       = f.text_field :"#{rec}", class:'size_variable-form'
       = f.submit '登録'
+      - if 'twtr' == rec
+        %br= '例）https://twitter.com/(あなたの@twitter_id)'

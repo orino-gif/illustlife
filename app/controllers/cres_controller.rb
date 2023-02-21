@@ -11,7 +11,7 @@ class CresController < ApplicationController
     cr = Cr.find_by(user_id:params[:id])
     if cr["bank"] && cr["branch"] && cr["a_type"] && cr["number"] \
     && cr["holder"]
-      @is_cr_all = true
+    @is_cr_all = true
     end
   end
   def earning 

@@ -2,8 +2,8 @@
 %h1.ll_font.ws_bgc ユーザー編集
 .container
   .row.my-5
-    - item = '私の代表作（※クリエーターは必須）：'
-    = render 'reg_img', {label:item, rec:'hdr'}
+    - label = '私の代表作（※クリエーターは必須）：'
+    = render 'reg_img', {label:label, rec:'hdr'}
     .col
       = disp_hdr(@cre, 'm_rect fit_c')
   .row.my-5
@@ -12,7 +12,7 @@
   .row.my-5
     = render 'acct'
   .row.my-5
-    = 'リンク先：'
+    = 'リンク先(URL)：'
     %table.table
       = render 'reg_sns', {label:'twitter:', rec:'twtr'}
       = render 'reg_sns', {label:'pixiv:', rec:'pixiv'}
@@ -35,8 +35,6 @@
             = f.label :job, '絵師　'
             = f.radio_button :job, :漫画家
             = f.label :job, '漫画家　'
-            = f.radio_button :job, :レイヤー
-            = f.label :job, 'レイヤー　'
             = f.radio_button :job, :一般
             = f.label :job, '一般　'
             = f.submit '変更'
