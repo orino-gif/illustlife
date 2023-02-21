@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 2023_02_20_112254) do
     t.integer "work_d", default: 14
     t.boolean "start", default: false
     t.boolean "nsfw", default: false
-    t.string "job", default: "評論家"
+    t.string "job", default: "一般"
   end
 
   create_table "ttls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
