@@ -2,7 +2,8 @@
 %h1.ll_font.ws_bgc ユーザー編集
 .container
   .row.my-5
-    - label = '私の代表作（※クリエーターは必須）：'
+    - label = '私の代表作（※クリエーターは必須):'
+    
     = render 'reg_img', {label:label, rec:'hdr'}
     .col
       = disp_hdr(@cre, 'm_rect fit_c')

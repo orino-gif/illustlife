@@ -1,20 +1,20 @@
 class TtlsController < ApplicationController
   include ApplicationHelper
   def index
-    @ttls = Ttl.joins(:path).all
+    @ttls = Ttl.joins(:thr).all
   end
   def new
     @ttl = Ttl.new
-    @path = Path.new
+    @thr = Thr.new
   end
 
   def create
     @ttl = Ttl.new(chars_params)
-    @path = Path.new
-    @path.url = params[:ttl][:url]
-    @path.img = params[:ttl][:img]
-    if @path.save
-      @ttl.path_id = @path.id
+    @thr = Thr.new
+    @thr.url = params[:ttl][:url]
+    @thr.img = params[:ttl][:img]
+    if @thr.save
+      @ttl.thr_id = @thr.id
       if @ttl.save
         noti('追加しました', ttls_path)
       else
@@ -27,7 +27,7 @@ class TtlsController < ApplicationController
   
   def show
     @ttl = Ttl.find_by(id: params[:id])
-    @path = Path.find_by(id: params[:id])
+    @thr = Thr.find_by(id: params[:id])
   end
   
   private

@@ -5,8 +5,8 @@
 .container
   .row
     .col-sm-4
-      = link_to image_tag(@ttl.path.img.url,
-      class:'ll_square full_rect fit_con'), @ttl.path.url
+      = link_to image_tag(@ttl.thr.img.url,
+      class:'ll_square full_rect fit_con'), @ttl.thr.url
     .col-sm-8
       %table.table
         %thead
@@ -22,7 +22,7 @@
             %td= @ttl.pub
           %tr
             %td 引用先URL
-            %td= @ttl.path.url.slice(0..20) + '...'
+            %td= link_to @ttl.thr.url.slice(0..20) + '...', @ttl.thr.url
           %tr
             %td 
             %td 

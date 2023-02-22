@@ -38,7 +38,6 @@ Rails.application.routes.draw do
   resources :homes, only: [:index] do
     resources :mans, only: [:index, :show]
   end
-  resources :paths, only: [:show]
   resources :reqs, only: [:index, :create, :show, :update] do
     collection do
       get '/:id/new', to: 'reqs#new'
@@ -50,6 +49,7 @@ Rails.application.routes.draw do
     end
   end
   resources :sttgs, only: [:update]
+  resources :thrus, only: [:show]
   resources :ttls, only: [:index, :new, :create, :edit, :show, :update]
   resources :works, only: [:new, :create, :show, :update] do
     collection do

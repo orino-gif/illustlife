@@ -1,4 +1,6 @@
 = form_with(model:@cre, local:true) do |f|
   = f.label :rec, label
   = f.file_field :"#{rec}"
-  = f.submit '登録'
+  = '(png ,jpg, jpeg, gif, 100MB以下)'
+  %br
+  %br= f.submit '登録'

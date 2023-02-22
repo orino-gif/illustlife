@@ -1,9 +1,9 @@
 - chars.each.with_index(1) do |char, index|
   .l_square.mx-3.mb-5
-    - if char.path.img?
-      = link_to image_tag(char.path.img.url,
+    - if char.thr.img?
+      = link_to image_tag(char.thr.img.url,
       class: 'full_rect fit_c border rounded-circle'),
-      char_path(char.path.id)
+      char_path(char.thr.id)
       .text-center.m_font
         = index.to_s + '位 ' + char.c_name
         %br

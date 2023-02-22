@@ -7,7 +7,7 @@ class CreateTtls < ActiveRecord::Migration[5.2]
     t.boolean :com, default: true
     t.boolean :serial, default: true
     t.string :auth, default: ''
-    t.references :path, default: 0
+    t.references :thr, default: 0
     t.timestamp :created_at
     end
   end

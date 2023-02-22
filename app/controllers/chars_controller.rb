@@ -5,17 +5,17 @@ class CharsController < ApplicationController
   end
   def new
     @char = Char.new
-    @path = Path.new
+    @thr = Thr.new
   end
 
   def create
     @char = Char.new(chars_params)
-    path = Path.new
+    thr = Thr.new
     
-    path.url = params[:char][:url]
-    path.img = params[:char][:img]
-    if path.save
-      @char.path_id = path.id
+    thr.url = params[:char][:url]
+    thr.img = params[:char][:img]
+    if thr.save
+      @char.thr_id = thr.id
       # p 'aaa' + params[:char][:id].to_s
       @char.ttl_id = params[:char][:id]
       if @char.save
@@ -29,9 +29,9 @@ class CharsController < ApplicationController
   end
   
   def show
-    @chars = Char.joins(:path).all
-    @char = Char.joins(:ttl).all.find_by(path_id: params[:id])
-    @path = Path.find_by(id: params[:id])
+    @chars = Char.joins(:thr).all
+    @char = Char.joins(:ttl).all.find_by(thr_id: params[:id])
+    @thr = Thr.find_by(id: params[:id])
     @address = request.env["HTTP_X_FORWARDED_FOR"] || request.remote_ip
     @is_vaild = true
     @ip = Ip.find_by(addr: @address.to_s)
@@ -84,6 +84,6 @@ class CharsController < ApplicationController
   
   private
   def chars_params
-    params.require(:char).permit(:c_name, :cause, :path_id, :ttl_id)
+    params.require(:char).permit(:c_name, :cause, :thr_id, :ttl_id)
   end
 end

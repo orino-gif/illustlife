@@ -21,7 +21,7 @@
             %button.btn.btn-light.m_font.border= link_to '実績', reqs_path
           %button.btn.btn-light.m_font.border= link_to '投稿', expors_path
           - if ENV['ADMIN'] == current_user.email
-            - if 'cres' == controller_name && 'show' == action_name
+            - if 'cres' == controller_name
               %button.btn.btn-light.border= link_to 'アカウント編集',
               edit_cre_path(params[:id])
           - else

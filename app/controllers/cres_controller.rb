@@ -1,5 +1,6 @@
 class CresController < ApplicationController
   before_action :set_cre, only: [:show, :edit, :earning, :update]
+  include ApplicationHelper
   def show
     @reqs = Req.where(rx_id: params[:id], stts: '納品')
     @expors = Expor.where(user_id: params[:id])
@@ -8,7 +9,7 @@ class CresController < ApplicationController
   def edit
     @sttg = Sttg.find_by(cre_id: params[:id])
     @card =  Card.find_by(user_id: params[:id])
-    cr = Cr.find_by(user_id:params[:id])
+    cr = Cr.find_by(user_id: params[:id])
     if cr["bank"] && cr["branch"] && cr["a_type"] && cr["number"] \
     && cr["holder"]
     @is_cr_all = true
@@ -42,13 +43,15 @@ class CresController < ApplicationController
           end
         end
       end
-      redirect_to cre_path(params[:id]), notice: '登録情報を更新しました。'
+      noti('登録情報を更新しました。', cre_path(params[:id]))
     else
       p @cre.errors.full_messages[0]
       if @cre.errors.full_messages[0].include?("amount")
         flash.now[:alert] = "金額入力の数値が範囲外です" 
       elsif @cre.errors.full_messages[0].include?("whitelist_error")
         flash.now[:alert] = "非対応のファイル形式です(対応:png,jpg,jpeg,gif)"
+      else 
+      flash.now[:alert] = "入力ファイルが非対応です"
       end
       render :edit
     end

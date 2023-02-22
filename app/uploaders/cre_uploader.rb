@@ -3,14 +3,6 @@ class CreUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   include CarrierWave::MiniMagick
   
-  # 画像の上限を640x480にする
-  process :resize_to_limit => [640, 640]
-  
-  # サムネイル保存する
-  version :thumb do
-    process :resize_to_limit => [320, 320]
-  end
-  
   # 保存形式をpngにする
   process :convert => 'png'
 
@@ -36,8 +28,17 @@ class CreUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  # Process files as they are uploaded:
-  # process scale: [200, 300]
+  # 画像の上限を640x480にする
+  process :resize_to_limit => [4096, 4096]
+  
+  # サムネイル保存する
+  version :thumb640 do
+    process :resize_to_limit => [640, 640]
+  end
+  
+  version :thumb320 do
+    process :resize_to_limit => [320, 320]
+  end
   #
   # def scale(width, height)
   #   # do something
@@ -56,11 +57,12 @@ class CreUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+  # 拡張子が同じでないとGIFをJPGとかにコンバートできないので、ファイル名を変更
+  def filename
+    super.chomp(File.extname(super)) + '.png' if original_filename.present?
+  end
   
   def size_range
-    1..1000.megabytes
+    1..100.megabytes
   end
 end

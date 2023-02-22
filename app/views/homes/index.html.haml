@@ -9,51 +9,47 @@
   .row
     %h3.l_font 2023年2月
   .row
-    %h4.l_font 商業
-  .row
     %h5.mx-2.l_font ルックス
   .row
-    = render 'char_img', {chars: @char_path_ttls.order(looks: 'DESC'),cha: @chars}
+    = render 'char_img', {chars: @char_thr_ttls.order(looks: 'DESC'),cha: @chars}
   %br
   .row
     %h5.mt-5.mx-2.l_font 性格
   .row
-    = render 'char_img', {chars: @char_path_ttls.order(chara: 'DESC'),cha: @chars}
+    = render 'char_img', {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars}
   %br
   .row
     %h5.mt-5.mx-2.l_font 能力
   .row
-    = render 'char_img', {chars: @char_path_ttls.order(ablty: 'DESC'),cha: @chars}
+    = render 'char_img', {chars: @char_thr_ttls.order(ablty: 'DESC'),cha: @chars}
   %br
   .row
     %h5.mt-5.mx-2.l_font 強さ
   .row
-    = render 'char_img', {chars: @char_path_ttls.order(str: 'DESC'),cha: @chars}
+    = render 'char_img', {chars: @char_thr_ttls.order(str: 'DESC'),cha: @chars}
   %br
   .row
     %h5.mt-5.mx-2.l_font 可愛さ
   .row
-    = render 'char_img', {chars: @char_path_ttls.order(cute: 'DESC'),cha: @chars}
+    = render 'char_img', {chars: @char_thr_ttls.order(cute: 'DESC'),cha: @chars}
   %br
   .row
     %h5.mt-5.mx-2.l_font エロさ
   .row
-    = render 'char_img', {chars: @char_path_ttls.order(ero: 'DESC'),cha: @chars}
+    = render 'char_img', {chars: @char_thr_ttls.order(ero: 'DESC'),cha: @chars}
   %br
   .row
     %h5.mt-5.mx-2.l_font 面白さ
   .row
-    = render 'char_img', {chars: @char_path_ttls.order(funny: 'DESC'),cha: @chars}
+    = render 'char_img', {chars: @char_thr_ttls.order(funny: 'DESC'),cha: @chars}
   %br
   .row
     %h5.mt-5.mx-2.l_font カッコ良さ
   .row
-    = render 'char_img', {chars: @char_path_ttls.order(cool: 'DESC'),cha: @chars}
+    = render 'char_img', {chars: @char_thr_ttls.order(cool: 'DESC'),cha: @chars}
   .row.pt-5.mt-5
     = button_to('別のキャラを追加', ttls_path, method: :get,
     class:"btn btn-light m_font border blu_col")
-  .row
-    %h3.l_font 個人のオリジナルキャラ
   .row
     %h2.l_font='晒す'
   .row

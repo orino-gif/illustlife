@@ -5,8 +5,8 @@
 .container
   .row.my-1
     .col1
-    - if @path.img?
-      = image_tag(@path.img.url,
+    - if @thr.img?
+      = image_tag(@thr.img.url,
       class: 'll_square full_rect fit_c border rounded-circle')
     .col
       .l_font='引用先'
@@ -24,8 +24,8 @@
             %td= @char.ttl.pub
           %tr
             %td URL
-            %td= link_to @char.ttl.path.url.slice(0..25) + '...',
-              @char.ttl.path.url
+            %td= link_to @char.ttl.thr.url.slice(0..25) + '...',
+              @char.ttl.thr.url
       
       
   .row
