@@ -7,12 +7,12 @@ class CreUploader < CarrierWave::Uploader::Base
   process :convert => 'png'
 
   # Choose what kind of storage to use for this uploader:
-  if Rails.env.development?
+  # if Rails.env.development?
     # storage :file
-    storage :fog
-  else
-    storage :fog
-  end
+    # storage :fog
+  # else
+  storage :fog
+  # end
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -38,6 +38,13 @@ class CreUploader < CarrierWave::Uploader::Base
   
   version :thumb320 do
     process :resize_to_limit => [320, 320]
+    storage :file
+    def store_dir
+      "uploads/#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}"
+    end
+    # def cache_dir
+    #   "/local#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}"
+    # end
   end
   #
   # def scale(width, height)

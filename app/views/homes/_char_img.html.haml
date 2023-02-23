@@ -1,12 +1,12 @@
 - chars.each.with_index(1) do |char, index|
-  .l_square.mx-3.mb-5
+  .l_square.mx-3.mb-2.pos_b
     - if char.thr.img?
-      = link_to image_tag(char.thr.img.url,
+      = link_to image_tag(char.thr.img.thumb320.url,
       class: 'full_rect fit_c border rounded-circle'),
       char_path(char.thr.id)
-      .text-center.m_font
+      .text-center.s_font
         = index.to_s + '位 ' + char.c_name
         %br
         = char.ttl.genre
         = '「' + char.ttl.t_name + '」'
-  - break if 3 == index
+  - break if 10 == index

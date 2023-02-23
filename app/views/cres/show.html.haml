@@ -4,7 +4,7 @@
   = render 'shared/user_hdr'
   - if not @expors.blank?
     .row
-      %h2.l_font 晒した作品
+      %h2.l_font 投稿作品
     .row
       - @expors.reverse_each do |expor|
         - e_ovr = Ovr.find_by(expor_id: expor.id)
@@ -30,7 +30,7 @@
               class:'ll_square fit_con'),"/expors/#{expor.id}"
               = expor.kind + '→ ' + expor.who
             - else
-              = link_to image_tag(expor.e_img.url,
+              = link_to image_tag(expor.e_img.thumb320.url,
               class:'ll_square fit_con'),
               "/expors/#{expor.id}/ovrs/#{e_ovr.id}"
               = expor.kind + '→ ' + expor.hope

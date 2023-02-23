@@ -1,76 +1,75 @@
-- content_for(:html_title) { '人気キャラ トレンド' }
-%h1.ll_font.ws_bgc 人気キャラ トレンド
-.container-fluid
-  .row#images.ws_bgc
-    = render 'o_img', {ovrs: @ovrs, place: 'トップ'}
+- title = '人気キャラ トレンド'
+- content_for(:html_title) { title }
+%h1.ll_font.ws_bgc= title
+// .container-fluid
+//   .row#images.ws_bgc
+//     = render 'o_img', {ovrs: @ovrs, place: 'トップ'}
 .container
   .row
-    %h2.l_font 人気キャラ 投票
-  .row  
-    %h3.l_font 毎日更新
+    %h2.l_font 2023年2月度 投票
   .row
-    %h3.l_font 2023年2月
+    %h3.l_font 商業, 二次創作
   .row
     %h5.mx-2.l_font ルックス
-  .row
+  .row.p-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(looks: 'DESC'),cha: @chars}
-  %br
   .row
     %h5.mt-5.mx-2.l_font 性格
-  .row
+  .row.p-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars}
-  %br
   .row
     %h5.mt-5.mx-2.l_font 能力
-  .row
+  .row.p-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(ablty: 'DESC'),cha: @chars}
-  %br
   .row
     %h5.mt-5.mx-2.l_font 強さ
-  .row
+  .row.p-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(str: 'DESC'),cha: @chars}
-  %br
   .row
     %h5.mt-5.mx-2.l_font 可愛さ
-  .row
+  .row.p-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(cute: 'DESC'),cha: @chars}
-  %br
   .row
     %h5.mt-5.mx-2.l_font エロさ
-  .row
+  .row.p-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(ero: 'DESC'),cha: @chars}
   %br
   .row
     %h5.mt-5.mx-2.l_font 面白さ
-  .row
+  .row.p-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(funny: 'DESC'),cha: @chars}
-  %br
   .row
     %h5.mt-5.mx-2.l_font カッコ良さ
-  .row
+  .row.p-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(cool: 'DESC'),cha: @chars}
-  .row.pt-5.mt-5
-    = button_to('別のキャラを追加', ttls_path, method: :get,
-    class:"btn btn-light m_font border blu_col")
+  
   .row
-    %h2.l_font='晒す'
+    = button_to('キャラを追加', ttls_path, method: :get,
+    class:"btn btn-light m_rect m_font border blu_col")
   .row
-    %h3.m_font 誰かに
+    %h3 ↑好きな作品や、自分で創ったオリジナルのキャラクターを追加しよう
+  // .row
+  //   %h2.l_font='晒す'
+  // .row
+  //   %h3.m_font 誰かに
+  // .row
+  //   = render 'e_img', {expors: @expors, who: '誰かに'}
+  // .row.mt-5
+  //   %h3.m_font 自分で
+  // .row
+  //   = render 'e_img', {expors: @expors, who: '自分で'}
+  // .row.mt-5
+  //   %h3.m_font 対応済
+  // .row.ss_m-side
+  //   = render 'o_img', {ovrs: @ovrs, place: '対応済'}
+  // .row.mt-5
+  //   %h3.m_font 作業中
+  // .row.ss_m-side
+  // = render 'o_img', {ovrs: @ovrs, place: '作業中'}
+  
   .row
-    = render 'e_img', {expors: @expors, who: '誰かに'}
+    %h3.mt-5 ↓オリジナルのキャラデザインや、1ページ漫画をリクエスト
   .row.mt-5
-    %h3.m_font 自分で
-  .row
-    = render 'e_img', {expors: @expors, who: '自分で'}
-  .row.mt-5
-    %h3.m_font 対応済
-  .row.ss_m-side
-    = render 'o_img', {ovrs: @ovrs, place: '対応済'}
-  .row.mt-5
-    %h3.m_font 作業中
-  .row.ss_m-side
-    = render 'o_img', {ovrs: @ovrs, place: '作業中'}
-  .row.mt-5
-    %h2.l_font 絵師、漫画家、評論家
+    %h2.l_font 絵師、漫画家
   .row.ss_m-side
     = render 'c_img', {cres: @cres, is_hdr: true}

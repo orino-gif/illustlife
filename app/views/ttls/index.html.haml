@@ -1,11 +1,12 @@
-- content_for(:html_title) { 'タイトル名選択　→　キャラ追加' }
-%h1.ll_font.ws_bgc タイトル名選択　→　キャラ追加
+- content_for(:html_title) { 'タイトル名選択' }
+%h1.ll_font.ws_bgc タイトル名選択
 .container
   .row.mt-5
     - if @ttls
       - @ttls.each do |ttl|
-        .ll_square.mx-2.text-center
-          = link_to image_tag(ttl.thr.img.url, class:'full_rect fit_con'),
+        .ll_square.pt-5.my-5.mx-2.text-center
+          = link_to image_tag(ttl.thr.img.thumb320.url,
+          class:'full_rect fit_con'),
           ttl_path(ttl.id)
           = '['+ ttl.genre + ']'
           = ttl.t_name
@@ -13,3 +14,5 @@
   .row.pt-5.mt-5
     = button_to('タイトルを追加', new_ttl_path, method: :get,
     class:"btn btn-light m_font border")
+  .row
+    = '↑お気に入りのタイトルがない場合'
