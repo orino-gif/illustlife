@@ -44,10 +44,11 @@
     = render 'char_img', {chars: @char_thr_ttls.order(cool: 'DESC'),cha: @chars}
   
   .row
+    %h3 ↓好きな作品や、自分で創ったオリジナルのキャラクターを追加しよう
+  .row
     = button_to('キャラを追加', ttls_path, method: :get,
     class:"btn btn-light s_rect m_font border blu_col")
-  .row
-    %h3 ↑好きな作品や、自分で創ったオリジナルのキャラクターを追加しよう
+  
   // .row
   //   %h2.l_font='晒す'
   // .row
@@ -67,9 +68,9 @@
   // .row.ss_m-side
   // = render 'o_img', {ovrs: @ovrs, place: '作業中'}
   
-  .row
-    %h3.mt-5 ↓オリジナルのキャラデザインや、1ページ漫画をリクエスト
   .row.mt-5
+    %h3.mt-5 ↓オリジナルのキャラデザインや、1ページ漫画をリクエスト
+  .row
     %h2.l_font 絵師、漫画家
   .row.ss_m-side
     = render 'c_img', {cres: @cres, is_hdr: true}
