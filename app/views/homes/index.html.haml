@@ -11,41 +11,41 @@
     %h3.l_font 商業, 二次創作
   .row
     %h5.mx-2.l_font ルックス
-  .row.p-5.border
+  .row.py-5.mb-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(looks: 'DESC'),cha: @chars}
   .row
     %h5.mt-5.mx-2.l_font 性格
-  .row.p-5.border
+  .row.py-5.mb-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars}
   .row
     %h5.mt-5.mx-2.l_font 能力
-  .row.p-5.border
+  .row.py-5.mb-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(ablty: 'DESC'),cha: @chars}
   .row
     %h5.mt-5.mx-2.l_font 強さ
-  .row.p-5.border
+  .row.py-5.mb-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(str: 'DESC'),cha: @chars}
   .row
     %h5.mt-5.mx-2.l_font 可愛さ
-  .row.p-5.border
+  .row.py-5.mb-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(cute: 'DESC'),cha: @chars}
   .row
     %h5.mt-5.mx-2.l_font エロさ
-  .row.p-5.border
+  .row.py-5.mb-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(ero: 'DESC'),cha: @chars}
   %br
   .row
     %h5.mt-5.mx-2.l_font 面白さ
-  .row.p-5.border
+  .row.py-5.mb-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(funny: 'DESC'),cha: @chars}
   .row
     %h5.mt-5.mx-2.l_font カッコ良さ
-  .row.p-5.border
+  .row.py-5.mb-5.border
     = render 'char_img', {chars: @char_thr_ttls.order(cool: 'DESC'),cha: @chars}
   
   .row
     = button_to('キャラを追加', ttls_path, method: :get,
-    class:"btn btn-light m_rect m_font border blu_col")
+    class:"btn btn-light s_rect m_font border blu_col")
   .row
     %h3 ↑好きな作品や、自分で創ったオリジナルのキャラクターを追加しよう
   // .row

@@ -1,5 +1,5 @@
 - chars.each.with_index(1) do |char, index|
-  .l_square.mx-3.mb-2.pos_b
+  .l_square.mx-2.mb-5.pos_b
     - if char.thr.img?
       = link_to image_tag(char.thr.img.thumb320.url,
       class: 'full_rect fit_c border rounded-circle'),
@@ -8,5 +8,8 @@
         = index.to_s + '位 ' + char.c_name
         %br
         = char.ttl.genre
-        = '「' + char.ttl.t_name + '」'
+        - if 6 < char.ttl.t_name.length
+          = "「#{char.ttl.t_name}」".slice(0..5) + '...'
+        -else
+          = '「' + char.ttl.t_name + '」'
   - break if 10 == index
