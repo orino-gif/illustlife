@@ -43,13 +43,3 @@
 //     $("#looks5,#cute5,#cool5,#chara5,#ablty5,#str5,#ero5,#funny5").show();
 //   }
 // });
-
-$(function () {
-  var windowSize = $(window).width();
-  if (windowSize < 456) {
-    $("#looks4,#cute4,#cool4,#chara4,#ablty4,#str4,#ero4,#funny4").hide();
-    $("#looks5,#cute5,#cool5,#chara5,#ablty5,#str5,#ero5,#funny5").hide();
-  } else if (windowSize <= 991) {
-    $("#looks5,#cute5,#cool5,#chara5,#ablty5,#str5,#ero5,#funny5").hide();
-  } 
-});

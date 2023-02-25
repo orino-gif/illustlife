@@ -1,15 +1,15 @@
 - chars.each.with_index(1) do |char, index|
-  .ll_square.ml-3.mb-5.text-center.s_font{:id => like.to_s + index.to_s}
+  .ll_square.ml-4.mag_bm.text-center.m_font{:id => like.to_s + index.to_s}
     - if char.thr.img?
       = link_to image_tag(char.thr.img.thumb320.url,
       class: "full_rect fit_c border"),
       char_path(char.thr.id)
-      = index.to_s + '位 ' + char.c_name.slice(0..5)
+      = index.to_s + '位 ' + char.c_name.slice(0..8)
       - if 9 < char.c_name.length
         = '...'
       %br
       = char.ttl.genre
-      = "#{char.ttl.t_name}".slice(0..5)
-      - if 7 < char.ttl.t_name.length
+      = "#{char.ttl.t_name}".slice(0..8)
+      - if 9 < char.ttl.t_name.length
         = '...'
   - break if 5 == index
