@@ -8,6 +8,7 @@ class CresController < ApplicationController
   end
   def edit
     @sttg = Sttg.find_by(cre_id: params[:id])
+    p @sttg
     @card =  Card.find_by(user_id: params[:id])
     cr = Cr.find_by(user_id: params[:id])
     if cr["bank"] && cr["branch"] && cr["a_type"] && cr["number"] \
@@ -47,13 +48,12 @@ class CresController < ApplicationController
     else
       p @cre.errors.full_messages[0]
       if @cre.errors.full_messages[0].include?("amount")
-        flash.now[:alert] = "金額入力の数値が範囲外です" 
+        alt("金額入力の数値が範囲外です")
       elsif @cre.errors.full_messages[0].include?("whitelist_error")
-        flash.now[:alert] = "非対応のファイル形式です(対応:png,jpg,jpeg,gif)"
+        alt("非対応のファイル形式です(対応:png,jpg,jpeg,gif)")
       else 
-      flash.now[:alert] = "入力ファイルが非対応です"
+        alt("入力ファイルが非対応です")
       end
-      render :edit
     end
   end
   

@@ -9,7 +9,7 @@
         %span.ll_font
           %strong イラストライフ
       / ポイントとアイコン表示
-      .col.text-right
+      .col.text-right.m_font
         - if user_signed_in?
           ="#{current_user.cre.pfm.point}ポイント"
           = icon(current_user.cre, 'ss_square')
