@@ -20,7 +20,7 @@ module ApplicationHelper
       end
     else
       if cre.hdr?
-        image_tag cre.hdr.thumb320.url, class: scss
+        image_tag cre.hdr.thumb640.url, class: scss
       else
         image_tag '/img/nothing.png', class: scss
       end
