@@ -28,14 +28,10 @@ class CreUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  # 画像の上限を640x480にする
+  # 画像の上限を4096x4096にする
   process :resize_to_limit => [4096, 4096]
   
   # サムネイル保存する
-  version :thumb640 do
-    process :resize_to_limit => [640, 640]
-  end
-  
   version :thumb320 do
     process :resize_to_limit => [320, 320]
     storage :file
