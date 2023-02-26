@@ -285,6 +285,8 @@ GEM
     puma (3.12.6)
     racc (1.5.2)
     rack (2.2.3)
+    rack-mini-profiler (3.0.0)
+      rack (>= 1.2.0)
     rack-protection (2.2.0)
       rack
     rack-test (1.1.0)
@@ -447,6 +449,7 @@ DEPENDENCIES
   payjp
   pry-rails
   puma (~> 3.11)
+  rack-mini-profiler
   rails (~> 5.2.6)
   rmagick
   rspec-rails
