@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2023_02_22_072419) do
     t.integer "ero", default: 0
     t.integer "funny", default: 0
     t.integer "cool", default: 0
+    t.integer "sympa", default: 0
     t.bigint "thr_id", default: 0
     t.bigint "ttl_id", default: 0
     t.datetime "created_at", null: false

@@ -11,6 +11,7 @@ class CreateChars < ActiveRecord::Migration[5.2]
       t.integer :ero, default: 0
       t.integer :funny, default: 0
       t.integer :cool, default: 0
+      t.integer :sympa, default: 0
       t.references :thr, default: 0
       t.references :ttl, default: 0
       t.timestamps

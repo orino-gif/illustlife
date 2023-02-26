@@ -1,13 +1,12 @@
 %header
   .container-fluid
-    .row.mb-3.d-flex.align-items-center
+    .row.mb-3.mt-2.d-flex.align-items-center
       / シンボルマークとサービス名を表示
       .col-auto
-        = link_to image_tag('/img/symbol.png', class: 'ss_square'), root_path,
-        data: {"turbolinks" => false}
-      .col-auto
-        %span.ll_font
-          %strong イラストライフ
+        = link_to root_path,data: {"turbolinks" => false} do
+          = image_tag('/img/symbol.png', class: 'ss_square')
+          %span.ll_font
+            %strong イラストライフ
       / ポイントとアイコン表示
       .col.text-right.m_font
         - if user_signed_in?

@@ -74,6 +74,8 @@ class CharsController < ApplicationController
           @char.funny += 1
         when 'カッコ良さ'
           @char.cool += 1
+        when '共感する'
+          @char.cool += 1
       end
       @char.save
       noti('送信しました', request.referer)
