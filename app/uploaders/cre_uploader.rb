@@ -41,15 +41,24 @@ class CreUploader < CarrierWave::Uploader::Base
   end
   
   version :thumb320 do
-    process :resize_to_limit => [320, 320]
+    process :resize_to_limit => [200, 200]
     storage :file
     def store_dir
       "uploads/#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}"
     end
+  end
+  
+  version :thumb50 do
+    process :resize_to_limit => [50, 50]
+    storage :file
+    def store_dir
+      "uploads/#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}"
+    end
+  end
     # def cache_dir
     #   "/local#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}"
     # end
-  end
+  
   #
   # def scale(width, height)
   #   # do something
