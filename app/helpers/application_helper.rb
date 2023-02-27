@@ -1,6 +1,6 @@
 module ApplicationHelper
   def icon(cre, scss)
-    if 'show' == controller.action_name
+    if 'show' == controller.action_name || 'edit' == controller.action_name
       if cre.icon?
         link_to image_tag(cre.icon.thumb250.url,
         class: "#{scss} rounded-circle fit_c icon"),

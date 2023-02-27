@@ -50,6 +50,7 @@
   .row.py-5.mb-3.border.ero
     = render 'char_img',
     {chars: @char_thr_ttls.order(ero: 'DESC'),cha: @chars, like:'ero'}
+    
   .row
     %h3.l_font.mt-5 キャラデザや1ページ漫画を、気軽にリクエスト
   .row
@@ -57,6 +58,7 @@
   .row.ss_m-side
     = render 'c_img', {cres: @cres, is_hdr: true}
   %br
+  
   .row
     %h5.ml-4.l_font.funny 面白さ
   .row.py-5.mb-3.border.funny
