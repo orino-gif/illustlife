@@ -23,8 +23,7 @@ class DownUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  # 画像の上限を4096にする
-  process :resize_to_limit => [4096, 4096]
+  # 画像サイズ上限なし
   
   # def scale(width, height)
   #   # do something

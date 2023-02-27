@@ -1,6 +1,6 @@
 = form_with(model:@work, local: true) do |f|
   = f.hidden_field :req_id, :value => @work.req_id
-  = '複数選択可'
+  = '複数選択不可(png jpg jpeg gif)'
   = f.file_field :images, multiple: true
   = f.submit '登録'
 %br
