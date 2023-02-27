@@ -5,7 +5,7 @@
     - if @ttls
       - @ttls.each do |ttl|
         .ll_square.pt-5.my-5.mx-2.text-center
-          = link_to image_tag(ttl.thr.img.thumb320.url,
+          = link_to image_tag(ttl.thr.img.thumb250.url,
           class:'full_rect fit_con'),
           ttl_path(ttl.id)
           = '['+ ttl.genre + ']'

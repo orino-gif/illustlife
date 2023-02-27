@@ -1,26 +1,38 @@
 module ApplicationHelper
   def icon(cre, scss)
-    if cre.icon?
-      link_to image_tag(cre.icon.thumb320.url,
-      class: "#{scss} rounded-circle fit_c icon"),
-      cre_path(cre.user_id)
+    if 'show' == controller.action_name
+      if cre.icon?
+        link_to image_tag(cre.icon.thumb250.url,
+        class: "#{scss} rounded-circle fit_c icon"),
+        cre_path(cre.user_id)
+      else
+        link_to image_tag('/img/mobu.png',
+        class: "#{scss} rounded-circle fit_c"),
+        cre_path(cre.user_id)
+      end
     else
-      link_to image_tag('/img/mobu.png',
-      class: "#{scss} rounded-circle fit_c"),
-      cre_path(cre.user_id)
+      if cre.icon?
+        link_to image_tag(cre.icon.thumb50.url,
+        class: "#{scss} rounded-circle fit_c icon"),
+        cre_path(cre.user_id)
+      else
+        link_to image_tag('/img/mobu.png',
+        class: "#{scss} rounded-circle fit_c"),
+        cre_path(cre.user_id)
+      end
     end
   end
   
   def disp_hdr(cre, scss)
     if 'homes' == controller.controller_name
       if cre.hdr?
-        link_to image_tag(cre.hdr.thumb320.url, class: scss), cre_path(cre.user_id)
+        link_to image_tag(cre.hdr.thumb250.url, class: scss), cre_path(cre.user_id)
       else
         link_to image_tag('/img/nothing.png', class: scss),cre_path(cre.user_id)
       end
     else
       if cre.hdr?
-        image_tag cre.hdr.thumb640.url, class: scss
+        image_tag cre.hdr.url, class: scss
       else
         image_tag '/img/nothing.png', class: scss
       end

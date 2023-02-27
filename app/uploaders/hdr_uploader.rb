@@ -1,18 +1,14 @@
-class CreUploader < CarrierWave::Uploader::Base
+class HdrUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
   include CarrierWave::MiniMagick
   
   # 保存形式をpngにする
   process :convert => 'png'
-
+  
   # Choose what kind of storage to use for this uploader:
-  # if Rails.env.development?
-    storage :file
-    # storage :fog
-  # else
-  # storage :fog
-  # end
+  # storage :file
+  storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -27,15 +23,11 @@ class CreUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
-
   
-  # サムネイル保存する
   
-    # def cache_dir
-    #   "/local#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}"
-    # end
+  #Process files as they are uploaded:
+    process :resize_to_limit => [1000, 1000]
   
-  #
   # def scale(width, height)
   #   # do something
   # end
@@ -43,21 +35,20 @@ class CreUploader < CarrierWave::Uploader::Base
   # Create different versions of your uploaded files:
   version :thumb250 do
     process :resize_to_limit => [250, 250]
-  end
-  
-  version :thumb50 do
-    process :resize_to_limit => [50, 50]
+    storage :file
+    def store_dir
+      "uploads/#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}"
+    end
   end
 
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w(png jpg jpeg gif)
+    %w(jpg jpeg gif png)
   end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # 拡張子が同じでないとGIFをJPGとかにコンバートできないので、ファイル名を変更
   def filename
     super.chomp(File.extname(super)) + '.png' if original_filename.present?
   end

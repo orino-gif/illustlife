@@ -1,7 +1,7 @@
 - chars.each.with_index(1) do |char, index|
   .ll_square.ml-4.mag_bm.text-center.m_font{:id => like.to_s + index.to_s}
     - if char.thr.img?
-      = link_to image_tag(char.thr.img.thumb320.url,
+      = link_to image_tag(char.thr.img.thumb250.url,
       class: "full_rect fit_c border"),
       char_path(char.thr.id)
       = index.to_s + '位 ' + char.c_name.slice(0..8)
