@@ -39,7 +39,7 @@ module ApplicationHelper
     end
   end
   
-  def noti(info, path: request.referer)
+  def noti(info, path = request.referer)
     redirect_to path, notice: info
   end
   
