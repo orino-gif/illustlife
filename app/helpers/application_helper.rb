@@ -1,6 +1,7 @@
 module ApplicationHelper
   def icon(cre, scss)
-    if 'show' == controller.action_name || 'edit' == controller.action_name
+    if 'show' == controller.action_name || 'edit' == controller.action_name ||\
+      'new' == controller.action_name
       if cre.icon?
         link_to image_tag(cre.icon.thumb250.url,
         class: "#{scss} rounded-circle fit_c icon"),
@@ -26,7 +27,8 @@ module ApplicationHelper
   def disp_hdr(cre, scss)
     if 'homes' == controller.controller_name
       if cre.hdr?
-        link_to image_tag(cre.hdr.thumb250.url, class: scss), cre_path(cre.user_id)
+        link_to image_tag(cre.hdr.thumb250.url,
+        class: scss), cre_path(cre.user_id)
       else
         link_to image_tag('/img/nothing.png', class: scss),cre_path(cre.user_id)
       end
