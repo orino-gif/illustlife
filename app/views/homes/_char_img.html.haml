@@ -1,6 +1,6 @@
 - chars.each.with_index(1) do |char, index|
-  .ll_square.ml-4.mag_bm.text-center.m_font{:id => like.to_s + index.to_s}
-    - if char.thr.img?
+  - if char.thr.img? && index > start
+    .ll_square.ml-4.mag_bm.text-center.m_font
       = link_to image_tag(char.thr.img.thumb250.url,
       class: "full_rect fit_c border"),
       char_path(char.thr.id)
@@ -12,4 +12,4 @@
       = "#{char.ttl.t_name}".slice(0..8)
       - if 9 < char.ttl.t_name.length
         = '...'
-  - break if 5 == index
+    - break if times == index

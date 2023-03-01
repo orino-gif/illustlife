@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     end
     collection do; get '/:id/new', to: 'expors#new'; end
   end
-  resources :homes, only: [:index] do
+  resources :homes, only: [:index, :show] do
     resources :mans, only: [:index, :show]
   end
   resources :reqs, only: [:index, :create, :show, :update] do

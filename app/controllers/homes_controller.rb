@@ -7,4 +7,9 @@ class HomesController < ApplicationController
     @char_thr_ttls = Char.joins(:thr,:ttl).all
     @chars = Char.all
   end
+  
+  def show
+    @char_thr_ttls = Char.joins(:thr,:ttl).all
+    
+  end
 end

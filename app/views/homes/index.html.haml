@@ -5,31 +5,30 @@
 //   .row#images.ws_bgc
 //     = render 'o_img', {ovrs: @ovrs, place: 'トップ'}
 .container
-  .row
-    %h2.l_font.ml-3 検索条件
-  .row.ml-3
-    = radio_button_tag :lang, '2023年2月',checked:true
-    = label_tag(:lang, "　2023年2月　", class:'l_font ml-2')
-  .row.ml-3
-    = radio_button_tag :cnt, '商業, 二次創作',checked:true
-    = label_tag(:cnt, "　商業, 二次創作　", class:'l_font ml-2')
+  = render 'terms'
   .row
     %h2.l_font.ml-3 好きな理由
   .row
     %h3.ml-4.l_font ルックス
   .row.py-5.border
     = render 'char_img',
-    {chars: @char_thr_ttls.order(looks: 'DESC'),like:'looks'}
+    {chars: @char_thr_ttls.order(looks: 'DESC'),cha: @chars,times:5, start:0}
+  .mb-3.m_font.text-right
+    = link_to 'more',home_path(1)
   .row
     %h5.ml-4.l_font.chara 性格
   .row.py-5.mb-3.border.chara
     = render 'char_img',
-    {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars, like:'chara'}
+    {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
+  .mb-3.m_font.text-right
+    = link_to 'more',home_path(2)
   .row
     %h5.ml-4.l_font.ablty 能力
   .row.py-5.mb-3.border.ablty
     = render 'char_img',
-    {chars: @char_thr_ttls.order(ablty: 'DESC'),cha: @chars, like:'ablty'}
+    {chars: @char_thr_ttls.order(ablty: 'DESC'),cha: @chars,times:5, start:0}
+  .mb-3.m_font.text-right
+    = link_to 'more',home_path(3)
   .row
     %h3.l_font ↓好きな作品や、自分が描いたキャラを追加しよう。
   .row.ml-4.mb-4
@@ -39,41 +38,52 @@
     %h5.ml-4.l_font.str 強さ
   .row.py-5.mb-3.border.str
     = render 'char_img',
-    {chars: @char_thr_ttls.order(str: 'DESC'),cha: @chars, like:'str'}
+    {chars: @char_thr_ttls.order(str: 'DESC'),cha: @chars, times:5, start:0}
+  .mb-3.m_font.text-right
+    = link_to 'more',home_path(4)
   .row
     %h3.ml-4.l_font 可愛さ
   .row.py-5.mb-3.border
     = render 'char_img',
-    {chars: @char_thr_ttls.order(cute: 'DESC'),like:'cute'}
+    {chars: @char_thr_ttls.order(cute: 'DESC'),cha: @chars, times:5, start:0}
+  .mb-3.m_font.text-right
+    = link_to 'more',home_path(5)
   .row
     %h5.ml-4.l_font.ero エロさ
   .row.py-5.mb-3.border.ero
     = render 'char_img',
-    {chars: @char_thr_ttls.order(ero: 'DESC'),cha: @chars, like:'ero'}
+    {chars: @char_thr_ttls.order(ero: 'DESC'),cha: @chars, times:5, start:0}
+  .mb-3.m_font.text-right
+    = link_to 'more',home_path(6)
     
   .row
     %h3.l_font.mt-5 キャラデザや1ページ漫画を、気軽にリクエスト
   .row
     %h3.l_font 絵師、漫画家
   .row.ss_m-side
-    = render 'c_img', {cres: @cres, is_hdr: true}
+    = render 'cre_img', {cres: @cres, is_hdr: true}
   %br
-  
   .row
     %h5.ml-4.l_font.funny 面白さ
   .row.py-5.mb-3.border.funny
     = render 'char_img',
-    {chars: @char_thr_ttls.order(funny: 'DESC'),cha: @chars, like:'funny'}
+    {chars: @char_thr_ttls.order(funny: 'DESC'),cha: @chars, times:5, start:0}
+  .mb-3.m_font.text-right
+    = link_to 'more',home_path(7)
   .row
     %h3.ml-4.l_font カッコ良さ
   .row.py-5.mb-3.border
     = render 'char_img',
-    {chars: @char_thr_ttls.order(cool: 'DESC'),like:'cool'}
+    {chars: @char_thr_ttls.order(cool: 'DESC'),cha: @chars, times:5, start:0}
+  .mb-3.m_font.text-right
+    = link_to 'more',home_path(8)
   .row
     %h5.ml-4.l_font.sympa 共感する
   .row.py-5.mb-3.border.sympa
     = render 'char_img',
-    {chars: @char_thr_ttls.order(sympa: 'DESC'),cha: @chars, like:'sympa'}
+    {chars: @char_thr_ttls.order(sympa: 'DESC'),cha: @chars, times:5, start:0}
+  .mb-3.m_font.text-right
+    = link_to 'more',home_path(9)
   
   // .row
   //   %h2.l_font='晒す(クリエータ向け)'
