@@ -1,4 +1,4 @@
-- title = '漫画　アニメ　イラスト　人気キャラ　トレンド'
+- title = '漫画　アニメ　イラスト　人気キャラ'
 - content_for(:html_title) { title }
 %h1.ll_font.ws_bgc= title
 // .container-fluid
@@ -17,14 +17,14 @@
     = link_to 'more',home_path(1)
   .row
     %h5.ml-4.l_font.chara 性格
-  .row.py-5.mb-3.border.chara
+  .row.py-5.mb-3.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
   .mb-3.m_font.text-right
     = link_to 'more',home_path(2)
   .row
     %h5.ml-4.l_font.ablty 能力
-  .row.py-5.mb-3.border.ablty
+  .row.py-5.mb-3.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(ablty: 'DESC'),cha: @chars,times:5, start:0}
   .mb-3.m_font.text-right
@@ -36,8 +36,7 @@
     class:"ll_square btn btn-light l_font border ml-2")
   .row
     %h5.ml-4.l_font.str 強さ
-  .row.py-5.mb-3.border.str
-    = render 'char_img',
+  .row.py-5.mb-3.border= render 'char_img',
     {chars: @char_thr_ttls.order(str: 'DESC'),cha: @chars, times:5, start:0}
   .mb-3.m_font.text-right
     = link_to 'more',home_path(4)
@@ -50,7 +49,7 @@
     = link_to 'more',home_path(5)
   .row
     %h5.ml-4.l_font.ero エロさ
-  .row.py-5.mb-3.border.ero
+  .row.py-5.mb-3.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(ero: 'DESC'),cha: @chars, times:5, start:0}
   .mb-3.m_font.text-right
@@ -64,8 +63,8 @@
     = render 'cre_img', {cres: @cres, is_hdr: true}
   %br
   .row
-    %h5.ml-4.l_font.funny 面白さ
-  .row.py-5.mb-3.border.funny
+    %h5.ml-4.l_font 面白さ
+  .row.py-5.mb-3.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(funny: 'DESC'),cha: @chars, times:5, start:0}
   .mb-3.m_font.text-right
@@ -79,7 +78,7 @@
     = link_to 'more',home_path(8)
   .row
     %h5.ml-4.l_font.sympa 共感する
-  .row.py-5.mb-3.border.sympa
+  .row.py-5.mb-3.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(sympa: 'DESC'),cha: @chars, times:5, start:0}
   .mb-3.m_font.text-right

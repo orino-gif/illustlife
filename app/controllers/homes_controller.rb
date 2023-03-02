@@ -10,6 +10,5 @@ class HomesController < ApplicationController
   
   def show
     @char_thr_ttls = Char.joins(:thr,:ttl).all
-    
   end
 end
