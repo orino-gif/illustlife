@@ -3,8 +3,9 @@
     .row.mb-3.mt-2.d-flex.align-items-center
       / シンボルマークとサービス名を表示
       .col-auto
-        = link_to root_path,data: {"turbolinks" => false} do
-          = image_tag('/img/symbol.png', class: 'ss_square')
+        = link_to root_path, data: {"turbolinks" => false} do
+          = image_tag('/img/symbol.png', alt:'シンボルマーク',
+          class: 'ss_square')
           %span.ll_font
             %strong イラストライフ
       / ポイントとアイコン表示

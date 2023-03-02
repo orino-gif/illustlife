@@ -22,9 +22,6 @@
 src="https://code.jquery.com/jquery-3.2.1.min.js"
 src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
 
-//衝突を避ける
-// jQuery.noConflict();
-
 console.log("jQuery稼働OK");
 
 $(document).on("change",".preview",function(){
@@ -44,6 +41,7 @@ $(document).on("change",".preview",function(){
     $(elem).next(".lll_img,.edit_img").html(lll_img)
   });
 })
+
 // $(function () {
 //   $('.dbl').mouseover(function() {
 //       // ここに処理を記述する
