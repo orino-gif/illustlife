@@ -16,14 +16,14 @@
   .mb-3.m_font.text-right
     = link_to 'more',home_path(1)
   .row
-    %h5.ml-4.l_font.chara 性格
+    %h3.ml-4.l_font.chara 性格
   .row.py-5.mb-3.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
   .mb-3.m_font.text-right
     = link_to 'more',home_path(2)
   .row
-    %h5.ml-4.l_font.ablty 能力
+    %h3.ml-4.l_font.ablty 能力
   .row.py-5.mb-3.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(ablty: 'DESC'),cha: @chars,times:5, start:0}
@@ -35,7 +35,7 @@
     = button_to("追加", ttls_path, method: :get,
     class:"ll_square btn btn-light l_font border ml-2")
   .row
-    %h5.ml-4.l_font.str 強さ
+    %h3.ml-4.l_font.str 強さ
   .row.py-5.mb-3.border= render 'char_img',
     {chars: @char_thr_ttls.order(str: 'DESC'),cha: @chars, times:5, start:0}
   .mb-3.m_font.text-right
@@ -48,7 +48,7 @@
   .mb-3.m_font.text-right
     = link_to 'more',home_path(5)
   .row
-    %h5.ml-4.l_font.ero エロさ
+    %h3.ml-4.l_font.ero エロさ
   .row.py-5.mb-3.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(ero: 'DESC'),cha: @chars, times:5, start:0}
@@ -56,14 +56,14 @@
     = link_to 'more',home_path(6)
     
   .row
-    %h3.l_font.mt-5 キャラデザや1ページ漫画を、気軽にリクエスト
+    %h2.l_font.mt-5 キャラデザや1ページ漫画を、気軽にリクエスト
   .row
-    %h3.l_font 絵師、漫画家
+    %h2.l_font 絵師、漫画家
   .row.ss_m-side
     = render 'cre_img', {cres: @cres, is_hdr: true}
   %br
   .row
-    %h5.ml-4.l_font 面白さ
+    %h3.ml-4.l_font 面白さ
   .row.py-5.mb-3.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(funny: 'DESC'),cha: @chars, times:5, start:0}
@@ -77,7 +77,7 @@
   .mb-3.m_font.text-right
     = link_to 'more',home_path(8)
   .row
-    %h5.ml-4.l_font.sympa 共感する
+    %h3.ml-4.l_font.sympa 共感する
   .row.py-5.mb-3.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(sympa: 'DESC'),cha: @chars, times:5, start:0}
