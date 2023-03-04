@@ -3,8 +3,9 @@
 = csp_meta_tag
 
 / googleアドセンス
-%script{async: "", crossorigin: "anonymous",
-src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1975514113864953"}
+- if 'production' == Rails.env
+  %script{async: "", crossorigin: "anonymous",
+  src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1975514113864953"}
 
 / 第三者コードをヘッダー上で実行
 %meta{content: "on", "http-equiv" => "x-dns-prefetch-control"}/
