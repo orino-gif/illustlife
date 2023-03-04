@@ -7,21 +7,21 @@
   .container
     / マニュアルページへのリンクテキストを表示
     .row.m-4
-      .mx-3
+      .mx-3.m_font
         = link_to 'イラスト付き利用説明', home_mans_path(1)
     / 各規約ページへのリンクテキストを表示
     .row.m-4
-      .mx-3
+      .p-3.mx-3.m_font
         = link_to '利用規約', agree_path(1)
-      .mx-3
+      .p-3.mx-3.m_font
         = link_to 'プライバシーポリシー', agree_path(2)
-      .mx-3
+      .p-3.mx-3.m_font
         = link_to '特定商取引法に基づく表記', agree_path(3)
-      .mx-3
+      .p-3.mx-3.m_font
         = link_to 'ご意見', expls_path
     / 著作権表示
     .row.m-3
-      .col.text-right
+      .col.text-right.m_font
         © 2021-2022 イラストライフ運営局
         = link_to image_tag('/img/twtr.png', alt: 'twitterマーク',
         class:'ss_square fit_c opacity scale_q'),'https://twitter.com/VUbOrcUFP2h0X6B'
