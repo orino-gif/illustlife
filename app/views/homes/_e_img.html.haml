@@ -9,7 +9,8 @@
         = link_to(expor_path(expor.id)) do
           .ll_square.fixed_co.p-3.pre_wrap.blk_col.text-left.m_line.hdn_over
             - msg = Msg.find_by(id: expor.msg_id)
-            = msg.s_msg.gsub(/[\n]/,"\n").slice(0..100) + '...'
+            - if msg
+              = msg.s_msg.gsub(/[\n]/,"\n").slice(0..100) + '...'
       = expor.kind + '→ ' + expor.hope.to_s
       %br= '+' + expor.fee.abs.to_s + 'pt'
     - break if 20 == index

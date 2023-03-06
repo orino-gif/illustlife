@@ -8,13 +8,9 @@
 @import "bootstrap";
 
 // 色変更、下線装飾無し(!importantで優先順位を上げる)
-a { color: black; text-decoration: none !important; }
-body { font-family: 'Kaisei Decol', serif, "メイリオ" ; }
-//見出し
-h1 { padding: 0.6rem 1.2rem; }
-h2 { border-bottom: 3px dotted black; }
+
 // ストロングとラベルタグの太字を無効化
-strong, label, th { font-weight: normal; }
+// label, th { font-weight: normal; }
 // 画像の上にSAMPLE文字を表示
 
 .blk_col {color: black;}
