@@ -28,7 +28,7 @@ module ApplicationHelper
     if cre.hdr?
       image_tag cre.hdr.url, alt: cre.user.nick,class: scss
     else
-      image_tag '/img/nothing.png',alt:モブキャラ,class: scss
+      image_tag '/img/nothing.png',alt:'モブキャラ',class: scss
     end
   end
   
