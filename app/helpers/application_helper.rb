@@ -25,20 +25,10 @@ module ApplicationHelper
   end
   
   def disp_hdr(cre, scss)
-    if 'homes' == controller.controller_name
-      if cre.hdr?
-        link_to image_tag(cre.hdr.thumb250.url, alt: cre.user.nick,
-        class: scss), cre_path(cre.user_id)
-      else
-        link_to image_tag('/img/nothing.png', alt:モブキャラ,
-        class: scss),cre_path(cre.user_id)
-      end
+    if cre.hdr?
+      image_tag cre.hdr.url, alt: cre.user.nick,class: scss
     else
-      if cre.hdr?
-        image_tag cre.hdr.url, alt: cre.user.nick,class: scss
-      else
-        image_tag '/img/nothing.png',alt:モブキャラ,class: scss
-      end
+      image_tag '/img/nothing.png',alt:モブキャラ,class: scss
     end
   end
   
