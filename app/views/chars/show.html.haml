@@ -26,8 +26,6 @@
             %td URL
             %td= link_to @char.ttl.thr.url.slice(0..25) + '...',
               @char.ttl.thr.url
-      
-      
   .row
     %h2.l_font= '好感度グラフ'
     - data = [['ルックス', @char.looks],['性格', @char.chara],

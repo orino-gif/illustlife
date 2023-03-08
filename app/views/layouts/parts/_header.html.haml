@@ -30,6 +30,7 @@
           destroy_user_session_path, method: "delete"
         - else
           - if not devise_controller?
+            .m_font= 'ゲストさん100pt'
             %button.btn.btn-light.m_font.border= link_to 'ログイン',
             new_user_session_path
           %button.btn.btn-light.m_font.border= link_to '新規登録',
