@@ -9,10 +9,14 @@
 
 / 第三者コードをヘッダー上で実行
 %meta{content: "on", "http-equiv" => "x-dns-prefetch-control"}/
-%link{href: "//tpc.googlesyndication.com/sodar/sodar2/225/runner.html", rel: "preconnect dns-prefetch"}/
-%link{href: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1975514113864953", rel: "preconnect dns-prefetch"}/
-%link{href: "//pagead2.googlesyndication.com/pagead/managed/js/adsense/m202302130101/show_ads_impl_with_ama_fy2021.js?client=ca-pub-1975514113864953&plah=160.16.136.195%3A3000", rel: "preconnect dns-prefetch"}/
-%link{href: "//www.googletagmanager.com/gtag/js?id=G-QJ06SMJ2Y5", rel: "preconnect dns-prefetch"}/
+%link{href: "//tpc.googlesyndication.com/sodar/sodar2/225/runner.html",
+rel: "preconnect dns-prefetch"}/
+%link{href: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1975514113864953",
+rel: "preconnect dns-prefetch"}/
+%link{href: "//pagead2.googlesyndication.com/pagead/managed/js/adsense/m202302130101/show_ads_impl_with_ama_fy2021.js?client=ca-pub-1975514113864953&plah=160.16.136.195%3A3000",
+rel: "preconnect dns-prefetch"}/
+%link{href: "//www.googletagmanager.com/gtag/js?id=G-QJ06SMJ2Y5",
+rel: "preconnect dns-prefetch"}/
 
 / google検索に表示しない
 - if 'agrees' == controller.controller_name || 'edit' == controller.action_name || ('expors' == controller.controller_name && 'index' == controller.action_name)
@@ -21,10 +25,10 @@
 :css
   h1 { padding: 0.6em 1.2em; }
   h2 { border-bottom: 3px dotted black; }
-  a { color: mediumblue; text-decoration: none !important; }
-  strong {font-weight: normal; }
-  label {font-weight: normal; }
-  th {font-weight: normal; }
+  a { color: black; text-decoration: none !important; }
+  strong { font-weight: normal; }
+  label { font-weight: normal; }
+  th { font-weight: normal; }
   body { font-family: 'Kaisei Decol', serif, "メイリオ" ; }
   
 :javascript

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_22_072419) do
+ActiveRecord::Schema.define(version: 2023_03_10_003740) do
 
   create_table "cards", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 2023_02_22_072419) do
     t.bigint "ttl_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "up_id"
+    t.integer "sum"
     t.index ["thr_id"], name: "index_chars_on_thr_id"
     t.index ["ttl_id"], name: "index_chars_on_ttl_id"
   end
