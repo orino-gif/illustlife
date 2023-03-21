@@ -7,12 +7,12 @@
   .row.d-flex.justify-content-center
     / 投稿は、ユーザー登録が必要
     - if user_signed_in?
-      - pass = "/chars/#{current_user.id}/new"
+      - pass = "/posts/#{current_user.id}/new"
     - else
-      - pass = "/chars/1/new"
-    %button.btn.btn-light.l_font.border.mt-5= link_to '投稿する(+5pt)', pass
+      - pass = "/posts/1/new"
+    %button.btn.btn-light.l_font.border.mt-5= link_to '投稿する', pass
   .row
-    %h3.ml-4.l_font キャラクター
+    %h3.ml-4.l_font 投稿作品
   .row.py-5.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(looks: 'DESC'),cha: @chars,times:5, start:0}
@@ -20,7 +20,7 @@
     = button_to("more", home_path(1) , method: :get,
     class:"btn btn-light l_font border blk_col mt-4")
   .row
-    %h3.ml-4.l_font.chara　タイトル
+    %h3.ml-4.l_font.chara　推薦されたクリエーター
   .row.py-5.mb-3.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}

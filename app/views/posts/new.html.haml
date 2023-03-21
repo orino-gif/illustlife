@@ -1,0 +1,34 @@
+- content_for(:html_title) { '投稿' }
+%h1.ll_font.ws_bgc 投稿
+.container
+  .row.my-5
+    .col-md-8.border.border-secondary
+      = form_with(model: @post, local:true) do |f|
+        %br
+        = f.label '投稿ファイル(png, jpeg, jpg, gif)(必須):', class:'lll_img'
+        %br
+        = f.file_field :img, class:'lll_img preview'
+        .lll_img.ws_bgc.lll_square.full_rect.fit_c
+        %br
+        = f.label :tag, 'タグ（必須）'
+        = f.text_area :tag, autofocus: true, class:'form-control', size:'10x6'
+        %br
+        = f.radio_button :illust, :true, checked: true
+        = f.label :illust, 'イラスト'
+        = f.radio_button :illust, :false
+        = f.label :illust, '漫画'
+        %br
+        = f.radio_button :org, :false, checked: true
+        = f.label :org, 'オリジナル'
+        = f.radio_button :org, :true
+        = f.label :org, '2次創作'
+        %br
+        = f.check_box :minor ,{},checked_value="true", unchecked_value="false"
+        = f.label :minor, 'R-18'
+        %br
+        = f.check_box :is_ai ,{},checked_value="true", unchecked_value="false"
+        = f.label :is_ai, 'AI'
+
+        %br
+        = f.hidden_field :id, :value => params[:id]
+        = f.submit '投稿', class:"btn btn-light l_font border my-5 ss_rect"

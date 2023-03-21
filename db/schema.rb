@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_10_003740) do
+ActiveRecord::Schema.define(version: 2023_03_21_002749) do
 
   create_table "cards", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
@@ -83,6 +83,11 @@ ActiveRecord::Schema.define(version: 2023_03_10_003740) do
     t.index ["user_id"], name: "index_expors_on_user_id"
   end
 
+  create_table "exps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.timestamp "created_at"
+    t.text "cnt"
+  end
+
   create_table "ips", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "addr", default: ""
     t.datetime "created_at", null: false
@@ -103,6 +108,11 @@ ActiveRecord::Schema.define(version: 2023_03_10_003740) do
     t.index ["expor_id"], name: "index_ovrs_on_expor_id"
   end
 
+  create_table "passes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.timestamp "created_at"
+    t.text "way"
+  end
+
   create_table "pfms", primary_key: "cre_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "pic", default: 0
     t.integer "dl", default: 100
@@ -111,6 +121,22 @@ ActiveRecord::Schema.define(version: 2023_03_10_003740) do
     t.integer "evl", default: 50
     t.integer "sales", default: 0
     t.integer "wdl", default: 0
+  end
+
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "ttl", default: ""
+    t.bigint "exp_id", default: 0
+    t.bigint "tag_id", default: 0
+    t.boolean "illust", default: true
+    t.boolean "minor", default: false
+    t.boolean "is_ai", default: false
+    t.boolean "org", default: false
+    t.boolean "cmt", default: true
+    t.integer "up_id", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exp_id"], name: "index_posts_on_exp_id"
+    t.index ["tag_id"], name: "index_posts_on_tag_id"
   end
 
   create_table "reqs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -138,6 +164,11 @@ ActiveRecord::Schema.define(version: 2023_03_10_003740) do
     t.boolean "start", default: false
     t.boolean "nsfw", default: false
     t.string "job", default: "一般"
+  end
+
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.timestamp "created_at"
+    t.text "txt"
   end
 
   create_table "thrs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
