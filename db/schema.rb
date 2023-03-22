@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_21_002749) do
+ActiveRecord::Schema.define(version: 2023_03_22_204245) do
 
   create_table "cards", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
@@ -59,6 +59,11 @@ ActiveRecord::Schema.define(version: 2023_03_21_002749) do
     t.string "holder"
   end
 
+  create_table "dtls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.timestamp "created_at"
+    t.text "cnt"
+  end
+
   create_table "expls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "adv_id"
     t.text "a_msg"
@@ -81,11 +86,6 @@ ActiveRecord::Schema.define(version: 2023_03_21_002749) do
     t.string "w_st"
     t.index ["msg_id"], name: "index_expors_on_msg_id"
     t.index ["user_id"], name: "index_expors_on_user_id"
-  end
-
-  create_table "exps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.timestamp "created_at"
-    t.text "cnt"
   end
 
   create_table "ips", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -125,18 +125,36 @@ ActiveRecord::Schema.define(version: 2023_03_21_002749) do
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "ttl", default: ""
-    t.bigint "exp_id", default: 0
+    t.bigint "dtl_id", default: 0
+    t.bigint "pass_id", default: 0
     t.bigint "tag_id", default: 0
     t.boolean "illust", default: true
     t.boolean "minor", default: false
     t.boolean "is_ai", default: false
     t.boolean "org", default: false
-    t.boolean "cmt", default: true
     t.integer "up_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["exp_id"], name: "index_posts_on_exp_id"
+    t.index ["dtl_id"], name: "index_posts_on_dtl_id"
+    t.index ["pass_id"], name: "index_posts_on_pass_id"
     t.index ["tag_id"], name: "index_posts_on_tag_id"
+  end
+
+  create_table "psts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "ttl", default: ""
+    t.bigint "dtl_id", default: 0
+    t.bigint "pass_id", default: 0
+    t.bigint "tag_id", default: 0
+    t.boolean "illust", default: true
+    t.boolean "minor", default: false
+    t.boolean "is_ai", default: false
+    t.boolean "org", default: false
+    t.integer "up_id", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dtl_id"], name: "index_psts_on_dtl_id"
+    t.index ["pass_id"], name: "index_psts_on_pass_id"
+    t.index ["tag_id"], name: "index_psts_on_tag_id"
   end
 
   create_table "reqs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

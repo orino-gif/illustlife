@@ -1,4 +1,4 @@
-- title = '漫画　アニメ　イラスト　投稿とリクエスト'
+- title = 'イラスト　漫画　投稿とリクエスト'
 - content_for(:html_title) { title }
 %h1.ll_font.ws_bgc= title
 .container
@@ -7,12 +7,19 @@
   .row.d-flex.justify-content-center
     / 投稿は、ユーザー登録が必要
     - if user_signed_in?
-      - pass = "/posts/#{current_user.id}/new"
+      - pass = "/psts/#{current_user.id}/new"
     - else
-      - pass = "/posts/1/new"
+      - pass = "/psts/1/new"
     %button.btn.btn-light.l_font.border.mt-5= link_to '投稿する', pass
   .row
     %h3.ml-4.l_font 投稿作品
+  .row.py-5.border
+  //   image_tag(.img.thumb250.url,alt:char.c_name,
+  //     class: "full_rect fit_c border lazyload")
+  //   - @posts.each.with_index(1) do |pos, index|
+  // - if char.thr.img? && index > start
+  .row
+    %h3.ml-4.l_font おすすめ作品
   .row.py-5.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(looks: 'DESC'),cha: @chars,times:5, start:0}

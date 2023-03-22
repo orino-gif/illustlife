@@ -38,9 +38,9 @@ Rails.application.routes.draw do
   resources :homes, only: [:index, :show] do
     resources :mans, only: [:index, :show]
   end
-  resources :posts, only: [:index, :create, :show] do
+  resources :psts, only: [:index, :create, :show] do
     collection do
-      get '/:id/new', to: 'posts#new'
+      get '/:id/new', to: 'psts#new'
     end
   end
   resources :reqs, only: [:index, :create, :show, :update] do

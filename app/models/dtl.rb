@@ -1,3 +1,3 @@
-class Tag < ApplicationRecord
+class Dtl < ApplicationRecord
   has_one :post, dependent: :destroy
 end

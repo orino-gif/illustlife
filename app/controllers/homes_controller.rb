@@ -6,6 +6,8 @@ class HomesController < ApplicationController
     @expors = Expor.where.not(id: Ovr.all.select(:expor_id))
     @char_thr_ttls = Char.joins(:thr,:ttl).all
     @chars = Char.all
+    @psts = Pst.all
+    
   end
   
   def show

@@ -1,2 +1,0 @@
-class Exp < ApplicationRecord
-end

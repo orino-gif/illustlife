@@ -1,0 +1,2 @@
+class Pst < ApplicationRecord
+end
