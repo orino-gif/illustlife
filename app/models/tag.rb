@@ -1,3 +1,3 @@
 class Tag < ApplicationRecord
-  has_one :post, dependent: :destroy
+  has_one :pst, dependent: :destroy
 end

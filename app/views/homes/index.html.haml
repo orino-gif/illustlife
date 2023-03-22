@@ -1,4 +1,4 @@
-- title = 'イラスト　漫画　投稿とリクエスト'
+- title = 'イラスト　漫画　投稿　評価　リクエスト'
 - content_for(:html_title) { title }
 %h1.ll_font.ws_bgc= title
 .container
@@ -14,7 +14,9 @@
   .row
     %h3.ml-4.l_font 投稿作品
   .row.py-5.border
-  //   image_tag(.img.thumb250.url,alt:char.c_name,
+    - @psts.reverse_each.with_index(1) do |pst, index|
+      - if pst
+        = image_tag(pst.pass.way.thumb250.url)
   //     class: "full_rect fit_c border lazyload")
   //   - @posts.each.with_index(1) do |pos, index|
   // - if char.thr.img? && index > start
