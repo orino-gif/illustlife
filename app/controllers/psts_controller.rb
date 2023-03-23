@@ -27,7 +27,10 @@ class PstsController < ApplicationController
     @pst.pass_id = pass.id
     @pst.tag_id = tag.id
     @pst.up_id = current_user.id
+    worth = Worth.new
     if @pst.save
+      worth.pst_id = @pst.id
+      worth.save
       noti('追加しました', root_path)
     else
       alt('失敗しました')
@@ -37,6 +40,7 @@ class PstsController < ApplicationController
   def show
     @pst = Pst.find_by(id: params[:id])
     @user = User.find_by(id: @pst.up_id )
+    @worth = Worth.find_by(pst_id: @pst.id)
   end
     
   def update

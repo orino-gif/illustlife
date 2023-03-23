@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_22_204245) do
+ActiveRecord::Schema.define(version: 2023_03_23_124319) do
 
   create_table "cards", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
@@ -235,6 +235,18 @@ ActiveRecord::Schema.define(version: 2023_03_22_204245) do
     t.boolean "rework", default: false
     t.timestamp "updated_at"
     t.json "images"
+  end
+
+  create_table "worths", primary_key: "pst_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "patt", default: 0
+    t.integer "cute", default: 0
+    t.integer "ero", default: 0
+    t.integer "btfl", default: 0
+    t.integer "cool", default: 0
+    t.integer "funny", default: 0
+    t.integer "sympa", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

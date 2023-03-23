@@ -8,7 +8,6 @@
       = link_to image_tag(@pst.pass.way.thumb500.url,
       class: "lll_square fit_con fit_c"), @pst.pass.way.url
     .col-sm
-      
       %table.table
         %thead
           %tr
@@ -18,5 +17,14 @@
           %tr
             %td='タグ' 
             %td=@pst.tag.txt
-            val
+          - if '' != @pst.dtl.cnt
+            %tr
+              %td='説明' 
+              %td=@pst.dtl.cnt
+  .row
+    %h2.l_font= '好きな理由'
+    - data = [['絵柄', @pst.worth.patt],['可愛さ', @pst.worth.cute],
+    ['エロさ',@pst.worth.ero],['美しさ', @pst.worth.btfl],['カッコ良さ', @pst.worth.cool],
+    ['面白さ', @pst.worth.funny],['共感', @pst.worth.sympa]]
+    = column_chart data
 
