@@ -41,6 +41,10 @@ class CreUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
+  version :thumb500 do
+    process :resize_to_limit => [500, 500]
+  end
+  
   version :thumb250 do
     process :resize_to_limit => [250, 250]
   end

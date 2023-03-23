@@ -1,0 +1,22 @@
+- title="#{@pst.ttl}"
+- content_for(:html_title) { title }
+%h1.ll_font.ws_bgc
+  = title
+.container
+  .row.my-1
+    .co1-sm-1
+      = link_to image_tag(@pst.pass.way.thumb500.url,
+      class: "lll_square fit_con fit_c"), @pst.pass.way.url
+    .col-sm
+      
+      %table.table
+        %thead
+          %tr
+            %td= icon(@user.cre,'ss_square') + @user.nick
+            %td
+        %tbody
+          %tr
+            %td='タグ' 
+            %td=@pst.tag.txt
+            val
+

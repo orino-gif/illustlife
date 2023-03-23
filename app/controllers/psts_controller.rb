@@ -26,6 +26,7 @@ class PstsController < ApplicationController
     @pst.dtl_id = dtl.id
     @pst.pass_id = pass.id
     @pst.tag_id = tag.id
+    @pst.up_id = current_user.id
     if @pst.save
       noti('追加しました', root_path)
     else
@@ -34,7 +35,8 @@ class PstsController < ApplicationController
   end
   
   def show
-    
+    @pst = Pst.find_by(id: params[:id])
+    @user = User.find_by(id: @pst.up_id )
   end
     
   def update

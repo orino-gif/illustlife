@@ -16,8 +16,8 @@
   .row.py-5.border
     - @psts.reverse_each.with_index(1) do |pst, index|
       - if pst
-        = image_tag(pst.pass.way.thumb250.url)
-  //     class: "full_rect fit_c border lazyload")
+        = link_to image_tag(pst.pass.way.thumb250.url,
+        class: "ll_square full_rect fit_c border lazyload"), pst_path(pst.id)
   //   - @posts.each.with_index(1) do |pos, index|
   // - if char.thr.img? && index > start
   .row
