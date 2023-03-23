@@ -22,9 +22,34 @@
               %td='説明' 
               %td=@pst.dtl.cnt
   .row
-    %h2.l_font= '好きな理由'
+    %h2.l_font= '好感度グラフ'
     - data = [['絵柄', @pst.worth.patt],['可愛さ', @pst.worth.cute],
     ['エロさ',@pst.worth.ero],['美しさ', @pst.worth.btfl],['カッコ良さ', @pst.worth.cool],
     ['面白さ', @pst.worth.funny],['共感', @pst.worth.sympa]]
     = column_chart data
+  .row
+    %h2.l_font= '好きな理由'
+  .row
+    = form_with(model: @pst.worth,url:@pst, local:true) do |f|
+      = f.radio_button :cause, :'絵柄'
+      = f.label :cause, '絵柄'
+      = f.radio_button :cause, :'可愛さ'
+      = f.label :cause, '可愛さ'
+      = f.radio_button :cause, :'エロさ'
+      = f.label :cause, 'エロさ'
+      = f.radio_button :cause, :'美しさ'
+      = f.label :cause, '美しさ'
+      = f.radio_button :cause, :'カッコ良さ'
+      = f.label :cause, 'カッコ良さ'
+      = f.radio_button :cause, :'面白さ'
+      = f.label :cause, '面白さ'
+      = f.radio_button :cause, :'共感'
+      = f.label :cause, '共感'
+      - is_owner = (user_signed_in? && current_user.email == 'operation@illustlife.sakura.ne.jp')
+      - if true == @is_vaild || true == is_owner
+        = f.submit '送信', class:"btn btn-light l_font border my-5 ss_rect"
+      - else
+        = f.submit '送信済み',
+        class:"btn btn-light l_font border my-5 ss_rect blu_col disabled"
+        ='※ボタンは24時間後に復活します'
 
