@@ -1,0 +1,11 @@
+- psts.each.with_index(1) do |pst, index|
+  - if pst
+    .ll_square.ml-4.mag_bm.text-center.m_font
+      %a{href: pst_path(pst.id)}
+        %img.lazyload.full_rect.fit_c.border{alt: pst.ttl,
+        "data-src" => pst.pass.way.thumb250.url}/
+      = pst.ttl.slice(0..8)
+      - if 9 < pst.ttl.length
+        = '...'
+      %br
+  - break if 40 == index

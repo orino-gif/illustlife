@@ -12,52 +12,48 @@
       - pass = "/psts/1/new"
     %button.btn.btn-light.l_font.border.mt-5= link_to '投稿する', pass
   .row
-    %h3.ml-4.l_font 投稿作品
+    %h3.ml-4.l_font 新着-投稿作品
   .row.py-5.border
-    - @psts.reverse_each.with_index(1) do |pst, index|
-      - if pst
-        = link_to image_tag(pst.pass.way.thumb250.url,
-        class: "ll_square full_rect fit_c border lazyload"), pst_path(pst.id)
-  //   - @posts.each.with_index(1) do |pos, index|
-  // - if char.thr.img? && index > start
+    = render 'pst',
+    {psts: @psts.order(updated_at: 'DESC')}
+  // .row
+  //   %h3.ml-4.l_font おすすめ作品
+  // .row.py-5.border
+  //   = render 'char_img',
+  //   {chars: @char_thr_ttls.order(looks: 'DESC'),cha: @chars,times:5, start:0}
+  // .mb-3.mt-2.m_font.text-right
+  //   = button_to("more", home_path(1) , method: :get,
+  //   class:"btn btn-light l_font border blk_col mt-4")
+  // .row
+  //   %h3.ml-4.l_font.chara　推薦されたクリエーター
+  // .row.py-5.mb-3.border
+  //   = render 'char_img',
+  //   {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
+  // .mb-3.m_font.text-right
+  //   = link_to '性格6位以下',home_path(2)
+  // .row
+  //   %h3.ml-4.l_font.chara 著者
+  // .row.py-5.mb-3.border
+  //   = render 'char_img',
+  //   {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
+  // .mb-3.m_font.text-right
+  //   = link_to '性格6位以下',home_path(2)
+  // .row
+  //   %h3.ml-4.l_font.chara 媒介
+  // .row.py-5.mb-3.border
+  //   = render 'char_img',
+  //   {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
+  // .mb-3.m_font.text-right
+  //   = link_to '性格6位以下',home_path(2)
+  // .row
+  //   %h2.l_font おすすめや、オリジナル作品を投稿して評価してもらう。(+5pt)
+  // .row.ml-4.mb-4
+  //   = button_to("追加", ttls_path, method: :get,
+  //   class:"ll_square btn btn-light l_font border ml-2")
   .row
-    %h3.ml-4.l_font おすすめ作品
-  .row.py-5.border
-    = render 'char_img',
-    {chars: @char_thr_ttls.order(looks: 'DESC'),cha: @chars,times:5, start:0}
-  .mb-3.mt-2.m_font.text-right
-    = button_to("more", home_path(1) , method: :get,
-    class:"btn btn-light l_font border blk_col mt-4")
+    %h2.l_font.mt-5 イラスト、1ページ漫画をリクエスト
   .row
-    %h3.ml-4.l_font.chara　推薦されたクリエーター
-  .row.py-5.mb-3.border
-    = render 'char_img',
-    {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
-  .mb-3.m_font.text-right
-    = link_to '性格6位以下',home_path(2)
-  .row
-    %h3.ml-4.l_font.chara 著者
-  .row.py-5.mb-3.border
-    = render 'char_img',
-    {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
-  .mb-3.m_font.text-right
-    = link_to '性格6位以下',home_path(2)
-  .row
-    %h3.ml-4.l_font.chara 媒介
-  .row.py-5.mb-3.border
-    = render 'char_img',
-    {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
-  .mb-3.m_font.text-right
-    = link_to '性格6位以下',home_path(2)
-  .row
-    %h2.l_font おすすめや、オリジナル作品を投稿して評価してもらう。(+5pt)
-  .row.ml-4.mb-4
-    = button_to("追加", ttls_path, method: :get,
-    class:"ll_square btn btn-light l_font border ml-2")
-  .row
-    %h2.l_font.mt-5 ポイントを消費して、1ページ漫画や、イラストを気軽にリクエスト
-  .row
-    %h3.l_font 漫画家、イラストレーター
+    %h3.l_font イラストレーター、漫画家
   .row.ss_m-side
     = render 'cre_img', {cres: @cres, is_hdr: true}
   %br

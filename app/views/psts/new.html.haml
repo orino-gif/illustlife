@@ -4,21 +4,22 @@
   .row.my-5
     .col-md-8.border.border-secondary
       = form_with(model: @pst, local:true) do |f|
-        %br
-          = f.label 'タイトル(20文字以内):'
-          %br
-          = f.text_field :ttl, class:'size_s_variable-form'
-        %br
-        = f.label :tag, '説明'
-        = f.text_area :dtl, class:'form-control', size:'10x6'
+        
         %br
         = f.label '投稿ファイル(png, jpeg, jpg, gif, 100MB以下)(必須):', class:'lll_img'
         %br
         = f.file_field :img, class:'lll_img preview'
         .lll_img.ws_bgc.lll_square.full_rect.fit_c
         %br
+          = f.label 'タイトル(20文字以内):'
+          %br
+          = f.text_field :ttl, class:'form-control size_s_variable-form'
+        %br
+        = f.label :tag, '説明'
+        = f.text_area :dtl, class:'form-control', size:'10x5'
+        %br
         = f.label :tag, 'タグ（必須）'
-        = f.text_area :tag, autofocus: true, class:'form-control', size:'10x6'
+        = f.text_area :tag, class:'form-control', size:'10x2'
         %br
         = f.radio_button :illust, :true, checked: true
         = f.label :illust, 'イラスト'
