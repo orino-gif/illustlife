@@ -2,10 +2,10 @@
 %h1.ll_font.ws_bgc= t('.sign_in')
 
 .container
-  // .col-md-10
-  //   = render 'devise/shared/twitter'
-  // .col-md-10
-  //   = 'or'
+  .col-md-10
+    = render 'devise/shared/twitter'
+  .col-md-10
+    = 'or'
   
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     .col-md-7
