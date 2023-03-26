@@ -30,8 +30,8 @@
     = button_to("more", home_path(1), method: :get,
     class:"btn btn-light l_font border blk_col")
   .row
-    %h3.ml-4.l_font.chara　性格
-  .row.py-5.mb-3.border
+    %h3.ml-4.l_font　性格
+  .row.py-5.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
   .mb-3.mt-1.m_font.text-right
@@ -39,20 +39,20 @@
     class:"btn btn-light l_font border blk_col")
   .row
     %h3.ml-4.l_font.chara 能力
-  .row.py-5.mb-3.border
+  .row.py-5.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(ablty: 'DESC'),cha: @chars,times:5, start:0}
   .mb-3.mt-2.m_font.text-right
     = button_to("more", home_path(3) , method: :get,
-    class:"btn btn-light l_font border blk_col mt-4")
+    class:"btn btn-light l_font border blk_col")
   .row
     %h3.ml-4.l_font.chara 強さ
-  .row.py-5.mb-3.border
+  .row.py-5.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(str: 'DESC'),cha: @chars,times:5, start:0}
   .mb-3.mt-2.m_font.text-right
     = button_to("more", home_path(4) , method: :get,
-    class:"btn btn-light l_font border blk_col mt-4")
+    class:"btn btn-light l_font border blk_col")
   // .row
   //   %h2.l_font おすすめや、オリジナル作品を投稿して評価してもらう。(+5pt)
   // .row.ml-4.mb-4
