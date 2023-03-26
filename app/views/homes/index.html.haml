@@ -32,27 +32,30 @@
   .row.py-5.mb-3.border
     = render 'char_img',
     {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
-  .mb-3.m_font.text-right
-    = link_to '性格6位以下',home_path(2)
+  .mb-3.mt-2.m_font.text-right
+    = button_to("more", home_path(2) , method: :get,
+    class:"btn btn-light l_font border blk_col mt-4")
   .row
     %h3.ml-4.l_font.chara 能力
   .row.py-5.mb-3.border
     = render 'char_img',
-    {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
-  .mb-3.m_font.text-right
-    = link_to '性格6位以下',home_path(2)
+    {chars: @char_thr_ttls.order(ablty: 'DESC'),cha: @chars,times:5, start:0}
+  .mb-3.mt-2.m_font.text-right
+    = button_to("more", home_path(3) , method: :get,
+    class:"btn btn-light l_font border blk_col mt-4")
   .row
     %h3.ml-4.l_font.chara 強さ
   .row.py-5.mb-3.border
     = render 'char_img',
-    {chars: @char_thr_ttls.order(chara: 'DESC'),cha: @chars,times:5, start:0}
-  .mb-3.m_font.text-right
-    = link_to '性格6位以下',home_path(2)
-  .row
-    %h2.l_font おすすめや、オリジナル作品を投稿して評価してもらう。(+5pt)
-  .row.ml-4.mb-4
-    = button_to("追加", ttls_path, method: :get,
-    class:"ll_square btn btn-light l_font border ml-2")
+    {chars: @char_thr_ttls.order(str: 'DESC'),cha: @chars,times:5, start:0}
+  .mb-3.mt-2.m_font.text-right
+    = button_to("more", home_path(4) , method: :get,
+    class:"btn btn-light l_font border blk_col mt-4")
+  // .row
+  //   %h2.l_font おすすめや、オリジナル作品を投稿して評価してもらう。(+5pt)
+  // .row.ml-4.mb-4
+  //   = button_to("追加", ttls_path, method: :get,
+  //   class:"ll_square btn btn-light l_font border ml-2")
   .row
     %h2.l_font.mt-5 イラスト、1ページ漫画をリクエスト
   .row
