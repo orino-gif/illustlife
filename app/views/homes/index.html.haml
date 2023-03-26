@@ -16,9 +16,9 @@
   .row.py-5.border
     = render 'pst',{psts: @psts.order(updated_at: 'DESC')}
   .row
-    %h2.l_font.ml-3.mt-5 人気キャラ
+    %h2.l_font.ml-3.mt-5 商業-人気キャラ
   .row.d-flex.justify-content-center
-    %button.btn.btn-light.l_font.border.mt-2= link_to '追加する', ttls_path
+    %button.btn.btn-light.l_font.border.mt-2= link_to '推薦する', ttls_path
   .row.d-flex.justify-content-center
     ='※ユーザ登録不要'
   .row
