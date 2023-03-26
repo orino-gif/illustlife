@@ -38,11 +38,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # インスタンスがデータベースに保存されていればtrue。いなければfalse。
     # ユーザー情報が保存されている場合、
     if @user.persisted?
-      sign_in_and_redirect @user,
-        event: :authentication # this will throw if @user is not activated
+      sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
         
-      set_flash_message(:notice, :success,
-        kind: "#{provider}".capitalize) if is_navigational_format?
+      set_flash_message(:notice, :success, kind: "#{provider}".capitalize) if is_navigational_format?
       @user.restore #ユーザーアカウントを復旧
       
     else
