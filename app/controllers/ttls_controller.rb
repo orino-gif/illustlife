@@ -32,6 +32,6 @@ class TtlsController < ApplicationController
   
   private
   def chars_params
-    params.require(:ttl).permit(:t_name, :genre, :com, :pub, :serial, :auth)
+    params.require(:ttl).permit(:t_name, :genre, :pub, :auth)
   end
 end

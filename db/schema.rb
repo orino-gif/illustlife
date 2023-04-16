@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_23_124319) do
+ActiveRecord::Schema.define(version: 2023_04_16_181453) do
 
   create_table "cards", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
@@ -192,16 +192,12 @@ ActiveRecord::Schema.define(version: 2023_03_23_124319) do
   create_table "thrs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "url", default: ""
     t.string "img", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "ttls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "t_name", default: ""
     t.string "genre", default: ""
     t.string "pub", default: ""
-    t.boolean "com", default: true
-    t.boolean "serial", default: true
     t.string "auth", default: ""
     t.bigint "thr_id", default: 0
     t.timestamp "created_at"

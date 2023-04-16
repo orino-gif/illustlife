@@ -18,37 +18,22 @@
           = f.label '画像引用先URL:'
           %br
           = f.text_field :url, class:'size_variable-form'
-        
+        %br
         = '<ジャンル>'
         %br
         = f.radio_button :genre, :'漫画', checked: true
         = f.label :genre, '漫画'
         = f.radio_button :genre, :'アニメ'
         = f.label :genre, 'アニメ'
-        = f.radio_button :genre, :'イラスト'
-        = f.label :genre, 'イラスト'
         %br
-        = '<業態>'
-        %br
-        = f.radio_button :com, :true, checked: true
-        = f.label :com, '商業'
-        = f.radio_button :com, :false
-        = f.label :com, '個人'
-        %br
-        = '<連載>'
-        %br
-        = f.radio_button :serial, :true, checked: true
-        = f.label :serial, '連載中'
-        = f.radio_button :serial, :false
-        = f.label :serial, '終了'
-        %br
-        %br
-          = f.label '出版社'
-          %br
-          = f.text_field :pub, class:'size_variable-form'
         %br
           = f.label '著者　(例:原作/作画)'
           %br
           = f.text_field :auth, class:'size_variable-form'
+        %br
+          = f.label '出版社'
+          %br
+          = f.text_field :pub, class:'size_variable-form'
+          
         = f.submit '追加', class:"btn btn-light l_font border my-5 ss_rect"
         %br

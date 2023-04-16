@@ -1,4 +1,4 @@
-- title="#{@ttl.t_name}"
+- title="#{@ttl.genre}「#{@ttl.t_name}」 感想"
 - content_for(:html_title) { title }
 %h1.ll_font.ws_bgc
   = title
@@ -22,11 +22,16 @@
             %td= @ttl.pub
           %tr
             %td 引用先URL
-            %td= link_to @ttl.thr.url.slice(0..20) + '...', @ttl.thr.url
+            %td= link_to @ttl.thr.url.slice(0..20) + '...', @ttl.thr.url,
+            {class: 'blu_col'}
           %tr
             %td 
             %td 
-  
-  .row.mt-5
-  = button_to('キャラ追加', "/chars/#{params[:id]}/new", method: :get,
-  class:"btn btn-light m_font border")
+  .row
+    %h2='感想'
+    
+  .row
+    %h2='その他'
+  .row
+  = button_to('作品中の好きなキャラを挙げる', "/chars/#{params[:id]}/new",
+  method: :get, class:"btn btn-light m_font border")

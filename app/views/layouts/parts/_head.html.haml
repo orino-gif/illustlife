@@ -32,9 +32,10 @@ rel: "preconnect dns-prefetch"}/
   body { font-family: 'Kaisei Decol', serif, "メイリオ" ; }
   
 :javascript
+  defer="defer"
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   
-%script{src: "https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"}
+%script{defer: "defer", src: "https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"}
 
 
 
