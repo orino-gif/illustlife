@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_16_181453) do
+ActiveRecord::Schema.define(version: 2023_04_18_221628) do
 
   create_table "cards", primary_key: "user_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cus_id", null: false
@@ -173,6 +173,12 @@ ActiveRecord::Schema.define(version: 2023_04_16_181453) do
   create_table "resms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "re_id"
     t.integer "noti_id"
+  end
+
+  create_table "stories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "ttl_id", default: 0
+    t.integer "ep"
+    t.index ["ttl_id"], name: "index_stories_on_ttl_id"
   end
 
   create_table "sttgs", primary_key: "cre_id", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

@@ -1,0 +1,13 @@
+- content_for(:html_title) { '話数を追加' }
+%h1.ll_font.ws_bgc 話数を追加
+.container
+  .row.my-5.m_font
+    .col-md-8.border.border-secondary
+      = form_with(model: @story, local:true) do |f|
+        %br
+          = f.label '話数:'
+          %br
+          = f.number_field :ep, :value => 1,
+          class:'size_variable-form'
+          = f.hidden_field :ttl_id, :value => params[:id]
+        = f.submit '追加', class:"btn btn-light l_font border my-5 ss_rect"

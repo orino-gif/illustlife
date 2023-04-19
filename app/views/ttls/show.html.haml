@@ -29,7 +29,9 @@
             %td 
   .row
     %h2='感想'
-    
+  .row
+    = button_to('話数を追加する', "/stories/#{params[:id]}/new",
+      method: :get, class:"btn btn-light m_font border")
   .row
     %h2='その他'
   .row

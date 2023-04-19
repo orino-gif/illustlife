@@ -54,6 +54,12 @@ Rails.application.routes.draw do
     end
   end
   resources :sttgs, only: [:update]
+  resources :stories, only: [:create, :show] do
+    collection do
+      get '/:id/new', to: 'stories#new'
+    end
+    resources :coms, only: [:show]
+  end
   resources :thrus, only: [:show]
   resources :ttls, only: [:index, :new, :create, :edit, :show, :update]
   resources :works, only: [:new, :create, :show, :update] do
