@@ -30,7 +30,12 @@
   .row
     %h2='感想'
   .row
-    = button_to('話数を追加する', "/stories/#{params[:id]}/new",
+    - @stories.each.with_index(1) do |story, index|
+      .ml-2.l_font= button_to(story.ep.to_s + '話',ttl_story_path(params[:id],story.ep),
+        method: :get, class:"btn btn-light m_font border")
+  .row.mt-3
+    = button_to('話数を追加する',
+    "/ttls/#{params[:id]}/stories/#{params[:id]}/new",
       method: :get, class:"btn btn-light m_font border")
   .row
     %h2='その他'

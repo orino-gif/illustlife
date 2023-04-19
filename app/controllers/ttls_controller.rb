@@ -28,6 +28,7 @@ class TtlsController < ApplicationController
   def show
     @ttl = Ttl.find_by(id: params[:id])
     @thr = Thr.find_by(id: params[:id])
+    @stories = Story.where(ttl_id: params[:id])
   end
   
   private

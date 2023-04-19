@@ -3,7 +3,7 @@
 .container
   .row.my-5.m_font
     .col-md-8.border.border-secondary
-      = form_with(model: @story, local:true) do |f|
+      = form_with(model: @story,url:ttl_stories_path(1,1), local:true) do |f|
         %br
           = f.label '話数:'
           %br
