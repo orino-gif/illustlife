@@ -13,6 +13,11 @@ class StoriesController < ApplicationController
     end
   end
   
+  def show
+    @story = Story.find_by(id: params[:id])
+    @ttl = Ttl.find_by(id: params[:ttl_id])
+  end
+  
   private
   def stories_params
     params.require(:story).permit(:ttl_id,:ep)

@@ -1,5 +1,12 @@
-- content_for(:html_title) { '話数を追加' }
-%h1.ll_font.ws_bgc 話数を追加
+- title = "[#{@ttl.genre}] #{@ttl.t_name} 　第#{@story.ep}話　 感想"
+- content_for(:html_title) {title }
+%h1.ll_font.ws_bgc= title
 .container
   .row.my-5.m_font
     .col-md-8.border.border-secondary
+      ='aaa'
+      
+  .row.mt-3
+    = button_to('コメントする',
+    "/ttls/#{params[:id]}/stories/#{params[:id]}/new",
+      method: :get, class:"btn btn-light m_font border")

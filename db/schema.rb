@@ -177,7 +177,8 @@ ActiveRecord::Schema.define(version: 2023_04_18_221628) do
 
   create_table "stories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "ttl_id", default: 0
-    t.integer "ep"
+    t.integer "ep", default: 0
+    t.text "com"
     t.index ["ttl_id"], name: "index_stories_on_ttl_id"
   end
 

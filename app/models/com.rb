@@ -1,0 +1,2 @@
+class Com < ApplicationRecord
+end
