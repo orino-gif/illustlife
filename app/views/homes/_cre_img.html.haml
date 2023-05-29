@@ -6,10 +6,17 @@
       - ans = (not cre.hdr?)
     - if ans
       .s_pdg.text-center.py-1
-        %a{href: cre_path(cre.user_id)}
-          %img.lazyload.ll_square.fit_c.border{alt: cre.user.nick,
-          "data-src" => cre.hdr.thumb250.url}/
+        = link_to image_tag(cre.hdr.thumb250.url,alt:cre.user.nick,
+        class: "ll_square fit_c border lazyload"),
+        cre_path(cre.user_id)
         .m_font.m_line= cre.user.nick
         = icon(cre, 's_square m_on_pos border')
+
+      // .s_pdg.text-center.py-1
+      //   %a{href: cre_path(cre.user_id)}
+      //     %img.lazyload.ll_square.fit_c.border{alt: cre.user.nick,
+      //     "data-src" => cre.hdr.thumb250.url}/
+      //   .m_font.m_line= cre.user.nick
+      //   = icon(cre, 's_square m_on_pos border')
   - break if 100 == index
 
